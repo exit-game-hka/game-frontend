@@ -12,6 +12,7 @@ type Props = {
 }
 export const GameSceneComponent: React.FC<Props> = (props: Props) => {
     const { room } = props;
+    // @ts-ignore
     return (
         <Canvas shadows={true}>
             <OrbitControls/>

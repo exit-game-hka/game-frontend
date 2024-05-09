@@ -9,6 +9,7 @@ import Typography from "@mui/joy/Typography";
 import Input from '@mui/joy/Input';
 import {Raum} from "@/api/raum";
 import Stack from '@mui/joy/Stack';
+import Image from "next/image";
 
 type Props = {
     open: boolean;
@@ -53,11 +54,12 @@ export const TaskModalComponent: React.FC<Props> = (props: Props) => {
                                 }[state],
                             }}
                         >
-                            <DialogTitle>{room.aufgaben[0].wert}</DialogTitle>
+                            <DialogTitle>Das Alphabet hat 26 Buchstaben</DialogTitle>
                             <DialogContent>
                                 <Typography level="body-sm">
-                                    {`Tipp: ${room.aufgaben[0].beschreibung}`}
+                                    Finde heraus, wie das Lösungswort lautet!
                                 </Typography>
+                                <Image src={"/alphabet.png"} alt={"Alphabets"} width={350} height={400} objectFit={"contain"} fill={false} />
                                 <Stack spacing={"var(--space-3)"} sx={{ mt: "var(--space-5)"}}>
                                     <Input size="lg" placeholder="Large" />
                                     <Button>Antwort senden</Button>

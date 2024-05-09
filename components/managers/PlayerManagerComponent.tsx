@@ -73,6 +73,10 @@ export const PlayerManagerComponent: React.FC<Props> = (props: Props) =>  {
         }
 
         followPlayer(camera, player);
+
+        // if (keyRight || keyLeft || keyUp || keyDown) {
+        //     followPlayer(camera, player);
+        // }
     });
 
     const resetRotationOfPlayer = (player: THREE.Object3D) => {

@@ -5,6 +5,9 @@ import {ThreeElements} from "@react-three/fiber";
 import {ExitDoor} from "@/components/ExitDoor";
 import {OfficeTableWithLaptop} from "@/components/OfficeTableWithLaptop";
 import {BookCupboard} from "@/public/models/book_cupboard/BookCupboard";
+import {DetectiveOfficeWithWindow} from "@/components/DetectiveOfficeWithWindow";
+import {WhiteClock} from "@/components/WhiteClock";
+import {OldStyleOffice} from "@/components/OldStyleOffice";
 
 export const RoomOneComponent: React.FC = () => {
     return (
@@ -89,6 +92,27 @@ export const RoomOneComponent: React.FC = () => {
                 scale={1}
                 rotation-y={Math.PI / 2}
                 position={[-5.5, WORLD_COORDINATE[1], -1]}
+            />
+
+            <DetectiveOfficeWithWindow
+                // @ts-ignore
+                scale={0.6}
+                //rotation-y={Math.PI / 2}
+                position={[15, WORLD_COORDINATE[1], -7]}
+            />
+
+            <WhiteClock
+                // @ts-ignore
+                scale={1.5}
+                position={[5, 2, -10.1]}
+                rotation-y={-Math.PI / 2}
+            />
+
+            <OldStyleOffice
+                // @ts-ignore
+                position={[15, WORLD_COORDINATE[1], 5]}
+                rotation-y={-Math.PI}
+                scale={0.25}
             />
 
             {/*<ObjectMultiplierComponent*/}

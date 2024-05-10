@@ -1,7 +1,7 @@
 import React, {createContext, PropsWithChildren, useState} from "react";
 import {AnimationAction} from "three";
 
-export type AnimationActionType = "idle" | "run" | "jump";
+export type AnimationActionType = "idle" | "run" | "jump" | "angry" | "defeated" | "celebration_chicken_dance";
 
 const DEFAULT_ANIMATION: AnimationActionType = "idle" as const;
 

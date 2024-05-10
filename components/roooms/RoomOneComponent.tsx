@@ -1,36 +1,102 @@
 import React from "react";
-import {ObjectMultiplierComponent} from "@/components/ObjectMultiplierComponent";
-import {Tree} from "@/components/Tree";
 import {WORLD_COORDINATE} from "@/app/contants";
-import {Cloud} from "@/components/Cloud";
-import {GroundComponent} from "@/components/GroundComponent";
+import {BrickWall} from "@/components/BrickWall";
+import {ThreeElements} from "@react-three/fiber";
+import {ExitDoor} from "@/components/ExitDoor";
 
 export const RoomOneComponent: React.FC = () => {
     return (
-      <>
-          {/*<ObjectMultiplierComponent*/}
-          {/*    key={1}*/}
-          {/*    model={Tree}*/}
-          {/*    count={1000}*/}
-          {/*    // @ts-ignore*/}
-          {/*    scale={0.06}*/}
-          {/*    getPosition={() => [*/}
-          {/*        (Math.random() * 2 - 1) * 300,*/}
-          {/*        WORLD_COORDINATE[1],*/}
-          {/*        (Math.random() * 2 - 1) * 300*/}
-          {/*    ]}*/}
-          {/*/>*/}
+        <>
+            {/* Front wall */}
+            <DoubleWallGroup
+                firstWall={{
+                    position: [0, WORLD_COORDINATE[1], -10],
+                    scale: 0.5
+                }}
+                secondWall={{
+                    position: [12.5, WORLD_COORDINATE[1], -10],
+                    scale: 0.5
+                }}
+            />
 
-          {/*<ObjectMultiplierComponent*/}
-          {/*    key={2}*/}
-          {/*    model={Cloud}*/}
-          {/*    count={1000}*/}
-          {/*    getPosition={() => [*/}
-          {/*        (Math.random() * 2 - 1) * 300,*/}
-          {/*        40,*/}
-          {/*        (Math.random() * 2 - 1) * 300*/}
-          {/*    ]}*/}
-          {/*/>*/}
-      </>
+            {/* Left side wall */}
+            <DoubleWallGroup
+                position-z={7.8}
+                rotation-y={Math.PI / 2}
+                firstWall={{
+                    position: [0, WORLD_COORDINATE[1], -6],
+                    scale: 0.5
+                }}
+                secondWall={{
+                    position: [12.5, WORLD_COORDINATE[1], -6],
+                    scale: 0.5
+                }}
+            />
+
+            {/* Right side wall */}
+            <DoubleWallGroup
+                position-z={-4}
+                rotation-y={-Math.PI / 2}
+                firstWall={{
+                    position: [0, WORLD_COORDINATE[1], -18],
+                    scale: 0.5
+                }}
+                secondWall={{
+                    position: [12.5, WORLD_COORDINATE[1], -18],
+                    scale: 0.5
+                }}
+            />
+
+            {/* Back side wall */}
+            <DoubleWallGroup
+                position-x={12.2}
+                position-z={8}
+                rotation-y={Math.PI}
+                firstWall={{
+                    position: [0, WORLD_COORDINATE[1], -6],
+                    scale: 0.5,
+                }}
+                secondWall={{
+                    position: [12.5, WORLD_COORDINATE[1], -6],
+                    scale: 0.5,
+                }}
+            />
+
+            {/* Exit door */}
+            <ExitDoor
+                rotation-y={-Math.PI / 2}
+                // @ts-ignore
+                position={[18, WORLD_COORDINATE[1], 0]}
+                scale={1}
+                setAnimationActions={() => {}}
+            />
+
+            {/*<ObjectMultiplierComponent*/}
+            {/*    key={2}*/}
+            {/*    model={Cloud}*/}
+            {/*    count={1000}*/}
+            {/*    getPosition={() => [*/}
+            {/*        (Math.random() * 2 - 1) * 300,*/}
+            {/*        40,*/}
+            {/*        (Math.random() * 2 - 1) * 300*/}
+            {/*    ]}*/}
+            {/*/>*/}
+        </>
+    );
+};
+
+type PropsWallGroup = ThreeElements["group"] & {
+    firstWall: ThreeElements["group"];
+    secondWall: ThreeElements["group"];
+};
+
+const DoubleWallGroup: React.FC<PropsWallGroup> = (props: PropsWallGroup) => {
+    const { firstWall, secondWall, ...rest } = props;
+
+    return (
+        <group {...rest}>
+            <BrickWall {...firstWall} />
+            <BrickWall {...secondWall} />
+        </group>
     );
 }

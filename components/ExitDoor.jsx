@@ -10,7 +10,7 @@ Title: Door
 import React, {forwardRef, useEffect, useRef} from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 
-export const ExitDoor = forwardRef((props) => {
+export const ExitDoor = forwardRef((props, ref) => {
     const group = useRef()
     const { nodes, materials, animations } = useGLTF("/models/exit_door/scene.gltf")
     const { actions } = useAnimations(animations, group)
@@ -21,7 +21,7 @@ export const ExitDoor = forwardRef((props) => {
 
     return (
         <group ref={group} {...props} dispose={null}>
-            <group name="Sketchfab_Scene">
+            <group name="Sketchfab_Scene" ref={ref}>
                 <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={0.843}>
                     <group name="Root">
                         <group name="Door_" position={[0, 0, 1.305]}>

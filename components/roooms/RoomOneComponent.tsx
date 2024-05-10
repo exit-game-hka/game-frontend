@@ -3,6 +3,8 @@ import {WORLD_COORDINATE} from "@/app/contants";
 import {BrickWall} from "@/components/BrickWall";
 import {ThreeElements} from "@react-three/fiber";
 import {ExitDoor} from "@/components/ExitDoor";
+import {OfficeTableWithLaptop} from "@/components/OfficeTableWithLaptop";
+import {BookCupboard} from "@/public/models/book_cupboard/BookCupboard";
 
 export const RoomOneComponent: React.FC = () => {
     return (
@@ -69,6 +71,24 @@ export const RoomOneComponent: React.FC = () => {
                 position={[18, WORLD_COORDINATE[1], 0]}
                 scale={1}
                 setAnimationActions={() => {}}
+            />
+
+            <OfficeTableWithLaptop
+                // @ts-ignore
+                scale={11}
+                rotation-y={Math.PI / 2}
+                position={[-2, WORLD_COORDINATE[1], -6]}
+            />
+            <BookCupboard
+                // @ts-ignore
+                scale={1}
+                position={[3, WORLD_COORDINATE[1], -9.5]}
+            />
+            <BookCupboard
+                // @ts-ignore
+                scale={1}
+                rotation-y={Math.PI / 2}
+                position={[-5.5, WORLD_COORDINATE[1], -1]}
             />
 
             {/*<ObjectMultiplierComponent*/}

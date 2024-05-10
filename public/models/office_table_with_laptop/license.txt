@@ -1,0 +1,11 @@
+Model Information:
+* title:	Office Set Lite Low-poly
+* source:	https://sketchfab.com/3d-models/office-set-lite-low-poly-ef6124dfbaf94365a76a6c1d613153d6
+* author:	Kelisei Ventura (https://sketchfab.com/frankestudios71)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Office Set Lite Low-poly" (https://sketchfab.com/3d-models/office-set-lite-low-poly-ef6124dfbaf94365a76a6c1d613153d6) by Kelisei Ventura (https://sketchfab.com/frankestudios71) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -4,10 +4,12 @@ import {Box, Button, Sheet, Typography, useColorScheme} from "@mui/joy";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
 import {Card} from "@mui/material";
+import {useRouter} from "next/navigation";
 
 export const OverviewCardComponent: React.FC = () => {
     const { isSmall } = useMediaQuery();
     const { mode } = useColorScheme();
+    const router = useRouter();
 
     return (
         <Card
@@ -58,7 +60,7 @@ export const OverviewCardComponent: React.FC = () => {
                     <Button
                         sx={{ minWidth: 120 }}
                         size="lg"
-                        onClick={() => {}}
+                        onClick={() => router.push("/avatar-selection")}
                     >
                         Jetzt spielen
                     </Button>

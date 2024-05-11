@@ -1,40 +1,23 @@
 "use client";
-import React, {ComponentType, ForwardRefExoticComponent, Ref, RefAttributes, useEffect, useRef, useState} from "react";
+import React, {ComponentType, ForwardRefExoticComponent, Ref, RefAttributes, useEffect, useRef} from "react";
 import {PageContentWrapperComponent} from "@/components/shared/PageContentWrapperComponent";
-import {Box, Button, Typography} from "@mui/joy";
+import {Avatar, Box, Button, Typography} from "@mui/joy";
 import {Canvas} from "@react-three/fiber";
-import {Amy} from "@/components/avatars/Amy";
 import {PropsModelComponent} from "@/context/ApplicationContext";
 import {AnimationActions, ObjectAnimation} from "@/context/AnimationContext";
 import useAnimationContext from "@/hooks/useAnimationContext";
 import {Object3D} from "three";
-import {Leonard} from "@/components/avatars/Loenard";
 import Stack from "@mui/joy/Stack";
-import {Avatar} from "@mui/joy";
+import {useRouter} from "next/navigation";
+import {useAvatars} from "@/hooks/useAvatars";
 
-type AvatarItem = {
-    name: string;
-    model: ComponentType<PropsModelComponent> | ForwardRefExoticComponent<RefAttributes<any>>;
-    thumbnail: string;
-    onClick: () => void;
-}
 const AvatarSelectionPage: React.FC = () => {
-    const avatarList: AvatarItem[] = [
-        {
-            name: "Amy",
-            model: Amy,
-            thumbnail: "/models/avatars/amy/thumbnail.png",
-            onClick: () => setSelectedAvatar(avatarList.find(a => a.name === "Amy")),
-        },
-        {
-            name: "Leonard",
-            model: Leonard,
-            thumbnail: "/models/avatars/leonard/thumbnail.png",
-            onClick: () => setSelectedAvatar(avatarList.find(a => a.name === "Leonard")),
-        },
-    ];
+    const router = useRouter();
 
-    const [selectedAvatar, setSelectedAvatar] = useState<AvatarItem | undefined>(avatarList[0]);
+    const {
+        avatarList,
+        selectedAvatar,
+    } = useAvatars();
 
     return (
         <PageContentWrapperComponent>
@@ -65,11 +48,12 @@ const AvatarSelectionPage: React.FC = () => {
                                 alignItems={"center"}
                                 alignContent={"center"}
                                 spacing={"var(--space-2)"}
-                                sx={{ textAlign: "center" }}
+                                sx={{ textAlign: "center", cursor: "pointer" }}
                                 onClick={avatar.onClick}
                             >
                                 <Avatar
                                     size={"lg"}
+                                    variant={"outlined"}
                                     src={avatar.thumbnail}
                                     alt={avatar.name}
                                     sx={{
@@ -86,7 +70,13 @@ const AvatarSelectionPage: React.FC = () => {
                             </Stack>
                         )}
                     </Stack>
-                    <Button size={"lg"} sx={{ maxWidth: "150px", width: "100%" }}>Weiter</Button>
+                    <Button
+                        size={"lg"}
+                        sx={{ maxWidth: "150px", width: "100%" }}
+                        onClick={() => router.push("/intro")}
+                    >
+                        Weiter
+                    </Button>
                 </Stack>
             </Box>
         </PageContentWrapperComponent>

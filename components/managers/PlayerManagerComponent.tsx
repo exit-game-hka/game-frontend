@@ -1,31 +1,21 @@
 "use client";
-import {ThreeElements, useFrame, useThree} from "@react-three/fiber";
-import React, {
-    ComponentType,
-    ForwardRefExoticComponent,
-    Ref,
-    RefAttributes,
-    useEffect,
-    useMemo,
-    useRef,
-} from "react";
+import {ThreeElements, useFrame} from "@react-three/fiber";
+import React, {Ref, useEffect, useMemo, useRef,} from "react";
 import * as THREE from "three";
 import {Object3D, QuaternionLike} from "three";
 import {useObjectControls} from "@/hooks/useObjectControls";
-import {PropsModelComponent,} from "@/context/ApplicationContext";
 import {WALKING_SPEED} from "@/app/contants";
 import useAnimationContext from "@/hooks/useAnimationContext";
 import {AnimationActions, ObjectAnimation} from "@/context/AnimationContext";
+import useApplicationContext from "@/hooks/useApplicationContext";
 
 type ModelRefType =  Ref<Object3D> | undefined;
 
-type Props = ThreeElements["mesh"] & {
-    model: ComponentType<PropsModelComponent> | ForwardRefExoticComponent<RefAttributes<any>>;
-}
+type Props = ThreeElements["mesh"]
 
 export const PlayerManagerComponent: React.FC<Props> = (props: Props) =>  {
     const playerRef = useRef<THREE.Object3D>();
-    const { model, ...rest } = props;
+    const appContext = useApplicationContext();
 
     const animationContext = useAnimationContext();
 
@@ -180,9 +170,9 @@ export const PlayerManagerComponent: React.FC<Props> = (props: Props) =>  {
     }
 
     return (
-        <props.model
+        <appContext.avatar
             ref={playerRef as ModelRefType}
-            {...rest}
+            {...props}
             setAnimationActions={addAnimationsToAnimationContext}
         />
     );

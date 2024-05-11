@@ -4,10 +4,7 @@ import {PlayerManagerComponent} from "@/components/managers/PlayerManagerCompone
 import {Canvas} from "@react-three/fiber";
 import {RoomManagerComponent} from "@/components/managers/RoomManagerComponent";
 import {WORLD_COORDINATE} from "@/app/contants";
-import {Girl} from "@/components/Girl";
 import {Raum} from "@/api/raum";
-import {Amy} from "@/components/avatars/Amy";
-import {Leonard} from "@/components/avatars/Loenard";
 
 type Props = {
     room: Raum;
@@ -39,7 +36,7 @@ export const GameSceneComponent: React.FC<Props> = (props: Props) => {
                 shadow-camera-bottom={-100}
             />
 
-            <PlayerManagerComponent position={[0, WORLD_COORDINATE[1], 0]} model={Amy} />
+            <PlayerManagerComponent position={[0, WORLD_COORDINATE[1], 0]} />
 
             <RoomManagerComponent room={room} />
 

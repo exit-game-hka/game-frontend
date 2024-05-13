@@ -10,6 +10,7 @@ Title: BGE Clock
 import React, {forwardRef, useRef} from 'react'
 import { useGLTF } from '@react-three/drei'
 
+// eslint-disable-next-line react/display-name
 export const WhiteClock = forwardRef((props, ref) => {
   const { nodes, materials } = useGLTF("/models/white_clock/scene.gltf")
   return (
@@ -17,7 +18,7 @@ export const WhiteClock = forwardRef((props, ref) => {
         <group rotation={[-Math.PI / 2, 0, 0]}>
           <group rotation={[0.05, 0, 0]}>
             <mesh geometry={nodes.Circle016_0.geometry} material={materials.Uhr_2} />
-            <mesh geometry={nodes.Circle016_1.geometry} material={materials.Uhr_2_Rand} />
+            <mesh name={"clock-border"} geometry={nodes.Circle016_1.geometry} material={materials.Uhr_2_Rand} />
             <mesh geometry={nodes.Circle016_2.geometry} material={materials.Sec_Zeiger} />
             <mesh geometry={nodes.Circle016_3.geometry} material={materials.min_Zeiger} />
           </group>

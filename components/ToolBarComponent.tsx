@@ -35,7 +35,7 @@ const ToolBarComponent: React.FC = () => {
         {
             label: "Raum verlassen",
             icon: <DoorBackOutlinedIcon sx={{ fontSize: "var(--icon-medium)", color: "inherit" }} />,
-            onClick: () => router.push("/rooms"),
+            onClick: () => router.push("/"),
         },
         {
             label: "Verkleinen",

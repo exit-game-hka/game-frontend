@@ -41,7 +41,7 @@ export const OldStyleOffice = forwardRef((props, ref) => {
           <mesh geometry={nodes.Object_6.geometry} material={materials.File_Storage} />
           <mesh geometry={nodes.Object_7.geometry} material={materials.Keyboard} />
           <mesh geometry={nodes.Object_8.geometry} material={materials.Lamp} />
-          <mesh geometry={nodes.Object_9.geometry} material={materials.Monitor} />
+          <mesh name={"monitor"} geometry={nodes.Object_9.geometry} material={materials.Monitor} />
         </group>
       </group>
   )

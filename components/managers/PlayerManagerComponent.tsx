@@ -62,11 +62,11 @@ export const PlayerManagerComponent: React.FC<Props> = (props: Props) =>  {
             // resetRotationOfPlayer(player);
         }
 
-        //followPlayer(camera, player);
+        followPlayer(camera, player);
 
-        if (keyRight || keyLeft || keyUp || keyDown) {
-            followPlayer(camera, player);
-        }
+        // if (keyRight || keyLeft || keyUp || keyDown) {
+        //     followPlayer(camera, player);
+        // }
     });
 
     const resetRotationOfPlayer = (player: THREE.Object3D) => {
@@ -170,7 +170,7 @@ export const PlayerManagerComponent: React.FC<Props> = (props: Props) =>  {
     }
 
     return (
-        <appContext.avatar
+        <appContext.avatar.model
             ref={playerRef as ModelRefType}
             {...props}
             setAnimationActions={addAnimationsToAnimationContext}

@@ -3,11 +3,17 @@ import React from 'react';
 import {PageContentWrapperComponent} from "@/components/shared/PageContentWrapperComponent";
 import {Box, Card, Sheet, Stack, Typography, useTheme} from "@mui/joy";
 import {Button} from "@mui/material";
-import {useRouter} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 
 const IntroPage: React.FC = () => {
     const theme = useTheme();
     const router = useRouter();
+    const params = useSearchParams();
+
+    // TODO: Remove later !!!. Just for MVP.
+    const navigateToRoomOne = () => {
+        router.push(`/game-scene/rooms/20000000-0000-0000-0000-000000000001?${params?.toString()}`);
+    };
 
     return (
         <PageContentWrapperComponent>
@@ -69,7 +75,7 @@ const IntroPage: React.FC = () => {
                     <Button
                         size={"lg"}
                         sx={{ width: "100%" }}
-                        onClick={() => {}}
+                        onClick={navigateToRoomOne}
                     >
                         Weiter
                     </Button>

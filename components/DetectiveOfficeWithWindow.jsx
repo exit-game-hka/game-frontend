@@ -36,7 +36,13 @@ export const DetectiveOfficeWithWindow = forwardRef((props, ref) => {
             <mesh geometry={nodes.Object_32.geometry} material={materials.glass_glass} position={[0.861, 1.763, -4.587]} />
             <mesh geometry={nodes.Object_14.geometry} material={materials.grey_metal} position={[5.027, 5.813, 0.91]} scale={[0.033, 0.107, 1]} />
             <mesh geometry={nodes.Object_25.geometry} material={materials.green_metal} position={[0.861, 1.763, -4.587]} />
-            <mesh geometry={nodes.Object_8.geometry} material={materials.paper} position={[0.861, 1.763, -4.587]} />
+            <mesh
+                name={"double-paper-on-table"}
+                geometry={nodes.Object_8.geometry}
+                material={materials.paper}
+                position={[0.861, 1.763, -4.587]}
+                onClick={props.onDoublePaperClick}
+            />
             <mesh geometry={nodes.Object_43.geometry} material={materials.dark_wood} position={[-3.09, 2.773, -3.675]} rotation={[0, -1.571, 0]} scale={1.123} />
             <mesh geometry={nodes.Object_45.geometry} material={materials.dark_wood} position={[-1.709, 2.773, -3.675]} rotation={[0, -1.571, 0]} scale={1.123} />
             <mesh geometry={nodes.Object_47.geometry} material={materials.dark_wood} position={[-1.709, 2.773, -3.675]} rotation={[0, -1.571, 0]} scale={1.123} />

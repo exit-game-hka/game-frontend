@@ -4,7 +4,6 @@ import {AppBarComponent} from "@/components/AppBarComponent";
 import {usePathname} from "next/navigation";
 import {AnimationContextProvider} from "@/context/AnimationContext";
 import {ApplicationContextProvider} from "@/context/ApplicationContext";
-import { getInitColorSchemeScript } from '@mui/joy/styles';
 
 type  Props = PropsWithChildren;
 

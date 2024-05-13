@@ -16,13 +16,11 @@ export const useAvatars = (): Output => {
             name: "Amy",
             model: Amy,
             thumbnail: "/models/avatars/amy/thumbnail.png",
-            onClick: () => setSelectedAvatar(avatarList.find(a => a.name === "Amy")!),
         },
         {
             name: "Leonard",
             model: Leonard,
             thumbnail: "/models/avatars/leonard/thumbnail.png",
-            onClick: () => setSelectedAvatar(avatarList.find(a => a.name === "Leonard")!),
         },
     ], []);
 

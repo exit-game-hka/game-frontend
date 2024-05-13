@@ -1,23 +1,22 @@
-import React, {useState} from 'react';
-import { Transition } from 'react-transition-group';
-import Button from '@mui/joy/Button';
+import React, {ReactNode} from 'react';
+import {Transition} from 'react-transition-group';
 import Modal from '@mui/joy/Modal';
 import ModalDialog from '@mui/joy/ModalDialog';
 import DialogTitle from '@mui/joy/DialogTitle';
 import DialogContent from '@mui/joy/DialogContent';
 import Typography from "@mui/joy/Typography";
-import Input from '@mui/joy/Input';
-import {Raum} from "@/api/raum";
-import Stack from '@mui/joy/Stack';
-import Image from "next/image";
+import {DialogHeader} from "next/dist/client/components/react-dev-overlay/internal/components/Dialog";
+import {Divider, ModalClose} from "@mui/joy";
 
-type Props = {
+export type ModalProps = {
     open: boolean;
-    close: () => void;
-    room: Raum;
+    title?: string;
+    subtitle?: string;
+    content?: ReactNode;
+    onClose?: (() => void) | undefined;
 }
-export const TaskModalComponent: React.FC<Props> = (props: Props) => {
-    const { open, close, room } = props;
+export const TaskModalComponent: React.FC<ModalProps> = (props: ModalProps) => {
+    const { open, title, subtitle, content, onClose } = props;
 
     return (
         <React.Fragment>
@@ -26,7 +25,7 @@ export const TaskModalComponent: React.FC<Props> = (props: Props) => {
                     <Modal
                         keepMounted
                         open={!['exited', 'exiting'].includes(state)}
-                        onClose={close}
+                        onClose={onClose}
                         slotProps={{
                             backdrop: {
                                 sx: {
@@ -54,16 +53,14 @@ export const TaskModalComponent: React.FC<Props> = (props: Props) => {
                                 }[state],
                             }}
                         >
-                            <DialogTitle>Das Alphabet hat 26 Buchstaben</DialogTitle>
+                            <ModalClose variant={"soft"} sx={{ borderRadius: "50%" }} />
+                            <DialogHeader>
+                                {title ? <DialogTitle>{title}</DialogTitle> : null}
+                            </DialogHeader>
+                            <Divider />
                             <DialogContent>
-                                <Typography level="body-sm">
-                                    Finde heraus, wie das Lösungswort lautet!
-                                </Typography>
-                                <Image src={"/alphabet.png"} alt={"Alphabets"} width={350} height={400} objectFit={"contain"} fill={false} />
-                                <Stack spacing={"var(--space-3)"} sx={{ mt: "var(--space-5)"}}>
-                                    <Input size="lg" placeholder="Large" />
-                                    <Button>Antwort senden</Button>
-                                </Stack>
+                                {subtitle ? <Typography level="body-sm">{subtitle}</Typography> : null}
+                                {content ?? null}
                             </DialogContent>
                         </ModalDialog>
                     </Modal>

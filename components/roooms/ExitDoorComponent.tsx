@@ -57,6 +57,8 @@ export const ExitDoorComponent: React.FC<Props> = (props: Props) => {
                     open={isOpen}
                     title="Wie läutet das Lösungswort ?"
                     answer={aufgabe.loesungen[0].wert}
+                    successMessage={aufgabe.erfolgMeldung}
+                    failureMessage={aufgabe.fehlschlagMeldung}
                     onSuccess={navigateToNextRoom}
                     onClose={() => setIsOpen(false)}
                     modalDialogProps={{

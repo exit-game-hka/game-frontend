@@ -83,7 +83,7 @@ export const DetectiveOfficeWithWindowComponent: React.FC = () => {
                 sx={{
                     display: "none",
                     width: "100%",
-                    minWidth: "400px",
+                    minWidth: "350px",
                     objectFit: "cover",
                     borderRadius: "var(--space-3)",
                     background: "url('/rooms/room1/double-paper-bg.png')",

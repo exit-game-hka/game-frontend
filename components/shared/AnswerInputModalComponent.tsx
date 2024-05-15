@@ -1,8 +1,8 @@
-import React, {ChangeEvent, useEffect, useState, useCallback} from 'react';
+import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import {Transition} from "react-transition-group";
 import Modal from "@mui/joy/Modal";
 import ModalDialog, {ModalDialogProps} from "@mui/joy/ModalDialog";
-import {Alert, Box, Button, Divider, ModalClose, Stack} from "@mui/joy";
+import {Alert, Button, Divider, ModalClose, Stack} from "@mui/joy";
 import {DialogHeader} from "next/dist/client/components/react-dev-overlay/internal/components/Dialog";
 import DialogTitle from "@mui/joy/DialogTitle";
 import DialogContent from "@mui/joy/DialogContent";
@@ -18,12 +18,24 @@ type Props = {
     subtitle?: string;
     onSuccess: () => void;
     answer: string;
+    successMessage: string;
+    failureMessage: string;
     onClose?: (() => void) | undefined;
     modalDialogProps?: ModalDialogProps;
 };
 
 export const AnswerInputModalComponent: React.FC<Props> = (props) => {
-    const { open, title, subtitle, answer, onSuccess, modalDialogProps, onClose } = props;
+    const {
+        open,
+        title,
+        subtitle,
+        answer,
+        successMessage,
+        failureMessage,
+        onSuccess,
+        modalDialogProps,
+        onClose,
+    } = props;
     const [inputValue, setInputValue] = useState<string>("");
     const [isComplete, setIsComplete] = useState<boolean | undefined>(undefined);
     const { isSmall } = useMediaQuery();
@@ -33,7 +45,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
         if (!onClose) return;
         onClose();
     }, [onClose]);
-    
+
     useEffect(() => {
         if (!isComplete) return;
         setTimeout(() => {
@@ -55,7 +67,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
     };
 
     const handleSubmit = () => {
-        if (inputValue !== answer) {
+        if (inputValue.toLowerCase() !== answer.toLowerCase()) {
             setIsComplete(false);
             return;
         }
@@ -129,7 +141,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                                             startDecorator={<CheckCircleIcon />}
                                             sx={{ alignItems: 'flex-start' }}
                                         >
-                                            EXZELLENT. SIE HABEN DIE PLATZHALTER DURCHSCHAUT!
+                                            {successMessage}
                                         </Alert> :
                                         isComplete === false ?
                                             <Alert
@@ -138,8 +150,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                                                 startDecorator={<ReportIcon />}
                                                 sx={{ alignItems: 'flex-start' }}
                                             >
-                                                SCHAUEN SIE NOCH EINMAL NACH, OB DIE ZAHLEN ALS
-                                                SUBSTITUTE FUNGIEREN UND PROBIEREN SIE ES ERNEUT!
+                                                {failureMessage}
                                             </Alert> : null
                                     }
                                     <Button onClick={handleSubmit}>Antwort senden</Button>

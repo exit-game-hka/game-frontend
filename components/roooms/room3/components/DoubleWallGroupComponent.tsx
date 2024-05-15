@@ -1,14 +1,13 @@
 import React from "react";
-import {BrickWall} from "@/components/BrickWall";
+import {HallWayWall} from "@/components/HallWayWall";
 import {DoubleWallGroupProps} from "@/components/roooms/DoubleWallGroupProps";
 
 export const DoubleWallGroupComponent: React.FC<DoubleWallGroupProps> = (props) => {
     const { firstWall, secondWall, ...rest } = props;
-
     return (
         <group {...rest}>
-            <BrickWall {...firstWall} />
-            <BrickWall {...secondWall} />
+            <HallWayWall {...firstWall} />
+            <HallWayWall {...secondWall} />
         </group>
     );
-};
+}

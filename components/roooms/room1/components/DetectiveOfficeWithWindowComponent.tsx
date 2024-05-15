@@ -86,7 +86,7 @@ export const DetectiveOfficeWithWindowComponent: React.FC = () => {
                     minWidth: "350px",
                     objectFit: "cover",
                     borderRadius: "var(--space-3)",
-                    background: "url('/rooms/room1/double-paper-bg.png')",
+                    background: "url('/rooms/double-paper-bg.png')",
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     "& *": {

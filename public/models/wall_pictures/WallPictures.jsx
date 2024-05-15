@@ -15,8 +15,21 @@ export const WallPictures = forwardRef((props, ref) => {
     return (
         <group ref={ref} {...props} dispose={null}>
             <group scale={0.01}>
-                <mesh geometry={nodes.wall_picture_2_wall_picture_2_2k_0.geometry} material={materials.wall_picture_2_2k} position={[0, 4.657, -70.974]} rotation={[0, 0, -0.015]} scale={127.73} />
-                <mesh geometry={nodes.wall_picture_3_wall_picture_3_0.geometry} material={materials.wall_picture_3} position={[0, 11.88, 70.49]} rotation={[-Math.PI / 2, 0.015, 0]} scale={121.209} />
+                <mesh
+                    geometry={nodes.wall_picture_2_wall_picture_2_2k_0.geometry}
+                    material={materials.wall_picture_2_2k}
+                    position={[0, 4.657, -70.974]}
+                    rotation={[0, 0, -0.015]}
+                    scale={127.73}
+                />
+                <mesh
+                    geometry={nodes.wall_picture_3_wall_picture_3_0.geometry}
+                    material={materials.wall_picture_3}
+                    position={[0, 11.88, 70.49]}
+                    rotation={[-Math.PI / 2, 0.015, 0]}
+                    scale={121.209}
+                    onClick={props.onClickCoffeeFrame}
+                />
                 <mesh geometry={nodes.wall_picture_1_wall_picture_1_2k_0.geometry} material={materials.wall_picture_1_2k} position={[0, -16.537, 0.484]} rotation={[-Math.PI / 2, 0.021, 0]} scale={100} />
             </group>
         </group>

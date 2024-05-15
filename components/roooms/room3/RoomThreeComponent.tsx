@@ -2,8 +2,6 @@ import React from 'react';
 import {useFloor} from "@/hooks/useFloor";
 import {WORLD_COORDINATE} from "@/app/contants";
 import {GroundComponent} from "@/components/GroundComponent";
-import {HallWayWall} from "@/components/HallWayWall";
-import {ThreeElements} from "@react-three/fiber";
 import {OfficeDeskWithFixPhone} from "@/components/OfficeDeskWithFixPhone";
 import {WallPictures} from "@/public/models/wall_pictures/WallPictures";
 import {ExitDoorComponent} from "@/components/roooms/ExitDoorComponent";
@@ -11,6 +9,7 @@ import {DoorToPreviousRoomComponent} from "@/components/roooms/DoorToPreviousRoo
 import {GreenBoardWithTableComponent} from "@/components/roooms/room3/components/GreenBoardWithTableComponent";
 import {TableWithBooksAndGlobeComponent} from "@/components/roooms/room3/components/TableWithBooksAndGlobeComponent";
 import {RoomProps} from "@/components/roooms/RoomProps";
+import {DoubleWallGroupComponent} from "@/components/roooms/room3/components/DoubleWallGroupComponent";
 
 export const RoomThreeComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
@@ -19,7 +18,7 @@ export const RoomThreeComponent: React.FC<RoomProps> = (props) => {
     return (
         <>
             {/* Front wall */}
-            <DoubleWall
+            <DoubleWallGroupComponent
                 firstWall={{
                     position: [0, WORLD_COORDINATE[1], -10],
                 }}
@@ -28,7 +27,7 @@ export const RoomThreeComponent: React.FC<RoomProps> = (props) => {
                 }}
             />
             {/* Left side wall */}
-            <DoubleWall
+            <DoubleWallGroupComponent
                 position-z={6.2}
                 position-x={2.4}
                 rotation-y={Math.PI / 2}
@@ -40,7 +39,7 @@ export const RoomThreeComponent: React.FC<RoomProps> = (props) => {
                 }}
             />
             {/* Right side wall */}
-            <DoubleWall
+            <DoubleWallGroupComponent
                 position-z={-6.25}
                 position-x={10.2}
                 rotation-y={-Math.PI / 2}
@@ -52,7 +51,7 @@ export const RoomThreeComponent: React.FC<RoomProps> = (props) => {
                 }}
             />
             {/* Back side wall */}
-            <DoubleWall
+            <DoubleWallGroupComponent
                 position-x={12.5}
                 position-z={4}
                 rotation-y={Math.PI}
@@ -106,19 +105,3 @@ export const RoomThreeComponent: React.FC<RoomProps> = (props) => {
         </>
     );
 };
-
-type PropsDoubleWall = ThreeElements["group"] & {
-    firstWall: ThreeElements["group"];
-    secondWall: ThreeElements["group"];
-};
-
-const DoubleWall: React.FC<PropsDoubleWall> = (props: PropsDoubleWall) => {
-    const { firstWall, secondWall, ...rest } = props;
-    return (
-        <group {...rest}>
-            <HallWayWall {...firstWall} />
-            <HallWayWall {...secondWall} />
-        </group>
-    );
-}
-

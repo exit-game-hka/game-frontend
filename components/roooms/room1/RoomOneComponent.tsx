@@ -16,12 +16,9 @@ import {
 import {WhiteClockComponent} from "@/components/roooms/room1/components/WhiteClockComponent";
 import {NumberComponent} from "@/components/roooms/room1/components/NumberComponent";
 import {ExitDoorComponent} from "@/components/roooms/ExitDoorComponent";
-import {Raum} from "@/api/raum";
+import {RoomProps} from "@/components/roooms/RoomProps";
 
-type Props = {
-    raum: Raum;
-}
-export const RoomOneComponent: React.FC<Props> = (props: Props) => {
+export const RoomOneComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
     const { scene } = useThree();
     const theme = useTheme();

@@ -3,6 +3,10 @@ import React, {ReactNode, useMemo} from "react";
 import {RoomOneComponent} from "@/components/roooms/room1/RoomOneComponent";
 import {Raum} from "@/api/raum";
 import {RoomThreeComponent} from "@/components/roooms/room3/RoomThreeComponent";
+import {RoomTwoComponent} from "@/components/roooms/room2/RoomTwoComponent";
+import {RoomFourComponent} from "@/components/roooms/room4/RoomFourComponent";
+import {RoomFiveComponent} from "@/components/roooms/room5/RoomFiveComponent";
+import {RoomSixComponent} from "@/components/roooms/room6/RoomSixComponent";
 
 type Props = {
     room: Raum
@@ -13,7 +17,11 @@ export const RoomManagerComponent: React.FC<Props> = (props: Props) => {
     const computedRoom = useMemo((): ReactNode => {
         switch (room.name) {
             case "Raum 1": return <RoomOneComponent raum={room} />
+            case "Raum 2": return <RoomTwoComponent raum={room} />
             case "Raum 3": return <RoomThreeComponent raum={room} />
+            case "Raum 4": return <RoomFourComponent raum={room} />
+            case "Raum 5": return <RoomFiveComponent raum={room} />
+            case "Raum 6": return <RoomSixComponent raum={room} />
             default: return <RoomOneComponent raum={room} />
         }
     }, [room]);

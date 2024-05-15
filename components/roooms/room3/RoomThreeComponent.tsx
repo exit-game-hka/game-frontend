@@ -7,15 +7,12 @@ import {ThreeElements} from "@react-three/fiber";
 import {OfficeDeskWithFixPhone} from "@/components/OfficeDeskWithFixPhone";
 import {WallPictures} from "@/public/models/wall_pictures/WallPictures";
 import {ExitDoorComponent} from "@/components/roooms/ExitDoorComponent";
-import {Raum} from "@/api/raum";
 import {DoorToPreviousRoomComponent} from "@/components/roooms/DoorToPreviousRoomComponent";
 import {GreenBoardWithTableComponent} from "@/components/roooms/room3/components/GreenBoardWithTableComponent";
 import {TableWithBooksAndGlobeComponent} from "@/components/roooms/room3/components/TableWithBooksAndGlobeComponent";
+import {RoomProps} from "@/components/roooms/RoomProps";
 
-type Props = {
-    raum: Raum;
-};
-export const RoomThreeComponent: React.FC<Props> = (props) => {
+export const RoomThreeComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
     const { texture } = useFloor("/trefoil-floor.png");
 

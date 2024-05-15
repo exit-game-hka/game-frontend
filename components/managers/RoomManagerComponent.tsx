@@ -5,7 +5,7 @@ import {Raum} from "@/api/raum";
 import {Html} from "@react-three/drei";
 import {ModalProps, TaskModalComponent} from "@/components/shared/TaskModalComponent";
 import useApplicationContext from "@/hooks/useApplicationContext";
-import {RoomTwoComponent} from "@/components/roooms/room2/RoomTwoComponent";
+import {RoomThreeComponent} from "@/components/roooms/room3/RoomThreeComponent";
 
 type Props = {
     room: Raum
@@ -16,9 +16,9 @@ export const RoomManagerComponent: React.FC<Props> = (props: Props) => {
 
     const computedRoom = useMemo((): ReactNode => {
         switch (room.name) {
-            case "Raum 1": return <RoomOneComponent />
-            case "Raum 2": return <RoomTwoComponent />
-            default: return <RoomOneComponent />
+            case "Raum 1": return <RoomOneComponent raum={room} />
+            case "Raum 3": return <RoomThreeComponent raum={room} />
+            default: return <RoomOneComponent raum={room} />
         }
     }, [room.name]);
 

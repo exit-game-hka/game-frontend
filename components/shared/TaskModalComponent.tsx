@@ -1,12 +1,14 @@
 import React, {ReactNode} from 'react';
 import {Transition} from 'react-transition-group';
 import Modal from '@mui/joy/Modal';
-import ModalDialog from '@mui/joy/ModalDialog';
+import ModalDialog, {ModalDialogProps} from '@mui/joy/ModalDialog';
 import DialogTitle from '@mui/joy/DialogTitle';
 import DialogContent from '@mui/joy/DialogContent';
 import Typography from "@mui/joy/Typography";
 import {DialogHeader} from "next/dist/client/components/react-dev-overlay/internal/components/Dialog";
 import {Divider, ModalClose} from "@mui/joy";
+import {ModalDialogTypeMap} from "@mui/joy/ModalDialog/ModalDialogProps";
+import {useMediaQuery} from "@/hooks/useMediaQuery";
 
 export type ModalProps = {
     open: boolean;
@@ -14,9 +16,11 @@ export type ModalProps = {
     subtitle?: string;
     content?: ReactNode;
     onClose?: (() => void) | undefined;
+    modalDialogProps?: ModalDialogProps;
 }
 export const TaskModalComponent: React.FC<ModalProps> = (props: ModalProps) => {
-    const { open, title, subtitle, content, onClose } = props;
+    const { open, title, subtitle, content, modalDialogProps, onClose } = props;
+    const { isSmall } = useMediaQuery();
 
     return (
         <React.Fragment>
@@ -44,6 +48,7 @@ export const TaskModalComponent: React.FC<ModalProps> = (props: ModalProps) => {
                         }}
                     >
                         <ModalDialog
+                            size={"lg"}
                             sx={{
                                 opacity: 0,
                                 transition: `opacity 300ms`,
@@ -52,13 +57,22 @@ export const TaskModalComponent: React.FC<ModalProps> = (props: ModalProps) => {
                                     entered: { opacity: 1 },
                                 }[state],
                             }}
+                            {...modalDialogProps}
+                            layout={isSmall ? "fullscreen" : "center"}
                         >
                             <ModalClose variant={"soft"} sx={{ borderRadius: "50%" }} />
                             <DialogHeader>
                                 {title ? <DialogTitle>{title}</DialogTitle> : null}
                             </DialogHeader>
                             <Divider />
-                            <DialogContent>
+                            <DialogContent
+                                sx={{
+                                    display: "grid",
+                                    gridGap: "var(--space-3)",
+                                    //gridTemplateColumns: "minmax(290px, 350px)",
+                                    //gridTemplateRows: "1fr minmax(auto-fit, 50dvh)",
+                                }}
+                            >
                                 {subtitle ? <Typography level="body-sm">{subtitle}</Typography> : null}
                                 {content ?? null}
                             </DialogContent>

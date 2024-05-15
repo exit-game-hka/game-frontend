@@ -1,8 +1,8 @@
 import React, {ChangeEvent, useEffect, useState, useCallback} from 'react';
 import {Transition} from "react-transition-group";
 import Modal from "@mui/joy/Modal";
-import ModalDialog from "@mui/joy/ModalDialog";
-import {Alert, Box, Button, Divider, ModalClose} from "@mui/material";
+import ModalDialog, {ModalDialogProps} from "@mui/joy/ModalDialog";
+import {Alert, Box, Button, Divider, ModalClose, Stack} from "@mui/joy";
 import {DialogHeader} from "next/dist/client/components/react-dev-overlay/internal/components/Dialog";
 import DialogTitle from "@mui/joy/DialogTitle";
 import DialogContent from "@mui/joy/DialogContent";
@@ -10,19 +10,23 @@ import Typography from "@mui/joy/Typography";
 import Input from "@mui/joy/Input";
 import ReportIcon from '@mui/icons-material/Report';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import {useMediaQuery} from "@/hooks/useMediaQuery";
 
 type Props = {
     open: boolean;
     title?: string;
     subtitle?: string;
     onSuccess: () => void;
+    answer: string;
     onClose?: (() => void) | undefined;
+    modalDialogProps?: ModalDialogProps;
 };
 
 export const AnswerInputModalComponent: React.FC<Props> = (props) => {
-    const { open, title, subtitle, onSuccess, onClose } = props;
+    const { open, title, subtitle, answer, onSuccess, modalDialogProps, onClose } = props;
     const [inputValue, setInputValue] = useState<string>("");
     const [isComplete, setIsComplete] = useState<boolean | undefined>(undefined);
+    const { isSmall } = useMediaQuery();
 
     const closeModal = useCallback(() => {
         resetStates();
@@ -51,7 +55,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
     };
 
     const handleSubmit = () => {
-        if (inputValue !== "RAETSEL") {
+        if (inputValue !== answer) {
             setIsComplete(false);
             return;
         }
@@ -84,6 +88,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                         }}
                     >
                         <ModalDialog
+                            size={"lg"}
                             sx={{
                                 opacity: 0,
                                 transition: `opacity 300ms`,
@@ -92,6 +97,8 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                                     entered: { opacity: 1 },
                                 }[state],
                             }}
+                            {...modalDialogProps}
+                            layout={isSmall ? "fullscreen" : "center"}
                         >
                             <ModalClose variant={"soft"} sx={{ borderRadius: "50%" }} />
                             <DialogHeader>
@@ -100,13 +107,8 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                             <Divider />
                             <DialogContent>
                                 {subtitle ? <Typography level="body-sm">{subtitle}</Typography> : null}
-                                <Box
-                                    component={"div"}
-                                    sx={{
-                                        display: "grid",
-                                        gridGap: "var(--space-3)",
-                                        gridTemplateColumns: "minmax(290px, 350px)",
-                                    }}
+                                <Stack
+                                    spacing={"var(--space-4)"}
                                 >
                                     <Input
                                         type={"text"}
@@ -123,7 +125,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                                     {isComplete ?
                                         <Alert
                                             color={"success"}
-                                            variant={"outlined"}
+                                            variant={"soft"}
                                             startDecorator={<CheckCircleIcon />}
                                             sx={{ alignItems: 'flex-start' }}
                                         >
@@ -132,7 +134,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                                         isComplete === false ?
                                             <Alert
                                                 color={"danger"}
-                                                variant={"outlined"}
+                                                variant={"soft"}
                                                 startDecorator={<ReportIcon />}
                                                 sx={{ alignItems: 'flex-start' }}
                                             >
@@ -141,7 +143,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                                             </Alert> : null
                                     }
                                     <Button onClick={handleSubmit}>Antwort senden</Button>
-                                </Box>
+                                </Stack>
                             </DialogContent>
                         </ModalDialog>
                     </Modal>

@@ -1,0 +1,11 @@
+Model Information:
+* title:	HW XYZ School Detailing
+* source:	https://sketchfab.com/3d-models/hw-xyz-school-detailing-979d5ea689b94c2db3c7b7bc12500869
+* author:	Sick and Sad (https://sketchfab.com/tomolabs1)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "HW XYZ School Detailing" (https://sketchfab.com/3d-models/hw-xyz-school-detailing-979d5ea689b94c2db3c7b7bc12500869) by Sick and Sad (https://sketchfab.com/tomolabs1) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

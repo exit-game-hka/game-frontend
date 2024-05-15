@@ -9,18 +9,21 @@ import {useTheme} from "@mui/joy";
 import {Mesh, MeshStandardMaterial, TextureLoader} from "three";
 import {useFloor} from "@/hooks/useFloor";
 import {GroundComponent} from "@/components/GroundComponent";
-import {ModalProps} from "@/components/shared/TaskModalComponent";
 import {DoubleWallGroupComponent} from "@/components/roooms/room1/components/DoubleWallGroupComponent";
 import {
     DetectiveOfficeWithWindowComponent
 } from "@/components/roooms/room1/components/DetectiveOfficeWithWindowComponent";
 import {WhiteClockComponent} from "@/components/roooms/room1/components/WhiteClockComponent";
 import {NumberComponent} from "@/components/roooms/room1/components/NumberComponent";
-import {ExitDoorComponent} from "@/components/roooms/room1/components/ExitDoorComponent";
+import {ExitDoorComponent} from "@/components/roooms/ExitDoorComponent";
 import useApplicationContext from "@/hooks/useApplicationContext";
+import {Raum} from "@/api/raum";
 
-type Props = {}
+type Props = {
+    raum: Raum;
+}
 export const RoomOneComponent: React.FC<Props> = (props: Props) => {
+    const { raum } = props;
     const {setModalProps: triggerModal} = useApplicationContext();
     const { scene } = useThree();
     const theme = useTheme();
@@ -39,8 +42,6 @@ export const RoomOneComponent: React.FC<Props> = (props: Props) => {
         const setPaperInteraction = () => {
             const doublePaper = scene.getObjectByName("double-paper-on-table") as unknown as ThreeElements["mesh"];
             if (!doublePaper || !doublePaper.material) return
-
-            console.log("Double paper: ", doublePaper);
 
             const doublePaperMaterial = doublePaper.material as MeshStandardMaterial;
             doublePaperMaterial.map = doublePaperTexture;
@@ -115,7 +116,13 @@ export const RoomOneComponent: React.FC<Props> = (props: Props) => {
                 }}
             />
 
-            <ExitDoorComponent triggerModal={triggerModal} />
+            <ExitDoorComponent
+                aufgabe={raum.aufgaben[0]}
+                nextRoomId={"20000000-0000-0000-0000-000000000002"}
+                doorProps={{
+                    position: [18, WORLD_COORDINATE[1], 0],
+                }}
+            />
 
             <OfficeTableWithLaptop
                 // @ts-ignore

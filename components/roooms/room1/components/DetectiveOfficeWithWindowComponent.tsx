@@ -26,16 +26,23 @@ export const DetectiveOfficeWithWindowComponent: React.FC<PropsDetectiveOfficeWi
     };
 
     const modalContent = (
-        <Box component={"div"} sx={{ display: "grid", gridGap: "var(--space-4)" }}>
+        <Box
+            component={"div"}
+            sx={{
+                display: "grid",
+                gridGap: "var(--space-4)",
+                alignItems: "start",
+                alignContent: "start",
+            }}
+        >
             <Box
                 ref={frontCardRef}
                 component={"img"}
                 src={"/rooms/room1/double-paper-front.png"}
                 alt={"Karte Vorderseite"}
                 sx={{
-                    maxWidth: "400px",
-                    height: "100%",
-                    objectFit: "contain",
+                    width: "100%",
+                    objectFit: "cover",
                     borderRadius: "var(--space-3)",
                 }}
                 onClick={handleFlip}
@@ -47,9 +54,8 @@ export const DetectiveOfficeWithWindowComponent: React.FC<PropsDetectiveOfficeWi
                 alt={"Karte Rückseite"}
                 sx={{
                     display: "none",
-                    maxWidth: "400px",
-                    height: "100%",
-                    objectFit: "contain",
+                    width: "100%",
+                    objectFit: "cover",
                     borderRadius: "var(--space-3)",
                 }}
                 onClick={handleFlip}

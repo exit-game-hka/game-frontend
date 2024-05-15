@@ -1,13 +1,11 @@
-import React from 'react';
-import {ModalProps} from "@/components/shared/TaskModalComponent";
+import React, {useState} from 'react';
+import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
 import {Number} from "@/public/models/number_for_room1/Number";
 import {Box, Typography} from "@mui/joy";
+import {Html} from "@react-three/drei";
 
-type Props = {
-    triggerModal: (modalProps: ModalProps) => void;
-};
-export const NumberComponent: React.FC<Props> = (props) => {
-    const {triggerModal} = props;
+export const NumberComponent: React.FC = () => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const modalContent = (
         <Box component={"div"}>
@@ -26,16 +24,24 @@ export const NumberComponent: React.FC<Props> = (props) => {
     );
 
     return (
-        <Number
-            scale={0.45}
-            position={[14, 4, -10]}
-            onClick={() => triggerModal({
-                    open: true,
-                    title: "Hinweis",
-                    content: modalContent,
-                }
-            )}
-        />
+        <>
+            <Number
+                scale={0.45}
+                position={[14, 4, -10]}
+                onClick={() => setIsOpen(true)}
+            />
+            <Html>
+                <TaskModalComponent
+                    open={isOpen}
+                    title="Hinweis"
+                    content={modalContent}
+                    onClose={() => setIsOpen(false)}
+                    modalDialogProps={{
+                        maxWidth: "550px",
+                    }}
+                />
+            </Html>
+        </>
     );
 };
 

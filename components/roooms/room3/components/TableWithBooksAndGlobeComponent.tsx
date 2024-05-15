@@ -11,25 +11,25 @@ export const TableWithBooksAndGlobeComponent: React.FC = () => {
 
     const modalContent = (
         <Stack spacing={"var(--space-3)"}>
-            {/*<Box*/}
-            {/*    component={"img"}*/}
-            {/*    src={"/rooms/room3/book2.png"}*/}
-            {/*    alt={"Buch 2"}*/}
-            {/*    sx={{*/}
-            {/*        width: "100%",*/}
-            {/*        objectFit: "cover",*/}
-            {/*        borderRadius: "var(--space-3)",*/}
-            {/*    }}*/}
-            {/*/>*/}
             <Box
                 component="div"
                 sx={{
                     background: "url('/rooms/room3/book1_bg.png')",
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
                     borderRadius: "var(--space-3)",
                     p: "var(--space-4) var(--space-5)",
                 }}
             >
-                <Stack spacing={"var(--space-3)"} sx={{ fontWeight: 700 }}>
+                <Stack
+                    spacing={"var(--space-3)"}
+                    sx={{
+                        fontWeight: 700,
+                        "& p": {
+                            color: "var(--color-black)",
+                        },
+                    }}
+                >
                     <Typography>
                         <b>TRANSPOSITION</b>: METHODE, DURCH DIE SYMBOLE AUS DEM KLARTEXT AN UNTERSCHIEDLICHE STELLEN IM VERSCHLUESSELTEN TEXT POSITIONIERT WERDEN.
                     </Typography>

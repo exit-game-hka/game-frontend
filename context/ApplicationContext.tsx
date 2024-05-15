@@ -5,7 +5,7 @@ import React, {
     ForwardRefExoticComponent,
     PropsWithChildren,
     ReactNode,
-    RefAttributes, useState
+    RefAttributes
 } from "react";
 import {ThreeElements} from "@react-three/fiber";
 import {AnimationActions} from "@/context/AnimationContext";
@@ -13,7 +13,6 @@ import {Aufgabe, getAllTasksApi, getTaskByIdApi} from "@/api/aufgabe";
 import {getAllRoomsApi, getRoomByIdApi, Raum} from "@/api/raum";
 import {UNIX_TIME_TO_JAVASCRIPT_TIME_FACTOR} from "@/app/contants";
 import {useAvatars} from "@/hooks/useAvatars";
-import {ModalProps} from "@/components/shared/TaskModalComponent";
 
 export type PropsModelComponent = Omit<Partial<ThreeElements["object3D"]>, "args" | "onUpdate"> & {
     setAnimationActions?: ((actions: AnimationActions) => void) | undefined;
@@ -52,8 +51,6 @@ export type AvatarType = ComponentType<PropsModelComponent> | ForwardRefExoticCo
 type ContextOutput = {
     avatar: AvatarItem;
     setAvatar: (avatar: AvatarItem) => void;
-    modalProps: ModalProps;
-    setModalProps: (props: ModalProps) => void;
     getAufgabeById: (id: string) => Promise<Aufgabe>;
     getAllAufgaben: () => Promise<Aufgabe[]>;
     getRoomById: (id: string) => Promise<Raum>;
@@ -71,8 +68,6 @@ export const ApplicationContextProvider: React.FC<Props> = (props: Props) => {
         selectedAvatar,
         setSelectedAvatar,
     } = useAvatars();
-
-    const [modalProps, setModalProps] = useState<ModalProps>({ open: false });
 
     const getAufgabeById = async (id: string): Promise<Aufgabe> => {
         const response = await getTaskByIdApi(id);
@@ -98,8 +93,6 @@ export const ApplicationContextProvider: React.FC<Props> = (props: Props) => {
         <ApplicationContext.Provider value={{
             avatar: selectedAvatar,
             setAvatar: setSelectedAvatar,
-            modalProps,
-            setModalProps,
             getAufgabeById,
             getAllAufgaben,
             getRoomById,

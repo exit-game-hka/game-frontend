@@ -2,13 +2,12 @@
 import React, {Ref, useEffect, useRef, useState} from 'react';
 import {ExitDoor} from "@/components/ExitDoor";
 import {ExitDoorAttachment} from "@/public/models/exit_door_attachment/ExitDoorAttachment";
-import * as THREE from "three";
+import {Mesh} from "three";
 import {Html} from "@react-three/drei";
 import {AnswerInputModalComponent} from "@/components/shared/AnswerInputModalComponent";
 import {useRouter, useSearchParams} from "next/navigation";
 import {Aufgabe} from "@/api/aufgabe";
-import {GroupProps, ThreeElements} from "@react-three/fiber";
-import {Mesh} from "three";
+import {GroupProps} from "@react-three/fiber";
 
 type Props = {
     aufgabe: Aufgabe;
@@ -62,6 +61,7 @@ export const ExitDoorComponent: React.FC<Props> = (props: Props) => {
                     onClose={() => setIsOpen(false)}
                     modalDialogProps={{
                         maxWidth: "550px",
+                        minWidth: "550px",
                     }}
                 />
             </Html>

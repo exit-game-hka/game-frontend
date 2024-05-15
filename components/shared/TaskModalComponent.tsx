@@ -7,10 +7,9 @@ import DialogContent from '@mui/joy/DialogContent';
 import Typography from "@mui/joy/Typography";
 import {DialogHeader} from "next/dist/client/components/react-dev-overlay/internal/components/Dialog";
 import {Divider, ModalClose} from "@mui/joy";
-import {ModalDialogTypeMap} from "@mui/joy/ModalDialog/ModalDialogProps";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
 
-export type ModalProps = {
+type ModalProps = {
     open: boolean;
     title?: string;
     subtitle?: string;
@@ -69,8 +68,13 @@ export const TaskModalComponent: React.FC<ModalProps> = (props: ModalProps) => {
                                 sx={{
                                     display: "grid",
                                     gridGap: "var(--space-3)",
-                                    //gridTemplateColumns: "minmax(290px, 350px)",
+                                    //gridTemplateColumns: "minmax(auto-fit, 450px)",
+                                    gridTemplateColumns: isSmall ? "minmax(auto-fit, 1fr)" : "minmax(450px, 500px)",
                                     //gridTemplateRows: "1fr minmax(auto-fit, 50dvh)",
+                                    justifyContent: "center",
+                                    justifyItems: "center",
+                                    alignItems: "start",
+                                    alignContent: "start",
                                 }}
                             >
                                 {subtitle ? <Typography level="body-sm">{subtitle}</Typography> : null}

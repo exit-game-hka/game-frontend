@@ -11,16 +11,32 @@ export const GreenBoardWithTableComponent: React.FC = () => {
     const [showFolderTip, setShowFolderTip] = useState<boolean>(false);
 
     const modalContentGreenBoard = (
-        <Box
-            component={"img"}
-            src={"/rooms/room3/paper.png"}
-            alt={"Blatt an der Tafel"}
+        <Stack
+            component={"div"}
             sx={{
-                width: "100%",
-                objectFit: "cover",
                 borderRadius: "var(--space-3)",
+                background: "url('/rooms/room3/paper-room3.png')",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                p: "var(--space-4) var(--space-5)",
+                "& p": {
+                    color: "var(--color-black)",
+                    fontWeight: 700,
+                },
             }}
-        />
+        >
+            <Stack spacing={"var(--space-5)"}>
+                <Typography level={"body-sm"}>REIHENFOLGE</Typography>
+                <Typography level={"title-lg"}>
+                    SPARTAS MILITAER BENUTZTE SCYTALE CODE, ABER WELCHE METHODE?
+                </Typography>
+                <Typography level={"body-sm"} textAlign={"center"}>TEILEN</Typography>
+                <Typography level={"title-lg"}>SAFPGTARARENTI!</Typography>
+            </Stack>
+            <Typography level={"body-sm"} sx={{ alignSelf: "flex-end" }}>
+                1, 2, X
+            </Typography>
+        </Stack>
     );
 
     const modalContentFolder = (
@@ -39,8 +55,13 @@ export const GreenBoardWithTableComponent: React.FC = () => {
                 component="div"
                 sx={{
                     background: "url('/rooms/room3/book1_bg.png')",
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
                     borderRadius: "var(--space-3)",
                     p: "var(--space-3) var(--space-5) var(--space-3) var(--space-2)",
+                    "& *": {
+                        color: "var(--color-black)",
+                    },
                 }}
             >
                 <Typography component="ul" fontSize={"title-sm"} fontWeight={700}>

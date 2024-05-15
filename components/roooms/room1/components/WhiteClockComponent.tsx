@@ -1,14 +1,11 @@
-import React from 'react';
-import {ModalProps} from "@/components/shared/TaskModalComponent";
+import React, {useState} from 'react';
+import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
 import {WhiteClock} from "@/components/WhiteClock";
 import {Box} from "@mui/joy";
+import {Html} from "@react-three/drei";
 
-type Props = {
-    triggerModal: (modalProps: ModalProps) => void;
-};
-
-export const WhiteClockComponent: React.FC<Props> = (props) => {
-    const {triggerModal} = props;
+export const WhiteClockComponent: React.FC = () => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const modalContent = (
         <Box
@@ -30,18 +27,26 @@ export const WhiteClockComponent: React.FC<Props> = (props) => {
     );
 
     return (
-        <WhiteClock
-            // @ts-ignore
-            scale={1.5}
-            position={[3, 4, -10.1]}
-            rotation-y={-Math.PI / 2}
-            onClick={() => triggerModal({
-                    open: true,
-                    title: "Hinweis",
-                    content: modalContent,
-                }
-            )}
-        />
+        <>
+            <WhiteClock
+                // @ts-ignore
+                scale={1.5}
+                position={[3, 4, -10.1]}
+                rotation-y={-Math.PI / 2}
+                onClick={() => setIsOpen(true)}
+            />
+           <Html>
+               <TaskModalComponent
+                   open={isOpen}
+                   title="Hinweis"
+                   content={modalContent}
+                   onClose={() => setIsOpen(false)}
+                   modalDialogProps={{
+                       maxWidth: "550px",
+                   }}
+               />
+           </Html>
+        </>
     );
 };
 

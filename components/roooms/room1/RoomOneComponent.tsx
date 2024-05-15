@@ -16,7 +16,6 @@ import {
 import {WhiteClockComponent} from "@/components/roooms/room1/components/WhiteClockComponent";
 import {NumberComponent} from "@/components/roooms/room1/components/NumberComponent";
 import {ExitDoorComponent} from "@/components/roooms/ExitDoorComponent";
-import useApplicationContext from "@/hooks/useApplicationContext";
 import {Raum} from "@/api/raum";
 
 type Props = {
@@ -24,7 +23,6 @@ type Props = {
 }
 export const RoomOneComponent: React.FC<Props> = (props: Props) => {
     const { raum } = props;
-    const {setModalProps: triggerModal} = useApplicationContext();
     const { scene } = useThree();
     const theme = useTheme();
     const doublePaperTexture = useLoader(TextureLoader, "/rooms/room1/double-paper-front.png");
@@ -142,9 +140,9 @@ export const RoomOneComponent: React.FC<Props> = (props: Props) => {
                 position={[-5.5, WORLD_COORDINATE[1], -1]}
             />
 
-            <DetectiveOfficeWithWindowComponent triggerModal={triggerModal} />
+            <DetectiveOfficeWithWindowComponent />
 
-            <WhiteClockComponent triggerModal={triggerModal} />
+            <WhiteClockComponent />
 
             <OldStyleOffice
                 // @ts-ignore
@@ -153,7 +151,7 @@ export const RoomOneComponent: React.FC<Props> = (props: Props) => {
                 scale={0.25}
             />
 
-            <NumberComponent triggerModal={triggerModal} />
+            <NumberComponent />
 
             <GroundComponent
                 position={WORLD_COORDINATE}

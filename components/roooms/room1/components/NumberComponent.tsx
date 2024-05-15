@@ -27,7 +27,8 @@ export const NumberComponent: React.FC = () => {
         <>
             <Number
                 scale={0.45}
-                position={[14, 4, -10]}
+                rotation-y={Math.PI / 2}
+                position={[-6, 3, 0.5]}
                 onClick={() => setIsOpen(true)}
             />
             <Html>

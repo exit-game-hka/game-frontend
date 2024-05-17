@@ -1,22 +1,20 @@
 import React from 'react';
-import {useFloor} from "@/hooks/useFloor";
+import {useTexture} from "@/hooks/useTexture";
 import {WORLD_COORDINATE} from "@/app/contants";
 import {GroundComponent} from "@/components/GroundComponent";
 import {RoomProps} from "@/components/roooms/RoomProps";
-import {OfficeWithFotoFrame} from "@/components/OfficeWithFotoFrame";
-import {WallComponent} from "@/components/roooms/room2/components/WallComponent";
 import {OfficePlantLong} from "@/components/OfficePlantLong";
-import {WallPictures} from "@/public/models/wall_pictures/WallPictures";
 import {JuliusCaesarComponent} from "@/components/roooms/room2/components/JuliusCaesarComponent";
 import {ExitDoorComponent} from "@/components/roooms/ExitDoorComponent";
 import {DoorToPreviousRoomComponent} from "@/components/roooms/DoorToPreviousRoomComponent";
 import {CupBoardComponent} from "@/components/roooms/room2/components/CupBoardComponent";
 import {WallPapersComponent} from "@/components/roooms/room2/components/WallPapersComponent";
 import {OfficeWithFotoFrameComponent} from "@/components/roooms/room2/components/OfficeWithFotoFrameComponent";
+import {FourWallsComponent} from "@/components/roooms/FourWallsComponent";
 
 export const RoomTwoComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
-    const { texture } = useFloor("/wooden_floor_with_smooth_finish.png");
+    const { texture } = useTexture("/wooden_floor_with_smooth_finish.png");
 
     const plantsCoordinates = [
         [0, WORLD_COORDINATE[1], -9],
@@ -28,27 +26,23 @@ export const RoomTwoComponent: React.FC<RoomProps> = (props) => {
 
     return (
         <>
-            {/* Front wall */}
-            <WallComponent
-                position={[0, 0, -10]}
-            />
-            {/* Left wall */}
-            <WallComponent
-                rotation-y={Math.PI / 2}
-                position={[-10, 0, 0]}
-            />
-            {/* Right wall */}
-            <WallComponent
-                rotation-y={Math.PI / 2}
-                position={[10, 0, 0]}
-            />
-            {/* Back wall */}
-            <WallComponent
-                position={[0, 0, 10]}
+            <FourWallsComponent
+                frontWall={{ position: [0, 0, -10] }}
+                leftWall={{
+                    rotation: [0, Math.PI / 2, 0],
+                    position: [-10, 0, 0],
+                }}
+                rightWall={{
+                    rotation: [0, Math.PI / 2, 0],
+                    position: [10, 0, 0],
+                }}
+                backWall={{ position: [0, 0, 10] }}
+                meshBasicMaterialProps={{
+                    color: "grey",
+                }}
             />
 
             <OfficeWithFotoFrameComponent />
-
 
             {plantsCoordinates.map((c, index) =>
                 <OfficePlantLong
@@ -86,11 +80,8 @@ export const RoomTwoComponent: React.FC<RoomProps> = (props) => {
                 position={WORLD_COORDINATE}
                 meshMaterialProps={{
                     map: texture,
-                    //wireframe: true
                 }}
             />
         </>
     );
 };
-
-

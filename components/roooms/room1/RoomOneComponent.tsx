@@ -7,7 +7,7 @@ import {BookCupboard} from "@/public/models/book_cupboard/BookCupboard";
 import {OldStyleOffice} from "@/components/OldStyleOffice";
 import {useTheme} from "@mui/joy";
 import {Mesh, MeshStandardMaterial, TextureLoader} from "three";
-import {useFloor} from "@/hooks/useFloor";
+import {useTexture} from "@/hooks/useTexture";
 import {GroundComponent} from "@/components/GroundComponent";
 import {DoubleWallGroupComponent} from "@/components/roooms/room1/components/DoubleWallGroupComponent";
 import {
@@ -23,7 +23,7 @@ export const RoomOneComponent: React.FC<RoomProps> = (props) => {
     const { scene } = useThree();
     const theme = useTheme();
     const doublePaperTexture = useLoader(TextureLoader, "/rooms/room1/double-paper-front.png");
-    const { texture } = useFloor("/wooden-floor.png");
+    const { texture } = useTexture("/wooden-floor.png");
 
     useEffect(() => {
         const setClockInteraction = () => {
@@ -154,7 +154,6 @@ export const RoomOneComponent: React.FC<RoomProps> = (props) => {
                 position={WORLD_COORDINATE}
                 meshMaterialProps={{
                     map: texture,
-                    //wireframe: true
                 }}
             />
         </>

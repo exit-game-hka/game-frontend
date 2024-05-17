@@ -1,0 +1,11 @@
+Model Information:
+* title:	Theological Book Stack (XB2002-02)
+* source:	https://sketchfab.com/3d-models/theological-book-stack-xb2002-02-8bc80ee72d034d3aaff28ab2083591cf
+* author:	SamuelJamesBate (https://sketchfab.com/SamuelJamesBate)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Theological Book Stack (XB2002-02)" (https://sketchfab.com/3d-models/theological-book-stack-xb2002-02-8bc80ee72d034d3aaff28ab2083591cf) by SamuelJamesBate (https://sketchfab.com/SamuelJamesBate) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

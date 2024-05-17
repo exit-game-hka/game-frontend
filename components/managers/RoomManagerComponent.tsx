@@ -1,5 +1,5 @@
 "use client";
-import React, {ComponentType, ReactNode, useMemo} from "react";
+import React, {ComponentType, useMemo} from "react";
 import {RoomOneComponent} from "@/components/roooms/room1/RoomOneComponent";
 import {Raum} from "@/api/raum";
 import {RoomThreeComponent} from "@/components/roooms/room3/RoomThreeComponent";
@@ -51,4 +51,11 @@ export const RoomManagerComponent: React.FC<Props> = (props: Props) => {
 // Room 3
 // "Bathroom Floor"
 // (https://skfb.ly/6CILA) by RubaQewar is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+
+// Room 4
+// "Star Tile Floor"
+// (https://skfb.ly/6WMSN) by MartyBrosevelt is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+
+// "Medieval Brick Wall"
+// (https://skfb.ly/6AFK6) by Pippa is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 

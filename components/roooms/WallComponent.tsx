@@ -2,18 +2,24 @@ import React from 'react';
 import {ThreeElements} from "@react-three/fiber";
 import {DoubleSide} from "three";
 
-type Props = ThreeElements["mesh"];
+type Props = {
+    meshProps: ThreeElements["mesh"];
+    meshBasicMaterialProps?: ThreeElements["meshBasicMaterial"];
+};
 
 export const WallComponent: React.FC<Props> = (props) => {
+    const { meshProps, meshBasicMaterialProps } = props;
     return (
         <mesh
-            {...props}
+            {...meshProps}
             castShadow={false}
             receiveShadow={true}
         >
             <planeGeometry args={[20, 4]}  />
-            <meshBasicMaterial color={"grey"} side={DoubleSide} />
+            <meshBasicMaterial
+                side={DoubleSide}
+                {...meshBasicMaterialProps}
+            />
         </mesh>
     );
 };
-

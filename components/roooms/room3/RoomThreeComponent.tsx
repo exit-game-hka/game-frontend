@@ -1,5 +1,5 @@
 import React from 'react';
-import {useFloor} from "@/hooks/useFloor";
+import {useTexture} from "@/hooks/useTexture";
 import {WORLD_COORDINATE} from "@/app/contants";
 import {GroundComponent} from "@/components/GroundComponent";
 import {OfficeDeskWithFixPhone} from "@/components/OfficeDeskWithFixPhone";
@@ -13,7 +13,7 @@ import {DoubleWallGroupComponent} from "@/components/roooms/room3/components/Dou
 
 export const RoomThreeComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
-    const { texture } = useFloor("/trefoil-floor.png");
+    const { texture } = useTexture("/trefoil-floor.png");
 
     return (
         <>
@@ -99,7 +99,6 @@ export const RoomThreeComponent: React.FC<RoomProps> = (props) => {
                 position={WORLD_COORDINATE}
                 meshMaterialProps={{
                     map: texture,
-                    //wireframe: true
                 }}
             />
         </>

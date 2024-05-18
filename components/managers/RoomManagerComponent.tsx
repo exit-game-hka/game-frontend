@@ -59,3 +59,7 @@ export const RoomManagerComponent: React.FC<Props> = (props: Props) => {
 // "Medieval Brick Wall"
 // (https://skfb.ly/6AFK6) by Pippa is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 
+// Room 5
+// "Floor - Marble Tiled Floor"
+// (https://skfb.ly/6WYpC) by tsteff63 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+

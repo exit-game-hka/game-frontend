@@ -11,7 +11,7 @@ import {TableWithBooksAndGlobeComponent} from "@/components/roooms/room3/compone
 import {RoomProps} from "@/components/roooms/RoomProps";
 import {DoubleWallGroupComponent} from "@/components/roooms/room3/components/DoubleWallGroupComponent";
 
-export const RoomThreeComponent: React.FC<RoomProps> = (props) => {
+const RoomThreeComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
     const { texture } = useTexture("/trefoil-floor.png");
 
@@ -104,3 +104,5 @@ export const RoomThreeComponent: React.FC<RoomProps> = (props) => {
         </>
     );
 };
+
+export default RoomThreeComponent;

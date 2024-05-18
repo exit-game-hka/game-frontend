@@ -1,15 +1,16 @@
 "use client";
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 import {TimerComponent} from "@/components/TimerComponent";
-import {GameSceneComponent} from "@/components/GameSceneComponent";
 import ToolBarComponent from "@/components/ToolBarComponent";
 import styled from "styled-components";
 import {useParams} from "next/navigation";
 import useApplicationContext from "@/hooks/useApplicationContext";
 import useSWR from "swr";
 import {Raum} from "@/api/raum";
-import {UNIX_TIME_TO_JAVASCRIPT_TIME_FACTOR} from "@/app/contants";
 import {convertMinutesToMilliseconds} from "@/context/ApplicationContext";
+import {SplashScreenComponent} from "@/components/shared/SplashScreenComponent";
+
+const GameSceneComponent = lazy(() => import("../../../../components/GameSceneComponent"));
 
 const RoomItemPage: React.FC = () => {
 
@@ -26,7 +27,7 @@ const RoomItemPage: React.FC = () => {
         alert("Time is up!");
     };
 
-    if (isLoading || !room) return <div>Loading...</div>;
+    if (isLoading || !room) return <SplashScreenComponent />;
 
     if (error) return <div>{`Ein Fehler ist aufgetreten: ${(error as Error).toString()}`}</div>;
 
@@ -37,7 +38,9 @@ const RoomItemPage: React.FC = () => {
                 onTimeout={handleTimeout}
             />
             <CanvasContainer>
-                <GameSceneComponent room={room} />
+                <Suspense fallback={<SplashScreenComponent />}>
+                    <GameSceneComponent room={room} />
+                </Suspense>
             </CanvasContainer>
             <ToolBarComponent />
         </>

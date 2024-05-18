@@ -12,7 +12,7 @@ import {OfficePlantLong} from "@/components/OfficePlantLong";
 import {OfficePlantComponent} from "@/components/roooms/room5/components/OfficePlantComponent";
 import {WallFotoFramesComponent} from "@/components/roooms/room5/components/WallFotoFramesComponent";
 
-export const RoomFiveComponent: React.FC<RoomProps> = (props) => {
+const RoomFiveComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
     const { texture: floorTexture } = useTexture("/floor-with-black-and-white-tile.png", [60, 60]);
 
@@ -65,3 +65,4 @@ export const RoomFiveComponent: React.FC<RoomProps> = (props) => {
     );
 };
 
+export default RoomFiveComponent;

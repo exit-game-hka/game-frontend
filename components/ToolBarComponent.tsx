@@ -71,7 +71,7 @@ const ToolBarComponent: React.FC = () => {
 
 const ToolBarWrapper = styled.div`
     position: fixed;
-    z-index: 1000000000;
+    z-index: var(--z-index-scene-controls);
     left: 50%;
     bottom: 4%;
     transform: translateX(-50%);

@@ -4,7 +4,7 @@ import {GroundComponent} from "@/components/GroundComponent";
 import {WORLD_COORDINATE} from "@/app/contants";
 import {RoomProps} from "@/components/roooms/RoomProps";
 
-export const RoomSixComponent: React.FC<RoomProps> = (props) => {
+const RoomSixComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
     const { texture } = useTexture("/trefoil-floor.png");
     return (
@@ -18,3 +18,5 @@ export const RoomSixComponent: React.FC<RoomProps> = (props) => {
         </>
     );
 };
+
+export default RoomSixComponent;

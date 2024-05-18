@@ -18,7 +18,7 @@ import {NumberComponent} from "@/components/roooms/room1/components/NumberCompon
 import {ExitDoorComponent} from "@/components/roooms/ExitDoorComponent";
 import {RoomProps} from "@/components/roooms/RoomProps";
 
-export const RoomOneComponent: React.FC<RoomProps> = (props) => {
+const RoomOneComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
     const { scene } = useThree();
     const theme = useTheme();
@@ -159,3 +159,5 @@ export const RoomOneComponent: React.FC<RoomProps> = (props) => {
         </>
     );
 };
+
+export default RoomOneComponent;

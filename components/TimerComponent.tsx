@@ -50,7 +50,7 @@ export const TimerComponent: React.FC<Props> = (props) => {
 
 const TimerContainer = styled(Box)`
     position: fixed;
-    z-index: 1000000000;
+    z-index: var(--z-index-scene-controls);
     left: 50%;
     top: 0;
     transform: translateX(-50%);

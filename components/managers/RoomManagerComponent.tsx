@@ -1,13 +1,14 @@
 "use client";
-import React, {ComponentType, useMemo} from "react";
-import {RoomOneComponent} from "@/components/roooms/room1/RoomOneComponent";
+import React, {ComponentType, lazy, useMemo} from "react";
 import {Raum} from "@/api/raum";
-import {RoomThreeComponent} from "@/components/roooms/room3/RoomThreeComponent";
-import {RoomTwoComponent} from "@/components/roooms/room2/RoomTwoComponent";
-import {RoomFourComponent} from "@/components/roooms/room4/RoomFourComponent";
-import {RoomFiveComponent} from "@/components/roooms/room5/RoomFiveComponent";
-import {RoomSixComponent} from "@/components/roooms/room6/RoomSixComponent";
 import {RoomProps} from "@/components/roooms/RoomProps";
+
+const RoomOneComponent = lazy(() => import("../../components/roooms/room1/RoomOneComponent"));
+const RoomTwoComponent = lazy(() => import("../../components/roooms/room2/RoomTwoComponent"));
+const RoomThreeComponent = lazy(() => import("../../components/roooms/room3/RoomThreeComponent"));
+const RoomFourComponent = lazy(() => import("../../components/roooms/room4/RoomFourComponent"));
+const RoomFiveComponent = lazy(() => import("../../components/roooms/room5/RoomFiveComponent"));
+const RoomSixComponent = lazy(() => import("../../components/roooms/room6/RoomSixComponent"));
 
 type Props = {
     room: Raum

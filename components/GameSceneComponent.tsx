@@ -1,5 +1,5 @@
 import React from "react";
-import {OrbitControls, PerspectiveCamera} from "@react-three/drei";
+import {PerspectiveCamera} from "@react-three/drei";
 import {PlayerManagerComponent} from "@/components/managers/PlayerManagerComponent";
 import {Canvas} from "@react-three/fiber";
 import {RoomManagerComponent} from "@/components/managers/RoomManagerComponent";
@@ -9,12 +9,12 @@ import {Raum} from "@/api/raum";
 type Props = {
     room: Raum;
 }
-export const GameSceneComponent: React.FC<Props> = (props: Props) => {
+const GameSceneComponent: React.FC<Props> = (props: Props) => {
     const { room } = props;
     // @ts-ignore
     return (
         <Canvas shadows={true}>
-            <OrbitControls/>
+            {/*<OrbitControls/>*/}
             <PerspectiveCamera args={[75, 30, 0]} position={[0, -20, 0]}/>
             <ambientLight intensity={1} color={"white"} shadow={"black"}/>
             <hemisphereLight intensity={1} />
@@ -35,11 +35,10 @@ export const GameSceneComponent: React.FC<Props> = (props: Props) => {
                 shadow-camera-top={100}
                 shadow-camera-bottom={-100}
             />
-
             <PlayerManagerComponent position={[0, WORLD_COORDINATE[1], 0]} />
-
             <RoomManagerComponent room={room} />
-
         </Canvas>
     );
 };
+
+export default GameSceneComponent;

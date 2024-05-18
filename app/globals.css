@@ -9,9 +9,12 @@ body {
 }
 
 :root {
-
     /* contrained content */
     --max-page-width: 1400px;
+
+    /* Z-Indexes */
+    --z-index-scene-controls: 1000000000;
+    --z-index-splash-screen: 1000000001;
 
     /* Icon sizes */
     --icon-medium: 30px;

@@ -11,7 +11,7 @@ import {OfficeWithBooksAndGlobeComponent} from "@/components/roooms/room4/compon
 import {TheologicalBookStackComponent} from "@/components/roooms/room4/components/TheologicalBookStackComponent";
 import {SmallCupBoardComponent} from "@/components/roooms/room4/components/SmallCupBoardComponent";
 
-export const RoomFourComponent: React.FC<RoomProps> = (props) => {
+const RoomFourComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
     const { texture: floorTexture } = useTexture("/floor-with-star-tile.png");
     const { texture: wallTexture } = useTexture("/medieval-brick-wall.png", [5, 4]);
@@ -67,3 +67,5 @@ export const RoomFourComponent: React.FC<RoomProps> = (props) => {
         </>
     );
 };
+
+export default RoomFourComponent;

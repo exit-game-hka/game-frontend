@@ -12,7 +12,7 @@ import {WallPapersComponent} from "@/components/roooms/room2/components/WallPape
 import {OfficeWithFotoFrameComponent} from "@/components/roooms/room2/components/OfficeWithFotoFrameComponent";
 import {FourWallsComponent} from "@/components/roooms/FourWallsComponent";
 
-export const RoomTwoComponent: React.FC<RoomProps> = (props) => {
+const RoomTwoComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
     const { texture } = useTexture("/wooden_floor_with_smooth_finish.png");
 
@@ -85,3 +85,5 @@ export const RoomTwoComponent: React.FC<RoomProps> = (props) => {
         </>
     );
 };
+
+export default RoomTwoComponent;

@@ -113,7 +113,12 @@ const AppBarContainer = styled(Box)`
     height: var(--app-bar-height);
     border-bottom: 1px solid #e5eaf2;
 
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: var(--joy-palette-background-body);
 `;
 const AppBarContent = styled(Box)`
     display: grid;

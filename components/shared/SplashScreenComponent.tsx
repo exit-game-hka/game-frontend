@@ -2,7 +2,7 @@ import React from 'react';
 import {useMediaQuery} from "@/hooks/useMediaQuery";
 import Image from "next/image";
 
-export const SplashScreenComponent: React.FC = () => {
+const SplashScreenComponent: React.FC = () => {
     const { isSmall } = useMediaQuery();
 
     return (
@@ -22,3 +22,4 @@ export const SplashScreenComponent: React.FC = () => {
     )
 };
 
+export default SplashScreenComponent;

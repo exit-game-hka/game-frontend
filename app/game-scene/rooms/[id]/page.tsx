@@ -8,8 +8,13 @@ import useApplicationContext from "@/hooks/useApplicationContext";
 import useSWR from "swr";
 import {Raum} from "@/api/raum";
 import {convertMinutesToMilliseconds} from "@/context/ApplicationContext";
-import {SplashScreenComponent} from "@/components/shared/SplashScreenComponent";
+import SplashScreenComponent from "@/components/shared/SplashScreenComponent";
+//import dynamic from "next/dynamic";
 
+// const SplashScreenComponent = dynamic(
+//     () => import("../../../../components/shared/SplashScreenComponent"),
+//     { ssr: false }
+// );
 const GameSceneComponent = lazy(() => import("../../../../components/GameSceneComponent"));
 
 const RoomItemPage: React.FC = () => {

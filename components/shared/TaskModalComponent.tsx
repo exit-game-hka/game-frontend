@@ -63,7 +63,7 @@ export const TaskModalComponent: React.FC<ModalProps> = (props: ModalProps) => {
                             <DialogHeader>
                                 {title ? <DialogTitle>{title}</DialogTitle> : null}
                             </DialogHeader>
-                            <Divider />
+                            {title ? <Divider/> : null}
                             <DialogContent
                                 sx={{
                                     display: "grid",
@@ -75,6 +75,7 @@ export const TaskModalComponent: React.FC<ModalProps> = (props: ModalProps) => {
                                     justifyItems: "center",
                                     alignItems: "start",
                                     alignContent: "start",
+                                    mt: "var(--space-4)",
                                 }}
                             >
                                 {subtitle ? <Typography level="body-sm">{subtitle}</Typography> : null}

@@ -70,7 +70,6 @@ export const CupBoardComponent: React.FC = () => {
             <Html>
                 <TaskModalComponent
                     open={isOpen}
-                    title="Hinweis"
                     content={modalContent}
                     onClose={() => setIsOpen(false)}
                     modalDialogProps={{

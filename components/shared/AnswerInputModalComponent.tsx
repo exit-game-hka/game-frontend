@@ -2,7 +2,7 @@ import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import {Transition} from "react-transition-group";
 import Modal from "@mui/joy/Modal";
 import ModalDialog, {ModalDialogProps} from "@mui/joy/ModalDialog";
-import {Alert, Button, Divider, ModalClose, Stack} from "@mui/joy";
+import {Alert, Button, Divider, FormControl, FormHelperText, FormLabel, ModalClose, Stack} from "@mui/joy";
 import {DialogHeader} from "next/dist/client/components/react-dev-overlay/internal/components/Dialog";
 import DialogTitle from "@mui/joy/DialogTitle";
 import DialogContent from "@mui/joy/DialogContent";
@@ -119,21 +119,22 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                             <Divider />
                             <DialogContent>
                                 {subtitle ? <Typography level="body-sm">{subtitle}</Typography> : null}
-                                <Stack
-                                    spacing={"var(--space-4)"}
-                                >
-                                    <Input
-                                        type={"text"}
-                                        size={"lg"}
-                                        value={inputValue}
-                                        onChange={handleChange}
-                                        slotProps={{
-                                            input: {
-                                                component: "input",
-                                            }
-                                        }}
-                                        placeholder={"Hier eingeben"}
-                                    />
+                                <Stack spacing={"var(--space-4)"}>
+                                    <FormControl size={"lg"}>
+                                        <FormLabel>Lösungswort</FormLabel>
+                                        <Input
+                                            type={"text"}
+                                            value={inputValue}
+                                            onChange={handleChange}
+                                            slotProps={{
+                                                input: {
+                                                    component: "input",
+                                                }
+                                            }}
+                                            placeholder={"Hier eingeben"}
+                                        />
+                                        <FormHelperText>Geben Sie das Lösungswort in Großbuchstaben und ohne Umlaute ein</FormHelperText>
+                                    </FormControl>
                                     {isComplete ?
                                         <Alert
                                             color={"success"}

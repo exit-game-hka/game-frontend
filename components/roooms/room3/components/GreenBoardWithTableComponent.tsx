@@ -88,7 +88,6 @@ export const GreenBoardWithTableComponent: React.FC = () => {
                     </li>
                 </Typography>
             </Box>
-            <Typography level={"title-lg"} textAlign={"center"}>Buch 1</Typography>
         </Stack>
     );
 
@@ -104,13 +103,11 @@ export const GreenBoardWithTableComponent: React.FC = () => {
             <Html>
                 <TaskModalComponent
                     open={showGreenBoardTip}
-                    title="Hinweis"
                     content={modalContentGreenBoard}
                     onClose={() => setShowGreenBoardTip(false)}
                 />
                 <TaskModalComponent
                     open={showFolderTip}
-                    title="Hinweis"
                     content={modalContentFolder}
                     onClose={() => setShowFolderTip(false)}
                     modalDialogProps={{

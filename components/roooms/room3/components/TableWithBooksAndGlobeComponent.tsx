@@ -41,7 +41,6 @@ export const TableWithBooksAndGlobeComponent: React.FC = () => {
                     </Typography>
                 </Stack>
             </Box>
-            <Typography level={"title-lg"} textAlign={"center"}>Buch 2</Typography>
         </Stack>
     );
 
@@ -57,7 +56,6 @@ export const TableWithBooksAndGlobeComponent: React.FC = () => {
             <Html>
                 <TaskModalComponent
                     open={isOpen}
-                    title="Hinweis"
                     content={modalContent}
                     onClose={() => setIsOpen(false)}
                     modalDialogProps={{

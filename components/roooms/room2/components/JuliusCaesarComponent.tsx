@@ -40,7 +40,6 @@ export const JuliusCaesarComponent: React.FC<Props> = (props) => {
             <Html>
                 <TaskModalComponent
                     open={isOpen}
-                    title="Hinweis"
                     content={modalContent}
                     onClose={() => setIsOpen(false)}
                     modalDialogProps={{

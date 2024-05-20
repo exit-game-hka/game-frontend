@@ -24,9 +24,6 @@ export const OfficeWithFotoFrameComponent: React.FC = () => {
             >
                 A → H
             </Typography>
-            <Typography level={"title-md"}>
-                Siebenfache Verschiebung
-            </Typography>
         </Stack>
     );
 
@@ -42,7 +39,6 @@ export const OfficeWithFotoFrameComponent: React.FC = () => {
             <Html>
                 <TaskModalComponent
                     open={isOpen}
-                    title="Hinweis"
                     content={modalContent}
                     onClose={() => setIsOpen(false)}
                     modalDialogProps={{

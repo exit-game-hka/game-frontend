@@ -60,7 +60,7 @@ export const OverviewCardComponent: React.FC = () => {
                     <Button
                         sx={{ minWidth: 120 }}
                         size="lg"
-                        onClick={() => router.push("/avatar-selection")}
+                        onClick={() => router.push("/login")}
                     >
                         Jetzt spielen
                     </Button>

@@ -5,7 +5,9 @@ import React, {
     ForwardRefExoticComponent,
     PropsWithChildren,
     ReactNode,
-    RefAttributes
+    RefAttributes,
+    useEffect,
+    useState
 } from "react";
 import {ThreeElements} from "@react-three/fiber";
 import {AnimationActions} from "@/context/AnimationContext";
@@ -13,6 +15,8 @@ import {Aufgabe, getAllTasksApi, getTaskByIdApi} from "@/api/aufgabe";
 import {getAllRoomsApi, getRoomByIdApi, Raum} from "@/api/raum";
 import {UNIX_TIME_TO_JAVASCRIPT_TIME_FACTOR} from "@/app/contants";
 import {useAvatars} from "@/hooks/useAvatars";
+import {getSpielerByAvatarNameApi, Spieler} from "@/api/spieler";
+import {usePathname, useRouter} from "next/navigation";
 
 export type PropsModelComponent = Omit<Partial<ThreeElements["object3D"]>, "args" | "onUpdate"> & {
     setAnimationActions?: ((actions: AnimationActions) => void) | undefined;
@@ -55,6 +59,9 @@ type ContextOutput = {
     getAllAufgaben: () => Promise<Aufgabe[]>;
     getRoomById: (id: string) => Promise<Raum>;
     getAllRooms: () => Promise<Raum[]>;
+    getSpielerByAvatarName: (avatarName: string) => Promise<Spieler>;
+    spieler: Spieler  | undefined;
+    saveSpieler: (spieler: Spieler) => void;
 }
 
 // @ts-ignore
@@ -68,6 +75,28 @@ export const ApplicationContextProvider: React.FC<Props> = (props: Props) => {
         selectedAvatar,
         setSelectedAvatar,
     } = useAvatars();
+    const router = useRouter();
+    const pathname = usePathname();
+    const [spieler, setSpieler] = useState<Spieler>();
+
+    useEffect(() => {
+        const playerFromLocalStorage = localStorage.getItem("player");
+        if (!playerFromLocalStorage) return;
+        const player = JSON.parse(playerFromLocalStorage) as Spieler;
+        setSpieler(player);
+    }, []);
+
+    useEffect(() => {
+        const playerFromLocalStorage = localStorage.getItem("player");
+        if (!playerFromLocalStorage && pathname !== "/") {
+            router.push("/login");
+        };
+    }, [pathname]);
+
+    const saveSpieler = (spielerToSave: Spieler) => {
+        localStorage.setItem("player", JSON.stringify(spielerToSave));
+        setSpieler(spielerToSave);
+    }
 
     const getAufgabeById = async (id: string): Promise<Aufgabe> => {
         const response = await getTaskByIdApi(id);
@@ -89,6 +118,11 @@ export const ApplicationContextProvider: React.FC<Props> = (props: Props) => {
         return response.data;
     }
 
+    const getSpielerByAvatarName = async (avatarName: string): Promise<Spieler> => {
+        const response = await getSpielerByAvatarNameApi(avatarName);
+        return response.data;
+    }
+
     return (
         <ApplicationContext.Provider value={{
             avatar: selectedAvatar,
@@ -97,6 +131,9 @@ export const ApplicationContextProvider: React.FC<Props> = (props: Props) => {
             getAllAufgaben,
             getRoomById,
             getAllRooms,
+            getSpielerByAvatarName,
+            spieler,
+            saveSpieler,
         }}>
             {children}
         </ApplicationContext.Provider>

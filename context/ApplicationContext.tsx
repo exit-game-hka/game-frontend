@@ -17,6 +17,14 @@ import {UNIX_TIME_TO_JAVASCRIPT_TIME_FACTOR} from "@/app/contants";
 import {useAvatars} from "@/hooks/useAvatars";
 import {getSpielerBySpielerIdApi, Spieler} from "@/api/spieler";
 import {usePathname, useRouter} from "next/navigation";
+import {
+    createStatusApi,
+    getStatusBySemesterIdApi,
+    getStatusBySpielerIdApi,
+    StatusDto,
+    updateStatusApi
+} from "@/api/status";
+import {Status} from "@/api/status";
 
 export type PropsModelComponent = Omit<Partial<ThreeElements["object3D"]>, "args" | "onUpdate"> & {
     setAnimationActions?: ((actions: AnimationActions) => void) | undefined;
@@ -62,6 +70,10 @@ type ContextOutput = {
     getSpielerBySpielerId: (spielerId: string) => Promise<Spieler>;
     spieler: Spieler  | undefined;
     saveSpieler: (spieler: Spieler) => void;
+    getStatusBySpielerId: (id: string) => Promise<Status>;
+    getStatusBySemesterId: (id: string) => Promise<Status>;
+    createStatus: (statusDto: StatusDto) => Promise<void>;
+    updateStatus: (status: Status) => Promise<void>;
 }
 
 // @ts-ignore
@@ -123,6 +135,25 @@ export const ApplicationContextProvider: React.FC<Props> = (props: Props) => {
         return response.data;
     }
 
+    const getStatusBySpielerId = async (id: string): Promise<Status> => {
+        const response = await getStatusBySpielerIdApi(id);
+        return response.data;
+    }
+
+    const getStatusBySemesterId = async (id: string): Promise<Status> => {
+        const response = await getStatusBySemesterIdApi(id);
+        return response.data;
+    }
+
+    const createStatus = async (statusDto: StatusDto): Promise<void> => {
+        const response = await createStatusApi(statusDto);
+        return response.data;
+    }
+
+    const updateStatus = async (status: Status): Promise<void> => {
+        await updateStatusApi(status);
+    }
+
     return (
         <ApplicationContext.Provider value={{
             avatar: selectedAvatar,
@@ -134,6 +165,10 @@ export const ApplicationContextProvider: React.FC<Props> = (props: Props) => {
             getSpielerBySpielerId,
             spieler,
             saveSpieler,
+            getStatusBySpielerId,
+            getStatusBySemesterId,
+            createStatus,
+            updateStatus,
         }}>
             {children}
         </ApplicationContext.Provider>

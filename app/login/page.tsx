@@ -11,12 +11,12 @@ const LoginPage: React.FC = () => {
     const playerRef = useRef<HTMLInputElement>();
     const { isSmall } = useMediaQuery();
     const router = useRouter();
-    const { getSpielerByAvatarName, saveSpieler } = useApplicationContext();
+    const { getSpielerBySpielerId, saveSpieler } = useApplicationContext();
     const [error, setError] = useState<string | undefined>(undefined);
 
     const navigateToGameScene = async () => {
         if (!playerRef.current) return;
-        const player = await getSpielerByAvatarName(playerRef.current.value);
+        const player = await getSpielerBySpielerId(playerRef.current.value);
         if (!player) {
             setError("Diese Spieler-ID ist ungültig");
             return;

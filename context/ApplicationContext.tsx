@@ -15,7 +15,7 @@ import {Aufgabe, getAllTasksApi, getTaskByIdApi} from "@/api/aufgabe";
 import {getAllRoomsApi, getRoomByIdApi, Raum} from "@/api/raum";
 import {UNIX_TIME_TO_JAVASCRIPT_TIME_FACTOR} from "@/app/contants";
 import {useAvatars} from "@/hooks/useAvatars";
-import {getSpielerByAvatarNameApi, Spieler} from "@/api/spieler";
+import {getSpielerBySpielerIdApi, Spieler} from "@/api/spieler";
 import {usePathname, useRouter} from "next/navigation";
 
 export type PropsModelComponent = Omit<Partial<ThreeElements["object3D"]>, "args" | "onUpdate"> & {
@@ -59,7 +59,7 @@ type ContextOutput = {
     getAllAufgaben: () => Promise<Aufgabe[]>;
     getRoomById: (id: string) => Promise<Raum>;
     getAllRooms: () => Promise<Raum[]>;
-    getSpielerByAvatarName: (avatarName: string) => Promise<Spieler>;
+    getSpielerBySpielerId: (spielerId: string) => Promise<Spieler>;
     spieler: Spieler  | undefined;
     saveSpieler: (spieler: Spieler) => void;
 }
@@ -118,8 +118,8 @@ export const ApplicationContextProvider: React.FC<Props> = (props: Props) => {
         return response.data;
     }
 
-    const getSpielerByAvatarName = async (avatarName: string): Promise<Spieler> => {
-        const response = await getSpielerByAvatarNameApi(avatarName);
+    const getSpielerBySpielerId = async (spielerId: string): Promise<Spieler> => {
+        const response = await getSpielerBySpielerIdApi(spielerId);
         return response.data;
     }
 
@@ -131,7 +131,7 @@ export const ApplicationContextProvider: React.FC<Props> = (props: Props) => {
             getAllAufgaben,
             getRoomById,
             getAllRooms,
-            getSpielerByAvatarName,
+            getSpielerBySpielerId,
             spieler,
             saveSpieler,
         }}>

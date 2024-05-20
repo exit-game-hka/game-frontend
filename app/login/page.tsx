@@ -6,22 +6,40 @@ import Input from "@mui/joy/Input";
 import {useRouter} from "next/navigation";
 import useApplicationContext from "@/hooks/useApplicationContext";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
+import {StatusDto} from "@/api/status";
 
 const LoginPage: React.FC = () => {
-    const playerRef = useRef<HTMLInputElement>();
+    const spielerIdInputRef = useRef<HTMLInputElement>();
     const { isSmall } = useMediaQuery();
     const router = useRouter();
-    const { getSpielerBySpielerId, saveSpieler } = useApplicationContext();
+    const { getSpielerBySpielerId, saveSpieler, createStatus, getStatusBySpielerId } = useApplicationContext();
     const [error, setError] = useState<string | undefined>(undefined);
 
     const navigateToGameScene = async () => {
-        if (!playerRef.current) return;
-        const player = await getSpielerBySpielerId(playerRef.current.value);
+        if (!spielerIdInputRef.current) return;
+        const player = await getSpielerBySpielerId(spielerIdInputRef.current.value);
+
         if (!player) {
             setError("Diese Spieler-ID ist ungültig");
             return;
         }
+
         saveSpieler(player);
+
+        const status = await getStatusBySpielerId(player.id);
+        if (!status) {
+            const statusToSubmit: StatusDto = {
+                spielerId: player.id,
+                semesterId: player.semesterId,
+                veranstaltungId: player.veranstaltungId,
+                spielStart: new Date(),
+                spielEnde: null,
+                istSpielBeendet: false,
+                istSpielAbgebrochen: false,
+            };
+            await createStatus(statusToSubmit);
+        }
+
         router.push("/avatar-selection");
     };
 
@@ -62,7 +80,7 @@ const LoginPage: React.FC = () => {
                         size={"lg"}
                         slotProps={{
                             input: {
-                                ref: playerRef as Ref<HTMLInputElement>,
+                                ref: spielerIdInputRef as Ref<HTMLInputElement>,
                                 component: "input",
                             }
                         }}

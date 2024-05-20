@@ -6,9 +6,10 @@ export type Status = {
     spielerId: string;
     semesterId: string;
     veranstaltungId: string;
-    spielStart: Date;
-    spielEnde: Date;
+    spielStart: Date | null;
+    spielEnde: Date | null;
     istSpielBeendet: boolean;
+    istSpielAbgebrochen: boolean;
 };
 
 export type StatusDto = Omit<Status, "id">;

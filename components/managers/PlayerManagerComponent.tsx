@@ -5,9 +5,7 @@ import * as THREE from "three";
 import {Object3D, QuaternionLike} from "three";
 import {useObjectControls} from "@/hooks/useObjectControls";
 import {WALKING_SPEED} from "@/app/contants";
-import useAnimationContext from "@/hooks/useAnimationContext";
-import {AnimationActions, ObjectAnimation} from "@/context/AnimationContext";
-import {useGlobalStore} from "@/store/useGlobalStore";
+import {AnimationActions, ObjectAnimation, useGlobalStore} from "@/store/useGlobalStore";
 
 type ModelRefType =  Ref<Object3D> | undefined;
 
@@ -17,17 +15,19 @@ export const PlayerManagerComponent: React.FC<Props> = (props: Props) =>  {
     const playerRef = useRef<THREE.Object3D>();
     const selectedAvatar = useGlobalStore((state) => state.selectedAvatar);
 
-    const animationContext = useAnimationContext();
+    const playAnimationAction = useGlobalStore((state) => state.playAnimationAction);
+    const animations = useGlobalStore((state) => state.animations);
+    const addAnimation = useGlobalStore((state) => state.addAnimation);
 
     useEffect(() => {
         if (!playerRef.current) return;
-        animationContext.playAnimationAction(playerRef.current.uuid, "idle");
-    }, [animationContext.animations]);
+        playAnimationAction(playerRef.current.uuid, "idle");
+    }, [animations]);
 
     const initialRotation = [0, 0, 0];
 
     useFrame((state) => {
-        if (!playerRef.current || !animationContext.animations) return;
+        if (!playerRef.current || !animations) return;
 
         // Instance of the camera
         const { camera } = state;
@@ -81,14 +81,14 @@ export const PlayerManagerComponent: React.FC<Props> = (props: Props) =>  {
         const player = playerRef.current;
 
         if (keyRight || keyLeft || keyUp || keyDown) {
-            animationContext.playAnimationAction(player.uuid, "run");
+            playAnimationAction(player.uuid, "run");
             return;
         }
         if (spaceKey) {
-            animationContext.playAnimationAction(player.uuid, "jump", 1);
+            playAnimationAction(player.uuid, "jump", 1);
             return;
         }
-        animationContext.resetToDefaultAnimation(playerRef.current.uuid);
+        resetToDefaultAnimation(playerRef.current.uuid);
     }, [keyLeft, keyRight, keyUp, keyDown, spaceKey]);
 
 
@@ -159,21 +159,21 @@ export const PlayerManagerComponent: React.FC<Props> = (props: Props) =>  {
 
     }
 
-    const addAnimationsToAnimationContext = (actions: AnimationActions) => {
+    const addAnimationsToAnimationStore = (actions: AnimationActions) => {
         if (!playerRef.current) return;
 
         const animations: ObjectAnimation = {
             id: playerRef.current.uuid,
             animationActions: actions,
         };
-        return animationContext.addAnimation(animations);
+        return addAnimation(animations);
     }
 
     return (
         <selectedAvatar.model
             ref={playerRef as ModelRefType}
             {...props}
-            setAnimationActions={addAnimationsToAnimationContext}
+            setAnimationActions={addAnimationsToAnimationStore}
         />
     );
 }

@@ -22,8 +22,9 @@ import {
 } from "@/api/ergebnis";
 import {UNIX_TIME_TO_JAVASCRIPT_TIME_FACTOR} from "@/app/contants";
 import {ThreeElements} from "@react-three/fiber";
-import {AnimationActions} from "@/context/AnimationContext";
+import {AnimationAction} from "three";
 
+// Zustand Doc: https://github.com/pmndrs/zustand
 // Avatar store
 
 type AvatarStore = {
@@ -150,13 +151,35 @@ const useErgebnisStoreSlice: StateCreator<ErgebnisStore> = () => ({
     },
 });
 
+// Three.js animation store
+
+type AnimationStore = {
+    animations: ObjectAnimation[];
+    addAnimation: (animation: ObjectAnimation) => void;
+    resetToDefaultAnimation: (objectId: string) => void;
+    playAnimationAction: (objectId: string, actionName: AnimationActionType, repetitions?: number) => void;
+};
+const useAnimationStoreSlice: StateCreator<AnimationStore> = (set, get) => ({
+    animations: [],
+    addAnimation: (animation: ObjectAnimation) => set((state) => ({ animations: [...state.animations, animation] })),
+    resetToDefaultAnimation: (objectId: string) => {
+        stopAllAnimationActionsOfObject(objectId, get().animations);
+        validateAndPlayAnimationAction(objectId, get().animations, DEFAULT_ANIMATION);
+    },
+    playAnimationAction: (objectId: string, actionName: AnimationActionType, repetitions?: number) => {
+        stopAllAnimationActionsOfObject(objectId, get().animations);
+        validateAndPlayAnimationAction(objectId, get().animations, actionName, repetitions);
+    },
+});
+
 type GlobalStore =
     AvatarStore &
     AufgabeStore &
     RoomStore &
     SpielerStore &
     StatusStore &
-    ErgebnisStore;
+    ErgebnisStore &
+    AnimationStore;
 export const useGlobalStore = create<GlobalStore>((...fn) => ({
     ...useAvatarStoreSlice(...fn),
     ...useAufgabeStoreSlice(...fn),
@@ -164,9 +187,10 @@ export const useGlobalStore = create<GlobalStore>((...fn) => ({
     ...useSpielerStoreSlice(...fn),
     ...useStatusStoreSlice(...fn),
     ...useErgebnisStoreSlice(...fn),
+    ...useAnimationStoreSlice(...fn),
 }));
 
-// Gobal stateless content (Types, Functions, etc...)
+// Global stateless content (Types, Functions, etc...)
 
 export type AvatarItem = {
     name: string;
@@ -194,4 +218,41 @@ export type PropsModelComponent = Omit<Partial<ThreeElements["object3D"]>, "args
     args?: any;
     //onUpdate?: (event: ThreeEvent) => void;
     onUpdate?: any;
+};
+
+export type AnimationActionType = "idle" | "run" | "jump" | "angry" | "defeated" | "celebration_chicken_dance";
+
+const DEFAULT_ANIMATION: AnimationActionType = "idle" as const;
+
+export type AnimationActions = {
+    [p: string]: AnimationAction | null;
+};
+
+export type ObjectAnimation = {
+    id: string;
+    animationActions: AnimationActions;
+};
+
+const stopAllAnimationActionsOfObject = (objectId: string, animations: ObjectAnimation[])  => {
+    const animation = animations.find(a => a.id === objectId);
+    if (!animation) {
+        console.error(`Object with ID ${objectId} was not found. So no animation will be played`);
+        return;
+    }
+    Object.entries(animation.animationActions).forEach(([_, action]) => {
+        // @ts-ignore
+        action?.stop();
+    });
+}
+
+const validateAndPlayAnimationAction = (objectId: string,  animations: ObjectAnimation[], actionName: AnimationActionType, repetitions?: number) => {
+    const animation = animations.find(a => a.id === objectId);
+    if (!animation) {
+        console.error(`Object with ID ${objectId} was not found. So no animation will be played`);
+        return;
+    }
+    if (repetitions) {
+        animation.animationActions[actionName]?.setLoop(2200, repetitions);
+    }
+    animation.animationActions[actionName]?.play();
 };

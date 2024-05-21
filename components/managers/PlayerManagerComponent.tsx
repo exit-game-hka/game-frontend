@@ -7,8 +7,7 @@ import {useObjectControls} from "@/hooks/useObjectControls";
 import {WALKING_SPEED} from "@/app/contants";
 import useAnimationContext from "@/hooks/useAnimationContext";
 import {AnimationActions, ObjectAnimation} from "@/context/AnimationContext";
-import useApplicationContext from "@/hooks/useApplicationContext";
-import {useAvatarStore} from "@/stores/useAvatarStore";
+import {useGlobalStore} from "@/store/useGlobalStore";
 
 type ModelRefType =  Ref<Object3D> | undefined;
 
@@ -16,7 +15,7 @@ type Props = ThreeElements["mesh"]
 
 export const PlayerManagerComponent: React.FC<Props> = (props: Props) =>  {
     const playerRef = useRef<THREE.Object3D>();
-    const selectedAvatar = useAvatarStore((state) => state.selectedAvatar);
+    const selectedAvatar = useGlobalStore((state) => state.selectedAvatar);
 
     const animationContext = useAnimationContext();
 

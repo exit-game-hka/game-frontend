@@ -1,4 +1,4 @@
-import {create} from "zustand";
+import {create, StateCreator} from "zustand";
 import {ComponentType, ForwardRefExoticComponent, RefAttributes} from "react";
 import {PropsModelComponent} from "@/context/ApplicationContext";
 import {Amy} from "@/components/avatars/Amy";
@@ -15,7 +15,7 @@ export type AvatarType = ComponentType<PropsModelComponent> | ForwardRefExoticCo
 
 type AvatarStore = {
     avatarList: AvatarItem[];
-    selectedAvatar: AvatarItem | undefined;
+    selectedAvatar: AvatarItem;
     setSelectedAvatar: (avatar: AvatarItem) => void;
 };
 
@@ -32,8 +32,14 @@ const INITIAL_AVATAR_LIST: AvatarItem[] = [
     },
 ];
 
-export const useAvatarStore = create<AvatarStore>((set) => ({
+export const useAvatarStore: StateCreator<AvatarStore> = (set) => ({
     avatarList: INITIAL_AVATAR_LIST,
     selectedAvatar: INITIAL_AVATAR_LIST[0],
     setSelectedAvatar: (newAvatar: AvatarItem) => set(() => ({ selectedAvatar: newAvatar })),
+});
+
+type GlobalStore = AvatarStore;
+
+export const useGlobalStore = create<GlobalStore>((...fn) => ({
+    ...useAvatarStore(...fn),
 }));

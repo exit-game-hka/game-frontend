@@ -9,12 +9,14 @@ import useAnimationContext from "@/hooks/useAnimationContext";
 import {Object3D} from "three";
 import Stack from "@mui/joy/Stack";
 import {useRouter} from "next/navigation";
-import {useAvatarStore} from "@/stores/useAvatarStore";
+import {useGlobalStore} from "@/store/useGlobalStore";
 
 const AvatarSelectionPage: React.FC = () => {
     const router = useRouter();
 
-    const { avatarList, selectedAvatar, setSelectedAvatar } = useAvatarStore();
+    const avatarList = useGlobalStore(state => state.avatarList);
+    const selectedAvatar = useGlobalStore(state => state.selectedAvatar);
+    const setSelectedAvatar = useGlobalStore(state => state.setSelectedAvatar);
 
     return (
         <PageContentWrapperComponent>
@@ -70,7 +72,7 @@ const AvatarSelectionPage: React.FC = () => {
                     <Button
                         size={"lg"}
                         sx={{ maxWidth: "150px", width: "100%" }}
-                        onClick={() => router.push(`/intro?avatar=${selectedAvatar?.name}`)}
+                        onClick={() => router.push(`/intro?avatar=${selectedAvatar.name}`)}
                     >
                         Weiter
                     </Button>

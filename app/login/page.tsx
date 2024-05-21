@@ -12,7 +12,7 @@ const LoginPage: React.FC = () => {
     const spielerIdInputRef = useRef<HTMLInputElement>();
     const { isSmall } = useMediaQuery();
     const router = useRouter();
-    const { getSpielerBySpielerId, saveSpieler, createStatus, getStatusBySpielerId } = useApplicationContext();
+    const { getSpielerBySpielerId, setSpieler, createStatus, getStatusBySpielerId } = useApplicationContext();
     const [error, setError] = useState<string | undefined>(undefined);
 
     const navigateToGameScene = async () => {
@@ -24,7 +24,7 @@ const LoginPage: React.FC = () => {
             return;
         }
 
-        saveSpieler(player);
+        setSpieler(player);
 
         const status = await getStatusBySpielerId(player.id);
         if (!status) {

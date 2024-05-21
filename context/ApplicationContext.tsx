@@ -1,31 +1,20 @@
 import {ThreeEvent} from "@react-three/fiber/dist/declarations/src/core/events";
-import React, {
-    ComponentType,
-    createContext,
-    ForwardRefExoticComponent,
-    PropsWithChildren,
-    ReactNode,
-    RefAttributes,
-    useEffect,
-    useState
-} from "react";
+import React, {createContext, PropsWithChildren, ReactNode} from "react";
 import {ThreeElements} from "@react-three/fiber";
 import {AnimationActions} from "@/context/AnimationContext";
 import {Aufgabe, getAllTasksApi, getTaskByIdApi} from "@/api/aufgabe";
 import {getAllRoomsApi, getRoomByIdApi, Raum} from "@/api/raum";
 import {UNIX_TIME_TO_JAVASCRIPT_TIME_FACTOR} from "@/app/contants";
-import {useAvatars} from "@/hooks/useAvatars";
 import {getSpielerBySpielerIdApi, Spieler} from "@/api/spieler";
 import {usePathname, useRouter} from "next/navigation";
 import {
     createStatusApi,
     getStatusBySemesterIdApi,
     getStatusBySpielerIdApi,
+    Status,
     StatusDto,
     updateStatusApi
 } from "@/api/status";
-import {Status} from "@/api/status";
-import {AxiosResponse} from "axios";
 import {
     createErgebnisApi,
     Ergebnis,
@@ -59,18 +48,7 @@ export type ButtonType = {
     onClick?: (() => void) | undefined;
 }
 
-export type AvatarItem = {
-    name: string;
-    model: AvatarType;
-    thumbnail: string;
-    onClick?: (() => void) | undefined;
-};
-
-export type AvatarType = ComponentType<PropsModelComponent> | ForwardRefExoticComponent<RefAttributes<any>>;
-
 type ContextOutput = {
-    avatar: AvatarItem;
-    setAvatar: (avatar: AvatarItem) => void;
     getAufgabeById: (id: string) => Promise<Aufgabe>;
     getAllAufgaben: () => Promise<Aufgabe[]>;
     getRoomById: (id: string) => Promise<Raum>;
@@ -95,10 +73,6 @@ type Props = PropsWithChildren;
 
 export const ApplicationContextProvider: React.FC<Props> = (props: Props) => {
     const { children } = props;
-    const {
-        selectedAvatar,
-        setSelectedAvatar,
-    } = useAvatars();
     const router = useRouter();
     const pathname = usePathname();
 
@@ -178,8 +152,8 @@ export const ApplicationContextProvider: React.FC<Props> = (props: Props) => {
 
     return (
         <ApplicationContext.Provider value={{
-            avatar: selectedAvatar,
-            setAvatar: setSelectedAvatar,
+            //avatar: selectedAvatar,
+            //setAvatar: setSelectedAvatar,
             getAufgabeById,
             getAllAufgaben,
             getRoomById,

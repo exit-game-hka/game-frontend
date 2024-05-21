@@ -8,6 +8,7 @@ import {WALKING_SPEED} from "@/app/contants";
 import useAnimationContext from "@/hooks/useAnimationContext";
 import {AnimationActions, ObjectAnimation} from "@/context/AnimationContext";
 import useApplicationContext from "@/hooks/useApplicationContext";
+import {useAvatarStore} from "@/stores/useAvatarStore";
 
 type ModelRefType =  Ref<Object3D> | undefined;
 
@@ -15,7 +16,7 @@ type Props = ThreeElements["mesh"]
 
 export const PlayerManagerComponent: React.FC<Props> = (props: Props) =>  {
     const playerRef = useRef<THREE.Object3D>();
-    const appContext = useApplicationContext();
+    const selectedAvatar = useAvatarStore((state) => state.selectedAvatar);
 
     const animationContext = useAnimationContext();
 
@@ -170,7 +171,7 @@ export const PlayerManagerComponent: React.FC<Props> = (props: Props) =>  {
     }
 
     return (
-        <appContext.avatar.model
+        <selectedAvatar.model
             ref={playerRef as ModelRefType}
             {...props}
             setAnimationActions={addAnimationsToAnimationContext}

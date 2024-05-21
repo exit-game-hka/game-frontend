@@ -3,24 +3,18 @@ import React, {ComponentType, ForwardRefExoticComponent, Ref, RefAttributes, use
 import {PageContentWrapperComponent} from "@/components/shared/PageContentWrapperComponent";
 import {Avatar, Box, Button, Typography} from "@mui/joy";
 import {Canvas} from "@react-three/fiber";
-import {AvatarItem, PropsModelComponent} from "@/context/ApplicationContext";
+import {PropsModelComponent} from "@/context/ApplicationContext";
 import {AnimationActions, ObjectAnimation} from "@/context/AnimationContext";
 import useAnimationContext from "@/hooks/useAnimationContext";
 import {Object3D} from "three";
 import Stack from "@mui/joy/Stack";
 import {useRouter} from "next/navigation";
-import {useAvatars} from "@/hooks/useAvatars";
-import useApplicationContext from "@/hooks/useApplicationContext";
+import {useAvatarStore} from "@/stores/useAvatarStore";
 
 const AvatarSelectionPage: React.FC = () => {
     const router = useRouter();
 
-    const {avatarList} = useAvatars();
-
-    const {
-        avatar: selectedAvatar,
-        setAvatar: setSelectedAvatar,
-    } = useApplicationContext();
+    const { avatarList, selectedAvatar, setSelectedAvatar } = useAvatarStore();
 
     return (
         <PageContentWrapperComponent>
@@ -76,7 +70,7 @@ const AvatarSelectionPage: React.FC = () => {
                     <Button
                         size={"lg"}
                         sx={{ maxWidth: "150px", width: "100%" }}
-                        onClick={() => router.push(`/intro?avatar=${selectedAvatar.name}`)}
+                        onClick={() => router.push(`/intro?avatar=${selectedAvatar?.name}`)}
                     >
                         Weiter
                     </Button>

@@ -25,6 +25,14 @@ import {
     updateStatusApi
 } from "@/api/status";
 import {Status} from "@/api/status";
+import {AxiosResponse} from "axios";
+import {
+    createErgebnisApi,
+    Ergebnis,
+    ErgebnisDto,
+    getErgebnisByAufgabeIdAndSpielerIdApi,
+    getErgebnisBySemesterIdApi
+} from "@/api/ergebnis";
 
 export type PropsModelComponent = Omit<Partial<ThreeElements["object3D"]>, "args" | "onUpdate"> & {
     setAnimationActions?: ((actions: AnimationActions) => void) | undefined;
@@ -68,12 +76,16 @@ type ContextOutput = {
     getRoomById: (id: string) => Promise<Raum>;
     getAllRooms: () => Promise<Raum[]>;
     getSpielerBySpielerId: (spielerId: string) => Promise<Spieler>;
-    spieler: Spieler  | undefined;
-    saveSpieler: (spieler: Spieler) => void;
+    setSpieler: (spieler: Spieler) => void;
+    removeSpieler: () => void;
     getStatusBySpielerId: (id: string) => Promise<Status>;
     getStatusBySemesterId: (id: string) => Promise<Status>;
     createStatus: (statusDto: StatusDto) => Promise<void>;
     updateStatus: (status: Status) => Promise<void>;
+    // Ergebnis
+    getErgebnisByAufgabeIdAndSpielerId: (aufgabeId: string, spielerId: string) => Promise<Ergebnis>;
+    getErgebnisBySemesterId: (id: string) => Promise<Ergebnis[]>;
+    createErgebnis: (ergebnisDto: ErgebnisDto) => Promise<void>;
 }
 
 // @ts-ignore
@@ -89,25 +101,20 @@ export const ApplicationContextProvider: React.FC<Props> = (props: Props) => {
     } = useAvatars();
     const router = useRouter();
     const pathname = usePathname();
-    const [spieler, setSpieler] = useState<Spieler>();
 
-    useEffect(() => {
-        const playerFromLocalStorage = localStorage.getItem("player");
-        if (!playerFromLocalStorage) return;
-        const player = JSON.parse(playerFromLocalStorage) as Spieler;
-        setSpieler(player);
-    }, []);
+    // useEffect(() => {
+    //     const playerFromLocalStorage = localStorage.getItem("player");
+    //     if (!playerFromLocalStorage && pathname !== "/") {
+    //         router.push("/login");
+    //     }
+    // }, [pathname]);
 
-    useEffect(() => {
-        const playerFromLocalStorage = localStorage.getItem("player");
-        if (!playerFromLocalStorage && pathname !== "/") {
-            router.push("/login");
-        };
-    }, [pathname]);
-
-    const saveSpieler = (spielerToSave: Spieler) => {
+    const setSpieler = (spielerToSave: Spieler) => {
         localStorage.setItem("player", JSON.stringify(spielerToSave));
-        setSpieler(spielerToSave);
+    }
+
+    const removeSpieler = () => {
+        localStorage.removeItem("player");
     }
 
     const getAufgabeById = async (id: string): Promise<Aufgabe> => {
@@ -154,6 +161,21 @@ export const ApplicationContextProvider: React.FC<Props> = (props: Props) => {
         await updateStatusApi(status);
     }
 
+    // Ergebnis
+    const getErgebnisByAufgabeIdAndSpielerId = async (aufgabeId: string, spielerId: string): Promise<Ergebnis> => {
+        const response = await getErgebnisByAufgabeIdAndSpielerIdApi(aufgabeId, spielerId);
+        return response.data;
+    }
+
+    const getErgebnisBySemesterId = async (id: string): Promise<Ergebnis[]> => {
+        const response = await getErgebnisBySemesterIdApi(id);
+        return response.data;
+    }
+
+    const createErgebnis = async (ergebnisDto: ErgebnisDto): Promise<void> => {
+        await createErgebnisApi(ergebnisDto);
+    }
+
     return (
         <ApplicationContext.Provider value={{
             avatar: selectedAvatar,
@@ -163,12 +185,15 @@ export const ApplicationContextProvider: React.FC<Props> = (props: Props) => {
             getRoomById,
             getAllRooms,
             getSpielerBySpielerId,
-            spieler,
-            saveSpieler,
+            setSpieler,
+            removeSpieler,
             getStatusBySpielerId,
             getStatusBySemesterId,
             createStatus,
             updateStatus,
+            getErgebnisByAufgabeIdAndSpielerId,
+            getErgebnisBySemesterId,
+            createErgebnis,
         }}>
             {children}
         </ApplicationContext.Provider>

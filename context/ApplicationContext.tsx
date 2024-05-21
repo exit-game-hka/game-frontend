@@ -51,13 +51,8 @@ export type ButtonType = {
 type ContextOutput = {
 
 
-    getSpielerBySpielerId: (spielerId: string) => Promise<Spieler>;
-    setSpieler: (spieler: Spieler) => void;
-    removeSpieler: () => void;
-    getStatusBySpielerId: (id: string) => Promise<Status>;
-    getStatusBySemesterId: (id: string) => Promise<Status>;
-    createStatus: (statusDto: StatusDto) => Promise<void>;
-    updateStatus: (status: Status) => Promise<void>;
+
+
     // Ergebnis
     getErgebnisByAufgabeIdAndSpielerId: (aufgabeId: string, spielerId: string) => Promise<Ergebnis>;
     getErgebnisBySemesterId: (id: string) => Promise<Ergebnis[]>;
@@ -146,13 +141,13 @@ export const ApplicationContextProvider: React.FC<Props> = (props: Props) => {
             // getAllAufgaben,
             //getRoomById,
             //getAllRooms,
-            getSpielerBySpielerId,
-            setSpieler,
-            removeSpieler,
-            getStatusBySpielerId,
-            getStatusBySemesterId,
-            createStatus,
-            updateStatus,
+            //getSpielerBySpielerId,
+            //setSpieler,
+            //removeSpieler,
+            //getStatusBySpielerId,
+            //getStatusBySemesterId,
+            //createStatus,
+            //updateStatus,
             getErgebnisByAufgabeIdAndSpielerId,
             getErgebnisBySemesterId,
             createErgebnis,

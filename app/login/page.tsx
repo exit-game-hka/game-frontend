@@ -4,7 +4,7 @@ import {PageContentWrapperComponent} from "@/components/shared/PageContentWrappe
 import {Alert, Box, Button, Card, Sheet, Stack, Typography} from "@mui/material";
 import Input from "@mui/joy/Input";
 import {useRouter} from "next/navigation";
-import useApplicationContext from "@/hooks/useApplicationContext";
+import {useGlobalStore} from "@/store/useGlobalStore";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
 import {StatusDto} from "@/api/status";
 
@@ -12,7 +12,11 @@ const LoginPage: React.FC = () => {
     const spielerIdInputRef = useRef<HTMLInputElement>();
     const { isSmall } = useMediaQuery();
     const router = useRouter();
-    const { getSpielerBySpielerId, setSpieler, createStatus, getStatusBySpielerId } = useApplicationContext();
+    const getSpielerBySpielerId = useGlobalStore((state) => state.getSpielerBySpielerId);
+    const setSpieler = useGlobalStore((state) => state.setSpieler);
+    const createStatus = useGlobalStore((state) => state.createStatus);
+    const getStatusBySpielerId = useGlobalStore((state) => state.getStatusBySpielerId);
+
     const [error, setError] = useState<string | undefined>(undefined);
 
     const navigateToGameScene = async () => {

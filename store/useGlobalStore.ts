@@ -5,6 +5,15 @@ import {Amy} from "@/components/avatars/Amy";
 import {Leonard} from "@/components/avatars/Loenard";
 import {Aufgabe, getAllTasksApi, getTaskByIdApi} from "@/api/aufgabe";
 import {getAllRoomsApi, getRoomByIdApi, Raum} from "@/api/raum";
+import {getSpielerBySpielerIdApi, Spieler} from "@/api/spieler";
+import {
+    createStatusApi,
+    getStatusBySemesterIdApi,
+    getStatusBySpielerIdApi,
+    Status,
+    StatusDto,
+    updateStatusApi
+} from "@/api/status";
 
 // Avatar store
 
@@ -76,10 +85,58 @@ const useRoomStoreSlice: StateCreator<RoomStore> = () => ({
     },
 });
 
-type GlobalStore = AvatarStore & AufgabeStore & RoomStore;
+// Spieler store
+
+type SpielerStore = {
+    getSpielerBySpielerId: (spielerId: string) => Promise<Spieler>;
+    setSpieler: (spieler: Spieler) => void;
+    removeSpieler: () => void;
+};
+const useSpielerStoreSlice: StateCreator<SpielerStore> = () => ({
+    getSpielerBySpielerId: async (spielerId: string): Promise<Spieler> => {
+        const response = await getSpielerBySpielerIdApi(spielerId);
+        return response.data;
+    },
+    setSpieler: (spielerToSave: Spieler) => {
+        localStorage.setItem("player", JSON.stringify(spielerToSave));
+    },
+    removeSpieler: () => {
+        localStorage.removeItem("player");
+    },
+});
+
+// Status store
+type StatusStore = {
+    getStatusBySpielerId: (id: string) => Promise<Status>;
+    getStatusBySemesterId: (id: string) => Promise<Status>;
+    createStatus: (statusDto: StatusDto) => Promise<void>;
+    updateStatus: (status: Status) => Promise<void>;
+};
+
+const useStatusStoreSlice: StateCreator<StatusStore> = () => ({
+    getStatusBySpielerId: async (id: string): Promise<Status> => {
+        const response = await getStatusBySpielerIdApi(id);
+        return response.data;
+    },
+    getStatusBySemesterId: async (id: string): Promise<Status> => {
+        const response = await getStatusBySemesterIdApi(id);
+        return response.data;
+    },
+    createStatus: async (statusDto: StatusDto): Promise<void> => {
+        const response = await createStatusApi(statusDto);
+        return response.data;
+    },
+    updateStatus: async (status: Status): Promise<void> => {
+        await updateStatusApi(status);
+    },
+});
+
+type GlobalStore = AvatarStore & AufgabeStore & RoomStore & SpielerStore & StatusStore;
 
 export const useGlobalStore = create<GlobalStore>((...fn) => ({
     ...useAvatarStoreSlice(...fn),
     ...useAufgabeStoreSlice(...fn),
     ...useRoomStoreSlice(...fn),
+    ...useSpielerStoreSlice(...fn),
+    ...useStatusStoreSlice(...fn),
 }));

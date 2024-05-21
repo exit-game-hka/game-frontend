@@ -3,7 +3,6 @@ import React from "react";
 import styled from "styled-components";
 import {Box, Button, Typography} from "@mui/joy";
 import {usePathname, useRouter} from "next/navigation";
-import {ButtonType} from "@/context/ApplicationContext";
 import Dropdown from '@mui/joy/Dropdown';
 import IconButton from '@mui/joy/IconButton';
 import Menu from '@mui/joy/Menu';
@@ -15,6 +14,7 @@ import NightsStayOutlinedIcon from '@mui/icons-material/NightsStayOutlined';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import {useColorScheme} from "@mui/material";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
+import {ButtonType} from "@/store/useGlobalStore";
 
 export const AppBarComponent: React.FC = () => {
     const router = useRouter();

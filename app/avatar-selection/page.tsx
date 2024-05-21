@@ -3,13 +3,12 @@ import React, {ComponentType, ForwardRefExoticComponent, Ref, RefAttributes, use
 import {PageContentWrapperComponent} from "@/components/shared/PageContentWrapperComponent";
 import {Avatar, Box, Button, Typography} from "@mui/joy";
 import {Canvas} from "@react-three/fiber";
-import {PropsModelComponent} from "@/context/ApplicationContext";
 import {AnimationActions, ObjectAnimation} from "@/context/AnimationContext";
 import useAnimationContext from "@/hooks/useAnimationContext";
 import {Object3D} from "three";
 import Stack from "@mui/joy/Stack";
 import {useRouter} from "next/navigation";
-import {useGlobalStore} from "@/store/useGlobalStore";
+import {PropsModelComponent, useGlobalStore} from "@/store/useGlobalStore";
 
 const AvatarSelectionPage: React.FC = () => {
     const router = useRouter();

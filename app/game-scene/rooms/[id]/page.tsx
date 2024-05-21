@@ -6,9 +6,8 @@ import styled from "styled-components";
 import {useParams} from "next/navigation";
 import useSWR from "swr";
 import {Raum} from "@/api/raum";
-import {convertMinutesToMilliseconds} from "@/context/ApplicationContext";
 import SplashScreenComponent from "@/components/shared/SplashScreenComponent";
-import {useGlobalStore} from "@/store/useGlobalStore";
+import {convertMinutesToMilliseconds, useGlobalStore} from "@/store/useGlobalStore";
 //import dynamic from "next/dynamic";
 
 // const SplashScreenComponent = dynamic(

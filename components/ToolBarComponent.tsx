@@ -10,7 +10,7 @@ import KeyboardDoubleArrowDownOutlinedIcon from '@mui/icons-material/KeyboardDou
 import {Typography, Box} from "@mui/joy";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
 import {useRouter} from "next/navigation";
-import {ButtonType} from "@/context/ApplicationContext";
+import {ButtonType} from "@/store/useGlobalStore";
 
 const ToolBarComponent: React.FC = () => {
     const { isSmall } = useMediaQuery();

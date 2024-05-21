@@ -49,10 +49,8 @@ export type ButtonType = {
 }
 
 type ContextOutput = {
-    getAufgabeById: (id: string) => Promise<Aufgabe>;
-    getAllAufgaben: () => Promise<Aufgabe[]>;
-    getRoomById: (id: string) => Promise<Raum>;
-    getAllRooms: () => Promise<Raum[]>;
+
+
     getSpielerBySpielerId: (spielerId: string) => Promise<Spieler>;
     setSpieler: (spieler: Spieler) => void;
     removeSpieler: () => void;
@@ -89,16 +87,6 @@ export const ApplicationContextProvider: React.FC<Props> = (props: Props) => {
 
     const removeSpieler = () => {
         localStorage.removeItem("player");
-    }
-
-    const getAufgabeById = async (id: string): Promise<Aufgabe> => {
-        const response = await getTaskByIdApi(id);
-        return response.data;
-    }
-
-    const getAllAufgaben = async (): Promise<Aufgabe[]> => {
-        const response = await getAllTasksApi();
-        return response.data;
     }
 
     const getRoomById = async (id: string): Promise<Raum> => {
@@ -154,10 +142,10 @@ export const ApplicationContextProvider: React.FC<Props> = (props: Props) => {
         <ApplicationContext.Provider value={{
             //avatar: selectedAvatar,
             //setAvatar: setSelectedAvatar,
-            getAufgabeById,
-            getAllAufgaben,
-            getRoomById,
-            getAllRooms,
+            // getAufgabeById,
+            // getAllAufgaben,
+            //getRoomById,
+            //getAllRooms,
             getSpielerBySpielerId,
             setSpieler,
             removeSpieler,

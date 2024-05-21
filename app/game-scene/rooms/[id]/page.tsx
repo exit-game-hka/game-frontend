@@ -4,11 +4,11 @@ import {TimerComponent} from "@/components/TimerComponent";
 import ToolBarComponent from "@/components/ToolBarComponent";
 import styled from "styled-components";
 import {useParams} from "next/navigation";
-import useApplicationContext from "@/hooks/useApplicationContext";
 import useSWR from "swr";
 import {Raum} from "@/api/raum";
 import {convertMinutesToMilliseconds} from "@/context/ApplicationContext";
 import SplashScreenComponent from "@/components/shared/SplashScreenComponent";
+import {useGlobalStore} from "@/store/useGlobalStore";
 //import dynamic from "next/dynamic";
 
 // const SplashScreenComponent = dynamic(
@@ -20,13 +20,13 @@ const GameSceneComponent = lazy(() => import("../../../../components/GameSceneCo
 const RoomItemPage: React.FC = () => {
 
     const { id } = useParams<{ id: string }>();
-    const appContext = useApplicationContext();
+    const getRoomById = useGlobalStore((state) => state.getRoomById);
 
     const {
         data: room,
         isLoading,
         error,
-    } = useSWR<Raum>(`getRoomById-${id}`, () => appContext.getRoomById(id))
+    } = useSWR<Raum>(`getRoomById-${id}`, () => getRoomById(id))
 
     const handleTimeout = () => {
         alert("Time is up!");

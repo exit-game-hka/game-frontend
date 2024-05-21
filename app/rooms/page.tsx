@@ -8,12 +8,12 @@ import styled from "styled-components";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
 import Image from "next/image";
 import {useRouter} from "next/navigation";
-import useApplicationContext from "@/hooks/useApplicationContext";
 import useSWR from "swr";
 import {Raum} from "@/api/raum";
+import {useGlobalStore} from "@/store/useGlobalStore";
 
 const RoomsPage: React.FC = () => {
-    const appContext = useApplicationContext();
+    const getAllRooms = useGlobalStore((state) => state.getAllRooms);
     const { isSmall } = useMediaQuery();
     const router = useRouter();
 
@@ -21,7 +21,7 @@ const RoomsPage: React.FC = () => {
         data: rooms,
         isLoading,
         error,
-    } = useSWR<Raum[]>("getAllRooms", appContext.getAllRooms);
+    } = useSWR<Raum[]>("getAllRooms", getAllRooms);
 
     const navigateToGameScene = (e: any, roomId: string) => {
         e?.preventDefault();

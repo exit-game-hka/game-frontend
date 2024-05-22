@@ -23,6 +23,12 @@ import {
 import {UNIX_TIME_TO_JAVASCRIPT_TIME_FACTOR} from "@/app/contants";
 import {ThreeElements} from "@react-three/fiber";
 import {AnimationAction} from "three";
+import {
+    createInteraktionApi,
+    getInteraktionBySpielerIdAndAufgabeIdApi,
+    Interaktion,
+    InteraktionDto
+} from "@/api/interaktion";
 
 // Zustand Doc: https://github.com/pmndrs/zustand
 // Avatar store
@@ -174,6 +180,22 @@ const useAnimationStoreSlice: StateCreator<AnimationStore> = (set, get) => ({
     },
 });
 
+// Interaktion store
+
+type InteraktionStore = {
+    getInteraktionBySpielerIdAndAufgabeId: (spielerId: string, aufgabeId: string) => Promise<Interaktion[]>;
+    createInteraktion: (interaktionDto: InteraktionDto) => Promise<void>;
+};
+const useInteraktionStoreSlice: StateCreator<InteraktionStore> = () => ({
+    getInteraktionBySpielerIdAndAufgabeId: async (spielerId: string, aufgabeId: string): Promise<Interaktion[]> => {
+        const response = await getInteraktionBySpielerIdAndAufgabeIdApi(spielerId, aufgabeId);
+        return response.data;
+    },
+    createInteraktion: async (interaktionDto: InteraktionDto): Promise<void> => {
+        await createInteraktionApi(interaktionDto);
+    },
+});
+
 type GlobalStore =
     AvatarStore &
     AufgabeStore &
@@ -181,7 +203,8 @@ type GlobalStore =
     SpielerStore &
     StatusStore &
     ErgebnisStore &
-    AnimationStore;
+    AnimationStore &
+    InteraktionStore;
 export const useGlobalStore = create<GlobalStore>((...fn) => ({
     ...useAvatarStoreSlice(...fn),
     ...useAufgabeStoreSlice(...fn),
@@ -190,6 +213,7 @@ export const useGlobalStore = create<GlobalStore>((...fn) => ({
     ...useStatusStoreSlice(...fn),
     ...useErgebnisStoreSlice(...fn),
     ...useAnimationStoreSlice(...fn),
+    ...useInteraktionStoreSlice(...fn),
 }));
 
 // Global stateless content (Types, Functions, etc...)

@@ -196,6 +196,22 @@ const useInteraktionStoreSlice: StateCreator<InteraktionStore> = () => ({
     },
 });
 
+// Time Store
+
+// Zeiteinheit in Minuten
+type TimeStore = {
+    totalTimeToPlay: number;
+    setTotalTimeToPlay: (time: number) => void;
+    timeToEscapeCurrentRoom: number;
+    setTimeToEscapeCurrentRoom: (time: number) => void;
+}
+const useTimeStoreSlice: StateCreator<TimeStore> = (set) => ({
+    totalTimeToPlay: 0,
+    setTotalTimeToPlay: (time: number) => set(() => ({ totalTimeToPlay: time })),
+    timeToEscapeCurrentRoom: 0,
+    setTimeToEscapeCurrentRoom: (time: number) => set(() => ({ timeToEscapeCurrentRoom: time })),
+});
+
 type GlobalStore =
     AvatarStore &
     AufgabeStore &
@@ -204,7 +220,8 @@ type GlobalStore =
     StatusStore &
     ErgebnisStore &
     AnimationStore &
-    InteraktionStore;
+    InteraktionStore &
+    TimeStore;
 export const useGlobalStore = create<GlobalStore>((...fn) => ({
     ...useAvatarStoreSlice(...fn),
     ...useAufgabeStoreSlice(...fn),
@@ -214,6 +231,7 @@ export const useGlobalStore = create<GlobalStore>((...fn) => ({
     ...useErgebnisStoreSlice(...fn),
     ...useAnimationStoreSlice(...fn),
     ...useInteraktionStoreSlice(...fn),
+    ...useTimeStoreSlice(...fn),
 }));
 
 // Global stateless content (Types, Functions, etc...)
@@ -227,8 +245,14 @@ export type AvatarItem = {
 
 export type AvatarType = ComponentType<PropsModelComponent> | ForwardRefExoticComponent<RefAttributes<any>>;
 
-export const convertMinutesToMilliseconds = (minutes: number) => {
-    return (minutes / 60) * UNIX_TIME_TO_JAVASCRIPT_TIME_FACTOR;
+const SECONDS_IN_A_MINUTE = 60;
+
+export const convertMinutesToMilliseconds = (minutes: number): number => {
+    return (minutes / SECONDS_IN_A_MINUTE) * UNIX_TIME_TO_JAVASCRIPT_TIME_FACTOR;
+}
+
+export const convertMillisecondsToMinutes = (milliseconds: number): number => {
+    return milliseconds / (UNIX_TIME_TO_JAVASCRIPT_TIME_FACTOR * SECONDS_IN_A_MINUTE);
 }
 
 export type ButtonType = {

@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
+import React, {ChangeEvent, useCallback, useEffect, useMemo, useState} from 'react';
 import {Transition} from "react-transition-group";
 import Modal from "@mui/joy/Modal";
 import ModalDialog, {ModalDialogProps} from "@mui/joy/ModalDialog";
@@ -11,7 +11,7 @@ import Input from "@mui/joy/Input";
 import ReportIcon from '@mui/icons-material/Report';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import {useMediaQuery} from "@/hooks/useMediaQuery";
-import {useGlobalStore} from "@/store/useGlobalStore";
+import {convertMillisecondsToMinutes, useGlobalStore} from "@/store/useGlobalStore";
 import {ErgebnisDto} from "@/api/ergebnis";
 
 type Props = {
@@ -43,6 +43,11 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
     const [inputValue, setInputValue] = useState<string>("");
     const [isComplete, setIsComplete] = useState<boolean | undefined>(undefined);
     const { isSmall } = useMediaQuery();
+
+    const startTime : number = useMemo((): number => {
+        return new Date().getTime();
+    }, []);
+
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
     const createErgebnis = useGlobalStore((state) => state.createErgebnis);
 
@@ -82,6 +87,10 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
         setIsComplete(false);
     };
 
+    const computeElapsedTime = (): number => {
+        return convertMillisecondsToMinutes(new Date().getTime() - startTime);
+    };
+
     const handleAnswerInput = (isCorrectAnswer: boolean) => {
         const spieler = getSpielerFromLocalStorage();
         if (!spieler) return;
@@ -89,7 +98,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
             spielerId: spieler.id,
             aufgabeId: aufgabeId,
             semesterId: spieler.semesterId,
-            geloestIn: isCorrectAnswer ? 5 : undefined,
+            geloestIn: isCorrectAnswer ? computeElapsedTime() : undefined,
         };
         createErgebnis(ergebnisDto);
     }
@@ -184,4 +193,3 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
         </>
     );
 };
-

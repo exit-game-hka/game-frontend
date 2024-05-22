@@ -1,13 +1,11 @@
 "use client";
 import React, {lazy, Suspense} from 'react';
-import {TimerComponent} from "@/components/TimerComponent";
-import ToolBarComponent from "@/components/ToolBarComponent";
 import styled from "styled-components";
 import {useParams} from "next/navigation";
 import useSWR from "swr";
 import {Raum} from "@/api/raum";
 import SplashScreenComponent from "@/components/shared/SplashScreenComponent";
-import {convertMinutesToMilliseconds, useGlobalStore} from "@/store/useGlobalStore";
+import {useGlobalStore} from "@/store/useGlobalStore";
 //import dynamic from "next/dynamic";
 
 // const SplashScreenComponent = dynamic(
@@ -33,21 +31,14 @@ const RoomItemPage: React.FC = () => {
 
     if (isLoading || !room) return <SplashScreenComponent />;
 
-    if (error) return <div>{`Ein Fehler ist aufgetreten: ${(error as Error).toString()}`}</div>;
+    if (error) return <div>{`Es ist ein Fehler ist aufgetreten: ${(error as Error).toString()}`}</div>;
 
     return (
-        <>
-            <TimerComponent
-                timeout={convertMinutesToMilliseconds(room.aufgaben[0].zeitZuLoesen)}
-                onTimeout={handleTimeout}
-            />
-            <CanvasContainer>
-                <Suspense fallback={<SplashScreenComponent />}>
-                    <GameSceneComponent room={room} />
-                </Suspense>
-            </CanvasContainer>
-            <ToolBarComponent />
-        </>
+        <CanvasContainer>
+            <Suspense fallback={<SplashScreenComponent />}>
+                <GameSceneComponent room={room} />
+            </Suspense>
+        </CanvasContainer>
     );
 };
 
@@ -56,4 +47,3 @@ const CanvasContainer = styled.main`
     //overflow: hidden;
 `
 export default RoomItemPage;
-

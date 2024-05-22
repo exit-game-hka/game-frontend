@@ -89,6 +89,7 @@ const useRoomStoreSlice: StateCreator<RoomStore> = () => ({
 
 type SpielerStore = {
     getSpielerBySpielerId: (spielerId: string) => Promise<Spieler>;
+    getSpielerFromLocalStorage: () => Spieler | undefined | null;
     setSpieler: (spieler: Spieler) => void;
     removeSpieler: () => void;
 };
@@ -97,6 +98,7 @@ const useSpielerStoreSlice: StateCreator<SpielerStore> = () => ({
         const response = await getSpielerBySpielerIdApi(spielerId);
         return response.data;
     },
+    getSpielerFromLocalStorage: () => JSON.parse(localStorage.getItem("player") as string) as Spieler | undefined,
     setSpieler: (spielerToSave: Spieler) => {
         localStorage.setItem("player", JSON.stringify(spielerToSave));
     },
@@ -133,12 +135,12 @@ const useStatusStoreSlice: StateCreator<StatusStore> = () => ({
 // Ergebnis store
 
 type ErgebnisStore = {
-    getErgebnisByAufgabeIdAndSpielerId: (aufgabeId: string, spielerId: string) => Promise<Ergebnis>;
+    getErgebnisByAufgabeIdAndSpielerId: (aufgabeId: string, spielerId: string) => Promise<Ergebnis[]>;
     getErgebnisBySemesterId: (id: string) => Promise<Ergebnis[]>;
     createErgebnis: (ergebnisDto: ErgebnisDto) => Promise<void>;
 };
 const useErgebnisStoreSlice: StateCreator<ErgebnisStore> = () => ({
-    getErgebnisByAufgabeIdAndSpielerId: async (aufgabeId: string, spielerId: string): Promise<Ergebnis> => {
+    getErgebnisByAufgabeIdAndSpielerId: async (aufgabeId: string, spielerId: string): Promise<Ergebnis[]> => {
         const response = await getErgebnisByAufgabeIdAndSpielerIdApi(aufgabeId, spielerId);
         return response.data;
     },

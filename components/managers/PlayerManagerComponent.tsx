@@ -18,6 +18,7 @@ export const PlayerManagerComponent: React.FC<Props> = (props: Props) =>  {
     const playAnimationAction = useGlobalStore((state) => state.playAnimationAction);
     const animations = useGlobalStore((state) => state.animations);
     const addAnimation = useGlobalStore((state) => state.addAnimation);
+    const resetToDefaultAnimation = useGlobalStore((state) => state.resetToDefaultAnimation);
 
     useEffect(() => {
         if (!playerRef.current) return;

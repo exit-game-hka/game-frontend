@@ -56,6 +56,7 @@ export const ExitDoorComponent: React.FC<Props> = (props: Props) => {
                 <AnswerInputModalComponent
                     open={isOpen}
                     title="Wie läutet das Lösungswort ?"
+                    aufgabeId={aufgabe.id}
                     answer={aufgabe.loesungen[0].wert}
                     successMessage={aufgabe.erfolgMeldung}
                     failureMessage={aufgabe.fehlschlagMeldung}

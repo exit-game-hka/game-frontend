@@ -13,8 +13,8 @@ export type ErgebnisDto = Omit<Ergebnis, "id">;
 
 const ENDPOINT = "/ergebnisse" as const;
 
-export const getErgebnisByAufgabeIdAndSpielerIdApi = async (aufgabeId: string, spielerId: string): Promise<AxiosResponse<Ergebnis>> => {
-    return await axiosClient.get<Ergebnis>(`${ENDPOINT}?aufgabe_id=${aufgabeId}&spieler_id=${spielerId}`);
+export const getErgebnisByAufgabeIdAndSpielerIdApi = async (aufgabeId: string, spielerId: string): Promise<AxiosResponse<Ergebnis[]>> => {
+    return await axiosClient.get<Ergebnis[]>(`${ENDPOINT}?aufgabe_id=${aufgabeId}&spieler_id=${spielerId}`);
 };
 
 export const getErgebnisBySemesterIdApi = async (id: string): Promise<AxiosResponse<Ergebnis[]>> => {

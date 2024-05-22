@@ -11,6 +11,8 @@ import Input from "@mui/joy/Input";
 import ReportIcon from '@mui/icons-material/Report';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import {useMediaQuery} from "@/hooks/useMediaQuery";
+import {useGlobalStore} from "@/store/useGlobalStore";
+import {ErgebnisDto} from "@/api/ergebnis";
 
 type Props = {
     open: boolean;
@@ -18,6 +20,7 @@ type Props = {
     subtitle?: string;
     onSuccess: () => void;
     answer: string;
+    aufgabeId: string;
     successMessage: string;
     failureMessage: string;
     onClose?: (() => void) | undefined;
@@ -30,6 +33,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
         title,
         subtitle,
         answer,
+        aufgabeId,
         successMessage,
         failureMessage,
         onSuccess,
@@ -39,6 +43,8 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
     const [inputValue, setInputValue] = useState<string>("");
     const [isComplete, setIsComplete] = useState<boolean | undefined>(undefined);
     const { isSmall } = useMediaQuery();
+    const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
+    const createErgebnis = useGlobalStore((state) => state.createErgebnis);
 
     const closeModal = useCallback(() => {
         resetStates();
@@ -67,12 +73,26 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
     };
 
     const handleSubmit = () => {
-        if (inputValue.toLowerCase() !== answer.toLowerCase()) {
-            setIsComplete(false);
+        if (inputValue.toLowerCase() === answer.toLowerCase()) {
+            handleAnswerInput(true);
+            setIsComplete(true);
             return;
         }
-        setIsComplete(true);
+        handleAnswerInput(false);
+        setIsComplete(false);
     };
+
+    const handleAnswerInput = (isCorrectAnswer: boolean) => {
+        const spieler = getSpielerFromLocalStorage();
+        if (!spieler) return;
+        const ergebnisDto: ErgebnisDto = {
+            spielerId: spieler.id,
+            aufgabeId: aufgabeId,
+            semesterId: spieler.semesterId,
+            geloestIn: isCorrectAnswer ? 5 : undefined,
+        };
+        createErgebnis(ergebnisDto);
+    }
 
     return (
         <>

@@ -5,11 +5,18 @@ import {DetectiveOfficeWithWindow} from "@/components/DetectiveOfficeWithWindow"
 import {WORLD_COORDINATE} from "@/app/contants";
 import {Typography} from "@mui/joy";
 import {Html} from "@react-three/drei";
+import {useGlobalStore} from "@/store/useGlobalStore";
+import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
+import {InteraktionDto} from "@/api/interaktion";
+import {ThreeEvent} from "@react-three/fiber";
 
-export const DetectiveOfficeWithWindowComponent: React.FC = () => {
+export const DetectiveOfficeWithWindowComponent: React.FC<InteractiveObjectProps> = (props) => {
+    const { raum } = props;
     const frontCardRef = useRef<HTMLButtonElement>();
     const backCardRef = useRef<HTMLButtonElement>();
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const createInteraktion = useGlobalStore((state) => state.createInteraktion);
+    const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
 
     const handleFlip = () => {
         if (!frontCardRef.current || !backCardRef.current) return;
@@ -43,14 +50,29 @@ export const DetectiveOfficeWithWindowComponent: React.FC = () => {
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     p: "calc(var(--space-15) * 2) var(--space-6) var(--space-6) var(--space-6)",
-                    "&>*": {
+                    "& *": {
                         color: "var(--color-black)",
                     },
                 }}
                 onClick={handleFlip}
             >
-                <Typography fontSize={"title-sm"} fontWeight={700}>ALAN TURING</Typography>
-                <Typography component={"ul"} fontSize={"title-sm"} fontWeight={700}>
+                <Typography
+                    fontSize={"title-sm"}
+                    fontWeight={700}
+                    sx={{ color: "var(--color-black)" }}
+                >
+                    ALAN TURING
+                </Typography>
+                <Typography
+                    component={"ul"}
+                    fontSize={"title-sm"}
+                    fontWeight={700}
+                    sx={{
+                        "& *": {
+                            color: "var(--color-black)",
+                        },
+                    }}
+                >
                     <li>
                         18 GEBOREN 1912 IN LONDON
                     </li>
@@ -146,6 +168,19 @@ export const DetectiveOfficeWithWindowComponent: React.FC = () => {
         </Box>
     );
 
+    const handleDoublePaperClick = async (event: ThreeEvent<MouseEvent>) => {
+        event?.stopPropagation();
+        setIsOpen(true);
+        const spieler = getSpielerFromLocalStorage();
+        if (!spieler) return;
+        const interactionDto: InteraktionDto = {
+            spielerId: spieler.id,
+            aufgabeId: raum.aufgaben[0].id,
+            action: "Infos über Alan Turing angeklickt",
+        };
+        await createInteraktion(interactionDto);
+    };
+
     return (
         <>
             <DetectiveOfficeWithWindow
@@ -153,7 +188,7 @@ export const DetectiveOfficeWithWindowComponent: React.FC = () => {
                 scale={0.6}
                 //rotation-y={Math.PI / 2}
                 position={[15, WORLD_COORDINATE[1], -7]}
-                onDoublePaperClick={() => setIsOpen(true)}
+                onDoublePaperClick={handleDoublePaperClick}
             />
             <Html>
                 <TaskModalComponent

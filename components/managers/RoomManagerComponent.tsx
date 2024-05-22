@@ -29,10 +29,7 @@ export const RoomManagerComponent: React.FC<Props> = (props: Props) => {
     }, [room]);
 
     return (
-        <>
-            <ComputedRoom raum={room} />
-            {/*<QuestionBoxComponent onClick={() => setShowTaskModal(true)} />*/}
-        </>
+        <ComputedRoom raum={room} />
     );
 };
 

@@ -5,7 +5,8 @@ export type Interaktion = {
     id: string;
     spielerId: string;
     aufgabeId: string;
-    gegenstandId: string;
+    // TODO: Remove !!!. Not used anymore since game objects are managed on client side.
+    // gegenstandId: string;
     action: string;
 };
 

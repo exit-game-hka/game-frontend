@@ -3,7 +3,6 @@ import {ThreeElements, useLoader} from "@react-three/fiber";
 import {Mesh, TextureLoader} from "three";
 
 type Props = ThreeElements["mesh"];
-
 export const Number = forwardRef<Mesh, Props>(function Number(props, ref) {
     const texture = useLoader(TextureLoader, "/rooms/room1/number.png");
 

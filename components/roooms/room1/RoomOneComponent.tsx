@@ -137,9 +137,9 @@ const RoomOneComponent: React.FC<RoomProps> = (props) => {
                 position={[-5.5, WORLD_COORDINATE[1], -1]}
             />
 
-            <DetectiveOfficeWithWindowComponent />
+            <DetectiveOfficeWithWindowComponent raum={raum} />
 
-            <WhiteClockComponent />
+            <WhiteClockComponent raum={raum} />
 
             <OldStyleOffice
                 // @ts-ignore
@@ -148,7 +148,7 @@ const RoomOneComponent: React.FC<RoomProps> = (props) => {
                 scale={0.25}
             />
 
-            <NumberComponent />
+            <NumberComponent raum={raum} />
 
             <GroundComponent
                 position={WORLD_COORDINATE}

@@ -3,9 +3,16 @@ import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
 import {WhiteClock} from "@/components/WhiteClock";
 import {Box} from "@mui/joy";
 import {Html} from "@react-three/drei";
+import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
+import {useGlobalStore} from "@/store/useGlobalStore";
+import {InteraktionDto} from "@/api/interaktion";
+import {ThreeEvent} from "@react-three/fiber";
 
-export const WhiteClockComponent: React.FC = () => {
+export const WhiteClockComponent: React.FC<InteractiveObjectProps> = (props) => {
+    const { raum } = props;
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const createInteraktion = useGlobalStore((state) => state.createInteraktion);
+    const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
 
     const modalContent = (
         <Box
@@ -26,6 +33,19 @@ export const WhiteClockComponent: React.FC = () => {
         </Box>
     );
 
+    const handleClickWhiteClock = async (e: ThreeEvent<MouseEvent>) => {
+        e?.stopPropagation();
+        setIsOpen(true);
+        const spieler = getSpielerFromLocalStorage();
+        if (!spieler) return;
+        const interactionDto: InteraktionDto = {
+            spielerId: spieler.id,
+            aufgabeId: raum.aufgaben[0].id,
+            action: "Schwarzes alphanumerisches Rad angeklickt",
+        };
+        await createInteraktion(interactionDto);
+    };
+
     return (
         <>
             <WhiteClock
@@ -33,7 +53,7 @@ export const WhiteClockComponent: React.FC = () => {
                 scale={1.5}
                 position={[3, 4, -10.1]}
                 rotation-y={-Math.PI / 2}
-                onClick={() => setIsOpen(true)}
+                onClick={handleClickWhiteClock}
             />
            <Html>
                <TaskModalComponent

@@ -33,7 +33,7 @@ export const CupBoardComponent: React.FC<InteractiveObjectProps> = (props) => {
             <Stack
                 spacing={"var(--space-3)"}
                 sx={{
-                    "& *": {
+                    "& p": {
                         color: "var(--color-black)",
                     },
                 }}

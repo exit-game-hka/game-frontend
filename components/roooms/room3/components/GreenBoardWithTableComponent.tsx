@@ -5,10 +5,17 @@ import {Html} from "@react-three/drei";
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
 import {Box, Typography} from "@mui/joy";
 import Stack from "@mui/joy/Stack";
+import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
+import {useGlobalStore} from "@/store/useGlobalStore";
+import {ThreeEvent} from "@react-three/fiber";
+import {InteraktionDto} from "@/api/interaktion";
 
-export const GreenBoardWithTableComponent: React.FC = () => {
+export const GreenBoardWithTableComponent: React.FC<InteractiveObjectProps> = (props) => {
+    const { raum } = props;
     const [showGreenBoardTip, setShowGreenBoardTip] = useState<boolean>(false);
     const [showFolderTip, setShowFolderTip] = useState<boolean>(false);
+    const createInteraktion = useGlobalStore((state) => state.createInteraktion);
+    const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
 
     const modalContentGreenBoard = (
         <Stack
@@ -41,16 +48,6 @@ export const GreenBoardWithTableComponent: React.FC = () => {
 
     const modalContentFolder = (
         <Stack spacing={"var(--space-3)"}>
-            {/*<Box*/}
-            {/*    component={"img"}*/}
-            {/*    src={"/rooms/room3/book1.png"}*/}
-            {/*    alt={"Buch 1"}*/}
-            {/*    sx={{*/}
-            {/*        width: "100%",*/}
-            {/*        objectFit: "cover",*/}
-            {/*        borderRadius: "var(--space-3)",*/}
-            {/*    }}*/}
-            {/*/>*/}
             <Box
                 component="div"
                 sx={{
@@ -91,14 +88,40 @@ export const GreenBoardWithTableComponent: React.FC = () => {
         </Stack>
     );
 
+    const handleClickGreenBoard = async (event: ThreeEvent<MouseEvent>) => {
+        event?.stopPropagation();
+        setShowGreenBoardTip(true);
+        const spieler = getSpielerFromLocalStorage();
+        if (!spieler) return;
+        const interactionDto: InteraktionDto = {
+            spielerId: spieler.id,
+            aufgabeId: raum.aufgaben[0].id,
+            action: "Tafel mit Info über Spartas Militär angeklickt",
+        };
+        await createInteraktion(interactionDto);
+    };
+
+    const handleClickFolder = async (event: ThreeEvent<MouseEvent>) => {
+        event?.stopPropagation();
+        setShowFolderTip(true);
+        const spieler = getSpielerFromLocalStorage();
+        if (!spieler) return;
+        const interactionDto: InteraktionDto = {
+            spielerId: spieler.id,
+            aufgabeId: raum.aufgaben[0].id,
+            action: "Buch 1 angeklickt",
+        };
+        await createInteraktion(interactionDto);
+    };
+
     return (
         <>
             <GreenBoardWithTable
                 // @ts-ignore
                 scale={5}
                 position={[-1, WORLD_COORDINATE[1] + 0.4, -12]}
-                onClickGreenBoard={() => setShowGreenBoardTip(true)}
-                onClickFolder={() => setShowFolderTip(true)}
+                onClickGreenBoard={handleClickGreenBoard}
+                onClickFolder={handleClickFolder}
             />
             <Html>
                 <TaskModalComponent

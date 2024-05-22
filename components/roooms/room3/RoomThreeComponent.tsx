@@ -63,9 +63,9 @@ const RoomThreeComponent: React.FC<RoomProps> = (props) => {
                 }}
             />
 
-            <GreenBoardWithTableComponent />
+            <GreenBoardWithTableComponent raum={raum} />
 
-            <TableWithBooksAndGlobeComponent />
+            <TableWithBooksAndGlobeComponent raum={raum} />
 
             <OfficeDeskWithFixPhone
                 // @ts-ignore

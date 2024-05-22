@@ -5,9 +5,16 @@ import {Html} from "@react-three/drei";
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
 import {Box, Typography} from "@mui/material";
 import Stack from "@mui/joy/Stack";
+import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
+import {useGlobalStore} from "@/store/useGlobalStore";
+import {ThreeEvent} from "@react-three/fiber";
+import {InteraktionDto} from "@/api/interaktion";
 
-export const TableWithBooksAndGlobeComponent: React.FC = () => {
+export const TableWithBooksAndGlobeComponent: React.FC<InteractiveObjectProps> = (props) => {
+    const { raum } = props;
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const createInteraktion = useGlobalStore((state) => state.createInteraktion);
+    const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
 
     const modalContent = (
         <Stack spacing={"var(--space-3)"}>
@@ -44,6 +51,19 @@ export const TableWithBooksAndGlobeComponent: React.FC = () => {
         </Stack>
     );
 
+    const handleClickBookOnTable = async (event: ThreeEvent<MouseEvent>) => {
+        event?.stopPropagation();
+        setIsOpen(true);
+        const spieler = getSpielerFromLocalStorage();
+        if (!spieler) return;
+        const interactionDto: InteraktionDto = {
+            spielerId: spieler.id,
+            aufgabeId: raum.aufgaben[0].id,
+            action: "Buch 2 angeklickt",
+        };
+        await createInteraktion(interactionDto);
+    };
+
     return (
         <>
             <TableWithBooksAndGlobe
@@ -51,7 +71,7 @@ export const TableWithBooksAndGlobeComponent: React.FC = () => {
                 scale={0.5}
                 rotation-y={Math.PI}
                 position={[10, WORLD_COORDINATE[1], -8]}
-                onClickBookOnTable={() => setIsOpen(true)}
+                onClickBookOnTable={handleClickBookOnTable}
             />
             <Html>
                 <TaskModalComponent

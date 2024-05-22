@@ -4,9 +4,16 @@ import {WORLD_COORDINATE} from "@/app/contants";
 import {Html} from "@react-three/drei";
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
 import {Box} from "@mui/material";
+import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
+import {useGlobalStore} from "@/store/useGlobalStore";
+import {ThreeEvent} from "@react-three/fiber";
+import {InteraktionDto} from "@/api/interaktion";
 
-export const DetectiveOfficeComponent: React.FC = () => {
+export const DetectiveOfficeComponent: React.FC<InteractiveObjectProps> = (props) => {
+    const { raum } = props;
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const createInteraktion = useGlobalStore((state) => state.createInteraktion);
+    const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
 
     const modalContent = (
         <Box component="div">
@@ -26,6 +33,19 @@ export const DetectiveOfficeComponent: React.FC = () => {
         </Box>
     );
 
+    const handleClickLamp = async (event: ThreeEvent<MouseEvent>) => {
+        event?.stopPropagation();
+        setIsOpen(true);
+        const spieler = getSpielerFromLocalStorage();
+        if (!spieler) return;
+        const interactionDto: InteraktionDto = {
+            spielerId: spieler.id,
+            aufgabeId: raum.aufgaben[0].id,
+            action: "Lampe mit der Zahl 2 angeklickt",
+        };
+        await createInteraktion(interactionDto);
+    };
+
     return (
         <>
             <DetectiveOfficeWithWindow
@@ -33,7 +53,7 @@ export const DetectiveOfficeComponent: React.FC = () => {
                 scale={0.6}
                 //rotation-y={Math.PI / 2}
                 position={[6.8, WORLD_COORDINATE[1], -6.7]}
-                onClickLamp={() => setIsOpen(true)}
+                onClickLamp={handleClickLamp}
             />
             <Html>
                 <TaskModalComponent

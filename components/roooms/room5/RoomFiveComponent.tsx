@@ -46,15 +46,15 @@ const RoomFiveComponent: React.FC<RoomProps> = (props) => {
                     position: [-10, WORLD_COORDINATE[1], 0],
                 }}
             />
-            <DetectiveOfficeComponent />
-            <OldStyleOfficeComponent />
+            <DetectiveOfficeComponent raum={raum} />
+            <OldStyleOfficeComponent raum={raum} />
             <OfficePlantLong
                 // @ts-ignore
                 position={[-4, WORLD_COORDINATE[1], -8]}
                 scale={1.5}
             />
-            <OfficePlantComponent />
-            <WallFotoFramesComponent />
+            <OfficePlantComponent raum={raum} />
+            <WallFotoFramesComponent raum={raum} />
             <GroundComponent
                 position={WORLD_COORDINATE}
                 meshMaterialProps={{

@@ -3,9 +3,16 @@ import {Box} from "@mui/material";
 import {WhiteClock} from "@/components/WhiteClock";
 import {Html} from "@react-three/drei";
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
+import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
+import {useGlobalStore} from "@/store/useGlobalStore";
+import {ThreeEvent} from "@react-three/fiber";
+import {InteraktionDto} from "@/api/interaktion";
 
-export const ClockComponent: React.FC = () => {
+export const ClockComponent: React.FC<InteractiveObjectProps> = (props) => {
+    const { raum } = props;
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const createInteraktion = useGlobalStore((state) => state.createInteraktion);
+    const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
 
     const modalContent = (
         <Box
@@ -26,6 +33,19 @@ export const ClockComponent: React.FC = () => {
         </Box>
     );
 
+    const handleClick = async (event: ThreeEvent<MouseEvent>) => {
+        event?.stopPropagation();
+        setIsOpen(true);
+        const spieler = getSpielerFromLocalStorage();
+        if (!spieler) return;
+        const interactionDto: InteraktionDto = {
+            spielerId: spieler.id,
+            aufgabeId: raum.aufgaben[0].id,
+            action: "Uhr mit dem Text 'Decode' angeklickt",
+        };
+        await createInteraktion(interactionDto);
+    };
+
     return (
         <>
             <WhiteClock
@@ -33,7 +53,7 @@ export const ClockComponent: React.FC = () => {
                 scale={1.5}
                 position={[3, 1, -9.96]}
                 rotation-y={-Math.PI / 2}
-                onClick={() => setIsOpen(true)}
+                onClick={handleClick}
             />
             <Html>
                 <TaskModalComponent

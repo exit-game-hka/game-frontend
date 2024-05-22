@@ -49,13 +49,13 @@ const RoomFourComponent: React.FC<RoomProps> = (props) => {
                 }}
             />
 
-            <OfficeWithBooksAndGlobeComponent />
+            <OfficeWithBooksAndGlobeComponent raum={raum} />
 
-            <TheologicalBookStackComponent />
+            <TheologicalBookStackComponent raum={raum} />
 
-            <ClockComponent />
+            <ClockComponent raum={raum} />
 
-            <SmallCupBoardComponent />
+            <SmallCupBoardComponent raum={raum} />
 
             <GroundComponent
                 position={WORLD_COORDINATE}

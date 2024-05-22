@@ -7,10 +7,17 @@ import {TheologicalBookStack} from "@/components/TheologicalBookStack";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SquareIcon from "@mui/icons-material/Square";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
+import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
+import {useGlobalStore} from "@/store/useGlobalStore";
+import {ThreeEvent} from "@react-three/fiber";
+import {InteraktionDto} from "@/api/interaktion";
 
-export const TheologicalBookStackComponent: React.FC = () => {
+export const TheologicalBookStackComponent: React.FC<InteractiveObjectProps> = (props) => {
+    const { raum } = props;
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const { isSmall } = useMediaQuery();
+    const createInteraktion = useGlobalStore((state) => state.createInteraktion);
+    const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
 
     const spade = (
         <Box
@@ -80,6 +87,19 @@ export const TheologicalBookStackComponent: React.FC = () => {
         </Card>
     );
 
+    const handleClick = async (event: ThreeEvent<MouseEvent>) => {
+        event?.stopPropagation();
+        setIsOpen(true);
+        const spieler = getSpielerFromLocalStorage();
+        if (!spieler) return;
+        const interactionDto: InteraktionDto = {
+            spielerId: spieler.id,
+            aufgabeId: raum.aufgaben[0].id,
+            action: "Buch 1 über Kryptographie und Kryptananlyse angeklickt",
+        };
+        await createInteraktion(interactionDto);
+    };
+
     return (
         <>
             <TheologicalBookStack
@@ -87,7 +107,7 @@ export const TheologicalBookStackComponent: React.FC = () => {
                 scale={3}
                 rotation-y={Math.PI}
                 position={[-1, WORLD_COORDINATE[1], -6]}
-                onClick={() => setIsOpen(true)}
+                onClick={handleClick}
             />
             <TheologicalBookStack
                 // @ts-ignore

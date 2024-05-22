@@ -4,9 +4,16 @@ import {WORLD_COORDINATE} from "@/app/contants";
 import {Html} from "@react-three/drei";
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
 import {Box, Table} from "@mui/joy";
+import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
+import {useGlobalStore} from "@/store/useGlobalStore";
+import {ThreeEvent} from "@react-three/fiber";
+import {InteraktionDto} from "@/api/interaktion";
 
-export const SmallCupBoardComponent: React.FC = () => {
+export const SmallCupBoardComponent: React.FC<InteractiveObjectProps> = (props) => {
+    const { raum } = props;
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const createInteraktion = useGlobalStore((state) => state.createInteraktion);
+    const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
 
     const rowData = [
         "ZEILE 1: DATUM",
@@ -31,6 +38,19 @@ export const SmallCupBoardComponent: React.FC = () => {
         </Table>
     );
 
+    const handleClickBookCupBoard = async (event: ThreeEvent<MouseEvent>) => {
+        event?.stopPropagation();
+        setIsOpen(true);
+        const spieler = getSpielerFromLocalStorage();
+        if (!spieler) return;
+        const interactionDto: InteraktionDto = {
+            spielerId: spieler.id,
+            aufgabeId: raum.aufgaben[0].id,
+            action: "Tabelle mit vier Zeilen angeklickt",
+        };
+        await createInteraktion(interactionDto);
+    };
+
     return (
         <>
             <BookCupboard
@@ -38,7 +58,7 @@ export const SmallCupBoardComponent: React.FC = () => {
                 scale={0.7}
                 rotation-y={Math.PI / 2}
                 position={[-9.55, WORLD_COORDINATE[1], -4]}
-                onClick={() => setIsOpen(true)}
+                onClick={handleClickBookCupBoard}
             />
             <Html>
                 <TaskModalComponent

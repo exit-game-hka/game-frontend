@@ -42,7 +42,7 @@ const RoomTwoComponent: React.FC<RoomProps> = (props) => {
                 }}
             />
 
-            <OfficeWithFotoFrameComponent />
+            <OfficeWithFotoFrameComponent raum={raum} />
 
             {plantsCoordinates.map((c, index) =>
                 <OfficePlantLong
@@ -53,11 +53,12 @@ const RoomTwoComponent: React.FC<RoomProps> = (props) => {
                 />
             )}
 
-            <CupBoardComponent />
+            <CupBoardComponent raum={raum} />
 
-            <WallPapersComponent />
+            <WallPapersComponent raum={raum} />
 
             <JuliusCaesarComponent
+                raum={raum}
                 scale={1}
                 position={[-3, 0.5, -9.95]}
             />

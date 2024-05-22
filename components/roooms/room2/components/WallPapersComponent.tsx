@@ -5,10 +5,17 @@ import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
 import {Card} from "@mui/material";
 import {Typography} from "@mui/joy";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
+import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
+import {useGlobalStore} from "@/store/useGlobalStore";
+import {ThreeEvent} from "@react-three/fiber";
+import {InteraktionDto} from "@/api/interaktion";
 
-export const WallPapersComponent: React.FC = () => {
+export const WallPapersComponent: React.FC<InteractiveObjectProps> = (props) => {
+    const { raum } = props;
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const { isSmall } = useMediaQuery();
+    const createInteraktion = useGlobalStore((state) => state.createInteraktion);
+    const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
 
     const modalContent = (
         <Card>
@@ -26,6 +33,19 @@ export const WallPapersComponent: React.FC = () => {
         </Card>
     );
 
+    const handleClickCoffeeFrame = async (event: ThreeEvent<MouseEvent>) => {
+        event?.stopPropagation();
+        setIsOpen(true);
+        const spieler = getSpielerFromLocalStorage();
+        if (!spieler) return;
+        const interactionDto: InteraktionDto = {
+            spielerId: spieler.id,
+            aufgabeId: raum.aufgaben[0].id,
+            action: "Auf das Plakat mit dem Text 'Substitution' geklickt",
+        };
+        await createInteraktion(interactionDto);
+    }
+
     return (
         <>
             <WallPictures
@@ -33,7 +53,7 @@ export const WallPapersComponent: React.FC = () => {
                 scale={1.5}
                 rotation-y={-Math.PI}
                 position={[9.95, 0, -6]}
-                onClickCoffeeFrame={() => setIsOpen(true)}
+                onClickCoffeeFrame={handleClickCoffeeFrame}
             />
             <Html>
                 <TaskModalComponent

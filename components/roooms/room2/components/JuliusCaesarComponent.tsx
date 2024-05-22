@@ -1,15 +1,21 @@
 import React, {useState} from 'react';
-import {ThreeElements, useLoader} from "@react-three/fiber";
+import {ThreeElements, ThreeEvent, useLoader} from "@react-three/fiber";
 import {DoubleSide, TextureLoader} from "three";
 import {Html} from "@react-three/drei";
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
 import {Box} from "@mui/material";
 import Stack from "@mui/joy/Stack";
+import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
+import {useGlobalStore} from "@/store/useGlobalStore";
+import {InteraktionDto} from "@/api/interaktion";
 
-type Props = ThreeElements["mesh"];
+type Props = ThreeElements["mesh"] & InteractiveObjectProps;
 export const JuliusCaesarComponent: React.FC<Props> = (props) => {
+    const { raum, ...rest} = props;
     const texture = useLoader(TextureLoader, "/rooms/room2/julius_caesar.png");
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const createInteraktion = useGlobalStore((state) => state.createInteraktion);
+    const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
 
     const modalContent = (
         <Stack spacing={"var(--space-3)"} sx={{ mt: "var(--space-4)" }}>
@@ -28,11 +34,24 @@ export const JuliusCaesarComponent: React.FC<Props> = (props) => {
         </Stack>
     );
 
+    const handleClickMesh = async (event: ThreeEvent<MouseEvent>) => {
+        event?.stopPropagation();
+        setIsOpen(true);
+        const spieler = getSpielerFromLocalStorage();
+        if (!spieler) return;
+        const interactionDto: InteraktionDto = {
+            spielerId: spieler.id,
+            aufgabeId: raum.aufgaben[0].id,
+            action: "Portrait von Julius Caesar angeklickt",
+        };
+        await createInteraktion(interactionDto);
+    };
+
     return (
         <>
             <mesh
-                onClick={() => setIsOpen(true)}
-                {...props}
+                onClick={handleClickMesh}
+                {...rest}
             >
                 <planeGeometry args={[1, 1]}/>
                 <meshPhysicalMaterial map={texture} side={DoubleSide}/>

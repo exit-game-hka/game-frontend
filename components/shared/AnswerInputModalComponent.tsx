@@ -125,6 +125,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                             },
                         }}
                         sx={{
+                            zIndex: "var(--z-index-modal)",
                             visibility: state === 'exited' ? 'hidden' : 'visible',
                         }}
                     >
@@ -153,7 +154,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                                         <FormLabel>Lösungswort</FormLabel>
                                         <Input
                                             type={"text"}
-                                            value={inputValue}
+                                            value={inputValue.toUpperCase()}
                                             onChange={handleChange}
                                             slotProps={{
                                                 input: {

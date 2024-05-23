@@ -43,6 +43,7 @@ export const TaskModalComponent: React.FC<ModalProps> = (props: ModalProps) => {
                             },
                         }}
                         sx={{
+                            zIndex: "var(--z-index-modal)",
                             visibility: state === 'exited' ? 'hidden' : 'visible',
                         }}
                     >

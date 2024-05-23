@@ -15,6 +15,7 @@ body {
     /* Z-Indexes */
     --z-index-scene-controls: 1000000000;
     --z-index-splash-screen: 1000000001;
+    --z-index-modal: 1000000002;
 
     /* Icon sizes */
     --icon-medium: 30px;

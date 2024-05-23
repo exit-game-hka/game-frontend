@@ -5,9 +5,13 @@ import Image from "next/image";
 const SplashScreenComponent: React.FC = () => {
     const { isSmall } = useMediaQuery();
 
+    const imageSource = isSmall ?
+        "/exit-game-frontend/splash-screen-mobile.png" :
+        "/exit-game-frontend/splash-screen.png";
+
     return (
         <Image
-            src={isSmall ? "/splash-screen-mobile.png" : "/splash-screen.png"}
+            src={imageSource}
             alt={"Splash screen"}
             fill={true}
             style={{

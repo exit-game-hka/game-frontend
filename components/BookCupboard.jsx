@@ -10,7 +10,7 @@ Title: Bookshelf
 import React, {forwardRef} from "react"
 import { useGLTF } from "@react-three/drei"
 
-export const BookCupboard = forwardRef((props, ref) => {
+export const BookCupboard = forwardRef(function BookCupboard(props, ref) {
     const { nodes, materials } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/book_cupboard/scene.gltf`)
     return (
         <group {...props} dispose={null}>

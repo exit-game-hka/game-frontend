@@ -14,7 +14,7 @@ import {WallFotoFramesComponent} from "@/components/roooms/room5/components/Wall
 
 const RoomFiveComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
-    const { texture: floorTexture } = useTexture("/floor-with-black-and-white-tile.png", [60, 60]);
+    const { texture: floorTexture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/floor-with-black-and-white-tile.png`, [60, 60]);
 
     return (
         <>

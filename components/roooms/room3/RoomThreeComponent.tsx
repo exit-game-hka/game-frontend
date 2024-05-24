@@ -3,7 +3,7 @@ import {useTexture} from "@/hooks/useTexture";
 import {WORLD_COORDINATE} from "@/app/contants";
 import {GroundComponent} from "@/components/GroundComponent";
 import {OfficeDeskWithFixPhone} from "@/components/OfficeDeskWithFixPhone";
-import {WallPictures} from "@/public/models/wall_pictures/WallPictures";
+import {WallPictures} from "@/components/WallPictures";
 import {ExitDoorComponent} from "@/components/roooms/ExitDoorComponent";
 import {DoorToPreviousRoomComponent} from "@/components/roooms/DoorToPreviousRoomComponent";
 import {GreenBoardWithTableComponent} from "@/components/roooms/room3/components/GreenBoardWithTableComponent";
@@ -13,7 +13,7 @@ import {DoubleWallGroupComponent} from "@/components/roooms/room3/components/Dou
 
 const RoomThreeComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
-    const { texture } = useTexture("/trefoil-floor.png");
+    const { texture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/trefoil-floor.png`);
 
     return (
         <>

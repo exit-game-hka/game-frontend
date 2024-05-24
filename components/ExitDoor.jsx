@@ -10,9 +10,9 @@ Title: Door
 import React, {forwardRef, useEffect, useRef} from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 
-export const ExitDoor = forwardRef((props, ref) => {
+export const ExitDoor = forwardRef(function ExitDoor(props, ref) {
     const group = useRef()
-    const { nodes, materials, animations } = useGLTF("/models/exit_door/scene.gltf")
+    const { nodes, materials, animations } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/exit_door/scene.gltf`)
     const { actions } = useAnimations(animations, group)
 
     useEffect(() => {
@@ -45,4 +45,4 @@ export const ExitDoor = forwardRef((props, ref) => {
     )
 });
 
-useGLTF.preload("/models/exit_door/scene.gltf")
+useGLTF.preload(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/exit_door/scene.gltf`)

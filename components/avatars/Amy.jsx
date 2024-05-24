@@ -9,7 +9,7 @@ import { useGLTF, useAnimations } from "@react-three/drei"
 // eslint-disable-next-line react/display-name
 export const Amy = forwardRef((props, ref) => {
   const group = useRef()
-  const { nodes, materials, animations } = useGLTF("/models/avatars/amy/scene.gltf")
+  const { nodes, materials, animations } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/amy/scene.gltf`)
   const { actions } = useAnimations(animations, group)
 
   useEffect(() => {
@@ -28,4 +28,4 @@ export const Amy = forwardRef((props, ref) => {
   )
 });
 
-useGLTF.preload("/models/avatars/amy/scene.gltf")
+useGLTF.preload(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/amy/scene.gltf`)

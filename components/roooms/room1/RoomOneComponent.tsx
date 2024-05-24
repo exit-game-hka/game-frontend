@@ -3,7 +3,7 @@ import React, {useEffect} from "react";
 import {WORLD_COORDINATE} from "@/app/contants";
 import {ThreeElements, useLoader, useThree} from "@react-three/fiber";
 import {OfficeTableWithLaptop} from "@/components/OfficeTableWithLaptop";
-import {BookCupboard} from "@/public/models/book_cupboard/BookCupboard";
+import {BookCupboard} from "@/components/BookCupboard";
 import {OldStyleOffice} from "@/components/OldStyleOffice";
 import {useTheme} from "@mui/joy";
 import {Mesh, MeshStandardMaterial, TextureLoader} from "three";
@@ -22,8 +22,8 @@ const RoomOneComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
     const { scene } = useThree();
     const theme = useTheme();
-    const doublePaperTexture = useLoader(TextureLoader, "/rooms/room1/double-paper-front.png");
-    const { texture } = useTexture("/wooden-floor.png");
+    const doublePaperTexture = useLoader(TextureLoader, `${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room1/double-paper-front.png`);
+    const { texture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/wooden-floor.png`);
 
     useEffect(() => {
         const setClockInteraction = () => {

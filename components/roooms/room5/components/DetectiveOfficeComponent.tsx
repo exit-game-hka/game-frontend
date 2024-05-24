@@ -19,7 +19,7 @@ export const DetectiveOfficeComponent: React.FC<InteractiveObjectProps> = (props
         <Box component="div">
             <Box
                 component={"img"}
-                src={"/rooms/room5/lamp-with-number.png"}
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room5/lamp-with-number.png`}
                 alt={"Lampe mit Nummer drauf"}
                 sx={{
                     width: "100%",

@@ -13,8 +13,8 @@ import {SmallCupBoardComponent} from "@/components/roooms/room4/components/Small
 
 const RoomFourComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
-    const { texture: floorTexture } = useTexture("/floor-with-star-tile.png");
-    const { texture: wallTexture } = useTexture("/medieval-brick-wall.png", [5, 4]);
+    const { texture: floorTexture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/floor-with-star-tile.png`);
+    const { texture: wallTexture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/medieval-brick-wall.png`, [5, 4]);
 
     return (
         <>

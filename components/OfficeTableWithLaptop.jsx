@@ -10,8 +10,8 @@ Title: Office Set Lite Low-poly
 import React, {forwardRef} from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export const OfficeTableWithLaptop = forwardRef((props, ref) => {
-  const { nodes, materials } = useGLTF("/models/office_table_with_laptop/scene.gltf")
+export const OfficeTableWithLaptop = forwardRef(function OfficeTableWithLaptop(props, ref) {
+  const { nodes, materials } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/office_table_with_laptop/scene.gltf`)
   return (
       <group {...props} dispose={null}>
         <group scale={0.01} ref={ref}>
@@ -25,4 +25,4 @@ export const OfficeTableWithLaptop = forwardRef((props, ref) => {
   )
 })
 
-useGLTF.preload("/models/office_table_with_laptop/scene.gltf")
+useGLTF.preload(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/office_table_with_laptop/scene.gltf`)

@@ -10,8 +10,8 @@ Title: A class Room
 import React, {forwardRef, useRef} from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export const GreenBoardWithTable = forwardRef((props, ref) => {
-    const { nodes, materials } = useGLTF("/models/green_board_with_table/scene.gltf")
+export const GreenBoardWithTable = forwardRef(function GreenBoardWithTable(props, ref) {
+    const { nodes, materials } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/green_board_with_table/scene.gltf`)
     return (
         <group ref={ref} {...props} dispose={null}>
             <mesh
@@ -36,4 +36,4 @@ export const GreenBoardWithTable = forwardRef((props, ref) => {
     )
 })
 
-useGLTF.preload("/models/green_board_with_table/scene.gltf")
+useGLTF.preload(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/green_board_with_table/scene.gltf`)

@@ -11,7 +11,7 @@ import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
 export const Cloud = (props) => {
-  const { nodes, materials } = useGLTF("/models/cartoon_cloud/scene.gltf")
+  const { nodes, materials } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/cartoon_cloud/scene.gltf`)
   return (
     <group {...props} dispose={null}>
       <mesh geometry={nodes.Object_2.geometry} material={materials.Material} rotation={[-Math.PI / 2, 0, 0]} />
@@ -19,4 +19,4 @@ export const Cloud = (props) => {
   )
 }
 
-useGLTF.preload("/models/cartoon_cloud/scene.gltf")
+useGLTF.preload(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/cartoon_cloud/scene.gltf`)

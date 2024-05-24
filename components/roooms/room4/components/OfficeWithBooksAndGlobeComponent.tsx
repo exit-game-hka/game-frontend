@@ -18,7 +18,7 @@ export const OfficeWithBooksAndGlobeComponent: React.FC<InteractiveObjectProps> 
     const modalContent = (
         <Card
             sx={{
-                background: "url('/rooms/ancien_paper.png')",
+                background: `url('${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/ancien_paper.png')`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 width: "inherit",

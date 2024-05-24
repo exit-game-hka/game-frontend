@@ -12,7 +12,7 @@ import { useGLTF } from '@react-three/drei'
 
 // eslint-disable-next-line react/display-name
 export const Tree = forwardRef((props, ref) => {
-  const { nodes, materials } = useGLTF("/models/tree/scene.gltf")
+  const { nodes, materials } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/tree/scene.gltf`)
   return (
       <group ref={ref} {...props}>
         <group rotation={[-Math.PI / 2, 0, 0]}>
@@ -29,4 +29,4 @@ export const Tree = forwardRef((props, ref) => {
   )
 })
 
-useGLTF.preload("/models/tree/scene.gltf")
+useGLTF.preload(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/tree/scene.gltf`)

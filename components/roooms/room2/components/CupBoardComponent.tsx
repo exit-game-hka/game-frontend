@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {WORLD_COORDINATE} from "@/app/contants";
-import {BookCupboard} from "@/public/models/book_cupboard/BookCupboard";
+import {BookCupboard} from "@/components/BookCupboard";
 import {Html} from "@react-three/drei";
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
 import {Box, Typography} from "@mui/joy";
@@ -21,7 +21,7 @@ export const CupBoardComponent: React.FC<InteractiveObjectProps> = (props) => {
             component="div"
             sx={{
                 borderRadius: "var(--space-3)",
-                background: "url('/rooms/ancien_paper.png')",
+                background: `url('${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/ancien_paper.png')`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 p: "var(--space-6) var(--space-4)",

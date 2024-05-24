@@ -6,8 +6,8 @@ Command: npx gltfjsx@6.2.16 .\scene.gltf
 import React, {forwardRef} from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export const OfficeWithFotoFrame = forwardRef((props, ref) => {
-  const { nodes, materials } = useGLTF("/models/office-with-foto-frame/scene.gltf")
+export const OfficeWithFotoFrame = forwardRef(function OfficeWithFotoFrame(props, ref) {
+  const { nodes, materials } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/office-with-foto-frame/scene.gltf`)
   return (
       <group ref={ref} {...props} dispose={null}>
         <group rotation={[-Math.PI / 2, 0, 0]} scale={0.049}>
@@ -34,4 +34,4 @@ export const OfficeWithFotoFrame = forwardRef((props, ref) => {
   )
 })
 
-useGLTF.preload("/models/office-with-foto-frame/scene.gltf")
+useGLTF.preload(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/office-with-foto-frame/scene.gltf`)

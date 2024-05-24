@@ -12,7 +12,7 @@ import { useGLTF } from '@react-three/drei'
 
 // eslint-disable-next-line react/display-name
 export const WhiteClock = forwardRef((props, ref) => {
-  const { nodes, materials } = useGLTF("/models/white_clock/scene.gltf")
+  const { nodes, materials } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/white_clock/scene.gltf`)
   return (
       <group {...props} ref={ref} dispose={null}>
         <group rotation={[-Math.PI / 2, 0, 0]}>
@@ -28,4 +28,4 @@ export const WhiteClock = forwardRef((props, ref) => {
   )
 });
 
-useGLTF.preload("/models/white_clock/scene.gltf")
+useGLTF.preload(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/white_clock/scene.gltf`)

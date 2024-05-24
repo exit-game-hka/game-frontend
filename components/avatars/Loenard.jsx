@@ -6,9 +6,9 @@ Command: npx gltfjsx@6.2.16 .\scene.gltf
 import React, {forwardRef, useEffect, useRef} from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 
-export const Leonard = forwardRef((props, ref) => {
+export const Leonard = forwardRef(function Leonard(props, ref) {
   const group = useRef()
-  const { nodes, materials, animations } = useGLTF("/models/avatars/leonard/scene.gltf")
+  const { nodes, materials, animations } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/leonard/scene.gltf`)
   const { actions } = useAnimations(animations, group)
 
   useEffect(() => {
@@ -33,4 +33,4 @@ export const Leonard = forwardRef((props, ref) => {
   )
 });
 
-useGLTF.preload("/models/avatars/leonard/scene.gltf")
+useGLTF.preload(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/leonard/scene.gltf`)

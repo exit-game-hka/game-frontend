@@ -12,7 +12,7 @@ import {InteraktionDto} from "@/api/interaktion";
 type Props = ThreeElements["mesh"] & InteractiveObjectProps;
 export const JuliusCaesarComponent: React.FC<Props> = (props) => {
     const { raum, ...rest} = props;
-    const texture = useLoader(TextureLoader, "/rooms/room2/julius_caesar.png");
+    const texture = useLoader(TextureLoader, `${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room2/julius_caesar.png`);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const createInteraktion = useGlobalStore((state) => state.createInteraktion);
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
@@ -21,7 +21,7 @@ export const JuliusCaesarComponent: React.FC<Props> = (props) => {
         <Stack spacing={"var(--space-3)"} sx={{ mt: "var(--space-4)" }}>
             <Box
                 component={"img"}
-                src={"/rooms/room2/julius_caesar.png"}
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room2/julius_caesar.png`}
                 alt={"Julius Caesar"}
                 sx={{
                     width: "100%",

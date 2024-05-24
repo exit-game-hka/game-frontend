@@ -6,8 +6,8 @@ Command: npx gltfjsx@6.2.16 .\brick-wall.gltf
 import React, {forwardRef, useRef} from "react"
 import { useGLTF } from "@react-three/drei"
 
-export const BrickWall = forwardRef((props, ref) => {
-    const { nodes, materials } = useGLTF("/models/brick_wall/brick-wall.gltf")
+export const BrickWall = forwardRef(function BrickWall(props, ref) {
+    const { nodes, materials } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/brick_wall/brick-wall.gltf`)
     return (
         <group ref={ref} {...props} dispose={null}>
             <mesh geometry={nodes.Object_2.geometry} material={materials.wall2_Material_u1_v1} position={[0, -2.5, 0]} rotation={[3.118, 0, 0]} />
@@ -15,4 +15,4 @@ export const BrickWall = forwardRef((props, ref) => {
     )
 });
 
-useGLTF.preload("/models/brick_wall/brick-wall.gltf")
+useGLTF.preload(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/brick_wall/brick-wall.gltf`)

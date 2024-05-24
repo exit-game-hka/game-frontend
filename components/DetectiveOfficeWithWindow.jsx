@@ -6,8 +6,8 @@ Command: npx gltfjsx@6.2.16 .\scene.gltf
 import React, {forwardRef} from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export const DetectiveOfficeWithWindow = forwardRef((props, ref) => {
-    const { nodes, materials } = useGLTF("/models/detective_office_with_window/scene.gltf")
+export const DetectiveOfficeWithWindow = forwardRef(function DetectiveOfficeWithWindow(props, ref) {
+    const { nodes, materials } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/detective_office_with_window/scene.gltf`)
     return (
         <group {...props} ref={ref} dispose={null}>
             <group position={[2.048, 1.907, 0.492]} rotation={[Math.PI / 2, 0, -0.941]} scale={[0.005, 0.086, 0.005]}>
@@ -62,4 +62,4 @@ export const DetectiveOfficeWithWindow = forwardRef((props, ref) => {
     )
 });
 
-useGLTF.preload("/models/detective_office_with_window/scene.gltf")
+useGLTF.preload(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/detective_office_with_window/scene.gltf`)

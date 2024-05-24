@@ -27,7 +27,7 @@ const DebriefingPage: React.FC = () => {
                     <Sheet>
                         <Box
                             component={"img"}
-                            src={"/into-thumbnail.png"}
+                            src={`${process.env.NEXT_PUBLIC_BASE_PATH}/into-thumbnail.png`}
                             alt={"into thumbnail"}
                             sx={{
                                 objectFit: "cover",

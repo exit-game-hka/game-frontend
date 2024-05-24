@@ -19,7 +19,7 @@ export const OfficePlantComponent: React.FC<InteractiveObjectProps> = (props) =>
         <Box component={"div"}>
             <Box
                 component={"img"}
-                src={"/rooms/room5/plant-with-tipp.png"}
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room5/plant-with-tipp.png`}
                 sx={{
                     width: "100%",
                     objectFit: "cover",

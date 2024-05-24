@@ -10,8 +10,8 @@ Title: table with things
 import React, {forwardRef} from 'react'
 import {useGLTF} from '@react-three/drei'
 
-export const TableWithBooksAndGlobe = forwardRef((props, ref) => {
-    const { nodes, materials } = useGLTF("/models/table_with_books_and_globe/scene.gltf")
+export const TableWithBooksAndGlobe = forwardRef(function TableWithBooksAndGlobe(props, ref) {
+    const { nodes, materials } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/table_with_books_and_globe/scene.gltf`)
     return (
         <group ref={ref} {...props} dispose={null}>
             <group scale={0.01}>
@@ -284,4 +284,4 @@ export const TableWithBooksAndGlobe = forwardRef((props, ref) => {
     )
 });
 
-useGLTF.preload("/models/table_with_books_and_globe/scene.gltf")
+useGLTF.preload(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/table_with_books_and_globe/scene.gltf`)

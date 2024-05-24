@@ -11,7 +11,7 @@ import React, {forwardRef} from "react"
 import { useGLTF } from "@react-three/drei"
 
 export const BookCupboard = forwardRef((props, ref) => {
-    const { nodes, materials } = useGLTF("/models/book_cupboard/scene.gltf")
+    const { nodes, materials } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/book_cupboard/scene.gltf`)
     return (
         <group {...props} dispose={null}>
             <group scale={0.01} ref={ref}>
@@ -24,4 +24,4 @@ export const BookCupboard = forwardRef((props, ref) => {
     )
 })
 
-useGLTF.preload("/models/book_cupboard/scene.gltf")
+useGLTF.preload(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/book_cupboard/scene.gltf`)

@@ -21,7 +21,7 @@ export const TableWithBooksAndGlobeComponent: React.FC<InteractiveObjectProps> =
             <Box
                 component="div"
                 sx={{
-                    background: "url('/rooms/room3/book1_bg.png')",
+                    background: `url('${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room3/book1_bg.png')`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     borderRadius: "var(--space-3)",

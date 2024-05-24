@@ -8,11 +8,12 @@ import {useRouter, useSearchParams} from "next/navigation";
 const IntroPage: React.FC = () => {
     const theme = useTheme();
     const router = useRouter();
-    const params = useSearchParams();
+    //const params = useSearchParams();
 
     // TODO: Remove later !!!. Just for MVP.
     const navigateToRoomOne = () => {
-        router.push(`/game-scene/rooms/20000000-0000-0000-0000-000000000001?${params?.toString()}`);
+        //router.push(`/game-scene/rooms/20000000-0000-0000-0000-000000000001?${params?.toString()}`);
+        router.push("/game-scene/rooms/20000000-0000-0000-0000-000000000001");
     };
 
     return (
@@ -35,7 +36,7 @@ const IntroPage: React.FC = () => {
                     <Sheet>
                         <Box
                             component={"img"}
-                            src={"/into-thumbnail.png"}
+                            src={`${process.env.NEXT_PUBLIC_BASE_PATH}/into-thumbnail.png`}
                             alt={"into thumbnail"}
                             sx={{
                                 objectFit: "cover",

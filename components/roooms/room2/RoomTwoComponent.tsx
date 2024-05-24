@@ -14,7 +14,7 @@ import {FourWallsComponent} from "@/components/roooms/FourWallsComponent";
 
 const RoomTwoComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
-    const { texture } = useTexture("/wooden_floor_with_smooth_finish.png");
+    const { texture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/wooden_floor_with_smooth_finish.png`);
 
     const plantsCoordinates = [
         [0, WORLD_COORDINATE[1], -9],

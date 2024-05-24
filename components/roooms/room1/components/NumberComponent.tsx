@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
-import {Number} from "@/public/models/number_for_room1/Number";
+import {Number} from "@/components/Number";
 import {Box, Typography} from "@mui/joy";
 import {Html} from "@react-three/drei";
 import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";

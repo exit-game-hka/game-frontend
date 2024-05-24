@@ -6,7 +6,7 @@ import {RoomProps} from "@/components/roooms/RoomProps";
 
 const RoomSixComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
-    const { texture } = useTexture("/trefoil-floor.png");
+    const { texture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/trefoil-floor.png`);
     return (
         <>
             <GroundComponent

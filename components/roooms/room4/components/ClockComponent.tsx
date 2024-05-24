@@ -24,7 +24,7 @@ export const ClockComponent: React.FC<InteractiveObjectProps> = (props) => {
         >
             <Box
                 component={"img"}
-                src={"/rooms/room4/clock-with-keyword.png"}
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room4/clock-with-keyword.png`}
                 sx={{
                     width: "100%",
                     objectFit: "cover",

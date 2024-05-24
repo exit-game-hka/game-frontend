@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {BookCupboard} from "@/public/models/book_cupboard/BookCupboard";
+import {BookCupboard} from "@/components/BookCupboard";
 import {WORLD_COORDINATE} from "@/app/contants";
 import {Html} from "@react-three/drei";
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";

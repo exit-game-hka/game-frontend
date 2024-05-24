@@ -10,8 +10,8 @@ Title: Office Plant 1
 import React, {forwardRef} from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export const OfficePlantLong = forwardRef((props, ref) => {
-  const { nodes, materials } = useGLTF("/models/office_plant_long/scene.gltf")
+export const OfficePlantLong = forwardRef(function OfficePlantLong(props, ref) {
+  const { nodes, materials } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/office_plant_long/scene.gltf`)
   return (
       <group ref={ref} {...props} dispose={null}>
         <group rotation={[-Math.PI / 2, 0, 0]} scale={0.473}>
@@ -26,4 +26,4 @@ export const OfficePlantLong = forwardRef((props, ref) => {
   )
 });
 
-useGLTF.preload("/models/office_plant_long/scene.gltf")
+useGLTF.preload(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/office_plant_long/scene.gltf`)

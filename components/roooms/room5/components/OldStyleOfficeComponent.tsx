@@ -65,4 +65,3 @@ export const OldStyleOfficeComponent: React.FC<InteractiveObjectProps> = (props)
         </>
     );
 };
-

@@ -11,7 +11,7 @@ import React, {forwardRef} from 'react'
 import { useGLTF } from '@react-three/drei'
 
 export const WallPictures = forwardRef((props, ref) => {
-    const { nodes, materials } = useGLTF("/models/wall_pictures/scene.gltf")
+    const { nodes, materials } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/wall_pictures/scene.gltf`)
     return (
         <group ref={ref} {...props} dispose={null}>
             <group scale={0.01}>
@@ -36,4 +36,4 @@ export const WallPictures = forwardRef((props, ref) => {
     )
 });
 
-useGLTF.preload("/models/wall_pictures/scene.gltf")
+useGLTF.preload(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/wall_pictures/scene.gltf`)

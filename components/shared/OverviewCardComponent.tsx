@@ -11,6 +11,10 @@ export const OverviewCardComponent: React.FC = () => {
     const { mode } = useColorScheme();
     const router = useRouter();
 
+    const cardBackground = mode === "dark" ?
+        `url('${process.env.NEXT_PUBLIC_BASE_PATH}/overview-card-bg-dark.png')` :
+        `url('${process.env.NEXT_PUBLIC_BASE_PATH}/overview-card-bg-light.png')`;
+
     return (
         <Card
             variant="soft"
@@ -20,7 +24,7 @@ export const OverviewCardComponent: React.FC = () => {
                 flexGrow: 1,
                 display: "flex",
                 //bgcolor: "var(--color-primary)",
-                background: mode === "dark" ? "url('/overview-card-bg-dark.png')" : "url('/overview-card-bg-light.png')",
+                background: cardBackground,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 p: { xs: "36px", md: "70px" },

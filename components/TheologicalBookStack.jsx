@@ -10,8 +10,8 @@ Title: Theological Book Stack (XB2002-02)
 import React, {forwardRef} from 'react'
 import {useGLTF} from '@react-three/drei'
 
-export const TheologicalBookStack = forwardRef((props, ref) => {
-    const { nodes, materials } = useGLTF("/models/theological_book_stack/scene.gltf")
+export const TheologicalBookStack = forwardRef(function TheologicalBookStack(props, ref) {
+    const { nodes, materials } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/theological_book_stack/scene.gltf`)
     return (
         <group ref={ref} {...props} dispose={null}>
             <group scale={0.01}>
@@ -22,4 +22,4 @@ export const TheologicalBookStack = forwardRef((props, ref) => {
         </group>
     )
 });
-useGLTF.preload("/models/theological_book_stack/scene.gltf")
+useGLTF.preload(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/theological_book_stack/scene.gltf`)

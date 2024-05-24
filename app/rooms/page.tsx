@@ -38,7 +38,7 @@ const RoomsPage: React.FC = () => {
                 {rooms.map((room, index) =>
                     <RoomItemContainer key={`${room.name}${index}`} onClick={(e) => navigateToGameScene(e, room.id)}>
                         <AspectRatioThumbnailContainer objectFit="cover" active={`${index < 2}`}>
-                            <Thumbnail alt="Forest" src={"/thumbnails/forest.jpg"} layout="fill" />
+                            <Thumbnail alt="Forest" src={`${process.env.NEXT_PUBLIC_BASE_PATH}/thumbnails/forest.jpg`} layout="fill" />
                         </AspectRatioThumbnailContainer>
                         <RoomLabelContainer>
                             <Typography key={1} level="title-md">{room.name}</Typography>

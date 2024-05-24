@@ -12,7 +12,7 @@ import { useGLTF } from '@react-three/drei'
 
 // eslint-disable-next-line react/display-name
 export const QuestionBox = forwardRef((props, ref) => {
-    const { nodes, materials } = useGLTF("/models/question_box/scene.gltf")
+    const { nodes, materials } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/question_box/scene.gltf`)
     return (
     <group ref={ref} dispose={null} rotation={[-Math.PI / 2, 0, 0]}  scale={0.121} {...props}>
         <mesh geometry={nodes.Object_2.geometry} material={materials.Material}/>
@@ -22,4 +22,4 @@ export const QuestionBox = forwardRef((props, ref) => {
 )
 })
 
-useGLTF.preload("/models/question_box/scene.gltf")
+useGLTF.preload(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/question_box/scene.gltf`)

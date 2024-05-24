@@ -22,7 +22,7 @@ export const TheologicalBookStackComponent: React.FC<InteractiveObjectProps> = (
     const spade = (
         <Box
             component={"img"}
-            src={"/spade.png"}
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH}/spade.png`}
             alt={"Spade"}
             sx={{
                 width: "20px",
@@ -38,7 +38,7 @@ export const TheologicalBookStackComponent: React.FC<InteractiveObjectProps> = (
     const modalContent = (
         <Card
             sx={{
-                background: "url('/rooms/ancien_paper.png')",
+                background: `url('${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/ancien_paper.png')`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 width: "inherit",

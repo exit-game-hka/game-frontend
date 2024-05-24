@@ -6,8 +6,8 @@ Command: npx gltfjsx@6.2.16 .\scene.gltf
 import React, {forwardRef} from 'react'
 import {useGLTF} from '@react-three/drei'
 
-export const HallWayWall = forwardRef((props, ref) => {
-    const { nodes, materials } = useGLTF("/models/hallway_wall/scene.gltf")
+export const HallWayWall = forwardRef(function HallWayWall(props, ref) {
+    const { nodes, materials } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/hallway_wall/scene.gltf`)
     return (
         <group {...props} ref={ref} dispose={null}>
             <group scale={0.025} rotation-y={Math.PI}>
@@ -19,4 +19,4 @@ export const HallWayWall = forwardRef((props, ref) => {
     )
 });
 
-useGLTF.preload("/models/hallway_wall/scene.gltf")
+useGLTF.preload(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/hallway_wall/scene.gltf`)

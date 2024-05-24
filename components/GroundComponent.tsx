@@ -21,4 +21,4 @@ export const GroundComponent: React.FC<Props> = (props: Props) => {
             <meshBasicMaterial {...meshMaterialProps} side={DoubleSide} />
         </mesh>
     );
-}
+};

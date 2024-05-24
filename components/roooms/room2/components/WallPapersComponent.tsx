@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {WallPictures} from "@/public/models/wall_pictures/WallPictures";
+import {WallPictures} from "@/components/WallPictures";
 import {Html} from "@react-three/drei";
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
 import {Card} from "@mui/material";

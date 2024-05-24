@@ -42,12 +42,12 @@ const INITIAL_AVATAR_LIST: AvatarItem[] = [
     {
         name: "Amy",
         model: Amy,
-        thumbnail: "/models/avatars/amy/thumbnail.png",
+        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/amy/thumbnail.png`,
     },
     {
         name: "Leonard",
         model: Leonard,
-        thumbnail: "/models/avatars/leonard/thumbnail.png",
+        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/leonard/thumbnail.png`,
     },
 ];
 

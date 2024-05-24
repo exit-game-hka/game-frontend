@@ -1,7 +1,7 @@
 "use client";
 import React, {Ref, useEffect, useRef, useState} from 'react';
 import {ExitDoor} from "@/components/ExitDoor";
-import {ExitDoorAttachment} from "@/public/models/exit_door_attachment/ExitDoorAttachment";
+import {ExitDoorAttachment} from "@/components/ExitDoorAttachment";
 import {Mesh} from "three";
 import {Html} from "@react-three/drei";
 import {AnswerInputModalComponent} from "@/components/shared/AnswerInputModalComponent";
@@ -17,13 +17,14 @@ type Props = {
 
 export const ExitDoorComponent: React.FC<Props> = (props: Props) => {
     const { aufgabe, nextRoomId, doorProps } = props;
-    const params = useSearchParams();
+    //const params = useSearchParams();
     const router = useRouter();
     const exitDoorAttachmentRef = useRef<Mesh>();
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const navigateToNextRoom = () => {
-        router.push(`/game-scene/rooms/${nextRoomId}?${params?.toString()}`);
+        //router.push(`/game-scene/rooms/${nextRoomId}?${params?.toString()}`);
+        router.push(`/game-scene/rooms/${nextRoomId}`);
     }
 
     useEffect(() => {

@@ -1,12 +1,9 @@
 import type {Metadata} from "next";
-import {Inter} from "next/font/google";
 import "./globals.css";
 import "@fontsource/inter";
 import React from "react";
 import {ApplicationContainerComponent} from "@/components/ApplicationContainerComponent";
 import ThemeRegistry from "@/app/ThemeRegistry";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,7 +23,7 @@ const RootLayout = ({
       {/*    rel="stylesheet"*/}
       {/*    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"*/}
       {/*  />*/}
-      <body className={inter.className}>
+      <body>
       <ThemeRegistry options={{ key: "joy" }}>
           <ApplicationContainerComponent>
               {children}

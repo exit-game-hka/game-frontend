@@ -1,8 +1,8 @@
 "use client";
 import React from 'react';
 import {Box, Button, Card, Sheet, Stack, Typography, useTheme} from "@mui/material";
-import {useRouter} from "next/navigation";
 import {PageContentWrapperComponent} from "@/components/shared/PageContentWrapperComponent";
+import Link from "next/link";
 
 const DebriefingPage: React.FC = () => {
     const theme = useTheme();
@@ -55,12 +55,9 @@ const DebriefingPage: React.FC = () => {
                         pt: "var(--space-4)",
                     }}
                 >
-                    <Button
-                        size={"lg"}
-                        sx={{ width: "100%" }}
-                    >
-                        Weiter
-                    </Button>
+                    <Link href={"/feedback"}>
+                        <Button size={"lg"} sx={{ width: "100%" }}>Weiter</Button>
+                    </Link>
                 </Box>
             </Stack>
         </PageContentWrapperComponent>

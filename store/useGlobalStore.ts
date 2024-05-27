@@ -29,6 +29,7 @@ import {
     Interaktion,
     InteraktionDto
 } from "@/api/interaktion";
+import {createKommentarApi, KommentarDto} from "@/api/kommentar";
 
 // Zustand Doc: https://github.com/pmndrs/zustand
 // Avatar store
@@ -212,6 +213,16 @@ const useTimeStoreSlice: StateCreator<TimeStore> = (set) => ({
     setTimeToEscapeCurrentRoom: (time: number) => set(() => ({ timeToEscapeCurrentRoom: time })),
 });
 
+// Kommentar store
+type KommentarStore = {
+    createKommentar: (kommentarDto: KommentarDto) => Promise<void>;
+}
+const useKommentarStoreSlice: StateCreator<KommentarStore> = () => ({
+    createKommentar: async (kommentarDto: KommentarDto): Promise<void> => {
+        await createKommentarApi(kommentarDto);
+    },
+});
+
 type GlobalStore =
     AvatarStore &
     AufgabeStore &
@@ -221,7 +232,8 @@ type GlobalStore =
     ErgebnisStore &
     AnimationStore &
     InteraktionStore &
-    TimeStore;
+    TimeStore &
+    KommentarStore;
 export const useGlobalStore = create<GlobalStore>((...fn) => ({
     ...useAvatarStoreSlice(...fn),
     ...useAufgabeStoreSlice(...fn),
@@ -232,6 +244,7 @@ export const useGlobalStore = create<GlobalStore>((...fn) => ({
     ...useAnimationStoreSlice(...fn),
     ...useInteraktionStoreSlice(...fn),
     ...useTimeStoreSlice(...fn),
+    ...useKommentarStoreSlice(...fn),
 }));
 
 // Global stateless content (Types, Functions, etc...)

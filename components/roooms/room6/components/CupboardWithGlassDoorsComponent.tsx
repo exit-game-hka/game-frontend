@@ -22,7 +22,7 @@ export const CupboardWithGlassDoorsComponent: React.FC<InteractiveObjectProps> =
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 width: "inherit",
-                "& *": {
+                "& p": {
                     color: "var(--color-black)",
                 },
             }}

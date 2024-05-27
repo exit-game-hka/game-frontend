@@ -11,6 +11,7 @@ import {useRouter} from "next/navigation";
 import Stack from "@mui/joy/Stack";
 import Image from "next/image";
 import {Typography} from "@mui/joy";
+import {StatusDto} from "@/api/status";
 
 export const SimpleSafeBoxComponent: React.FC<InteractiveObjectProps> = (props) => {
     const { raum } = props;
@@ -18,6 +19,7 @@ export const SimpleSafeBoxComponent: React.FC<InteractiveObjectProps> = (props) 
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const createInteraktion = useGlobalStore((state) => state.createInteraktion);
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
+    const createStatus = useGlobalStore((state) => state.createStatus);
 
     const aufgabe = raum.aufgaben[0];
 
@@ -52,6 +54,23 @@ export const SimpleSafeBoxComponent: React.FC<InteractiveObjectProps> = (props) 
         await createInteraktion(interactionDto);
     };
 
+    const handleSuccess = () => {
+        const player = getSpielerFromLocalStorage();
+        if (!player) return;
+
+        const statusToSubmit: StatusDto = {
+            spielerId: player.id,
+            semesterId: player.semesterId,
+            veranstaltungId: player.veranstaltungId,
+            spielStart: null,
+            spielEnde: null,
+            istSpielBeendet: true,
+            istSpielAbgebrochen: false,
+        };
+        createStatus(statusToSubmit);
+        router.push("/outro");
+    }
+
     return (
         <>
             <SimpleSafeBox
@@ -67,9 +86,9 @@ export const SimpleSafeBoxComponent: React.FC<InteractiveObjectProps> = (props) 
                     aufgabeId={aufgabe.id}
                     answer={aufgabe.loesungen[0].wert}
                     successMessage={successMessage}
-                    timeoutOnSuccess={60000}
+                    timeoutOnSuccess={30000}
                     failureMessage={aufgabe.fehlschlagMeldung}
-                    onSuccess={() => router.push("/outro")}
+                    onSuccess={handleSuccess}
                     onClose={() => setIsOpen(false)}
                     modalDialogProps={{
                         maxWidth: "550px",

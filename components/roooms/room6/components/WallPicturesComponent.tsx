@@ -21,7 +21,7 @@ export const WallPicturesComponent: React.FC<InteractiveObjectProps> = (props) =
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 width: "inherit",
-                "& *": {
+                "& p": {
                     color: "var(--color-black)",
                 },
             }}

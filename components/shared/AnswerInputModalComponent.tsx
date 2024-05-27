@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useCallback, useEffect, useMemo, useState} from 'react';
+import React, {ChangeEvent, ReactNode, useCallback, useEffect, useMemo, useState} from 'react';
 import {Transition} from "react-transition-group";
 import Modal from "@mui/joy/Modal";
 import ModalDialog, {ModalDialogProps} from "@mui/joy/ModalDialog";
@@ -21,7 +21,8 @@ type Props = {
     onSuccess: () => void;
     answer: string;
     aufgabeId: string;
-    successMessage: string;
+    successMessage: ReactNode;
+    timeoutOnSuccess?: number | undefined;
     failureMessage: string;
     onClose?: (() => void) | undefined;
     modalDialogProps?: ModalDialogProps;
@@ -37,6 +38,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
         successMessage,
         failureMessage,
         onSuccess,
+        timeoutOnSuccess,
         modalDialogProps,
         onClose,
     } = props;
@@ -59,11 +61,16 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
 
     useEffect(() => {
         if (!isComplete) return;
-        setTimeout(() => {
+
+        const timeoutToWait = timeoutOnSuccess ?? 2000;
+
+        const timeout = setTimeout(() => {
             onSuccess();
             closeModal();
-        }, 2000);
-    }, [closeModal, isComplete, onSuccess]);
+        }, timeoutToWait);
+
+        return () => clearTimeout(timeout);
+    }, [closeModal, isComplete, onSuccess, timeoutOnSuccess]);
 
     const resetStates = () => {
         setInputValue("");

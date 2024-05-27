@@ -11,7 +11,7 @@ import {GroupProps} from "@react-three/fiber";
 
 type Props = {
     aufgabe: Aufgabe;
-    nextRoomId: string;
+    nextRoomId?: string | undefined;
     doorProps: GroupProps;
 };
 
@@ -23,6 +23,10 @@ export const ExitDoorComponent: React.FC<Props> = (props: Props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const navigateToNextRoom = () => {
+        if (!nextRoomId) {
+            router.push("/outro");
+            return;
+        }
         //router.push(`/game-scene/rooms/${nextRoomId}?${params?.toString()}`);
         router.push(`/game-scene/rooms/${nextRoomId}`);
     }

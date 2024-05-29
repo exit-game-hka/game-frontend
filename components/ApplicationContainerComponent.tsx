@@ -1,7 +1,12 @@
 "use client";
 import React, {PropsWithChildren} from "react";
-import {AppBarComponent} from "@/components/AppBarComponent";
 import {usePathname} from "next/navigation";
+import dynamic from "next/dynamic";
+
+const AppBarComponent = dynamic(
+    () => import("@/components/AppBarComponent"),
+    { ssr: false }
+)
 
 type  Props = PropsWithChildren;
 

@@ -10,10 +10,10 @@ Title: Office Desk
 import React, {forwardRef} from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export const OfficeDeskWithFixPhone= forwardRef(function OfficeDeskWithFixPhone(props) {
+export const OfficeDeskWithFixPhone= forwardRef(function OfficeDeskWithFixPhone(props, ref) {
   const { nodes, materials } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/office_desk_with_fix_phone/scene.gltf`)
   return (
-      <group {...props} dispose={null}>
+      <group ref={ref} {...props} dispose={null}>
         <group rotation={[-Math.PI / 2, 0, 0]} scale={1.102}>
           <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
             <group position={[43.729, 0.4, -8.044]} rotation={[-Math.PI / 2, 0, 0]} scale={100}>

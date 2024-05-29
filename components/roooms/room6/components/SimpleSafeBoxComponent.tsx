@@ -86,7 +86,7 @@ export const SimpleSafeBoxComponent: React.FC<InteractiveObjectProps> = (props) 
                     aufgabeId={aufgabe.id}
                     answer={aufgabe.loesungen[0].wert}
                     successMessage={successMessage}
-                    timeoutOnSuccess={30000}
+                    timeoutOnSuccess={5000}
                     failureMessage={aufgabe.fehlschlagMeldung}
                     onSuccess={handleSuccess}
                     onClose={() => setIsOpen(false)}

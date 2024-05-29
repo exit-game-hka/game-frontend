@@ -16,7 +16,7 @@ import {useColorScheme} from "@mui/material";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
 import {ButtonType} from "@/store/useGlobalStore";
 
-export const AppBarComponent: React.FC = () => {
+const AppBarComponent: React.FC = () => {
     const router = useRouter();
     const pathname = usePathname();
     const { isSmall } = useMediaQuery();
@@ -139,3 +139,5 @@ const ButtonList = styled(Box)<{ cols: number }>`
     align-content: center;
     align-items: center;
 `;
+
+export default AppBarComponent;

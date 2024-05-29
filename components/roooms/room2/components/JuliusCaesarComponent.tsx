@@ -34,7 +34,7 @@ export const JuliusCaesarComponent: React.FC<Props> = (props) => {
         </Stack>
     );
 
-    const handleClickMesh = async (event: ThreeEvent<MouseEvent>) => {
+    const handleClickMesh = (event: ThreeEvent<MouseEvent>) => {
         event?.stopPropagation();
         setIsOpen(true);
         const spieler = getSpielerFromLocalStorage();
@@ -44,7 +44,7 @@ export const JuliusCaesarComponent: React.FC<Props> = (props) => {
             aufgabeId: raum.aufgaben[0].id,
             action: "Portrait von Julius Caesar angeklickt",
         };
-        await createInteraktion(interactionDto);
+        createInteraktion(interactionDto);
     };
 
     return (

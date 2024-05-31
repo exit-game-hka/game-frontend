@@ -22,7 +22,7 @@ const RoomOneComponent: React.FC<RoomProps> = (props) => {
     const theme = useTheme();
     const doublePaperTexture = useLoader(TextureLoader, `${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room1/double-paper-front.png`);
     const { texture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/wooden-floor.png`);
-    const { texture: wallTexture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/medieval-brick-wall.png`, [5, 4]);
+    const { texture: wallTexture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/brick_wall_united_kingdom_neutral.png`, [5, 1]);
 
     useEffect(() => {
         const setClockInteraction = () => {

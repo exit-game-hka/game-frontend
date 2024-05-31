@@ -647,49 +647,49 @@
   ],
   "images": [
     {
-      "uri": "textures/Table_baseColor.png"
+      "uri": "textures/Table_baseColor.jpg"
     },
     {
-      "uri": "textures/Table_metallicRoughness.png"
+      "uri": "textures/Table_metallicRoughness.jpg"
     },
     {
-      "uri": "textures/Table_normal.png"
+      "uri": "textures/Table_normal.jpg"
     },
     {
-      "uri": "textures/material_baseColor.png"
+      "uri": "textures/material_baseColor.jpg"
     },
     {
       "uri": "textures/material_metallicRoughness.png"
     },
     {
-      "uri": "textures/material_normal.png"
+      "uri": "textures/material_normal.jpg"
     },
     {
-      "uri": "textures/Computer_baseColor.png"
+      "uri": "textures/Computer_baseColor.jpg"
     },
     {
-      "uri": "textures/Computer_metallicRoughness.png"
+      "uri": "textures/Computer_metallicRoughness.jpg"
     },
     {
-      "uri": "textures/Computer_normal.png"
+      "uri": "textures/Computer_normal.jpg"
     },
     {
       "uri": "textures/material_3_baseColor.png"
     },
     {
-      "uri": "textures/material_3_metallicRoughness.png"
+      "uri": "textures/material_3_metallicRoughness.jpg"
     },
     {
-      "uri": "textures/material_3_normal.png"
+      "uri": "textures/material_3_normal.jpg"
     },
     {
-      "uri": "textures/Chair_baseColor.png"
+      "uri": "textures/Chair_baseColor.jpg"
     },
     {
-      "uri": "textures/Chair_metallicRoughness.png"
+      "uri": "textures/Chair_metallicRoughness.jpg"
     },
     {
-      "uri": "textures/Chair_normal.png"
+      "uri": "textures/Chair_normal.jpg"
     }
   ],
   "materials": [

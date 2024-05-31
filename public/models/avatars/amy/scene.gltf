@@ -15579,24 +15579,24 @@
 	],
 	"images":[
 		{
-			"mimeType":"image/png",
+			"mimeType":"image/jpeg",
 			"name":"Ch46_1001_Specular",
-			"uri":"textures/Ch46_1001_Specular.png"
+			"uri":"textures/Ch46_1001_Specular.jpg"
 		},
 		{
-			"mimeType":"image/png",
+			"mimeType":"image/jpeg",
 			"name":"Ch46_1001_Normal",
-			"uri":"textures/Ch46_1001_Normal.png"
+			"uri":"textures/Ch46_1001_Normal.jpg"
 		},
 		{
-			"mimeType":"image/png",
+			"mimeType":"image/jpeg",
 			"name":"Ch46_1001_Diffuse",
-			"uri":"textures/Ch46_1001_Diffuse.png"
+			"uri":"textures/Ch46_1001_Diffuse.jpg"
 		},
 		{
-			"mimeType":"image/png",
+			"mimeType":"image/jpeg",
 			"name":"Ch46_1001_Glossiness",
-			"uri":"textures/Ch46_1001_Glossiness.png"
+			"uri":"textures/Ch46_1001_Glossiness.jpg"
 		}
 	],
 	"skins":[

@@ -122,7 +122,7 @@
   ],
   "images": [
     {
-      "uri": "textures/Mat_1_baseColor.png"
+      "uri": "textures/Mat_1_baseColor.jpg"
     },
     {
       "uri": "textures/Mat_1_metallicRoughness.png"

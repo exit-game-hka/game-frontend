@@ -317,31 +317,31 @@
   ],
   "images": [
     {
-      "uri": "textures/wall_picture_2_2k_baseColor.png"
+      "uri": "textures/wall_picture_2_2k_baseColor.jpg"
     },
     {
-      "uri": "textures/wall_picture_2_2k_metallicRoughness.png"
+      "uri": "textures/wall_picture_2_2k_metallicRoughness.jpg"
     },
     {
-      "uri": "textures/wall_picture_2_2k_normal.png"
+      "uri": "textures/wall_picture_2_2k_normal.jpg"
     },
     {
-      "uri": "textures/wall_picture_3_baseColor.png"
+      "uri": "textures/wall_picture_3_baseColor.jpg"
     },
     {
-      "uri": "textures/wall_picture_3_metallicRoughness.png"
+      "uri": "textures/wall_picture_3_metallicRoughness.jpg"
     },
     {
-      "uri": "textures/wall_picture_3_normal.png"
+      "uri": "textures/wall_picture_3_normal.jpg"
     },
     {
-      "uri": "textures/wall_picture_1_2k_baseColor.png"
+      "uri": "textures/wall_picture_1_2k_baseColor.jpg"
     },
     {
-      "uri": "textures/wall_picture_1_2k_metallicRoughness.png"
+      "uri": "textures/wall_picture_1_2k_metallicRoughness.jpg"
     },
     {
-      "uri": "textures/wall_picture_1_2k_normal.png"
+      "uri": "textures/wall_picture_1_2k_normal.jpg"
     }
   ],
   "materials": [

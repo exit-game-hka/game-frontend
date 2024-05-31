@@ -920,19 +920,19 @@
   ],
   "images": [
     {
-      "uri": "textures/Material_101_baseColor.png"
+      "uri": "textures/Material_101_baseColor.jpg"
     },
     {
-      "uri": "textures/Material_160_baseColor.png"
+      "uri": "textures/Material_160_baseColor.jpg"
     },
     {
-      "uri": "textures/Material_121_baseColor.png"
+      "uri": "textures/Material_121_baseColor.jpg"
     },
     {
-      "uri": "textures/Material_131_baseColor.png"
+      "uri": "textures/Material_131_baseColor.jpg"
     },
     {
-      "uri": "textures/Material_149_baseColor.png"
+      "uri": "textures/Material_149_baseColor.jpg"
     }
   ],
   "materials": [

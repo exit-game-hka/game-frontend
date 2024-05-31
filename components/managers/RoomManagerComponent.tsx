@@ -41,6 +41,9 @@ export const RoomManagerComponent: React.FC<Props> = (props: Props) => {
 // Room 1
 // "Old tile wooden floor texture"
 // (https://skfb.ly/oPEzK) by Tijerín Art Studio is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+//
+// "Brick wall United Kingdom"
+// (https://skfb.ly/6RPvP) by theovasilis is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 
 // Room 2
 // "Wooden floor with smooth finish"

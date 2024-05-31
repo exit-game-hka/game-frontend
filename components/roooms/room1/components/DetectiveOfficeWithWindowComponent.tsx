@@ -187,7 +187,7 @@ export const DetectiveOfficeWithWindowComponent: React.FC<InteractiveObjectProps
                 // @ts-ignore
                 scale={0.6}
                 //rotation-y={Math.PI / 2}
-                position={[15, WORLD_COORDINATE[1], -7]}
+                position={[11.85, WORLD_COORDINATE[1], -11.5]}
                 onDoublePaperClick={handleDoublePaperClick}
             />
             <Html>

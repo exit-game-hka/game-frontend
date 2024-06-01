@@ -1632,9 +1632,9 @@
 			"uri":"textures/drawers_baseColor.jpg"
 		},
 		{
-			"mimeType":"image/png",
+			"mimeType":"image/jpeg",
 			"name":"paper_baseColor",
-			"uri":"textures/paper_baseColor.png"
+			"uri":"textures/paper_baseColor.jpg"
 		},
 		{
 			"mimeType":"image/jpeg",

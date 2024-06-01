@@ -379,13 +379,13 @@
       "uri": "textures/Uhr_2.001_baseColor.png"
     },
     {
-      "uri": "textures/Uhr_2_baseColor.jpeg"
+      "uri": "textures/Uhr_2_baseColor.jpg"
     },
     {
-      "uri": "textures/Uhr_2_Rand_baseColor.jpeg"
+      "uri": "textures/Uhr_2_Rand_baseColor.jpg"
     },
     {
-      "uri": "textures/Uhr_2_Rand_normal.png"
+      "uri": "textures/Uhr_2_Rand_normal.jpg"
     }
   ],
   "materials": [

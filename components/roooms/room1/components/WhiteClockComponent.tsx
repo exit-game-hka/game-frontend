@@ -51,7 +51,7 @@ export const WhiteClockComponent: React.FC<InteractiveObjectProps> = (props) => 
             <WhiteClock
                 // @ts-ignore
                 scale={1.5}
-                position={[3, 4, -10.1]}
+                position={[3, 3, -14.9]}
                 rotation-y={-Math.PI / 2}
                 onClick={handleClickWhiteClock}
             />

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {ThreeElements, ThreeEvent, useLoader} from "@react-three/fiber";
-import {DoubleSide, TextureLoader} from "three";
+import {TextureLoader} from "three";
 import {Html} from "@react-three/drei";
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
 import {Box} from "@mui/material";
@@ -12,7 +12,7 @@ import {InteraktionDto} from "@/api/interaktion";
 type Props = ThreeElements["mesh"] & InteractiveObjectProps;
 export const JuliusCaesarComponent: React.FC<Props> = (props) => {
     const { raum, ...rest} = props;
-    const texture = useLoader(TextureLoader, `${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room2/julius_caesar.png`);
+    const texture = useLoader(TextureLoader, `${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room2/julius_caesar.jpg`);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const createInteraktion = useGlobalStore((state) => state.createInteraktion);
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
@@ -21,7 +21,7 @@ export const JuliusCaesarComponent: React.FC<Props> = (props) => {
         <Stack spacing={"var(--space-3)"} sx={{ mt: "var(--space-4)" }}>
             <Box
                 component={"img"}
-                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room2/julius_caesar.png`}
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room2/julius_caesar.jpg`}
                 alt={"Julius Caesar"}
                 sx={{
                     width: "100%",
@@ -50,11 +50,12 @@ export const JuliusCaesarComponent: React.FC<Props> = (props) => {
     return (
         <>
             <mesh
-                onClick={handleClickMesh}
                 {...rest}
+                onClick={handleClickMesh}
+                dispose={null}
             >
                 <planeGeometry args={[1, 1]}/>
-                <meshPhysicalMaterial map={texture} side={DoubleSide}/>
+                <meshPhysicalMaterial map={texture} />
             </mesh>
             <Html>
                 <TaskModalComponent

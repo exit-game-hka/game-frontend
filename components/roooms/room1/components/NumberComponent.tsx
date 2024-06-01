@@ -48,7 +48,7 @@ export const NumberComponent: React.FC<InteractiveObjectProps> = (props) => {
             <Number
                 scale={0.45}
                 rotation-y={Math.PI / 2}
-                position={[-6, 3, 0.5]}
+                position={[-14.9, 2.5, 0.5]}
                 onClick={handleClick}
             />
             <Html>

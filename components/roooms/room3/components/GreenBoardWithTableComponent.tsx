@@ -22,7 +22,7 @@ export const GreenBoardWithTableComponent: React.FC<InteractiveObjectProps> = (p
             component={"div"}
             sx={{
                 borderRadius: "var(--space-3)",
-                background: `url('${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room3/paper-room3.png')`,
+                background: `url('${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room3/paper-room3.jpg')`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 p: "var(--space-4) var(--space-5)",
@@ -51,7 +51,7 @@ export const GreenBoardWithTableComponent: React.FC<InteractiveObjectProps> = (p
             <Box
                 component="div"
                 sx={{
-                    background: `url('${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room3/book1_bg.png')`,
+                    background: `url('${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room3/book1_bg.jpg')`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     borderRadius: "var(--space-3)",

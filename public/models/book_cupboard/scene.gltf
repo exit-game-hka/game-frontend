@@ -290,13 +290,13 @@
   ],
   "images": [
     {
-      "uri": "textures/Shelf__0_baseColor.png"
+      "uri": "textures/Shelf__0_baseColor.jpg"
     },
     {
       "uri": "textures/Shelf__0_metallicRoughness.png"
     },
     {
-      "uri": "textures/Shelf__0_normal.png"
+      "uri": "textures/Shelf__0_normal.jpg"
     },
     {
       "uri": "textures/Books.001_baseColor.jpeg"

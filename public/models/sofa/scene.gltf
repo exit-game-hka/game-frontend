@@ -324,13 +324,13 @@
   ],
   "images": [
     {
-      "uri": "textures/pasted__sofalegsShape_bakedmtl2_metallicRoughness.png"
+      "uri": "textures/pasted__sofalegsShape_bakedmtl2_metallicRoughness.jpg"
     },
     {
-      "uri": "textures/pasted__sofabody2Shape_bakedmtl2_baseColor.png"
+      "uri": "textures/pasted__sofabody2Shape_bakedmtl2_baseColor.jpg"
     },
     {
-      "uri": "textures/pasted__sofabody2Shape_bakedmtl2_metallicRoughness.png"
+      "uri": "textures/pasted__sofabody2Shape_bakedmtl2_metallicRoughness.jpg"
     }
   ],
   "materials": [

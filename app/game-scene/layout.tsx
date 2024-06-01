@@ -1,7 +1,16 @@
 import React, {PropsWithChildren} from "react";
 import {ApplicationContainerComponent} from "@/components/ApplicationContainerComponent";
-import {TimeManagerComponent} from "@/components/managers/TimeManagerComponent";
-import ToolBarComponent from "@/components/ToolBarComponent";
+import dynamic from "next/dynamic";
+
+const TimeManagerComponent = dynamic(
+    () => import("@/components/managers/TimeManagerComponent"),
+    { ssr: false }
+);
+
+const ToolBarComponent = dynamic(
+    () => import("@/components/ToolBarComponent"),
+    { ssr: false }
+);
 
 type  Props = PropsWithChildren;
 const GameSceneLayout: React.FC<Props> = (props: Props) => {

@@ -992,10 +992,10 @@
   ],
   "images": [
     {
-      "uri": "textures/lambert1_baseColor.png"
+      "uri": "textures/lambert1_baseColor.jpg"
     },
     {
-      "uri": "textures/lambert1_metallicRoughness.png"
+      "uri": "textures/lambert1_metallicRoughness.jpg"
     }
   ],
   "materials": [

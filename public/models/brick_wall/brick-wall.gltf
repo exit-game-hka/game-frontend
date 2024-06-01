@@ -89,9 +89,9 @@
 			"uri":"textures/wall2_Material_u1_v1_baseColor.jpg"
 		},
 		{
-			"mimeType":"image/png",
+			"mimeType":"image/jpeg",
 			"name":"wall2_Material_u1_v1_metallicRoughness",
-			"uri":"textures/wall2_Material_u1_v1_metallicRoughness.png"
+			"uri":"textures/wall2_Material_u1_v1_metallicRoughness.jpg"
 		}
 	],
 	"accessors":[

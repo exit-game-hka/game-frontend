@@ -6,7 +6,7 @@ import useSWR from "swr";
 import {Aufgabe} from "@/api/aufgabe";
 import {useRouter} from "next/navigation";
 
-export const TimeManagerComponent: React.FC = () => {
+const TimeManagerComponent: React.FC = () => {
     const router = useRouter();
     const getAllAufgaben = useGlobalStore((state) => state.getAllAufgaben);
     const setTotalTimeToPlay = useGlobalStore((state) => state.setTotalTimeToPlay);
@@ -43,3 +43,4 @@ export const TimeManagerComponent: React.FC = () => {
     );
 };
 
+export default TimeManagerComponent;

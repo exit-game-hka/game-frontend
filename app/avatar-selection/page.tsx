@@ -2,7 +2,7 @@
 import React, {ComponentType, ForwardRefExoticComponent, Ref, RefAttributes, useEffect, useRef} from "react";
 import {PageContentWrapperComponent} from "@/components/shared/PageContentWrapperComponent";
 import {Avatar, Box, Button, Typography} from "@mui/joy";
-import {Canvas} from "@react-three/fiber";
+import {Canvas, useFrame, useThree} from "@react-three/fiber";
 import {Object3D} from "three";
 import Stack from "@mui/joy/Stack";
 import {useRouter} from "next/navigation";
@@ -30,10 +30,9 @@ const AvatarSelectionPage: React.FC = () => {
                 }}
             >
                 <Typography level="h2">Wählen Sie Ihren Charakter</Typography>
-                <Canvas shadows={true}>
-                    <ambientLight intensity={1} color={"white"} shadow={"black"} />
+                <Canvas performance={{ max: 0.7 }}>
+                    <ambientLight intensity={0.6} color={"white"} />
                     <hemisphereLight intensity={1} />
-                    <pointLight position={[0, 10, 0]} />
                     {selectedAvatar ? <AvatarWrapperComponent model={selectedAvatar.model} /> : null}
                 </Canvas>
                 <Stack spacing={"var(--space-7)"} alignItems="center" alignContent="center">
@@ -89,10 +88,16 @@ const AvatarWrapperComponent: React.FC<PropsAvatarWrapperComponent> = (props: Pr
     const animations = useGlobalStore((state) => state.animations);
     const addAnimation = useGlobalStore((state) => state.addAnimation);
 
+    const regress = useThree((state) => state.performance.regress);
+
+    useFrame(() => {
+        regress();
+    });
+
     useEffect(() => {
         if (!modelRef.current) return;
         playAnimationAction(modelRef.current.uuid, "idle");
-    }, [animations]);
+    }, [animations, playAnimationAction]);
 
     const addAnimationsToAnimationStore = (actions: AnimationActions) => {
         if (!modelRef.current) return;

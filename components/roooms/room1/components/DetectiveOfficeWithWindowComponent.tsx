@@ -46,7 +46,7 @@ export const DetectiveOfficeWithWindowComponent: React.FC<InteractiveObjectProps
                 component={"div"}
                 sx={{
                     borderRadius: "var(--space-3)",
-                    background: `url('${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room1/double-paper-front-bg.png')`,
+                    background: `url('${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room1/double-paper-front-bg.jpg')`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     p: "calc(var(--space-15) * 2) var(--space-6) var(--space-6) var(--space-6)",
@@ -187,7 +187,7 @@ export const DetectiveOfficeWithWindowComponent: React.FC<InteractiveObjectProps
                 // @ts-ignore
                 scale={0.6}
                 //rotation-y={Math.PI / 2}
-                position={[15, WORLD_COORDINATE[1], -7]}
+                position={[11.85, WORLD_COORDINATE[1], -11.5]}
                 onDoublePaperClick={handleDoublePaperClick}
             />
             <Html>

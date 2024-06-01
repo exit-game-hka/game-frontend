@@ -13,7 +13,6 @@ export const WallComponent: React.FC<Props> = (props) => {
         <mesh
             {...meshProps}
             castShadow={false}
-            receiveShadow={true}
         >
             <planeGeometry args={[20, 4]}  />
             <meshBasicMaterial

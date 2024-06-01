@@ -19,6 +19,7 @@ export const FeedbackFormComponent: React.FC = () => {
             spielerId: player.id,
             semesterId: player.semesterId,
             inhalt: comment,
+            creationTimestamp: new Date(),
         };
         createKommentar(commentToSubmit);
         router.push("/result-and-qrcode");
@@ -89,4 +90,3 @@ export const FeedbackFormComponent: React.FC = () => {
         </Stack>
     );
 };
-

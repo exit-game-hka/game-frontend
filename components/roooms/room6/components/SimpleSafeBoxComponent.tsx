@@ -54,7 +54,7 @@ export const SimpleSafeBoxComponent: React.FC<InteractiveObjectProps> = (props) 
         await createInteraktion(interactionDto);
     };
 
-    const handleSuccess = () => {
+    const handleSuccess = async () => {
         const player = getSpielerFromLocalStorage();
         if (!player) return;
 
@@ -67,7 +67,7 @@ export const SimpleSafeBoxComponent: React.FC<InteractiveObjectProps> = (props) 
             istSpielBeendet: true,
             istSpielAbgebrochen: false,
         };
-        createStatus(statusToSubmit);
+        await createStatus(statusToSubmit);
         router.push("/outro");
     }
 

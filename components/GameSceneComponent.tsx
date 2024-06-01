@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {OrbitControls, PerspectiveCamera} from "@react-three/drei";
+import {PerspectiveCamera} from "@react-three/drei";
 import {PlayerManagerComponent} from "@/components/managers/PlayerManagerComponent";
 import {Canvas, useThree} from "@react-three/fiber";
 import {RoomManagerComponent} from "@/components/managers/RoomManagerComponent";
@@ -14,7 +14,6 @@ const GameSceneComponent: React.FC<Props> = (props: Props) => {
     // @ts-ignore
     return (
         <Canvas dpr={[0, 1]} performance={{ min: 0.7, current: 0.8 }}>
-            <OrbitControls />
             <PerspectiveCamera args={[75, 30, 0]} position={[0, -20, 0]}/>
             <ambientLight intensity={0.6} color={"white"} />
             <hemisphereLight intensity={1} />
@@ -48,7 +47,7 @@ const PerformanceControlComponent = () => {
 
     useEffect(() => {
         setPixelRatio(window.devicePixelRatio * current)
-    }, [current])
+    }, [current, setPixelRatio])
 
     const regress = useThree((state) => state.performance.regress)
     const controls = useThree((state) => state.controls);

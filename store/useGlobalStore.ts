@@ -4,7 +4,7 @@ import {Amy} from "@/components/avatars/Amy";
 import {Leonard} from "@/components/avatars/Loenard";
 import {Aufgabe, getAllTasksApi, getTaskByIdApi} from "@/api/aufgabe";
 import {getAllRoomsApi, getRoomByIdApi, Raum} from "@/api/raum";
-import {getSpielerBySpielerIdApi, Spieler} from "@/api/spieler";
+import {createSpielerApi, getSpielerBySpielerIdApi, Spieler, SpielerDto} from "@/api/spieler";
 import {
     createStatusApi,
     getStatusBySemesterIdApi,
@@ -30,6 +30,9 @@ import {
     InteraktionDto
 } from "@/api/interaktion";
 import {createKommentarApi, KommentarDto} from "@/api/kommentar";
+import {AxiosResponse} from "axios";
+import {getAllSemesterApi, getSemesterByIdApi, Semester} from "@/api/semester";
+import {getAllVeranstaltungenApi, getVeranstaltungByIdApi, Veranstaltung} from "@/api/veranstaltung";
 
 // Zustand Doc: https://github.com/pmndrs/zustand
 // Avatar store
@@ -97,6 +100,7 @@ const useRoomStoreSlice: StateCreator<RoomStore> = () => ({
 type SpielerStore = {
     getSpielerBySpielerId: (spielerId: string) => Promise<Spieler>;
     getSpielerFromLocalStorage: () => Spieler | undefined | null;
+    createSpieler: (spielerDto: SpielerDto) => Promise<void>;
     setSpieler: (spieler: Spieler) => void;
     removeSpieler: () => void;
 };
@@ -108,6 +112,9 @@ const useSpielerStoreSlice: StateCreator<SpielerStore> = () => ({
     getSpielerFromLocalStorage: () => JSON.parse(localStorage.getItem("player") as string) as Spieler | undefined,
     setSpieler: (spielerToSave: Spieler) => {
         localStorage.setItem("player", JSON.stringify(spielerToSave));
+    },
+    createSpieler: async (spielerDto: SpielerDto) => {
+        await createSpielerApi(spielerDto);
     },
     removeSpieler: () => {
         localStorage.removeItem("player");
@@ -223,6 +230,40 @@ const useKommentarStoreSlice: StateCreator<KommentarStore> = () => ({
     },
 });
 
+// Semester store
+
+type SemesterStore = {
+    getSemesterById: (id: string) => Promise<Semester>;
+    getAllSemester: () => Promise<Semester[]>;
+};
+const useSemesterStoreSlice: StateCreator<SemesterStore> = () => ({
+    getSemesterById: async (id: string) => {
+        const response = await getSemesterByIdApi(id);
+        return convertToSemesterModel(response.data);
+    },
+    getAllSemester: async () => {
+        const response = await getAllSemesterApi();
+        return response.data.map(convertToSemesterModel);
+    },
+});
+
+// Veranstaltung store
+
+type VeranstaltungStore = {
+    getVeranstaltungById: (id: string) => Promise<Veranstaltung>;
+    getAllVeranstaltungen: () => Promise<Veranstaltung[]>;
+};
+const useVeranstaltungStoreStoreSlice: StateCreator<VeranstaltungStore> = () => ({
+    getVeranstaltungById: async (id: string) => {
+        const response = await getVeranstaltungByIdApi(id);
+        return response.data;
+    },
+    getAllVeranstaltungen: async () => {
+        const response = await getAllVeranstaltungenApi();
+        return response.data;
+    },
+});
+
 type GlobalStore =
     AvatarStore &
     AufgabeStore &
@@ -233,7 +274,9 @@ type GlobalStore =
     AnimationStore &
     InteraktionStore &
     TimeStore &
-    KommentarStore;
+    KommentarStore &
+    SemesterStore &
+    VeranstaltungStore;
 export const useGlobalStore = create<GlobalStore>((...fn) => ({
     ...useAvatarStoreSlice(...fn),
     ...useAufgabeStoreSlice(...fn),
@@ -245,6 +288,8 @@ export const useGlobalStore = create<GlobalStore>((...fn) => ({
     ...useInteraktionStoreSlice(...fn),
     ...useTimeStoreSlice(...fn),
     ...useKommentarStoreSlice(...fn),
+    ...useSemesterStoreSlice(...fn),
+    ...useVeranstaltungStoreStoreSlice(...fn),
 }));
 
 // Global stateless content (Types, Functions, etc...)
@@ -319,3 +364,11 @@ const validateAndPlayAnimationAction = (objectId: string,  animations: ObjectAni
     }
     animation.animationActions[actionName]?.play();
 };
+
+const convertToSemesterModel = (semester: Semester): Semester => {
+    return {
+        ...semester,
+        start: new Date(semester.start),
+        ende: new Date(semester.ende),
+    };
+}

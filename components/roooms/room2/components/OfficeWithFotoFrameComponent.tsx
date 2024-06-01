@@ -3,7 +3,7 @@ import {WORLD_COORDINATE} from "@/app/contants";
 import {OfficeWithFotoFrame} from "@/components/OfficeWithFotoFrame";
 import {Html} from "@react-three/drei";
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
-import {Box, Typography} from "@mui/material";
+import {Typography} from "@mui/material";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
 import Stack from "@mui/joy/Stack";
 import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
@@ -29,7 +29,7 @@ export const OfficeWithFotoFrameComponent: React.FC<InteractiveObjectProps> = (p
                     margin: "auto",
                 }}
             >
-                A → H
+                U → N
             </Typography>
         </Stack>
     );
@@ -42,7 +42,7 @@ export const OfficeWithFotoFrameComponent: React.FC<InteractiveObjectProps> = (p
         const interactionDto: InteraktionDto = {
             spielerId: spieler.id,
             aufgabeId: raum.aufgaben[0].id,
-            action: "Hinweis mit dem Text 'A → H' angeklickt",
+            action: "Hinweis mit dem Text 'U → N' angeklickt",
         };
         await createInteraktion(interactionDto);
     };

@@ -1,6 +1,10 @@
-import React from 'react';
-import {Box, Typography} from "@mui/joy";
+"use client";
+import React, {useEffect, useState} from 'react';
+import {Alert, Box, Typography} from "@mui/joy";
 import CircularProgress from '@mui/joy/CircularProgress';
+import WarningAmberOutlinedIcon from '@mui/icons-material/WarningAmberOutlined';
+
+const LOADING_TIMEOUT = 20000 as const;
 
 type Props = {
     message: string;
@@ -8,6 +12,17 @@ type Props = {
 
 export const LoadingComponent: React.FC<Props> = (props) => {
     const { message } = props;
+    const [timeReached, setTimeReached] = useState<boolean>(false);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setTimeReached(true);
+        }, LOADING_TIMEOUT);
+        return () => {
+            clearTimeout(timeout);
+        }
+    }, []);
+
     return (
         <Box
             component="div"
@@ -24,15 +39,31 @@ export const LoadingComponent: React.FC<Props> = (props) => {
                 justifyItems: "center",
                 alignItems: "center",
                 alignContent: "center",
+                px: "var(--space-6)",
+                backgroundColor: theme => theme.vars.palette.background.body,
             }}
         >
-            <CircularProgress
-                size={"lg"}
-                sx={{
-                    color: "var(--color-primary)",
-                }}
-            />
-            <Typography>{message}</Typography>
+            {timeReached ?
+                <>
+                    <WarningAmberOutlinedIcon sx={{ fontSize: "50px" }} />
+                    <Alert color={"danger"}>
+                        <Typography level="title-md" sx={{ fontWeight: 500 }}>
+                            Die Ladezeit wurde überschritten, versuchen Sie es später erneut!
+                        </Typography>
+                    </Alert>
+
+                </>
+                :
+                <>
+                    <CircularProgress
+                        size={"lg"}
+                        sx={{
+                            color: "var(--color-primary)",
+                        }}
+                    />
+                    <Typography level="h4" sx={{ fontWeight: 500 }}>{message}</Typography>
+                </>
+            }
         </Box>
     );
 };

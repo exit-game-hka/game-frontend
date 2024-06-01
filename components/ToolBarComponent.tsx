@@ -18,29 +18,14 @@ const ToolBarComponent: React.FC = () => {
 
     const buttons: ButtonType[] = [
         {
-            label: "Ergebnisse",
-            icon: <EmojiEventsOutlinedIcon sx={{ fontSize: "var(--icon-medium)", color: "inherit" }} />,
-            onClick: () => alert("In dev"),
-        },
-        {
-            label: "Aufgaben",
-            icon: <ExtensionOutlinedIcon sx={{ fontSize: "var(--icon-medium)", color: "inherit" }} />,
-            onClick: () => alert("In dev"),
-        },
-        {
             label: "Informationen",
             icon: <InfoOutlinedIcon sx={{ fontSize: "var(--icon-medium)", color: "inherit" }} />,
             onClick: () => alert("In dev"),
         },
         {
-            label: "Raum verlassen",
+            label: "Spiel verlassen",
             icon: <DoorBackOutlinedIcon sx={{ fontSize: "var(--icon-medium)", color: "inherit" }} />,
             onClick: () => router.push("/"),
-        },
-        {
-            label: "Verkleinen",
-            icon: <KeyboardDoubleArrowDownOutlinedIcon sx={{ fontSize: "var(--icon-medium)", color: "inherit" }} />,
-            onClick: () => alert("In dev"),
         },
     ];
 

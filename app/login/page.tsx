@@ -166,7 +166,7 @@ const LoginPage: React.FC = () => {
                 justifyContent="center"
                 justifyItems="center"
             >
-                <Typography level="h2">Spieler-ID</Typography>
+                <Typography level="h2">Anmeldung</Typography>
                 <Card
                     sx={{
                         display: "grid",

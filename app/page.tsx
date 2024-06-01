@@ -1,7 +1,11 @@
 import React from "react";
 import {PageContentWrapperComponent} from "@/components/shared/PageContentWrapperComponent";
-import {OverviewCardComponent} from "@/components/shared/OverviewCardComponent";
+import dynamic from "next/dynamic";
 
+const OverviewCardComponent = dynamic(
+    () => import("@/components/shared/OverviewCardComponent"),
+    { ssr: false }
+);
 const Home: React.FC = () => {
     return (
         <PageContentWrapperComponent subtitle="Das Abenteuer beginnt hier">

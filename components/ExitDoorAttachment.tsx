@@ -7,7 +7,7 @@ type Props = ThreeElements["mesh"];
 export const ExitDoorAttachment = forwardRef<Mesh, Props>(function ExitDoorAttachment(props: Props, ref) {
     const texture = useLoader(TextureLoader, `${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/exit-door-attachment.png`);
     return (
-        <mesh ref={ref} {...props}>
+        <mesh ref={ref} {...props} dispose={null}>
             <planeGeometry args={[5, 5]} />
             <meshPhysicalMaterial map={texture} />
         </mesh>

@@ -14,6 +14,7 @@ export const GroundComponent: React.FC<Props> = (props: Props) => {
             {...rest}
             castShadow={false}
             rotation-x={-Math.PI / 2}
+            dispose={null}
         >
             <planeGeometry args={[WORLD_WIDTH, WORLD_HEIGHT, 10, 10]}  />
             <meshBasicMaterial {...meshMaterialProps} />

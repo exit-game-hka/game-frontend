@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {OrbitControls, PerspectiveCamera} from "@react-three/drei";
 import {PlayerManagerComponent} from "@/components/managers/PlayerManagerComponent";
-import {Canvas, useFrame, useThree} from "@react-three/fiber";
+import {Canvas, useThree} from "@react-three/fiber";
 import {RoomManagerComponent} from "@/components/managers/RoomManagerComponent";
 import {WORLD_COORDINATE} from "@/app/contants";
 import {Raum} from "@/api/raum";
@@ -13,8 +13,8 @@ const GameSceneComponent: React.FC<Props> = (props: Props) => {
     const { room } = props;
     // @ts-ignore
     return (
-        <Canvas performance={{ max: 1, current: 0.9 }}>
-            <OrbitControls/>
+        <Canvas dpr={[0, 1]} performance={{ min: 0.7, current: 0.8 }}>
+            <OrbitControls />
             <PerspectiveCamera args={[75, 30, 0]} position={[0, -20, 0]}/>
             <ambientLight intensity={0.6} color={"white"} />
             <hemisphereLight intensity={1} />
@@ -37,18 +37,18 @@ const GameSceneComponent: React.FC<Props> = (props: Props) => {
             {/*/>*/}
             <PlayerManagerComponent position={[0, WORLD_COORDINATE[1], 0]} />
             <RoomManagerComponent room={room} />
-            <AdaptivePixelRatio />
+            <PerformanceControlComponent />
         </Canvas>
     );
 };
 
-const AdaptivePixelRatio = () => {
+const PerformanceControlComponent = () => {
     const current = useThree((state) => state.performance.current)
     const setPixelRatio = useThree((state) => state.setDpr)
 
     useEffect(() => {
         setPixelRatio(window.devicePixelRatio * current)
-    }, [current, setPixelRatio])
+    }, [current])
 
     const regress = useThree((state) => state.performance.regress)
     const controls = useThree((state) => state.controls);
@@ -58,11 +58,16 @@ const AdaptivePixelRatio = () => {
         return () => {
             controls?.removeEventListener("change", regress);
         };
-    }, [controls, regress]);
+    }, []);
 
-    useFrame(() => {
-        // regress();
-    })
+    useEffect(() => {
+        const interval = setInterval(() => {
+            regress();
+        }, 100);
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
 
     return null;
 };

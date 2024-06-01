@@ -6,16 +6,11 @@ import useSWR from "swr";
 import {Raum} from "@/api/raum";
 import SplashScreenComponent from "@/components/shared/SplashScreenComponent";
 import {useGlobalStore} from "@/store/useGlobalStore";
-//import dynamic from "next/dynamic";
+import {LoadingComponent} from "@/components/shared/LoadingComponent";
 
-// const SplashScreenComponent = dynamic(
-//     () => import("../../../../components/shared/SplashScreenComponent"),
-//     { ssr: false }
-// );
 const GameSceneComponent = lazy(() => import("../../../../components/GameSceneComponent"));
 
 const RoomItemPage: React.FC = () => {
-
     const { id } = useParams<{ id: string }>();
     const getRoomById = useGlobalStore((state) => state.getRoomById);
 
@@ -25,11 +20,7 @@ const RoomItemPage: React.FC = () => {
         error,
     } = useSWR<Raum>(`getRoomById-${id}`, () => getRoomById(id))
 
-    const handleTimeout = () => {
-        alert("Time is up!");
-    };
-
-    if (isLoading || !room) return <SplashScreenComponent />;
+    if (isLoading || !room) return <LoadingComponent message={"Der Raum wird geladen"} />;
 
     if (error) return <div>{`Es ist ein Fehler ist aufgetreten: ${(error as Error).toString()}`}</div>;
 
@@ -44,6 +35,5 @@ const RoomItemPage: React.FC = () => {
 
 const CanvasContainer = styled.main`
     height: 100vh;
-    //overflow: hidden;
 `
 export default RoomItemPage;

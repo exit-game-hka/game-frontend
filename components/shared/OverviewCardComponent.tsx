@@ -12,8 +12,8 @@ export const OverviewCardComponent: React.FC = () => {
     const router = useRouter();
 
     const cardBackground = mode === "dark" ?
-        `url('${process.env.NEXT_PUBLIC_BASE_PATH}/overview-card-bg-dark.png')` :
-        `url('${process.env.NEXT_PUBLIC_BASE_PATH}/overview-card-bg-light.png')`;
+        `url('${process.env.NEXT_PUBLIC_BASE_PATH}/overview-card-bg-dark.jpg')` :
+        `url('${process.env.NEXT_PUBLIC_BASE_PATH}/overview-card-bg-light.jpg')`;
 
     return (
         <Card

@@ -13,7 +13,7 @@ import {DoubleWallGroupComponent} from "@/components/roooms/room3/components/Dou
 
 const RoomThreeComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
-    const { texture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/trefoil-floor.png`);
+    const { texture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/trefoil-floor.jpg`);
 
     return (
         <>
@@ -62,25 +62,20 @@ const RoomThreeComponent: React.FC<RoomProps> = (props) => {
                     position: [12.5, WORLD_COORDINATE[1], -6],
                 }}
             />
-
             <GreenBoardWithTableComponent raum={raum} />
-
             <TableWithBooksAndGlobeComponent raum={raum} />
-
             <OfficeDeskWithFixPhone
                 // @ts-ignore
                 scale={1.3}
                 rotation-y={Math.PI / 10}
                 position={[15, WORLD_COORDINATE[1], 5]}
             />
-
             <WallPictures
                 // @ts-ignore
                 scale={1.5}
                 rotation-y={-Math.PI / 2}
                 position={[5, 1, -12.4]}
             />
-
             <ExitDoorComponent
                 aufgabe={raum.aufgaben[0]}
                 nextRoomId={"20000000-0000-0000-0000-000000000004"}
@@ -88,13 +83,11 @@ const RoomThreeComponent: React.FC<RoomProps> = (props) => {
                     position: [18.5, WORLD_COORDINATE[1], 0],
                 }}
             />
-
             <DoorToPreviousRoomComponent
                 doorProps={{
                     position: [-6, WORLD_COORDINATE[1], 0],
                 }}
             />
-
             <GroundComponent
                 position={WORLD_COORDINATE}
                 meshMaterialProps={{

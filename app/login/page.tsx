@@ -69,7 +69,7 @@ const LoginPage: React.FC = () => {
                     <Sheet>
                         <Box
                             component={"img"}
-                            src={`${process.env.NEXT_PUBLIC_BASE_PATH}/into-thumbnail.png`}
+                            src={`${process.env.NEXT_PUBLIC_BASE_PATH}/into-thumbnail.jpg`}
                             alt={"into thumbnail"}
                             sx={{
                                 objectFit: "cover",

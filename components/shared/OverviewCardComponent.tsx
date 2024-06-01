@@ -6,7 +6,7 @@ import {useMediaQuery} from "@/hooks/useMediaQuery";
 import {Card} from "@mui/material";
 import {useRouter} from "next/navigation";
 
-export const OverviewCardComponent: React.FC = () => {
+const OverviewCardComponent: React.FC = () => {
     const { isSmall } = useMediaQuery();
     const { mode } = useColorScheme();
     const router = useRouter();
@@ -103,3 +103,5 @@ export const OverviewCardComponent: React.FC = () => {
         </Card>
     );
 };
+
+export default OverviewCardComponent;

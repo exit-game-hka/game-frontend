@@ -20,7 +20,7 @@ const RoomItemPage: React.FC = () => {
         error,
     } = useSWR<Raum>(`getRoomById-${id}`, () => getRoomById(id))
 
-    if (isLoading || !room) return <LoadingComponent message={"Der Raum wird geladen"} />;
+    if (isLoading || !room) return <LoadingComponent message={"Daten werden geladen"} />;
 
     if (error) return <div>{`Es ist ein Fehler ist aufgetreten: ${(error as Error).toString()}`}</div>;
 

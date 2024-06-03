@@ -98,7 +98,7 @@ const LoginPage: React.FC = () => {
             return;
         }
         if (!loginData.veranstaltungId) {
-            setFormError("Wählen Sie eine Veranstaltung aus.");
+            setFormError("Wählen Sie ein Fachgebiet aus.");
             return;
         }
         setIsLoading(true);
@@ -152,7 +152,7 @@ const LoginPage: React.FC = () => {
     </Alert>
 
     if (errorVeranstaltungen) return <Alert  color="danger">
-        Veranstaltungen konnten nicht geladen werden: {(errorVeranstaltungen as Error).toString()}
+        Fachgebiete konnten nicht geladen werden: {(errorVeranstaltungen as Error).toString()}
     </Alert>
 
     return (
@@ -230,9 +230,9 @@ const LoginPage: React.FC = () => {
                             />
                         </FormControl>
                         <FormControl size="md">
-                            <FormLabel>Veranstaltung</FormLabel>
+                            <FormLabel>Fachgebiet</FormLabel>
                             <Autocomplete
-                                placeholder="Veranstaltung auswählen"
+                                placeholder="Fachgebiet auswählen"
                                 options={veranstaltungen}
                                 getOptionLabel={(option) => `${option.bezeichnung} - ${option.name}`}
                                 onChange={(_, option) => handleVeranstaltungChange(option as Veranstaltung)}

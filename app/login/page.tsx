@@ -16,7 +16,6 @@ import FormLabel from '@mui/joy/FormLabel';
 import Autocomplete from '@mui/joy/Autocomplete';
 import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined';
 import {LoadingComponent} from "@/components/shared/LoadingComponent";
-import CircularProgress from "@mui/joy/CircularProgress";
 
 // TODO: Persist in DB or set as Env. Var in staging or prod env.
 const CLIENT_PLAYER_PASSWORD = "98#65@3f7$c+0d/29";

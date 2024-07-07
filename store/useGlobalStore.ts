@@ -30,7 +30,6 @@ import {
     InteraktionDto
 } from "@/api/interaktion";
 import {createKommentarApi, KommentarDto} from "@/api/kommentar";
-import {AxiosResponse} from "axios";
 import {getAllSemesterApi, getSemesterByIdApi, Semester} from "@/api/semester";
 import {getAllVeranstaltungenApi, getVeranstaltungByIdApi, Veranstaltung} from "@/api/veranstaltung";
 
@@ -55,10 +54,29 @@ const INITIAL_AVATAR_LIST: AvatarItem[] = [
     },
 ];
 
+const SELECTED_AVATAR_LOCAL_STORAGE_KEY = "selected-avatar" as const;
+
+const resolveSelectedAvatarFromLocalStorage = (avatarList: AvatarItem[]): AvatarItem => {
+    if (typeof window === "undefined") return avatarList[0];
+    const selectedAvatarName = localStorage.getItem(SELECTED_AVATAR_LOCAL_STORAGE_KEY);
+    if (!selectedAvatarName || selectedAvatarName === "") return avatarList[0];
+    return avatarList.find((avatar) =>
+        avatar.name.toLocaleLowerCase() === selectedAvatarName.toLocaleLowerCase()
+    ) || avatarList[0];
+}
+
+const saveSelectedAvatarToLocalStorage = (selectedAvatar: AvatarItem) => {
+    if (typeof window === "undefined") return;
+    localStorage.setItem(SELECTED_AVATAR_LOCAL_STORAGE_KEY, selectedAvatar.name);
+}
+
 const useAvatarStoreSlice: StateCreator<AvatarStore> = (set) => ({
     avatarList: INITIAL_AVATAR_LIST,
-    selectedAvatar: INITIAL_AVATAR_LIST[0],
-    setSelectedAvatar: (newAvatar: AvatarItem) => set(() => ({ selectedAvatar: newAvatar })),
+    selectedAvatar: resolveSelectedAvatarFromLocalStorage(INITIAL_AVATAR_LIST),
+    setSelectedAvatar: (newAvatar: AvatarItem) => set(() => {
+        saveSelectedAvatarToLocalStorage(newAvatar);
+        return { selectedAvatar: newAvatar };
+    }),
 });
 
 // Aufgabe store

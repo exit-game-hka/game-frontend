@@ -24,7 +24,7 @@ const RoomOneComponent: React.FC<RoomProps> = (props) => {
         <>
             <InstancedWallModelComponent
                 meshProps={{
-                    scale: [1.5, 2, 1.5],
+                    scale: [1, 2, 1],
                     position: [0, WORLD_COORDINATE[1] * -3, 0],
                 }}
                 meshBasicMaterialProps={{
@@ -53,31 +53,31 @@ const RoomOneComponent: React.FC<RoomProps> = (props) => {
                 aufgabe={raum.aufgaben[0]}
                 nextRoomId={"20000000-0000-0000-0000-000000000002"}
                 doorProps={{
-                    position: [15, WORLD_COORDINATE[1], 0],
+                    position: [10, WORLD_COORDINATE[1], 0],
                 }}
             />
             <OfficeTableWithLaptop
                 // @ts-ignore
                 scale={11}
                 rotation-y={Math.PI / 2}
-                position={[-12, WORLD_COORDINATE[1], -10]}
+                position={[-7, WORLD_COORDINATE[1], -5]}
             />
             <BookCupboard
                 // @ts-ignore
                 scale={1}
-                position={[3, WORLD_COORDINATE[1], -14.4]}
+                position={[-1, WORLD_COORDINATE[1], -9.4]}
             />
             <BookCupboard
                 // @ts-ignore
                 scale={1}
                 rotation-y={Math.PI / 2}
-                position={[-14.4, WORLD_COORDINATE[1], -1]}
+                position={[-9.4, WORLD_COORDINATE[1], -1]}
             />
             <DetectiveOfficeWithWindowComponent raum={raum} />
             <WhiteClockComponent raum={raum} />
             <OldStyleOffice
                 // @ts-ignore
-                position={[15, WORLD_COORDINATE[1], 5]}
+                position={[7, WORLD_COORDINATE[1], 5]}
                 rotation-y={-Math.PI}
                 scale={0.25}
             />

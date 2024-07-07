@@ -264,6 +264,16 @@ const useVeranstaltungStoreStoreSlice: StateCreator<VeranstaltungStore> = () => 
     },
 });
 
+// User Input Events
+type UserInputEvents = {
+    listenToKeyboardKeyPress: boolean
+    setListenToKeyboardKeyPress: (value: boolean) => void;
+}
+const useUserInputEventsStoreSlice: StateCreator<UserInputEvents> = (set) => ({
+    listenToKeyboardKeyPress: true,
+    setListenToKeyboardKeyPress: (value: boolean) => set(() => ({ listenToKeyboardKeyPress: value })),
+});
+
 type GlobalStore =
     AvatarStore &
     AufgabeStore &
@@ -276,7 +286,8 @@ type GlobalStore =
     TimeStore &
     KommentarStore &
     SemesterStore &
-    VeranstaltungStore;
+    VeranstaltungStore &
+    UserInputEvents;
 export const useGlobalStore = create<GlobalStore>((...fn) => ({
     ...useAvatarStoreSlice(...fn),
     ...useAufgabeStoreSlice(...fn),
@@ -290,6 +301,7 @@ export const useGlobalStore = create<GlobalStore>((...fn) => ({
     ...useKommentarStoreSlice(...fn),
     ...useSemesterStoreSlice(...fn),
     ...useVeranstaltungStoreStoreSlice(...fn),
+    ...useUserInputEventsStoreSlice(...fn),
 }));
 
 // Global stateless content (Types, Functions, etc...)

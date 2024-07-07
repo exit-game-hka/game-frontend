@@ -5,9 +5,10 @@ import {ExitDoorAttachment} from "@/components/ExitDoorAttachment";
 import {Mesh} from "three";
 import {Html} from "@react-three/drei";
 import {AnswerInputModalComponent} from "@/components/shared/AnswerInputModalComponent";
-import {useRouter, useSearchParams} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {Aufgabe} from "@/api/aufgabe";
 import {GroupProps} from "@react-three/fiber";
+import {useGlobalStore} from "@/store/useGlobalStore";
 
 type Props = {
     aufgabe: Aufgabe;
@@ -21,6 +22,15 @@ export const ExitDoorComponent: React.FC<Props> = (props: Props) => {
     const router = useRouter();
     const exitDoorAttachmentRef = useRef<Mesh>();
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const setListenToKeyboardKeyPress = useGlobalStore((state) => state.setListenToKeyboardKeyPress);
+
+    useEffect(() => {
+        if (isOpen) {
+            setListenToKeyboardKeyPress(false);
+            return;
+        }
+        setListenToKeyboardKeyPress(true);
+    }, [isOpen]);
 
     const navigateToNextRoom = () => {
         if (!nextRoomId) {

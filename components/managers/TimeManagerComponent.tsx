@@ -18,7 +18,7 @@ const TimeManagerComponent: React.FC = () => {
     } = useSWR<Aufgabe[]>("getAllAufgaben", getAllAufgaben);
 
     const timeout: number = useMemo((): number => {
-        return aufgaben?.reduce((acc: number, curr: Aufgabe) => acc + curr.zeitZuLoesen,0)!;
+        return aufgaben?.reduce((acc: number, curr: Aufgabe) => acc + curr.zeitZuLoesen, 0)!;
     }, [aufgaben]);
 
     useEffect(() => {

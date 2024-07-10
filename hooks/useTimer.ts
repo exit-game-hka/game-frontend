@@ -17,7 +17,11 @@ export const useTimer = (
     useEffect(() => {
         const getCurrentTimeoutFromLocalStorage = () => {
             const timeoutFromLocalStorage = localStorage.getItem(CURRENT_TIMEOUT_LOCAL_STORAGE_KEY);
-            if (!timeoutFromLocalStorage || timeoutFromLocalStorage === "") return;
+            if (!timeoutFromLocalStorage || timeoutFromLocalStorage === "") {
+                setMinutes(timeoutInMinutes);
+                setSeconds(0);
+                return;
+            };
             const [minutesFromLocalStorage, secondsFromLocalStorage] = timeoutFromLocalStorage.split(":").map(Number);
             if (isNaN(minutesFromLocalStorage) || isNaN(secondsFromLocalStorage)) {
                 setMinutes(timeoutInMinutes);
@@ -25,6 +29,11 @@ export const useTimer = (
                 return;
             }
             if (minutesFromLocalStorage === 0 && secondsFromLocalStorage === 0) {
+                setMinutes(timeoutInMinutes);
+                setSeconds(0);
+                return;
+            }
+            if (minutesFromLocalStorage === 0 && secondsFromLocalStorage === 1) {
                 setMinutes(timeoutInMinutes);
                 setSeconds(0);
                 return;

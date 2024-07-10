@@ -70,7 +70,7 @@ export const TableWithBooksAndGlobeComponent: React.FC<InteractiveObjectProps> =
                 // @ts-ignore
                 scale={0.5}
                 rotation-y={Math.PI}
-                position={[10, WORLD_COORDINATE[1], -8]}
+                position={[4, WORLD_COORDINATE[1], -7]}
                 onClickBookOnTable={handleClickBookOnTable}
             />
             <Html>

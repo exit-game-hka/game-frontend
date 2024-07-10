@@ -119,7 +119,7 @@ export const GreenBoardWithTableComponent: React.FC<InteractiveObjectProps> = (p
             <GreenBoardWithTable
                 // @ts-ignore
                 scale={5}
-                position={[-1, WORLD_COORDINATE[1] + 0.4, -12]}
+                position={[-6, WORLD_COORDINATE[1] + 0.4, -9]}
                 onClickGreenBoard={handleClickGreenBoard}
                 onClickFolder={handleClickFolder}
             />

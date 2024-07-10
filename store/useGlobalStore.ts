@@ -1,7 +1,8 @@
 import {create, StateCreator} from "zustand";
 import {ComponentType, ForwardRefExoticComponent, ReactNode, RefAttributes} from "react";
-import {Amy} from "@/components/avatars/Amy";
-import {Leonard} from "@/components/avatars/Loenard";
+import {Megan} from "@/components/avatars/Megan";
+import {Lewis} from "@/components/avatars/Lewis";
+import {Maria} from "@/components/avatars/Maria";
 import {Aufgabe, getAllTasksApi, getTaskByIdApi} from "@/api/aufgabe";
 import {getAllRoomsApi, getRoomByIdApi, Raum} from "@/api/raum";
 import {createSpielerApi, getSpielerBySpielerIdApi, Spieler, SpielerDto} from "@/api/spieler";
@@ -32,6 +33,8 @@ import {
 import {createKommentarApi, KommentarDto} from "@/api/kommentar";
 import {getAllSemesterApi, getSemesterByIdApi, Semester} from "@/api/semester";
 import {getAllVeranstaltungenApi, getVeranstaltungByIdApi, Veranstaltung} from "@/api/veranstaltung";
+import {Mousey} from "@/components/avatars/Mousey";
+import {Prisoner} from "@/components/avatars/Prisoner";
 
 // Zustand Doc: https://github.com/pmndrs/zustand
 // Avatar store
@@ -43,14 +46,29 @@ type AvatarStore = {
 };
 const INITIAL_AVATAR_LIST: AvatarItem[] = [
     {
-        name: "Amy",
-        model: Amy,
-        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/amy/thumbnail.png`,
+        name: "Megan",
+        model: Megan,
+        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/megan/thumbnail.png`,
     },
     {
-        name: "Leonard",
-        model: Leonard,
-        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/leonard/thumbnail.png`,
+        name: "Lewis",
+        model: Lewis,
+        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/lewis/thumbnail.png`,
+    },
+    {
+        name: "Maria",
+        model: Maria,
+        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/maria/thumbnail.png`,
+    },
+    {
+        name: "Mousey",
+        model: Mousey,
+        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/mousey/thumbnail.png`,
+    },
+    {
+        name: "Häftling",
+        model: Prisoner,
+        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/prisoner/thumbnail.png`,
     },
 ];
 

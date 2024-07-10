@@ -18,7 +18,7 @@ import {OldStyleOffice} from "@/components/OldStyleOffice";
 const RoomOneComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
     const { texture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/wooden-floor.jpg`);
-    const { texture: wallTexture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/brick_wall_united_kingdom_neutral.jpg`, [5, 1]);
+    const { texture: wallTexture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/brick_wall_united_kingdom_neutral.jpg`, [3, 6]);
 
     return (
         <>

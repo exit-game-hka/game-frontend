@@ -16,6 +16,7 @@ import FormLabel from '@mui/joy/FormLabel';
 import Autocomplete from '@mui/joy/Autocomplete';
 import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined';
 import {LoadingComponent} from "@/components/shared/LoadingComponent";
+import {NOTIFICATION_TYPE, NotificationDto} from "@/api/notification";
 
 // TODO: Persist in DB or set as Env. Var in staging or prod env.
 const CLIENT_PLAYER_PASSWORD = "98#65@3f7$c+0d/29";
@@ -35,11 +36,13 @@ const LoginPage: React.FC = () => {
     const router = useRouter();
     const getSpielerBySpielerId = useGlobalStore((state) => state.getSpielerBySpielerId);
     const setSpieler = useGlobalStore((state) => state.setSpieler);
+    const getPlayerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
     const createStatus = useGlobalStore((state) => state.createStatus);
     const getStatusBySpielerId = useGlobalStore((state) => state.getStatusBySpielerId);
     const createSpieler = useGlobalStore((state) => state.createSpieler);
     const getAllSemester = useGlobalStore((state) => state.getAllSemester);
     const getAllVeranstaltungen = useGlobalStore((state) => state.getAllVeranstaltungen);
+    const emitNotification = useGlobalStore((state) => state.emitNotification);
 
     const [loginData, setLoginData] = useState<LoginData>(INITIAL_STATE as LoginData);
 
@@ -106,6 +109,18 @@ const LoginPage: React.FC = () => {
         await createSpieler(spielerDto as SpielerDto);
         await setPlayerAndNavigateToAvatarSelection(loginData.spielerId);
         setIsLoading(false);
+
+        const player = getPlayerFromLocalStorage();
+
+        if (!player) return;
+        const notificationDto: NotificationDto = {
+            userName: player.spielerId,
+            title: "Neuer Spieler",
+            content: `Der Spieler ${player.spielerId} hat sich gerade registriert.`,
+            creationDate: new Date().toISOString(),
+            type: NOTIFICATION_TYPE.NEW_PLAYER_LOGGED_IN,
+        };
+        emitNotification(notificationDto);
     };
 
     const generatePlayerId = () => {

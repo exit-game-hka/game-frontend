@@ -8,7 +8,12 @@ import {KeyboardControls} from "@react-three/drei";
 const AppBarComponent = dynamic(
     () => import("@/components/AppBarComponent"),
     { ssr: false }
-)
+);
+
+const WebSocketNotificationEmitter = dynamic(
+    () => import("@/components/WebSocketNotificationInitializer"),
+    { ssr: false }
+);
 
 type  Props = PropsWithChildren;
 
@@ -21,6 +26,7 @@ export const ApplicationContainerComponent: React.FC<Props> = (props: Props) => 
         <KeyboardControls map={keysMap}>
             {pathname.includes("game-scene") ? null : <AppBarComponent />}
             {children}
+            <WebSocketNotificationEmitter />
         </KeyboardControls>
     )
 };

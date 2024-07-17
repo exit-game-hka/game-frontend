@@ -5,15 +5,17 @@ import Input from "@mui/joy/Input";
 import {useRouter} from "next/navigation";
 import {useGlobalStore} from "@/store/useGlobalStore";
 import {KommentarDto} from "@/api/kommentar";
+import {NOTIFICATION_TYPE, NotificationDto} from "@/api/notification";
 
 export const FeedbackFormComponent: React.FC = () => {
     const router = useRouter();
     const [comment, setComment] = useState<string>("");
     const createKommentar = useGlobalStore((state) => state.createKommentar);
-    const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
+    const getPlayerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
+    const emitNotification = useGlobalStore((state) => state.emitNotification);
 
     const handleSubmitComment = () => {
-        const player = getSpielerFromLocalStorage();
+        const player = getPlayerFromLocalStorage();
         if (!player) return;
         const commentToSubmit: KommentarDto = {
             spielerId: player.id,
@@ -22,6 +24,16 @@ export const FeedbackFormComponent: React.FC = () => {
             creationTimestamp: new Date(),
         };
         createKommentar(commentToSubmit);
+
+        const notificationDto: NotificationDto = {
+            userName: player.spielerId,
+            title: "Neuer Kommentar",
+            content: `Spieler ${player.spielerId} hat einen Kommentar hinterlassen.`,
+            creationDate: new Date().toISOString(),
+            type: NOTIFICATION_TYPE.PLAYER_SENT_COMMENT,
+        };
+        emitNotification(notificationDto);
+
         router.push("/result-and-qrcode");
     };
 

@@ -15,6 +15,7 @@ import {
 } from "@/store/useGlobalStore";
 import {useKeyboardControls} from "@react-three/drei";
 import {Controls} from "@/hooks/useKeysMap";
+import {NOTIFICATION_TYPE, NotificationDto} from "@/api/notification";
 
 const AvatarSelectionPage: React.FC = () => {
     const router = useRouter();
@@ -24,6 +25,8 @@ const AvatarSelectionPage: React.FC = () => {
     const rightKeyPressed = useKeyboardControls<Controls>((state) => state.rightward);
     const avatarList = useGlobalStore((state) => state.avatarList);
     const setSelectedAvatarInStore = useGlobalStore((state) => state.setSelectedAvatar);
+    const emitNotification = useGlobalStore((state) => state.emitNotification);
+    const getPlayerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
 
     useEffect(() => {
         setSelectedAvatar(selectedAvatarFromStore);
@@ -49,6 +52,24 @@ const AvatarSelectionPage: React.FC = () => {
             return;
         }
     }, [avatarList, leftKeyPressed, rightKeyPressed]);
+
+    const handleCharacterSelection = () => {
+        const player = getPlayerFromLocalStorage();
+
+        if (!player) {
+            router.push("/intro");
+            return;
+        };
+        const notificationDto: NotificationDto = {
+            userName: player.spielerId,
+            title: "Neues Spiel begonnen",
+            content: `Spieler ${player.spielerId} hat das Spiel begonnen.`,
+            creationDate: new Date().toISOString(),
+            type: NOTIFICATION_TYPE.PLAYER_STARTED_GAME,
+        };
+        emitNotification(notificationDto);
+        router.push("/intro");
+    };
 
     if (!selectedAvatar) return null;
 
@@ -126,7 +147,7 @@ const AvatarSelectionPage: React.FC = () => {
                     <Button
                         size={"lg"}
                         sx={{ maxWidth: "150px", width: "100%", mt: "var(--space-9)" }}
-                        onClick={() => router.push(`/intro?avatar=${selectedAvatar.name}`)}
+                        onClick={handleCharacterSelection}
                     >
                         Weiter
                     </Button>

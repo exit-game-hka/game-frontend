@@ -35,6 +35,9 @@ import {getAllSemesterApi, getSemesterByIdApi, Semester} from "@/api/semester";
 import {getAllVeranstaltungenApi, getVeranstaltungByIdApi, Veranstaltung} from "@/api/veranstaltung";
 import {Mousey} from "@/components/avatars/Mousey";
 import {Prisoner} from "@/components/avatars/Prisoner";
+import webSocketClient, {WEBSOCKET_SEND_NOTIFICATION_ENDPOINT} from "@/api/webSocketClient";
+import {Client} from "@stomp/stompjs";
+import {NotificationDto} from "@/api/notification";
 
 // Zustand Doc: https://github.com/pmndrs/zustand
 // Avatar store
@@ -310,6 +313,21 @@ const useUserInputEventsStoreSlice: StateCreator<UserInputEvents> = (set) => ({
     setListenToKeyboardKeyPress: (value: boolean) => set(() => ({ listenToKeyboardKeyPress: value })),
 });
 
+// Notification store
+type NotificationStore = {
+    emitNotification: (notificationDto: NotificationDto) => void;
+    webSocketNotificationClient: Client;
+}
+const useNotificationStoreSlice: StateCreator<NotificationStore> = (set) => ({
+    emitNotification: (notificationDto: NotificationDto) => {
+        webSocketClient.publish({
+            destination: WEBSOCKET_SEND_NOTIFICATION_ENDPOINT,
+            body: JSON.stringify(notificationDto),
+        });
+    },
+    webSocketNotificationClient: webSocketClient,
+});
+
 type GlobalStore =
     AvatarStore &
     AufgabeStore &
@@ -323,7 +341,8 @@ type GlobalStore =
     KommentarStore &
     SemesterStore &
     VeranstaltungStore &
-    UserInputEvents;
+    UserInputEvents &
+    NotificationStore;
 export const useGlobalStore = create<GlobalStore>((...fn) => ({
     ...useAvatarStoreSlice(...fn),
     ...useAufgabeStoreSlice(...fn),
@@ -338,6 +357,7 @@ export const useGlobalStore = create<GlobalStore>((...fn) => ({
     ...useSemesterStoreSlice(...fn),
     ...useVeranstaltungStoreStoreSlice(...fn),
     ...useUserInputEventsStoreSlice(...fn),
+    ...useNotificationStoreSlice(...fn),
 }));
 
 // Global stateless content (Types, Functions, etc...)

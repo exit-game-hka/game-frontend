@@ -19,7 +19,6 @@ export const OldStyleOfficeComponent: React.FC<InteractiveObjectProps> = (props)
     const modalContent = (
         <Box component={"div"}>
             <Typography
-                level={"title-lg"}
                 sx={{
                     textAlign: "center",
                     margin: "var(--space-15) 0",

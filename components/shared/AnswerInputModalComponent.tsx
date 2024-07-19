@@ -21,6 +21,7 @@ type Props = {
     onSuccess: () => void;
     answer: string;
     aufgabeId: string;
+    submitButtonLabel?: string;
     successMessage: ReactNode;
     timeoutOnSuccess?: number | undefined;
     failureMessage: string;
@@ -35,6 +36,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
         subtitle,
         answer,
         aufgabeId,
+        submitButtonLabel,
         successMessage,
         failureMessage,
         onSuccess,
@@ -191,7 +193,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                                                 {failureMessage}
                                             </Alert> : null
                                     }
-                                    <Button onClick={handleSubmit}>Antwort senden</Button>
+                                    <Button onClick={handleSubmit}>{submitButtonLabel ?? "Antwort senden"}</Button>
                                 </Stack>
                             </DialogContent>
                         </ModalDialog>

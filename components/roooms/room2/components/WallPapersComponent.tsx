@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {WallPictures} from "@/components/WallPictures";
 import {Html} from "@react-three/drei";
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
-import {Card} from "@mui/material";
 import {Typography} from "@mui/joy";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
 import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
@@ -18,19 +17,17 @@ export const WallPapersComponent: React.FC<InteractiveObjectProps> = (props) => 
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
 
     const modalContent = (
-        <Card>
-            <Typography
-                component={"p"}
-                sx={{
-                    fontSize: isSmall ? "40px" : "60px",
-                    fontWeight: "bold",
-                    textAlign: "center",
-                    margin: "auto",
-                }}
-            >
-                SUBSTITUTION
-            </Typography>
-        </Card>
+        <Typography
+            component={"p"}
+            sx={{
+                //fontSize: isSmall ? "40px" : "60px",
+                fontWeight: "bold",
+                textAlign: "center",
+                margin: "auto",
+            }}
+        >
+            SUBSTITUTION
+        </Typography>
     );
 
     const handleClickCoffeeFrame = async (event: ThreeEvent<MouseEvent>) => {

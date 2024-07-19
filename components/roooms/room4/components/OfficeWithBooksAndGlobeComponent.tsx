@@ -21,13 +21,13 @@ export const OfficeWithBooksAndGlobeComponent: React.FC<InteractiveObjectProps> 
                 background: `url('${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/ancien_paper.png')`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
-                width: "inherit",
                 "& p": {
                     color: "var(--color-black)",
                 },
+                width: "100%",
             }}
         >
-            <Typography sx={{ fontSize: "20px" }}>
+            <Typography textAlign="center">
                 DIE ANZAHL DER ZEILEN IST WICHTIG
             </Typography>
         </Card>

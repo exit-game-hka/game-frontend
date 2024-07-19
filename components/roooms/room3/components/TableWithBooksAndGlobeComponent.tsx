@@ -31,7 +31,7 @@ export const TableWithBooksAndGlobeComponent: React.FC<InteractiveObjectProps> =
                 <Stack
                     spacing={"var(--space-3)"}
                     sx={{
-                        fontWeight: 700,
+                        //fontWeight: 700,
                         "& p": {
                             color: "var(--color-black)",
                         },

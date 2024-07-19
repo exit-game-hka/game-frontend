@@ -58,12 +58,11 @@ const DebriefingPage: React.FC = () => {
                             }}
                         />
                     </Sheet>
-                    <Typography component={"p"} sx={{ mt: "var(--space-2)" }}>
-                        KLASSE, SIE HABEN DEN KELLER DES PROFESSORS AUFGERAEUMT
-                        UND SOGAR DAS PASSBILD VON ALAN TURING GEFUNDEN. DER
-                        PROFESSOR IST HOECHST DANKBAR UND GIBT IHNEN NICHT NUR
-                        DIE ZUSÄTZLICHEN CREDITS, SONDERN LAEDT SIE SOGAR NOCH
-                        AUF EIN MATE EIN
+                    <Typography component={"p"} level={"body-lg"} sx={{ mt: "var(--space-2)" }}>
+                        Klasse, Sie haben den Keller des Professors aufgeräumt und sogar das Passbild von Alan
+                        Turing gefunden. Der Professor ist höchst dankbar und gibt Ihnen nicht nur die zusätzlichen
+                        Credits, sondern lädt Sie sogar noch auf ein Mate ein. Klicken Sie auf weiter, um das Spiel
+                        abzuschließen und ihre Ergebnisse zu erhalten.
                     </Typography>
                 </Card>
                 <Box

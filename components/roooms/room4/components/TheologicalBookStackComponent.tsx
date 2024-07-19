@@ -55,7 +55,7 @@ export const TheologicalBookStackComponent: React.FC<InteractiveObjectProps> = (
                     KLARTEXT.
                 </Typography>
                 <Typography>
-                    KRYPTANALYSE: WIRD VON MITLESERN DES VERSCHLUESSELTEN TEXTES
+                    KRYPTANALYSE: WIRD VON MITLESENDEN DES VERSCHLUESSELTEN TEXTES
                     VERWENDET UM DEN UNVERSCHLUESSELTEN ORIGINALTEXT WIEDER
                     HERZUSTELLEN.
                 </Typography>
@@ -80,8 +80,8 @@ export const TheologicalBookStackComponent: React.FC<InteractiveObjectProps> = (
                         <div>=</div>
                     </Stack>
                 </Stack>
-                <Typography level={isSmall ? "body-xs" : "body-sm"} sx={{ color: "inherit" }}>
-                    KTGSYGIUYNSROITPRESPAEYLEKTAPKTL!POIROFLRAY!
+                <Typography sx={{ color: "inherit" }}>
+                    KTGSYGHLRAYROITPRIUYNSYLEKTAESPAEPOIROPPKTL!
                 </Typography>
             </Stack>
         </Card>

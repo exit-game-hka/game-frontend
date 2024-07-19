@@ -16,22 +16,24 @@ export const TimerTotalTimeToPlayComponent: React.FC<Props> = (props) => {
     const { isSmall } = useMediaQuery();
 
     return (
-        <TimerContainer>
-            <CardContainer small={`${isSmall}`}>
-                <Typography level="h3">
+        <TimerContainer small={`${isSmall}`}>
+            {/*<CardContainer small={`${isSmall}`}>*/}
+                <Typography level="h3" noWrap>
                     {`${minutes.toString().padStart(2, '0')} : ${seconds.toString().padStart(2, '0')}`}
                 </Typography>
-            </CardContainer>
+            {/*</CardContainer>*/}
         </TimerContainer>
     )
 };
 
-const TimerContainer = styled(Box)`
-    position: fixed;
-    z-index: var(--z-index-scene-controls);
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
+const TimerContainer = styled(Box)<{ small: "true" | "false" }>`
+    //position: fixed;
+    //z-index: var(--z-index-scene-controls);
+    //left: 50%;
+    //top: 0;
+    //transform: translateX(-50%);
+    justify-self: center;
+    width: ${(props) => props.small === "true" ? "90px" : "100px"};
 `;
 const CardContainer = styled(Card)<{ small: "true" | "false" }>`
     display: grid;

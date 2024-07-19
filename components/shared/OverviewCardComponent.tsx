@@ -68,18 +68,6 @@ const OverviewCardComponent: React.FC = () => {
                     >
                         Jetzt spielen
                     </Button>
-                    <Button
-                        size="lg"
-                        variant="plain"
-                        endDecorator={<ArrowForwardIcon fontSize="small" />}
-                        sx={{
-                            "&:hover": { "--Button-gap": "0.625rem" },
-                            "& span": { transition: "0.15s" },
-                        }}
-                        onClick={() => {}}
-                    >
-                        Mehr erfahren
-                    </Button>
                 </Box>
             </Box>
             {/*<Box*/}

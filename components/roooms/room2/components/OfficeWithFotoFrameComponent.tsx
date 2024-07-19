@@ -23,7 +23,7 @@ export const OfficeWithFotoFrameComponent: React.FC<InteractiveObjectProps> = (p
             <Typography
                 component={"p"}
                 sx={{
-                    fontSize: isSmall ? "40px" : "60px",
+                    //fontSize: isSmall ? "40px" : "60px",
                     fontWeight: "bold",
                     textAlign: "center",
                     margin: "auto",

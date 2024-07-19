@@ -10,9 +10,10 @@ export const FormContainerComponent: React.FC<Props> = (props) => {
     const { isSmall } = useMediaQuery();
 
     return (
-        <Stack spacing={"var(--space-3)"} sx={{ width: isSmall ? "100%" : "500px" }}>
+        <Stack
+            spacing={"var(--space-5)"}
+        >
             {children}
         </Stack>
     );
 };
-

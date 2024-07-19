@@ -28,7 +28,6 @@ export const WallPicturesComponent: React.FC<InteractiveObjectProps> = (props) =
         >
             <Typography
                 component={"p"}
-                level={"title-lg"}
                 sx={{
                     fontWeight: "bold",
                 }}

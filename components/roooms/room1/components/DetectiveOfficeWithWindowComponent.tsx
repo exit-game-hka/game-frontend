@@ -80,9 +80,6 @@ export const DetectiveOfficeWithWindowComponent: React.FC<InteractiveObjectProps
                         1 INTERESSEN: RELATIVITAETSTHEORIE, QUANTENMECHANIK
                     </li>
                     <li>
-                        1 INTERESSEN: RELATIVITAETSTHEORIE, QUANTENMECHANIK
-                    </li>
-                    <li>
                         5 HOBBIES: MATHEMATIKWETTBEWERBE
                     </li>
                     <li>

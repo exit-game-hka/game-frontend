@@ -2,31 +2,37 @@
 import React from 'react';
 import {Card} from "@mui/material";
 import styled from "styled-components";
-import EmojiEventsOutlinedIcon from '@mui/icons-material/EmojiEventsOutlined';
-import ExtensionOutlinedIcon from '@mui/icons-material/ExtensionOutlined';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import DoorBackOutlinedIcon from '@mui/icons-material/DoorBackOutlined';
-import KeyboardDoubleArrowDownOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowDownOutlined';
-import {Typography, Box} from "@mui/joy";
+import {Box, Typography} from "@mui/joy";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
 import {useRouter} from "next/navigation";
 import {ButtonType} from "@/store/useGlobalStore";
+import dynamic from "next/dynamic";
+
+const TimeManagerComponent = dynamic(
+    () => import("@/components/managers/TimeManagerComponent"),
+    { ssr: false }
+);
 
 const ToolBarComponent: React.FC = () => {
     const { isSmall } = useMediaQuery();
     const router = useRouter();
 
     const buttons: ButtonType[] = [
-        {
-            label: "Informationen",
-            icon: <InfoOutlinedIcon sx={{ fontSize: "var(--icon-medium)", color: "inherit" }} />,
-            onClick: () => alert("In dev"),
-        },
+        // {
+        //     label: "Informationen",
+        //     icon: <InfoOutlinedIcon sx={{ fontSize: "var(--icon-medium)", color: "inherit" }} />,
+        //     onClick: () => alert("In dev"),
+        // },
         {
             label: "Spiel verlassen",
             icon: <DoorBackOutlinedIcon sx={{ fontSize: "var(--icon-medium)", color: "inherit" }} />,
             onClick: () => router.push("/"),
         },
+        {
+            label: "Verbleibende Zeit",
+            icon: <TimeManagerComponent />
+        }
     ];
 
     return (
@@ -43,8 +49,8 @@ const ToolBarComponent: React.FC = () => {
                                     noWrap
                                     sx={{ color: "inherit" }}
                                 >
-                                {b.label}
-                            </Typography>
+                                    {b.label}
+                                </Typography>
                             }
                         </ToolBarItem>
                     )}
@@ -82,7 +88,7 @@ const ToolBarItem = styled(Box)`
     justify-items: center;
     justify-content: center;
     border-radius: var(--space-1);
-    
+
     &:hover {
         cursor: pointer;
         color: var(--color-primary);

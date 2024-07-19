@@ -320,6 +320,7 @@ type NotificationStore = {
 }
 const useNotificationStoreSlice: StateCreator<NotificationStore> = (set) => ({
     emitNotification: (notificationDto: NotificationDto) => {
+        if (!webSocketClient.connected) return;
         webSocketClient.publish({
             destination: WEBSOCKET_SEND_NOTIFICATION_ENDPOINT,
             body: JSON.stringify(notificationDto),

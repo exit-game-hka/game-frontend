@@ -47,13 +47,10 @@ const IntroPage: React.FC = () => {
                             }}
                         />
                     </Sheet>
-                    <Typography component={"p"} sx={{ mt: "var(--space-2)" }}>
-                        UM EIN PAAR ZUSÄTZLICHE CREDIT POINTS ZU ERGATTERN,
-                        ERKLÄREN SIE SICH DAZU BEREIT, DEN KELLER IHRES
-                        INFORMATIKPROFESSORS AUSZUMISTEN. IHRE AUFGABE IST ES,
-                        BÜCHER ZU ENTSORGEN UND ALTKLAUSUREN ZU ORDNEN. ER
-                        LÄSST SIE ALLEINE UND SAGT, DASS ER NACH SEINER
-                        MITTAGSPAUSE IN X MINUTEN NACH IHNEN SCHAUEN WIRD.
+                    <Typography component={"p"} level={"body-lg"} sx={{ mt: "var(--space-2)" }}>
+                        Um ein paar zusätzliche Credit Points zu ergattern, erklären Sie sich dazu bereit, den
+                        Keller Ihres Informatikprofessors auszumisten. Er lässt Sie alleine und sagt, dass er nach
+                        seiner Mittagspause in X Minuten nach Ihnen sehen wird.
                     </Typography>
                 </Card>
                 <Box

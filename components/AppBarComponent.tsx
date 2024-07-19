@@ -23,11 +23,11 @@ const AppBarComponent: React.FC = () => {
     const { mode, setMode } = useColorScheme();
 
     const buttons: ButtonType[] = [
-        {
-            label: "Startseite",
-            isActive: pathname === "/",
-            onClick: () => router.push("/"),
-        },
+        // {
+        //     label: "Startseite",
+        //     isActive: pathname === "/",
+        //     onClick: () => router.push("/"),
+        // },
     ];
 
     const switchMode = () => {

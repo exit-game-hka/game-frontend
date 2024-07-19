@@ -28,7 +28,7 @@ export const NumberComponent: React.FC<InteractiveObjectProps> = (props) => {
             <Typography
                 component={"p"}
                 sx={{
-                    fontSize: "100px",
+                    //fontSize: "100px",
                     fontWeight: "bold",
                     textAlign: "center",
                     margin: "auto",

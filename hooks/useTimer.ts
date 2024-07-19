@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 
-const CURRENT_TIMEOUT_LOCAL_STORAGE_KEY = "current-timeout";
+export const CURRENT_TIMEOUT_LOCAL_STORAGE_KEY = "current-timeout";
 
 type OutputUseTimer = {
     minutes: number;

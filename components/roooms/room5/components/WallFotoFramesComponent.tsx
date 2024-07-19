@@ -19,7 +19,6 @@ export const WallFotoFramesComponent: React.FC<InteractiveObjectProps> = (props)
         <Box component="div">
             <Typography
                 component={"p"}
-                level={"title-md"}
                 sx={{
                     fontWeight: "bold",
                     textAlign: "center",

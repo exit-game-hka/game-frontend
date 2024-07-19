@@ -41,7 +41,7 @@ export const CupBoardComponent: React.FC<InteractiveObjectProps> = (props) => {
                 <Typography>
                     DAS WORT KRYPTOGRAPHIE KOMMT AUS DEM
                     GRIECHISCHEN UND BESTEHT AUS DEN WORTEN
-                    <b> KRYPTOS</b> (VERSTECKEN) UND <b> GRAPHEIN</b> (SCHREIBEN).
+                    KRYPTOS (VERSTECKEN) UND GRAPHEIN (SCHREIBEN).
                 </Typography>
                 <Typography>
                     KRYPTOGRAPHIE = DIE KUNST CODES ZU SCHREIBEN
@@ -58,13 +58,20 @@ export const CupBoardComponent: React.FC<InteractiveObjectProps> = (props) => {
                     INFORMATIONSSICHERHEIT.
                 </Typography>
                 <Box component={"div"}>
-                    WICHTIGE ASPEKTE DER INFORMATIONSSICHERHEIT
-                    SIND:
+                    <Typography>WICHTIGE ASPEKTE DER INFORMATIONSSICHERHEIT SIND:</Typography>
                     <Box component="ul">
-                        <li>VERTRAULICHKEIT UNSERER DATEN</li>
-                        <li>DATEN INTEGRITAET</li>
-                        <li>AUTHENTIFIZIERUNG</li>
-                        <li>UHJODLPZIHYRLP</li>
+                        <li>
+                            <Typography>VERTRAULICHKEIT UNSERER DATEN</Typography>
+                        </li>
+                        <li>
+                            <Typography>DATEN INTEGRITAET</Typography>
+                        </li>
+                        <li>
+                            <Typography>AUTHENTIFIZIERUNG</Typography>
+                        </li>
+                        <li>
+                            <Typography>UHJODLPZIHYRLPA</Typography>
+                        </li>
                     </Box>
                 </Box>
             </Stack>

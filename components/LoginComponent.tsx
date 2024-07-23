@@ -103,19 +103,8 @@ const LoginComponent: React.FC = () => {
             setFormError("Wählen Sie ein Fachgebiet aus.");
             return;
         }
+
         setIsLoading(true);
-
-        const player = getPlayerFromLocalStorage();
-
-        if (!player) return;
-        const notificationDto: NotificationDto = {
-            userName: player.spielerId,
-            title: "Neuer Spieler",
-            content: `Der Spieler ${player.spielerId} hat sich gerade registriert.`,
-            creationDate: new Date().toISOString(),
-            type: NOTIFICATION_TYPE.NEW_PLAYER_LOGGED_IN,
-        };
-        emitNotification(notificationDto);
 
         const {password: _, ...spielerDto} = loginData;
         await createSpieler(spielerDto as SpielerDto);
@@ -222,8 +211,8 @@ const LoginComponent: React.FC = () => {
                         <Autocomplete
                             placeholder="Semester auswählen"
                             options={semesters}
-                            getOptionLabel={(option) => option.bezeichnung}
-                            onChange={(_, option) => handleSemesterChange(option as Semester)}
+                            getOptionLabel={(option: Semester) => option.bezeichnung}
+                            onChange={(_, option) => handleSemesterChange(option as unknown as Semester)}
                         />
                     </FormControl>
                     <FormControl size="md">
@@ -231,8 +220,8 @@ const LoginComponent: React.FC = () => {
                         <Autocomplete
                             placeholder="Fachgebiet auswählen"
                             options={veranstaltungen}
-                            getOptionLabel={(option) => `${option.bezeichnung} - ${option.name}`}
-                            onChange={(_, option) => handleVeranstaltungChange(option as Veranstaltung)}
+                            getOptionLabel={(option: Veranstaltung) => `${option.bezeichnung} - ${option.name}`}
+                            onChange={(_, option) => handleVeranstaltungChange(option as unknown as Veranstaltung)}
                         />
                     </FormControl>
                     {formError ? <Alert color="danger">{formError}</Alert> : null}

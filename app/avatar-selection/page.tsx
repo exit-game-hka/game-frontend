@@ -59,13 +59,14 @@ const AvatarSelectionPage: React.FC = () => {
         if (!player) {
             router.push("/intro");
             return;
-        };
+        }
+
         const notificationDto: NotificationDto = {
             userName: player.spielerId,
-            title: "Neues Spiel begonnen",
-            content: `Spieler ${player.spielerId} hat das Spiel begonnen.`,
+            title: "Neuer Spieler",
+            content: `Der Spieler ${player.spielerId} hat sich gerade registriert.`,
             creationDate: new Date().toISOString(),
-            type: NOTIFICATION_TYPE.PLAYER_STARTED_GAME,
+            type: NOTIFICATION_TYPE.NEW_PLAYER_LOGGED_IN,
         };
         emitNotification(notificationDto);
         router.push("/intro");

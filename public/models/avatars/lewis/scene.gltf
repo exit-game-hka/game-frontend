@@ -1,6 +1,6 @@
 {
 	"asset":{
-		"generator":"Khronos glTF Blender I/O v4.1.63",
+		"generator":"Khronos glTF Blender I/O v4.2.57",
 		"version":"2.0"
 	},
 	"extensionsUsed":[
@@ -15614,19 +15614,19 @@
 			"uri":"textures/Ch12_1001_Specular.png"
 		},
 		{
-			"mimeType":"image/png",
+			"mimeType":"image/jpeg",
 			"name":"Ch12_1001_Normal",
-			"uri":"textures/Ch12_1001_Normal.png"
+			"uri":"textures/Ch12_1001_Normal.jpg"
 		},
 		{
-			"mimeType":"image/png",
+			"mimeType":"image/jpeg",
 			"name":"Ch12_1001_Diffuse",
-			"uri":"textures/Ch12_1001_Diffuse.png"
+			"uri":"textures/Ch12_1001_Diffuse.jpg"
 		},
 		{
-			"mimeType":"image/png",
+			"mimeType":"image/jpeg",
 			"name":"Ch12_1001_Glossiness",
-			"uri":"textures/Ch12_1001_Glossiness.png"
+			"uri":"textures/Ch12_1001_Glossiness.jpg"
 		}
 	],
 	"skins":[

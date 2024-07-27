@@ -11294,19 +11294,19 @@
 	],
 	"images":[
 		{
-			"mimeType":"image/png",
+			"mimeType":"image/jpeg",
 			"name":"prisoner_specular",
-			"uri":"textures/prisoner_specular.png"
+			"uri":"textures/prisoner_specular.jpg"
 		},
 		{
-			"mimeType":"image/png",
+			"mimeType":"image/jpeg",
 			"name":"prisoner_normal",
-			"uri":"textures/prisoner_normal.png"
+			"uri":"textures/prisoner_normal.jpg"
 		},
 		{
-			"mimeType":"image/png",
+			"mimeType":"image/jpeg",
 			"name":"prisoner_diffuse",
-			"uri":"textures/prisoner_diffuse.png"
+			"uri":"textures/prisoner_diffuse.jpg"
 		}
 	],
 	"skins":[

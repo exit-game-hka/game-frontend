@@ -15546,19 +15546,19 @@
 	],
 	"images":[
 		{
-			"mimeType":"image/png",
+			"mimeType":"image/jpeg",
 			"name":"maria_specular",
-			"uri":"textures/maria_specular.png"
+			"uri":"textures/maria_specular.jpg"
 		},
 		{
-			"mimeType":"image/png",
+			"mimeType":"image/jpeg",
 			"name":"maria_normal",
-			"uri":"textures/maria_normal.png"
+			"uri":"textures/maria_normal.jpg"
 		},
 		{
-			"mimeType":"image/png",
+			"mimeType":"image/jpeg",
 			"name":"maria_diffuse",
-			"uri":"textures/maria_diffuse.png"
+			"uri":"textures/maria_diffuse.jpg"
 		}
 	],
 	"skins":[

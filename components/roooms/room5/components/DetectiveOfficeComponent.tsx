@@ -53,7 +53,7 @@ export const DetectiveOfficeComponent: React.FC<InteractiveObjectProps> = (props
                 scale={0.6}
                 //rotation-y={Math.PI / 2}
                 position={[6.8, WORLD_COORDINATE[1], -6.7]}
-                onClickLamp={handleClickLamp}
+                // onClickLamp={handleClickLamp}
             />
             <Html>
                 <TaskModalComponent

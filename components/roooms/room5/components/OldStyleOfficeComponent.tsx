@@ -24,7 +24,7 @@ export const OldStyleOfficeComponent: React.FC<InteractiveObjectProps> = (props)
                     margin: "var(--space-15) 0",
                 }}
             >
-                WELCHE METHODE FEHLT?
+                Welche Methode ist gesucht?
             </Typography>
         </Box>
     );

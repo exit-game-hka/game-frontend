@@ -8,6 +8,7 @@ import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
 import {useGlobalStore} from "@/store/useGlobalStore";
 import {ThreeEvent} from "@react-three/fiber";
 import {InteraktionDto} from "@/api/interaktion";
+import { Text } from "@react-three/drei";
 
 export const WallPapersComponent: React.FC<InteractiveObjectProps> = (props) => {
     const { raum } = props;
@@ -26,7 +27,7 @@ export const WallPapersComponent: React.FC<InteractiveObjectProps> = (props) => 
                 margin: "auto",
             }}
         >
-            SUBSTITUTION
+            Substitution
         </Typography>
     );
 
@@ -52,6 +53,16 @@ export const WallPapersComponent: React.FC<InteractiveObjectProps> = (props) => 
                 position={[9.95, 0, -6]}
                 onClickCoffeeFrame={handleClickCoffeeFrame}
             />
+            <Text
+                scale={[0.15, 0.15, 0.15]}
+                color="white"
+                anchorX="center"
+                anchorY="middle"
+                position={[9.92, 0.4, -6.9]}
+                rotation-y={-Math.PI / 2}
+            >
+                Substitution
+            </Text>
             <Html>
                 <TaskModalComponent
                     open={isOpen}

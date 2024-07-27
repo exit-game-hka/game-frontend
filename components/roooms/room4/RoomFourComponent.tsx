@@ -1,3 +1,11 @@
+// Authors of 3d models
+//
+// "yellow key secret neighbor" (https://skfb.ly/6YTzH)
+// by Harlie/Kaeul is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+//
+// "Office Props Pack" (https://skfb.ly/6yYK8)
+// by seenoise is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+
 import React from 'react';
 import {useTexture} from "@/hooks/useTexture";
 import {GroundComponent} from "@/components/GroundComponent";

@@ -36,11 +36,9 @@ export const WallPicturesComponent: React.FC<InteractiveObjectProps> = (props) =
                 <br/>
                 <br/>
 
-                AALBACND
-                TEUFRGIHNIGJ
-                KKNLAMCNKOTPEQ
-                DRISET
-                UEVNWIXGYMZA
+                CNCCP VWDTKPEI <br />
+                MPFCEMGVG FHKG <br />
+                GIPKIJOC
             </Typography>
         </Card>
     );

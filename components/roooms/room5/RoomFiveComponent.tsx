@@ -11,6 +11,7 @@ import {OfficePlantLong} from "@/components/OfficePlantLong";
 import {OfficePlantComponent} from "@/components/roooms/room5/components/OfficePlantComponent";
 import {WallFotoFramesComponent} from "@/components/roooms/room5/components/WallFotoFramesComponent";
 import {InstancedWallModelComponent} from "@/components/roooms/InstancedWallModelComponent";
+import JuliusCaesarWithNumberComponent from "@/components/roooms/room5/components/JuliusCaesarWithNumberComponent";
 
 const RoomFiveComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
@@ -65,7 +66,12 @@ const RoomFiveComponent: React.FC<RoomProps> = (props) => {
                 scale={1.5}
             />
             <OfficePlantComponent raum={raum} />
-            <WallFotoFramesComponent raum={raum} />
+            <JuliusCaesarWithNumberComponent
+                raum={raum}
+                // @ts-ignore
+                position={[0, 1.5, 9.9]}
+                rotation={[0, Math.PI, 0]}
+            />
             <GroundComponent
                 position={WORLD_COORDINATE}
                 meshMaterialProps={{

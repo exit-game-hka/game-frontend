@@ -29,7 +29,6 @@
     "styled-components": "^6.1.8",
     "swr": "^2.2.5",
     "three": "^0.163.0",
-    "three-stdlib": "^2.30.5",
     "zustand": "^4.5.2"
   },
   "devDependencies": {

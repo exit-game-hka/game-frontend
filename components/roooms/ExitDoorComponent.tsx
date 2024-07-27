@@ -18,7 +18,6 @@ type Props = {
 
 export const ExitDoorComponent: React.FC<Props> = (props: Props) => {
     const { aufgabe, nextRoomId, doorProps } = props;
-    //const params = useSearchParams();
     const router = useRouter();
     const exitDoorAttachmentRef = useRef<Mesh>();
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -37,14 +36,13 @@ export const ExitDoorComponent: React.FC<Props> = (props: Props) => {
             router.push("/outro");
             return;
         }
-        //router.push(`/game-scene/rooms/${nextRoomId}?${params?.toString()}`);
         router.push(`/game-scene/rooms/${nextRoomId}`);
     }
 
     useEffect(() => {
         if (!doorProps || !doorProps.position || !exitDoorAttachmentRef.current) return;
-        // @ts-ignore
-        const [x] = doorProps.position;
+
+        const [x] = doorProps.position as [x: number, y: number, z: number];
 
         const xCoordinateOfAttachment = x - 0.13;
         exitDoorAttachmentRef.current.position.set(xCoordinateOfAttachment, -0.5, 0);

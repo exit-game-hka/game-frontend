@@ -3,18 +3,16 @@ import React from 'react';
 import {PageContentWrapperComponent} from "@/components/shared/PageContentWrapperComponent";
 import {Box, Card, Sheet, Stack, Typography, useTheme} from "@mui/joy";
 import {Button} from "@mui/material";
-import {useRouter, useSearchParams} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {NOTIFICATION_TYPE, NotificationDto} from "@/api/notification";
 import {useGlobalStore} from "@/store/useGlobalStore";
 
 const IntroPage: React.FC = () => {
     const theme = useTheme();
     const router = useRouter();
-    //const params = useSearchParams();
     const getPlayerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
     const emitNotification = useGlobalStore((state) => state.emitNotification);
 
-    // TODO: Remove later !!!. Just for MVP.
     const navigateToRoomOne = () => {
         const player = getPlayerFromLocalStorage();
 
@@ -30,7 +28,6 @@ const IntroPage: React.FC = () => {
             type: NOTIFICATION_TYPE.PLAYER_STARTED_GAME,
         };
         emitNotification(notificationDto);
-        //router.push(`/game-scene/rooms/20000000-0000-0000-0000-000000000001?${params?.toString()}`);
         router.push("/game-scene/rooms/20000000-0000-0000-0000-000000000001");
     };
 
@@ -102,4 +99,3 @@ const IntroPage: React.FC = () => {
 };
 
 export default IntroPage;
-

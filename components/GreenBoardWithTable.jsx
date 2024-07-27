@@ -7,7 +7,7 @@ Source: https://sketchfab.com/3d-models/a-class-room-3368e91fa2a8404996b81244036
 Title: A class Room
 */
 
-import React, {forwardRef, useRef} from 'react'
+import React, {forwardRef} from 'react'
 import { useGLTF } from '@react-three/drei'
 
 export const GreenBoardWithTable = forwardRef(function GreenBoardWithTable(props, ref) {

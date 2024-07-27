@@ -67,4 +67,3 @@ export const LoadingComponent: React.FC<Props> = (props) => {
         </Box>
     );
 };
-

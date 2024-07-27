@@ -9,7 +9,6 @@ import {DetectiveOfficeComponent} from "@/components/roooms/room5/components/Det
 import {OldStyleOfficeComponent} from "@/components/roooms/room5/components/OldStyleOfficeComponent";
 import {OfficePlantLong} from "@/components/OfficePlantLong";
 import {OfficePlantComponent} from "@/components/roooms/room5/components/OfficePlantComponent";
-import {WallFotoFramesComponent} from "@/components/roooms/room5/components/WallFotoFramesComponent";
 import {InstancedWallModelComponent} from "@/components/roooms/InstancedWallModelComponent";
 import JuliusCaesarWithNumberComponent from "@/components/roooms/room5/components/JuliusCaesarWithNumberComponent";
 

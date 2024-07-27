@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-import {Box, Button, Sheet, Typography, useColorScheme} from "@mui/joy";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import {Box, Button, Typography, useColorScheme} from "@mui/joy";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
 import {Card} from "@mui/material";
 import {useRouter} from "next/navigation";
@@ -18,12 +17,9 @@ const OverviewCardComponent: React.FC = () => {
     return (
         <Card
             variant="soft"
-            //color="primary"
-            //invertedColors
             sx={{
                 flexGrow: 1,
                 display: "flex",
-                //bgcolor: "var(--color-primary)",
                 background: cardBackground,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
@@ -42,7 +38,7 @@ const OverviewCardComponent: React.FC = () => {
                      zIndex: 1,
                      position: "relative",
                      color: mode === "dark" ? "white" : "var(--joy-palette-neutral-800)",
-            }}>
+                 }}>
                 <Typography level="body-lg" sx={{ fontWeight: 600, color: "var(--color-primary)" }}>Exit-Game HKA</Typography>
                 <Typography level="h2" sx={{ fontSize: "35px", maxWidth: isSmall ? "unset" : "650px", color: "inherit" }}>
                     Deine Übungen an der Hochschule jetzt spielerisch vermittelt.
@@ -70,24 +66,6 @@ const OverviewCardComponent: React.FC = () => {
                     </Button>
                 </Box>
             </Box>
-            {/*<Box*/}
-            {/*    component="img"*/}
-            {/*    alt="banner-partial-background"*/}
-            {/*    src="/banner-partial-background.png"*/}
-            {/*    sx={{ position: "absolute", height: "100%", top: 0, right: 0 }}*/}
-            {/*/>*/}
-            {/*{isSmall ? null : (*/}
-            {/*    <Typography*/}
-            {/*        sx={{*/}
-            {/*            position: "absolute",*/}
-            {/*            bottom: "1.5rem",*/}
-            {/*            right: "2rem",*/}
-            {/*            borderRadius: "50%",*/}
-            {/*        }}*/}
-            {/*    >*/}
-            {/*        */}
-            {/*    </Typography>*/}
-            {/*)}*/}
         </Card>
     );
 };

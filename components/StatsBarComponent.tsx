@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import {Box, Card, LinearProgress, Stack, Typography} from "@mui/joy";
-import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
 import SquareOutlinedIcon from '@mui/icons-material/SquareOutlined';
 import styled from "styled-components";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
@@ -59,11 +58,11 @@ const StatsContainer = styled(Card)<{ small: "true" | "false" }>`
     transform: translateX(-50%);
     opacity: 70%;
     z-index: var(--z-index-content-behind-modal);
-    
+
     padding: ${(props) => props.small === "true" ? "var(--space-2) var(--space-4)" : "var(--space-2) var(--space-9)"};
     border-radius: 0 0 var(--space-3) var(--space-3);
     box-shadow: 0 0 10px black;
-    
+
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;

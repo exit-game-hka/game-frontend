@@ -413,7 +413,7 @@ export type ObjectAnimation = {
 const stopAllAnimationActionsOfObject = (objectId: string, animations: ObjectAnimation[])  => {
     const animation = animations.find(a => a.id === objectId);
     if (!animation) {
-        console.error(`Object with ID ${objectId} was not found. So no animation will be played`);
+        console.error(`Animation of object with ID ${objectId} was not found. No animation will be played!`);
         return;
     }
     Object.entries(animation.animationActions).forEach(([_, action]) => {
@@ -440,4 +440,4 @@ const convertToSemesterModel = (semester: Semester): Semester => {
         start: new Date(semester.start),
         ende: new Date(semester.ende),
     };
-}
+};

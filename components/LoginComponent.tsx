@@ -7,7 +7,6 @@ import useSWR from "swr";
 import {Semester} from "@/api/semester";
 import {Veranstaltung} from "@/api/veranstaltung";
 import {StatusDto} from "@/api/status";
-import {NOTIFICATION_TYPE, NotificationDto} from "@/api/notification";
 import {LoadingComponent} from "@/components/shared/LoadingComponent";
 import {Alert, Box, Button, Card, Stack} from "@mui/material";
 import {FormContainerComponent} from "@/components/shared/FormContainerComponent";
@@ -35,13 +34,11 @@ const LoginComponent: React.FC = () => {
     const { isSmall } = useMediaQuery();
     const getPlayerBySpielerId = useGlobalStore((state) => state.getSpielerBySpielerId);
     const setSpieler = useGlobalStore((state) => state.setSpieler);
-    const getPlayerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
     const createStatus = useGlobalStore((state) => state.createStatus);
     const getStatusBySpielerId = useGlobalStore((state) => state.getStatusBySpielerId);
     const createSpieler = useGlobalStore((state) => state.createSpieler);
     const getAllSemester = useGlobalStore((state) => state.getAllSemester);
     const getAllVeranstaltungen = useGlobalStore((state) => state.getAllVeranstaltungen);
-    const emitNotification = useGlobalStore((state) => state.emitNotification);
 
     const [loginData, setLoginData] = useState<LoginData>(INITIAL_STATE as LoginData);
 

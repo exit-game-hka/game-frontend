@@ -6,7 +6,6 @@ import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
 import {TheologicalBookStack} from "@/components/TheologicalBookStack";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SquareIcon from "@mui/icons-material/Square";
-import {useMediaQuery} from "@/hooks/useMediaQuery";
 import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
 import {useGlobalStore} from "@/store/useGlobalStore";
 import {ThreeEvent} from "@react-three/fiber";
@@ -15,7 +14,6 @@ import {InteraktionDto} from "@/api/interaktion";
 export const TheologicalBookStackComponent: React.FC<InteractiveObjectProps> = (props) => {
     const { raum } = props;
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const { isSmall } = useMediaQuery();
     const createInteraktion = useGlobalStore((state) => state.createInteraktion);
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
 

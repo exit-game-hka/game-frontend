@@ -4,7 +4,6 @@ import {OfficeWithFotoFrame} from "@/components/OfficeWithFotoFrame";
 import {Html} from "@react-three/drei";
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
 import {Typography} from "@mui/material";
-import {useMediaQuery} from "@/hooks/useMediaQuery";
 import Stack from "@mui/joy/Stack";
 import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
 import {useGlobalStore} from "@/store/useGlobalStore";
@@ -14,7 +13,6 @@ import {InteraktionDto} from "@/api/interaktion";
 export const OfficeWithFotoFrameComponent: React.FC<InteractiveObjectProps> = (props) => {
     const { raum } = props;
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const { isSmall } = useMediaQuery();
     const createInteraktion = useGlobalStore((state) => state.createInteraktion);
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
 
@@ -23,7 +21,6 @@ export const OfficeWithFotoFrameComponent: React.FC<InteractiveObjectProps> = (p
             <Typography
                 component={"p"}
                 sx={{
-                    //fontSize: isSmall ? "40px" : "60px",
                     fontWeight: "bold",
                     textAlign: "center",
                     margin: "auto",

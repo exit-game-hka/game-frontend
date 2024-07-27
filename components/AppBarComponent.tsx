@@ -17,18 +17,8 @@ import {useMediaQuery} from "@/hooks/useMediaQuery";
 import {ButtonType} from "@/store/useGlobalStore";
 
 const AppBarComponent: React.FC = () => {
-    const router = useRouter();
-    const pathname = usePathname();
     const { isSmall } = useMediaQuery();
     const { mode, setMode } = useColorScheme();
-
-    const buttons: ButtonType[] = [
-        // {
-        //     label: "Startseite",
-        //     isActive: pathname === "/",
-        //     onClick: () => router.push("/"),
-        // },
-    ];
 
     const switchMode = () => {
         setMode(mode === 'dark' ? 'light' : 'dark');
@@ -48,14 +38,14 @@ const AppBarComponent: React.FC = () => {
                                 {mode === "light" ? <NightsStayOutlinedIcon /> : <WbSunnyOutlinedIcon />}
                             </IconButton>
                             <ResponsiveLayoutComponent
-                                layoutOnLargeScreen={<LargeScreenNavigation buttons={buttons} />}
-                                layoutOnSmallScreen={<SmallScreenNavigation buttons={buttons} />}
+                                layoutOnLargeScreen={<LargeScreenNavigation buttons={[]} />}
+                                layoutOnSmallScreen={<SmallScreenNavigation buttons={[]} />}
                             />
                         </> :
                         <>
                             <ResponsiveLayoutComponent
-                                layoutOnLargeScreen={<LargeScreenNavigation buttons={buttons} />}
-                                layoutOnSmallScreen={<SmallScreenNavigation buttons={buttons} />}
+                                layoutOnLargeScreen={<LargeScreenNavigation buttons={[]} />}
+                                layoutOnSmallScreen={<SmallScreenNavigation buttons={[]} />}
                             />
                             <IconButton variant={"outlined"} onClick={switchMode}>
                                 {mode === "light" ? <NightsStayOutlinedIcon /> : <WbSunnyOutlinedIcon />}

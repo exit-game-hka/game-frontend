@@ -14,7 +14,7 @@ import {InstancedWallModelComponent} from "@/components/roooms/InstancedWallMode
 const RoomThreeComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
     const { texture: floorTexture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/trefoil-floor.jpg`);
-    const { texture: wallTexture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/hallway_wall.png`, [2, 3]);
+    const { texture: wallTexture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/hallway_wall.jpg`, [2, 3]);
 
     return (
         <>

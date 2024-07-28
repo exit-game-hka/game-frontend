@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useRouter, useSearchParams} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {ExitDoor} from "@/components/ExitDoor";
 import {Html} from "@react-three/drei";
 import {GroupProps} from "@react-three/fiber";
@@ -14,24 +14,13 @@ type Props = {
 
 export const DoorToPreviousRoomComponent: React.FC<Props> = (props) => {
     const { doorProps } = props;
-    const params = useSearchParams();
     const router = useRouter();
-    //const exitDoorAttachmentRef = useRef<Mesh>();
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const navigateBack = () => {
         setIsOpen(false);
         router.back();
     };
-
-    // useEffect(() => {
-    //     if (!doorProps || !doorProps.position || !exitDoorAttachmentRef.current) return;
-    //     // @ts-ignore
-    //     const [x] = doorProps.position;
-    //
-    //     const xCoordinateOfAttachment = x - 0.13;
-    //     exitDoorAttachmentRef.current.position.set(xCoordinateOfAttachment, -0.5, 0);
-    // }, [doorProps]);
 
     const modalContent = (
         <Stack spacing={"var(--space-6)"}>

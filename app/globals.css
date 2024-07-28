@@ -13,9 +13,10 @@ body {
     --max-page-width: 1400px;
 
     /* Z-Indexes */
-    --z-index-scene-controls: 1000000000;
-    --z-index-splash-screen: 1000000001;
-    --z-index-modal: 1000000002;
+    --z-index-content-behind-modal: 999999999;
+    --z-index-modal: 1000000000;
+    --z-index-scene-controls: 1000000001;
+    --z-index-splash-screen: 1000000002;
 
     /* Icon sizes */
     --icon-medium: 30px;

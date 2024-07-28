@@ -3,16 +3,31 @@ import React from 'react';
 import {PageContentWrapperComponent} from "@/components/shared/PageContentWrapperComponent";
 import {Box, Card, Sheet, Stack, Typography, useTheme} from "@mui/joy";
 import {Button} from "@mui/material";
-import {useRouter, useSearchParams} from "next/navigation";
+import {useRouter} from "next/navigation";
+import {NOTIFICATION_TYPE, NotificationDto} from "@/api/notification";
+import {useGlobalStore} from "@/store/useGlobalStore";
 
 const IntroPage: React.FC = () => {
     const theme = useTheme();
     const router = useRouter();
-    //const params = useSearchParams();
+    const getPlayerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
+    const emitNotification = useGlobalStore((state) => state.emitNotification);
 
-    // TODO: Remove later !!!. Just for MVP.
     const navigateToRoomOne = () => {
-        //router.push(`/game-scene/rooms/20000000-0000-0000-0000-000000000001?${params?.toString()}`);
+        const player = getPlayerFromLocalStorage();
+
+        if (!player) {
+            console.error("Es kontne keinen Spieler erstellt werden...!");
+            return;
+        }
+        const notificationDto: NotificationDto = {
+            userName: player.spielerId,
+            title: "Neues Spiel begonnen",
+            content: `Spieler ${player.spielerId} hat das Spiel begonnen.`,
+            creationDate: new Date().toISOString(),
+            type: NOTIFICATION_TYPE.PLAYER_STARTED_GAME,
+        };
+        emitNotification(notificationDto);
         router.push("/game-scene/rooms/20000000-0000-0000-0000-000000000001");
     };
 
@@ -47,13 +62,10 @@ const IntroPage: React.FC = () => {
                             }}
                         />
                     </Sheet>
-                    <Typography component={"p"} sx={{ mt: "var(--space-2)" }}>
-                        UM EIN PAAR ZUSÄTZLICHE CREDIT POINTS ZU ERGATTERN,
-                        ERKLÄREN SIE SICH DAZU BEREIT, DEN KELLER IHRES
-                        INFORMATIKPROFESSORS AUSZUMISTEN. IHRE AUFGABE IST ES,
-                        BÜCHER ZU ENTSORGEN UND ALTKLAUSUREN ZU ORDNEN. ER
-                        LÄSST SIE ALLEINE UND SAGT, DASS ER NACH SEINER
-                        MITTAGSPAUSE IN X MINUTEN NACH IHNEN SCHAUEN WIRD.
+                    <Typography component={"p"} level={"body-lg"} sx={{ mt: "var(--space-2)" }}>
+                        Um ein paar zusätzliche Credit Points zu ergattern, erklären Sie sich dazu bereit, den
+                        Keller Ihres Informatikprofessors auszumisten. Er lässt Sie alleine und sagt, dass er nach
+                        seiner Mittagspause in X Minuten nach Ihnen sehen wird.
                     </Typography>
                 </Card>
                 <Box
@@ -87,4 +99,3 @@ const IntroPage: React.FC = () => {
 };
 
 export default IntroPage;
-

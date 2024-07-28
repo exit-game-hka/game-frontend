@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {WORLD_COORDINATE} from "@/app/contants";
 import {OldStyleOffice} from "@/components/OldStyleOffice";
 import {Html} from "@react-three/drei";
-import {Box, Card} from "@mui/material";
+import {Box} from "@mui/material";
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
 import {Typography} from "@mui/joy";
 import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
@@ -19,13 +19,12 @@ export const OldStyleOfficeComponent: React.FC<InteractiveObjectProps> = (props)
     const modalContent = (
         <Box component={"div"}>
             <Typography
-                level={"title-lg"}
                 sx={{
                     textAlign: "center",
                     margin: "var(--space-15) 0",
                 }}
             >
-                WELCHE METHODE FEHLT?
+                Welche Methode ist gesucht?
             </Typography>
         </Box>
     );

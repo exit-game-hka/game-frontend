@@ -1,4 +1,4 @@
-import React, {ChangeEvent, ReactNode, useCallback, useEffect, useMemo, useState} from 'react';
+import React, {ChangeEvent, ReactNode, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {Transition} from "react-transition-group";
 import Modal from "@mui/joy/Modal";
 import ModalDialog, {ModalDialogProps} from "@mui/joy/ModalDialog";
@@ -21,6 +21,7 @@ type Props = {
     onSuccess: () => void;
     answer: string;
     aufgabeId: string;
+    submitButtonLabel?: string;
     successMessage: ReactNode;
     timeoutOnSuccess?: number | undefined;
     failureMessage: string;
@@ -35,6 +36,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
         subtitle,
         answer,
         aufgabeId,
+        submitButtonLabel,
         successMessage,
         failureMessage,
         onSuccess,
@@ -45,6 +47,12 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
     const [inputValue, setInputValue] = useState<string>("");
     const [isComplete, setIsComplete] = useState<boolean | undefined>(undefined);
     const { isSmall } = useMediaQuery();
+    const inputRef = useRef<HTMLInputElement | null>(null);
+
+    useEffect(() => {
+        if (!inputRef.current) return;
+        inputRef.current.focus();
+    }, [inputRef, props]);
 
     const startTime : number = useMemo((): number => {
         return new Date().getTime();
@@ -115,7 +123,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
             <Transition in={open} timeout={400}>
                 {(state: string) => (
                     <Modal
-                        keepMounted
+                        //keepMounted
                         open={!['exited', 'exiting'].includes(state)}
                         onClose={closeModal}
                         slotProps={{
@@ -165,6 +173,8 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                                             onChange={handleChange}
                                             slotProps={{
                                                 input: {
+                                                    ref: inputRef,
+                                                    autoFocus: true,
                                                     component: "input",
                                                 }
                                             }}
@@ -191,7 +201,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                                                 {failureMessage}
                                             </Alert> : null
                                     }
-                                    <Button onClick={handleSubmit}>Antwort senden</Button>
+                                    <Button onClick={handleSubmit}>{submitButtonLabel ?? "Antwort senden"}</Button>
                                 </Stack>
                             </DialogContent>
                         </ModalDialog>

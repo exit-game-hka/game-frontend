@@ -6,7 +6,6 @@ import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
 import {TheologicalBookStack} from "@/components/TheologicalBookStack";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SquareIcon from "@mui/icons-material/Square";
-import {useMediaQuery} from "@/hooks/useMediaQuery";
 import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
 import {useGlobalStore} from "@/store/useGlobalStore";
 import {ThreeEvent} from "@react-three/fiber";
@@ -15,7 +14,6 @@ import {InteraktionDto} from "@/api/interaktion";
 export const TheologicalBookStackComponent: React.FC<InteractiveObjectProps> = (props) => {
     const { raum } = props;
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const { isSmall } = useMediaQuery();
     const createInteraktion = useGlobalStore((state) => state.createInteraktion);
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
 
@@ -55,7 +53,7 @@ export const TheologicalBookStackComponent: React.FC<InteractiveObjectProps> = (
                     KLARTEXT.
                 </Typography>
                 <Typography>
-                    KRYPTANALYSE: WIRD VON MITLESERN DES VERSCHLUESSELTEN TEXTES
+                    KRYPTANALYSE: WIRD VON MITLESENDEN DES VERSCHLUESSELTEN TEXTES
                     VERWENDET UM DEN UNVERSCHLUESSELTEN ORIGINALTEXT WIEDER
                     HERZUSTELLEN.
                 </Typography>
@@ -80,8 +78,8 @@ export const TheologicalBookStackComponent: React.FC<InteractiveObjectProps> = (
                         <div>=</div>
                     </Stack>
                 </Stack>
-                <Typography level={isSmall ? "body-xs" : "body-sm"} sx={{ color: "inherit" }}>
-                    KTGSYGIUYNSROITPRESPAEYLEKTAPKTL!POIROFLRAY!
+                <Typography sx={{ color: "inherit" }}>
+                    KTGSYGHLRAYROITPRIUYNSYLEKTAESPAEPOIROPPKTL!
                 </Typography>
             </Stack>
         </Card>

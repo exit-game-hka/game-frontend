@@ -9,58 +9,41 @@ import {DoorToPreviousRoomComponent} from "@/components/roooms/DoorToPreviousRoo
 import {GreenBoardWithTableComponent} from "@/components/roooms/room3/components/GreenBoardWithTableComponent";
 import {TableWithBooksAndGlobeComponent} from "@/components/roooms/room3/components/TableWithBooksAndGlobeComponent";
 import {RoomProps} from "@/components/roooms/RoomProps";
-import {DoubleWallGroupComponent} from "@/components/roooms/room3/components/DoubleWallGroupComponent";
+import {InstancedWallModelComponent} from "@/components/roooms/InstancedWallModelComponent";
 
 const RoomThreeComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
-    const { texture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/trefoil-floor.jpg`);
+    const { texture: floorTexture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/trefoil-floor.jpg`);
+    const { texture: wallTexture } = useTexture(`${process.env.NEXT_PUBLIC_BASE_PATH}/hallway_wall.jpg`, [2, 3]);
 
     return (
         <>
-            {/* Front wall */}
-            <DoubleWallGroupComponent
-                firstWall={{
-                    position: [0, WORLD_COORDINATE[1], -10],
+            <InstancedWallModelComponent
+                meshProps={{
+                    scale: [1, 2, 1],
+                    position: [0, WORLD_COORDINATE[1] * -3, 0],
                 }}
-                secondWall={{
-                    position: [12.5, WORLD_COORDINATE[1], -10],
+                meshBasicMaterialProps={{
+                    map: wallTexture,
                 }}
-            />
-            {/* Left side wall */}
-            <DoubleWallGroupComponent
-                position-z={6.2}
-                position-x={2.4}
-                rotation-y={Math.PI / 2}
-                firstWall={{
-                    position: [0, WORLD_COORDINATE[1], -6],
-                }}
-                secondWall={{
-                    position: [12.5, WORLD_COORDINATE[1], -6],
-                }}
-            />
-            {/* Right side wall */}
-            <DoubleWallGroupComponent
-                position-z={-6.25}
-                position-x={10.2}
-                rotation-y={-Math.PI / 2}
-                firstWall={{
-                    position: [0, WORLD_COORDINATE[1], -6],
-                }}
-                secondWall={{
-                    position: [12.5, WORLD_COORDINATE[1], -6],
-                }}
-            />
-            {/* Back side wall */}
-            <DoubleWallGroupComponent
-                position-x={12.5}
-                position-z={4}
-                rotation-y={Math.PI}
-                firstWall={{
-                    position: [0, WORLD_COORDINATE[1], -6],
-                }}
-                secondWall={{
-                    position: [12.5, WORLD_COORDINATE[1], -6],
-                }}
+                modelsProps={[
+                    {
+                        position: [0, WORLD_COORDINATE[1], -10],
+                        rotation: [0, 0, 0],
+                    },
+                    {
+                        position: [-10, WORLD_COORDINATE[1], 0],
+                        rotation: [0, Math.PI / 2, 0],
+                    },
+                    {
+                        position: [0, WORLD_COORDINATE[1], 10],
+                        rotation: [0, 0, 0],
+                    },
+                    {
+                        position: [10, WORLD_COORDINATE[1], 0],
+                        rotation: [0, -Math.PI / 2, 0],
+                    },
+                ]}
             />
             <GreenBoardWithTableComponent raum={raum} />
             <TableWithBooksAndGlobeComponent raum={raum} />
@@ -68,30 +51,30 @@ const RoomThreeComponent: React.FC<RoomProps> = (props) => {
                 // @ts-ignore
                 scale={1.3}
                 rotation-y={Math.PI / 10}
-                position={[15, WORLD_COORDINATE[1], 5]}
+                position={[7, WORLD_COORDINATE[1], 5]}
             />
             <WallPictures
                 // @ts-ignore
                 scale={1.5}
                 rotation-y={-Math.PI / 2}
-                position={[5, 1, -12.4]}
+                position={[5, 1, -9.9]}
             />
             <ExitDoorComponent
                 aufgabe={raum.aufgaben[0]}
                 nextRoomId={"20000000-0000-0000-0000-000000000004"}
                 doorProps={{
-                    position: [18.5, WORLD_COORDINATE[1], 0],
+                    position: [10, WORLD_COORDINATE[1], 0],
                 }}
             />
             <DoorToPreviousRoomComponent
                 doorProps={{
-                    position: [-6, WORLD_COORDINATE[1], 0],
+                    position: [-10, WORLD_COORDINATE[1], 0],
                 }}
             />
             <GroundComponent
                 position={WORLD_COORDINATE}
                 meshMaterialProps={{
-                    map: texture,
+                    map: floorTexture,
                 }}
             />
         </>

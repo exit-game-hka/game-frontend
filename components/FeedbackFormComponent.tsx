@@ -5,15 +5,19 @@ import Input from "@mui/joy/Input";
 import {useRouter} from "next/navigation";
 import {useGlobalStore} from "@/store/useGlobalStore";
 import {KommentarDto} from "@/api/kommentar";
+import {NOTIFICATION_TYPE, NotificationDto} from "@/api/notification";
+import {useMediaQuery} from "@/hooks/useMediaQuery";
 
 export const FeedbackFormComponent: React.FC = () => {
     const router = useRouter();
+    const { isSmall } = useMediaQuery();
     const [comment, setComment] = useState<string>("");
     const createKommentar = useGlobalStore((state) => state.createKommentar);
-    const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
+    const getPlayerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
+    const emitNotification = useGlobalStore((state) => state.emitNotification);
 
     const handleSubmitComment = () => {
-        const player = getSpielerFromLocalStorage();
+        const player = getPlayerFromLocalStorage();
         if (!player) return;
         const commentToSubmit: KommentarDto = {
             spielerId: player.id,
@@ -22,6 +26,16 @@ export const FeedbackFormComponent: React.FC = () => {
             creationTimestamp: new Date(),
         };
         createKommentar(commentToSubmit);
+
+        const notificationDto: NotificationDto = {
+            userName: player.spielerId,
+            title: "Neuer Kommentar",
+            content: `Spieler ${player.spielerId} hat einen Kommentar hinterlassen.`,
+            creationDate: new Date().toISOString(),
+            type: NOTIFICATION_TYPE.PLAYER_SENT_COMMENT,
+        };
+        emitNotification(notificationDto);
+
         router.push("/result-and-qrcode");
     };
 
@@ -43,8 +57,8 @@ export const FeedbackFormComponent: React.FC = () => {
                 }}
             >
                 <Typography component={"p"} sx={{ mt: "var(--space-2)" }}>
-                    Möchten Sie einen Kommentar über Ihre Erfahrungen beim Spielen hinterlassen?
-                    Ihr Kommentar wird zur Verbesserung des Exit-Spiels beitragen
+                    Möchten Sie einen Kommentar über Ihre Erfahrung beim Spielen hinterlassen?
+                    Ihr Kommentar wird zur Verbesserung des Exit-Games beitragen.
                 </Typography>
                 <FormControl size={"lg"}>
                     <FormLabel>Kommentar</FormLabel>
@@ -66,8 +80,9 @@ export const FeedbackFormComponent: React.FC = () => {
                 sx={{
                     display: "grid",
                     gridGap: "var(--space-4)",
-                    gridTemplateColumns: "repeat(2, minmax(150px, 1fr))",
+                    gridTemplateColumns: isSmall ? "1fr" : "repeat(2, minmax(150px, 1fr))",
                     pt: "var(--space-4)",
+                    width: isSmall ? "100%" : "unset",
                 }}
             >
                 <Button
@@ -76,7 +91,7 @@ export const FeedbackFormComponent: React.FC = () => {
                     sx={{ width: "100%" }}
                     onClick={() => router.push("/result-and-qrcode")}
                 >
-                    Nein danke
+                    Weiter ohne Kommentar
                 </Button>
                 <Button
                     size={"lg"}
@@ -84,7 +99,7 @@ export const FeedbackFormComponent: React.FC = () => {
                     disabled={comment === ""}
                     onClick={handleSubmitComment}
                 >
-                    Kommentar absenden
+                    Weiter und Kommentar absenden
                 </Button>
             </Box>
         </Stack>

@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
 import {WallPictures} from "@/components/WallPictures";
-import {Html} from "@react-three/drei";
+import {Html, Text} from "@react-three/drei";
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
-import {Card} from "@mui/material";
 import {Typography} from "@mui/joy";
-import {useMediaQuery} from "@/hooks/useMediaQuery";
 import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
 import {useGlobalStore} from "@/store/useGlobalStore";
 import {ThreeEvent} from "@react-three/fiber";
@@ -13,24 +11,20 @@ import {InteraktionDto} from "@/api/interaktion";
 export const WallPapersComponent: React.FC<InteractiveObjectProps> = (props) => {
     const { raum } = props;
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const { isSmall } = useMediaQuery();
     const createInteraktion = useGlobalStore((state) => state.createInteraktion);
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
 
     const modalContent = (
-        <Card>
-            <Typography
-                component={"p"}
-                sx={{
-                    fontSize: isSmall ? "40px" : "60px",
-                    fontWeight: "bold",
-                    textAlign: "center",
-                    margin: "auto",
-                }}
-            >
-                SUBSTITUTION
-            </Typography>
-        </Card>
+        <Typography
+            component={"p"}
+            sx={{
+                fontWeight: "bold",
+                textAlign: "center",
+                margin: "auto",
+            }}
+        >
+            Substitution
+        </Typography>
     );
 
     const handleClickCoffeeFrame = async (event: ThreeEvent<MouseEvent>) => {
@@ -55,6 +49,16 @@ export const WallPapersComponent: React.FC<InteractiveObjectProps> = (props) => 
                 position={[9.95, 0, -6]}
                 onClickCoffeeFrame={handleClickCoffeeFrame}
             />
+            <Text
+                scale={[0.15, 0.15, 0.15]}
+                color="white"
+                anchorX="center"
+                anchorY="middle"
+                position={[9.92, 0.4, -6.9]}
+                rotation-y={-Math.PI / 2}
+            >
+                Substitution
+            </Text>
             <Html>
                 <TaskModalComponent
                     open={isOpen}

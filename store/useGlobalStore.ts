@@ -1,7 +1,8 @@
 import {create, StateCreator} from "zustand";
 import {ComponentType, ForwardRefExoticComponent, ReactNode, RefAttributes} from "react";
-import {Amy} from "@/components/avatars/Amy";
-import {Leonard} from "@/components/avatars/Loenard";
+import {Megan} from "@/components/avatars/Megan";
+import {Lewis} from "@/components/avatars/Lewis";
+import {Maria} from "@/components/avatars/Maria";
 import {Aufgabe, getAllTasksApi, getTaskByIdApi} from "@/api/aufgabe";
 import {getAllRoomsApi, getRoomByIdApi, Raum} from "@/api/raum";
 import {createSpielerApi, getSpielerBySpielerIdApi, Spieler, SpielerDto} from "@/api/spieler";
@@ -30,9 +31,13 @@ import {
     InteraktionDto
 } from "@/api/interaktion";
 import {createKommentarApi, KommentarDto} from "@/api/kommentar";
-import {AxiosResponse} from "axios";
 import {getAllSemesterApi, getSemesterByIdApi, Semester} from "@/api/semester";
 import {getAllVeranstaltungenApi, getVeranstaltungByIdApi, Veranstaltung} from "@/api/veranstaltung";
+import {Mousey} from "@/components/avatars/Mousey";
+import {Prisoner} from "@/components/avatars/Prisoner";
+import webSocketClient, {WEBSOCKET_SEND_NOTIFICATION_ENDPOINT} from "@/api/webSocketClient";
+import {Client} from "@stomp/stompjs";
+import {NotificationDto} from "@/api/notification";
 
 // Zustand Doc: https://github.com/pmndrs/zustand
 // Avatar store
@@ -44,21 +49,55 @@ type AvatarStore = {
 };
 const INITIAL_AVATAR_LIST: AvatarItem[] = [
     {
-        name: "Amy",
-        model: Amy,
-        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/amy/thumbnail.png`,
+        name: "Megan",
+        model: Megan,
+        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/megan/thumbnail.png`,
     },
     {
-        name: "Leonard",
-        model: Leonard,
-        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/leonard/thumbnail.png`,
+        name: "Lewis",
+        model: Lewis,
+        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/lewis/thumbnail.png`,
+    },
+    {
+        name: "Maria",
+        model: Maria,
+        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/maria/thumbnail.png`,
+    },
+    {
+        name: "Mousey",
+        model: Mousey,
+        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/mousey/thumbnail.png`,
+    },
+    {
+        name: "Häftling",
+        model: Prisoner,
+        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/prisoner/thumbnail.png`,
     },
 ];
 
+const SELECTED_AVATAR_LOCAL_STORAGE_KEY = "selected-avatar" as const;
+
+const resolveSelectedAvatarFromLocalStorage = (avatarList: AvatarItem[]): AvatarItem => {
+    if (typeof window === "undefined") return avatarList[0];
+    const selectedAvatarName = localStorage.getItem(SELECTED_AVATAR_LOCAL_STORAGE_KEY);
+    if (!selectedAvatarName || selectedAvatarName === "") return avatarList[0];
+    return avatarList.find((avatar) =>
+        avatar.name.toLocaleLowerCase() === selectedAvatarName.toLocaleLowerCase()
+    ) || avatarList[0];
+}
+
+const saveSelectedAvatarToLocalStorage = (selectedAvatar: AvatarItem) => {
+    if (typeof window === "undefined") return;
+    localStorage.setItem(SELECTED_AVATAR_LOCAL_STORAGE_KEY, selectedAvatar.name);
+}
+
 const useAvatarStoreSlice: StateCreator<AvatarStore> = (set) => ({
     avatarList: INITIAL_AVATAR_LIST,
-    selectedAvatar: INITIAL_AVATAR_LIST[0],
-    setSelectedAvatar: (newAvatar: AvatarItem) => set(() => ({ selectedAvatar: newAvatar })),
+    selectedAvatar: resolveSelectedAvatarFromLocalStorage(INITIAL_AVATAR_LIST),
+    setSelectedAvatar: (newAvatar: AvatarItem) => set(() => {
+        saveSelectedAvatarToLocalStorage(newAvatar);
+        return { selectedAvatar: newAvatar };
+    }),
 });
 
 // Aufgabe store
@@ -264,6 +303,32 @@ const useVeranstaltungStoreStoreSlice: StateCreator<VeranstaltungStore> = () => 
     },
 });
 
+// User Input Events
+type UserInputEvents = {
+    listenToKeyboardKeyPress: boolean
+    setListenToKeyboardKeyPress: (value: boolean) => void;
+}
+const useUserInputEventsStoreSlice: StateCreator<UserInputEvents> = (set) => ({
+    listenToKeyboardKeyPress: true,
+    setListenToKeyboardKeyPress: (value: boolean) => set(() => ({ listenToKeyboardKeyPress: value })),
+});
+
+// Notification store
+type NotificationStore = {
+    emitNotification: (notificationDto: NotificationDto) => void;
+    webSocketNotificationClient: Client;
+}
+const useNotificationStoreSlice: StateCreator<NotificationStore> = (set) => ({
+    emitNotification: (notificationDto: NotificationDto) => {
+        if (!webSocketClient.connected) return;
+        webSocketClient.publish({
+            destination: WEBSOCKET_SEND_NOTIFICATION_ENDPOINT,
+            body: JSON.stringify(notificationDto),
+        });
+    },
+    webSocketNotificationClient: webSocketClient,
+});
+
 type GlobalStore =
     AvatarStore &
     AufgabeStore &
@@ -276,7 +341,9 @@ type GlobalStore =
     TimeStore &
     KommentarStore &
     SemesterStore &
-    VeranstaltungStore;
+    VeranstaltungStore &
+    UserInputEvents &
+    NotificationStore;
 export const useGlobalStore = create<GlobalStore>((...fn) => ({
     ...useAvatarStoreSlice(...fn),
     ...useAufgabeStoreSlice(...fn),
@@ -290,6 +357,8 @@ export const useGlobalStore = create<GlobalStore>((...fn) => ({
     ...useKommentarStoreSlice(...fn),
     ...useSemesterStoreSlice(...fn),
     ...useVeranstaltungStoreStoreSlice(...fn),
+    ...useUserInputEventsStoreSlice(...fn),
+    ...useNotificationStoreSlice(...fn),
 }));
 
 // Global stateless content (Types, Functions, etc...)
@@ -344,7 +413,7 @@ export type ObjectAnimation = {
 const stopAllAnimationActionsOfObject = (objectId: string, animations: ObjectAnimation[])  => {
     const animation = animations.find(a => a.id === objectId);
     if (!animation) {
-        console.error(`Object with ID ${objectId} was not found. So no animation will be played`);
+        console.error(`Animation of object with ID ${objectId} was not found. No animation will be played!`);
         return;
     }
     Object.entries(animation.animationActions).forEach(([_, action]) => {
@@ -371,4 +440,4 @@ const convertToSemesterModel = (semester: Semester): Semester => {
         start: new Date(semester.start),
         ende: new Date(semester.ende),
     };
-}
+};

@@ -2,6 +2,7 @@
 import React, {ComponentType, lazy, useMemo} from "react";
 import {Raum} from "@/api/raum";
 import {RoomProps} from "@/components/roooms/RoomProps";
+import {RigidBody} from "@react-three/rapier";
 
 const RoomOneComponent = lazy(() => import("../../components/roooms/room1/RoomOneComponent"));
 const RoomTwoComponent = lazy(() => import("../../components/roooms/room2/RoomTwoComponent"));
@@ -28,8 +29,11 @@ export const RoomManagerComponent: React.FC<Props> = (props: Props) => {
         }
     }, [room]);
 
+    // The RigidBody wrapper auto generates a collider around every child object
     return (
-        <ComputedRoom raum={room} />
+        <RigidBody type={"fixed"}>
+            <ComputedRoom raum={room} />
+        </RigidBody>
     );
 };
 

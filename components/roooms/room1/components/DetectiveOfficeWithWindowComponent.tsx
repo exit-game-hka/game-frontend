@@ -80,9 +80,6 @@ export const DetectiveOfficeWithWindowComponent: React.FC<InteractiveObjectProps
                         1 INTERESSEN: RELATIVITAETSTHEORIE, QUANTENMECHANIK
                     </li>
                     <li>
-                        1 INTERESSEN: RELATIVITAETSTHEORIE, QUANTENMECHANIK
-                    </li>
-                    <li>
                         5 HOBBIES: MATHEMATIKWETTBEWERBE
                     </li>
                     <li>
@@ -187,7 +184,7 @@ export const DetectiveOfficeWithWindowComponent: React.FC<InteractiveObjectProps
                 // @ts-ignore
                 scale={0.6}
                 //rotation-y={Math.PI / 2}
-                position={[11.85, WORLD_COORDINATE[1], -11.5]}
+                position={[6.85, WORLD_COORDINATE[1], -6.7]}
                 onDoublePaperClick={handleDoublePaperClick}
             />
             <Html>

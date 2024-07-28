@@ -31,7 +31,6 @@ export const TableWithBooksAndGlobeComponent: React.FC<InteractiveObjectProps> =
                 <Stack
                     spacing={"var(--space-3)"}
                     sx={{
-                        fontWeight: 700,
                         "& p": {
                             color: "var(--color-black)",
                         },
@@ -70,7 +69,7 @@ export const TableWithBooksAndGlobeComponent: React.FC<InteractiveObjectProps> =
                 // @ts-ignore
                 scale={0.5}
                 rotation-y={Math.PI}
-                position={[10, WORLD_COORDINATE[1], -8]}
+                position={[4, WORLD_COORDINATE[1], -7]}
                 onClickBookOnTable={handleClickBookOnTable}
             />
             <Html>
@@ -86,4 +85,3 @@ export const TableWithBooksAndGlobeComponent: React.FC<InteractiveObjectProps> =
         </>
     );
 };
-

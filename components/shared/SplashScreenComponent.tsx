@@ -6,8 +6,8 @@ const SplashScreenComponent: React.FC = () => {
     const { isSmall } = useMediaQuery();
 
     const imageSource = isSmall ?
-        `${process.env.NEXT_PUBLIC_BASE_PATH}/splash-screen-mobile.png` :
-        `${process.env.NEXT_PUBLIC_BASE_PATH}/splash-screen.png`;
+        `${process.env.NEXT_PUBLIC_BASE_PATH}/splash-screen-mobile.jpg` :
+        `${process.env.NEXT_PUBLIC_BASE_PATH}/splash-screen.jpg`;
 
     return (
         <Image

@@ -13,22 +13,33 @@ FROM node:${NODE_VERSION}-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-ARG NEXT_PUBLIC_BASE_PATH="/exit-game-frontend"
+
+ARG NEXT_PUBLIC_BASE_PATH
 ARG NEXT_PUBLIC_BACKEND_URL
-ENV NEXT_PUBLIC_BASE_PATH="/exit-game-frontend"
-ENV NEXT_PUBLIC_BACKEND_URL $NEXT_PUBLIC_BACKEND_URL
-ENV NEXT_TELEMETRY_DISABLED 1
+ARG NEXT_PUBLIC_WEBSOCKET_NOTIFICATIONS_SERVER_URL
+ARG NEXT_PUBLIC_WEBSOCKET_NOTIFICATIONS_RECONNECTION_DELAY
+ARG NEXT_PUBLIC_WEBSOCKET_NOTIFICATIONS_INCOMING_HEARTBEAT
+ARG NEXT_PUBLIC_WEBSOCKET_NOTIFICATIONS_OUTGOING_HEARTBEAT
+
+ENV NEXT_PUBLIC_BASE_PATH=$NEXT_PUBLIC_BASE_PATH
+ENV NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL
+ENV NEXT_PUBLIC_WEBSOCKET_NOTIFICATIONS_SERVER_URL=$NEXT_PUBLIC_WEBSOCKET_NOTIFICATIONS_SERVER_URL
+ENV NEXT_PUBLIC_WEBSOCKET_NOTIFICATIONS_RECONNECTION_DELAY=$NEXT_PUBLIC_WEBSOCKET_NOTIFICATIONS_RECONNECTION_DELAY
+ENV NEXT_PUBLIC_WEBSOCKET_NOTIFICATIONS_INCOMING_HEARTBEAT=$NEXT_PUBLIC_WEBSOCKET_NOTIFICATIONS_INCOMING_HEARTBEAT
+ENV NEXT_PUBLIC_WEBSOCKET_NOTIFICATIONS_OUTGOING_HEARTBEAT=$NEXT_PUBLIC_WEBSOCKET_NOTIFICATIONS_OUTGOING_HEARTBEAT
+ENV NEXT_TELEMETRY_DISABLED=1
+
 RUN npm run build
 
 # Run the app
 FROM node:${NODE_VERSION}-alpine AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
-ENV NEXT_TELEMETRY_DISABLED 1
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
-#RUN addgroup --system --gid 1001 nodejs
-#RUN adduser --system --uid 1001 nextjs
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
@@ -36,14 +47,17 @@ COPY --from=builder /app/package.json ./package.json
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 #COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 #COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+#
+#COPY --from=builder /app/.next/standalone ./
+#COPY --from=builder /app/.next/static ./.next/static
+#
+#USER nextjs
 
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
-#USER nextjs
-
 # EXPOSE 3000
 
-ENV PORT 3000
+ENV PORT=3000
 
 CMD ["node", "server.js"]

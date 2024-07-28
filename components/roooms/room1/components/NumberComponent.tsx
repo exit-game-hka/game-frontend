@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
 import {Number} from "@/components/Number";
 import {Box, Typography} from "@mui/joy";
@@ -13,13 +13,22 @@ export const NumberComponent: React.FC<InteractiveObjectProps> = (props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const createInteraktion = useGlobalStore((state) => state.createInteraktion);
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
+    const setListenToKeyboardKeyPress = useGlobalStore((state) => state.setListenToKeyboardKeyPress);
+
+    useEffect(() => {
+        if (isOpen) {
+            setListenToKeyboardKeyPress(false);
+            return;
+        }
+        setListenToKeyboardKeyPress(true);
+    }, [isOpen]);
 
     const modalContent = (
         <Box component={"div"}>
             <Typography
                 component={"p"}
                 sx={{
-                    fontSize: "100px",
+                    //fontSize: "100px",
                     fontWeight: "bold",
                     textAlign: "center",
                     margin: "auto",
@@ -48,7 +57,7 @@ export const NumberComponent: React.FC<InteractiveObjectProps> = (props) => {
             <Number
                 scale={0.45}
                 rotation-y={Math.PI / 2}
-                position={[-14.9, 2.5, 0.5]}
+                position={[-9.4, 2.5, 0.5]}
                 onClick={handleClick}
             />
             <Html>

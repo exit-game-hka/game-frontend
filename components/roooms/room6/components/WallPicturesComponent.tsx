@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
 import {useGlobalStore} from "@/store/useGlobalStore";
-import {Box, Card, Typography} from "@mui/material";
+import {Card, Typography} from "@mui/material";
 import {ThreeEvent} from "@react-three/fiber";
 import {InteraktionDto} from "@/api/interaktion";
 import {WallPictures} from "@/components/WallPictures";
@@ -28,7 +28,6 @@ export const WallPicturesComponent: React.FC<InteractiveObjectProps> = (props) =
         >
             <Typography
                 component={"p"}
-                level={"title-lg"}
                 sx={{
                     fontWeight: "bold",
                 }}
@@ -37,11 +36,9 @@ export const WallPicturesComponent: React.FC<InteractiveObjectProps> = (props) =
                 <br/>
                 <br/>
 
-                AALBACND
-                TEUFRGIHNIGJ
-                KKNLAMCNKOTPEQ
-                DRISET
-                UEVNWIXGYMZA
+                CNCCP VWDTKPEI <br />
+                MPFCEMGVG FHKG <br />
+                GIPKIJOC
             </Typography>
         </Card>
     );
@@ -80,4 +77,3 @@ export const WallPicturesComponent: React.FC<InteractiveObjectProps> = (props) =
         </>
     );
 };
-

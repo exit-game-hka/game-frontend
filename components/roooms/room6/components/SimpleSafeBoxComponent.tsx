@@ -83,6 +83,7 @@ export const SimpleSafeBoxComponent: React.FC<InteractiveObjectProps> = (props) 
                 <AnswerInputModalComponent
                     open={isOpen}
                     title="Wie läutet das Lösungswort ?"
+                    submitButtonLabel="weiter"
                     aufgabeId={aufgabe.id}
                     answer={aufgabe.loesungen[0].wert}
                     successMessage={successMessage}

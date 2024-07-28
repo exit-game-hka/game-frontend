@@ -2,3 +2,12 @@
 Dockerfile
 README.md
 node_modules
+.env
+.swc
+__tests__
+coverage
+.next
+dist
+.idea
+.git
+.vscode

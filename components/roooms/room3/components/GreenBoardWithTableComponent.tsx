@@ -33,14 +33,14 @@ export const GreenBoardWithTableComponent: React.FC<InteractiveObjectProps> = (p
             }}
         >
             <Stack spacing={"var(--space-5)"}>
-                <Typography level={"body-sm"}>REIHENFOLGE</Typography>
-                <Typography level={"title-lg"}>
+                <Typography>REIHENFOLGE</Typography>
+                <Typography>
                     SPARTAS MILITAER BENUTZTE SCYTALE CODE, ABER WELCHE METHODE?
                 </Typography>
-                <Typography level={"body-sm"} textAlign={"center"}>TEILEN</Typography>
-                <Typography level={"title-lg"}>SAFPGTARARENTI!</Typography>
+                <Typography textAlign={"center"}>TEILEN</Typography>
+                <Typography>SAFPGTARARENTI!</Typography>
             </Stack>
-            <Typography level={"body-sm"} sx={{ alignSelf: "flex-end" }}>
+            <Typography sx={{ alignSelf: "flex-end" }}>
                 1, 2, X
             </Typography>
         </Stack>
@@ -119,7 +119,7 @@ export const GreenBoardWithTableComponent: React.FC<InteractiveObjectProps> = (p
             <GreenBoardWithTable
                 // @ts-ignore
                 scale={5}
-                position={[-1, WORLD_COORDINATE[1] + 0.4, -12]}
+                position={[-6, WORLD_COORDINATE[1] + 0.4, -9]}
                 onClickGreenBoard={handleClickGreenBoard}
                 onClickFolder={handleClickFolder}
             />

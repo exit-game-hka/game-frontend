@@ -29,7 +29,6 @@ export const CupboardWithGlassDoorsComponent: React.FC<InteractiveObjectProps> =
         >
             <Typography
                 component={"p"}
-                level={"title-lg"}
                 sx={{
                     fontWeight: "bold",
                 }}

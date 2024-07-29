@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    basePath: "/exit-game-frontend",
+    basePath: process.env.NEXT_PUBLIC_BASE_PATH,
     transpilePackages: ['three'],
     compiler: {
         styledComponents: true,

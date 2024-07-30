@@ -16,7 +16,7 @@ import Input from "@mui/joy/Input";
 import Autocomplete from "@mui/joy/Autocomplete";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
 
-const CLIENT_PLAYER_PASSWORD="98#65@3f7$c+0d/29" as const;
+const CLIENT_PLAYER_PASSWORD="exitiwihka" as const;
 
 type LoginData = Partial<SpielerDto> & {
     password: string;

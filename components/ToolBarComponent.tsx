@@ -8,11 +8,17 @@ import {useMediaQuery} from "@/hooks/useMediaQuery";
 import {useRouter} from "next/navigation";
 import {ButtonType} from "@/store/useGlobalStore";
 import dynamic from "next/dynamic";
+import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined';
 
 const TimeManagerComponent = dynamic(
     () => import("@/components/managers/TimeManagerComponent"),
     { ssr: false }
 );
+
+const AvailableKeyboardKeysComponent = dynamic(
+    () => import("@/components/AvailableKeyboardKeysComponent"),
+    { ssr: false }
+)
 
 const ToolBarComponent: React.FC = () => {
     const { isSmall } = useMediaQuery();
@@ -30,9 +36,18 @@ const ToolBarComponent: React.FC = () => {
             onClick: () => router.push("/"),
         },
         {
+            label: "Lerninhalte",
+            icon: <AutoStoriesOutlinedIcon sx={{ fontSize: "var(--icon-medium)", color: "inherit" }}  />,
+            onClick: () => window.open(`${process.env.NEXT_PUBLIC_BASE_PATH}/lerninhalte.pdf`, "_blank"),
+        },
+        {
+            label: "Hilfe",
+            icon: <AvailableKeyboardKeysComponent />,
+        },
+        {
             label: "Verbleibende Zeit",
             icon: <TimeManagerComponent />
-        }
+        },
     ];
 
     return (

@@ -41,7 +41,7 @@ const ToolBarComponent: React.FC = () => {
             onClick: () => window.open(`${process.env.NEXT_PUBLIC_BASE_PATH}/lerninhalte.pdf`, "_blank"),
         },
         {
-            label: "Hilfe",
+            label: "Spielsteuerung",
             icon: <AvailableKeyboardKeysComponent />,
         },
         {
@@ -59,7 +59,7 @@ const ToolBarComponent: React.FC = () => {
                             {b.icon}
                             {isSmall ? null :
                                 <Typography
-                                    level="body-md"
+                                    level="body-sm"
                                     textAlign={"center"}
                                     noWrap
                                     sx={{ color: "inherit" }}
@@ -89,13 +89,13 @@ const CardContainer = styled(Card)`
     box-shadow: 0 0 10px black;
     padding: var(--space-4);
     border-radius: var(--space-3);
-    opacity: 55%;
+    opacity: 70%;
     overflow-x: auto;
 `;
 const ButtonListContainer = styled(Box)<{ cols: string, small: "true" | "false" }>`
     display: grid;
     grid-template-columns: ${(props) => `repeat(${props.cols}, 1fr)`};
-    grid-gap: ${(props) => props.small === "true" ? "var(--space-6)" : "var(--space-3)"};
+    grid-gap: ${(props) => props.small === "true" ? "var(--space-6)" : "var(--space-1)"};
 `;
 const ToolBarItem = styled(Box)`
     display: grid;

@@ -2,29 +2,16 @@
 import React from "react";
 import styled from "styled-components";
 import {Box, Button, Typography} from "@mui/joy";
-import {usePathname, useRouter} from "next/navigation";
 import Dropdown from '@mui/joy/Dropdown';
 import IconButton from '@mui/joy/IconButton';
 import Menu from '@mui/joy/Menu';
 import MenuButton from '@mui/joy/MenuButton';
 import MenuItem from '@mui/joy/MenuItem';
 import MoreVert from '@mui/icons-material/MoreVert';
-import {ResponsiveLayoutComponent} from "@/components/shared/ResponsiveLayoutComponent";
-import NightsStayOutlinedIcon from '@mui/icons-material/NightsStayOutlined';
-import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
-import {useColorScheme} from "@mui/material";
-import {useMediaQuery} from "@/hooks/useMediaQuery";
 import {ButtonType} from "@/store/useGlobalStore";
+import ModeSwitcherIconComponent from "@/components/ModeSwitcherIconComponent";
 
 const AppBarComponent: React.FC = () => {
-    const { isSmall } = useMediaQuery();
-    const { mode, setMode } = useColorScheme();
-
-    const switchMode = () => {
-        setMode(mode === 'dark' ? 'light' : 'dark');
-        //setColorScheme(mode === 'dark' ? { light: 'light' } : { dark: 'dark' });
-    }
-
     return (
         <AppBarContainer>
             <AppBarContent>
@@ -32,26 +19,7 @@ const AppBarComponent: React.FC = () => {
                     <Typography level="title-md">Exit Game HKA</Typography>
                 </LogoContainer>
                 <Box component="div" sx={{ display: "flex", gap: "var(--space-3)" }}>
-                    {isSmall ?
-                        <>
-                            <IconButton variant={"outlined"} onClick={switchMode}>
-                                {mode === "light" ? <NightsStayOutlinedIcon /> : <WbSunnyOutlinedIcon />}
-                            </IconButton>
-                            <ResponsiveLayoutComponent
-                                layoutOnLargeScreen={<LargeScreenNavigation buttons={[]} />}
-                                layoutOnSmallScreen={<SmallScreenNavigation buttons={[]} />}
-                            />
-                        </> :
-                        <>
-                            <ResponsiveLayoutComponent
-                                layoutOnLargeScreen={<LargeScreenNavigation buttons={[]} />}
-                                layoutOnSmallScreen={<SmallScreenNavigation buttons={[]} />}
-                            />
-                            <IconButton variant={"outlined"} onClick={switchMode}>
-                                {mode === "light" ? <NightsStayOutlinedIcon /> : <WbSunnyOutlinedIcon />}
-                            </IconButton>
-                        </>
-                    }
+                    <ModeSwitcherIconComponent />
                 </Box>
             </AppBarContent>
         </AppBarContainer>

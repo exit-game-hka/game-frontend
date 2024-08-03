@@ -19,7 +19,7 @@ import {
     Ergebnis,
     ErgebnisDto,
     getErgebnisByAufgabeIdAndSpielerIdApi,
-    getErgebnisBySemesterIdApi
+    getErgebnisBySemesterIdApi, getErgebnisBySpielerIdApi
 } from "@/api/ergebnis";
 import {UNIX_TIME_TO_JAVASCRIPT_TIME_FACTOR} from "@/app/contants";
 import {ThreeElements} from "@react-three/fiber";
@@ -38,6 +38,7 @@ import {Prisoner} from "@/components/avatars/Prisoner";
 import webSocketClient, {WEBSOCKET_SEND_NOTIFICATION_ENDPOINT} from "@/api/webSocketClient";
 import {Client} from "@stomp/stompjs";
 import {NotificationDto} from "@/api/notification";
+import {AxiosResponse} from "axios";
 
 // Zustand Doc: https://github.com/pmndrs/zustand
 // Avatar store
@@ -189,12 +190,17 @@ const useStatusStoreSlice: StateCreator<StatusStore> = () => ({
 
 type ErgebnisStore = {
     getErgebnisByAufgabeIdAndSpielerId: (aufgabeId: string, spielerId: string) => Promise<Ergebnis[]>;
+    getErgebnisBySpielerId: (spielerId: string) => Promise<Ergebnis[]>;
     getErgebnisBySemesterId: (id: string) => Promise<Ergebnis[]>;
     createErgebnis: (ergebnisDto: ErgebnisDto) => Promise<void>;
 };
 const useErgebnisStoreSlice: StateCreator<ErgebnisStore> = () => ({
     getErgebnisByAufgabeIdAndSpielerId: async (aufgabeId: string, spielerId: string): Promise<Ergebnis[]> => {
         const response = await getErgebnisByAufgabeIdAndSpielerIdApi(aufgabeId, spielerId);
+        return response.data;
+    },
+    getErgebnisBySpielerId: async (spielerId: string): Promise<Ergebnis[]> => {
+        const response = await getErgebnisBySpielerIdApi(spielerId);
         return response.data;
     },
     getErgebnisBySemesterId: async (id: string): Promise<Ergebnis[]> => {

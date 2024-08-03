@@ -1,6 +1,6 @@
 "use client";
 import React, {useEffect, useState} from "react";
-import {Box, Card, LinearProgress, Stack, Typography} from "@mui/joy";
+import {Avatar, Box, Card, LinearProgress, Stack, Typography} from "@mui/joy";
 import SquareOutlinedIcon from '@mui/icons-material/SquareOutlined';
 import styled from "styled-components";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
@@ -13,6 +13,7 @@ const StatsBarComponent: React.FC = () => {
     const { isSmall } = useMediaQuery();
     const pathname = usePathname();
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
+    const selectedAvatar = useGlobalStore((state) => state.selectedAvatar);
     const [numberOfChallengesSolved, setNumberOfChallengesSolved] = useState<number>(0);
 
     useEffect(() => {
@@ -30,7 +31,13 @@ const StatsBarComponent: React.FC = () => {
         <StatsContainer small={`${isSmall}`}>
             <Stack
                 direction="row"
-                spacing="var(--space-3)"
+                spacing="var(--space-2)"
+                sx={{
+                    alignItems: "center",
+                    alignContent: "center",
+                    justifyContent: "space-evenly",
+                    justifyItems: "space-evenly",
+                }}
             >
                 <Stack spacing="var(--space-2)">
                     <div>
@@ -46,14 +53,11 @@ const StatsBarComponent: React.FC = () => {
                         Angeklickte Objekte: 4%
                     </Typography>
                 </Stack>
-                <Box component="div">
-                    <SquareOutlinedIcon
-                        sx={{
-                            fontSize: "26px",
-                            transform: "rotateZ(45deg)",
-                        }}
-                    />
-                </Box>
+                <Avatar
+                    alt={"Charakter"}
+                    size={isSmall ? "sm" : "lg"}
+                    src={selectedAvatar.thumbnail}
+                />
                 <Stack spacing="var(--space-2)">
                     <div>
                         <LinearProgress
@@ -80,7 +84,7 @@ const StatsContainer = styled(Card)<{ small: "true" | "false" }>`
     transform: translateX(-50%);
     opacity: 70%;
     z-index: var(--z-index-content-behind-modal);
-    min-width: 350px;
+    width: ${(props) => props.small === "true" ? "95dvw" : "unset"};
 
     padding: ${(props) => props.small === "true" ? "var(--space-2) var(--space-3)" : "var(--space-2) var(--space-9)"};
     border-radius: 0 0 var(--space-3) var(--space-3);

@@ -201,7 +201,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                                                 {failureMessage}
                                             </Alert> : null
                                     }
-                                    <Button onClick={handleSubmit}>{submitButtonLabel ?? "Antwort senden"}</Button>
+                                    <Button onClick={handleSubmit}>{submitButtonLabel ?? "Weiter"}</Button>
                                 </Stack>
                             </DialogContent>
                         </ModalDialog>

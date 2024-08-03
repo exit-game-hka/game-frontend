@@ -20,7 +20,7 @@ const HomePageContentComponent: React.FC = ()  => {
     const { isSmall } = useMediaQuery();
     return (
         <SectionListContainer>
-            <OverviewCardComponent />
+            {/*<OverviewCardComponent />*/}
             <LoginSectionContainer issmall={`${isSmall}`}>
                 <Stack
                     spacing="var(--space-4)"

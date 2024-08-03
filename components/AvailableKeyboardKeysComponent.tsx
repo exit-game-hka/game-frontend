@@ -1,22 +1,24 @@
 "use client";
 import React, {useEffect, useState} from "react";
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
-
-import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import {useColorScheme} from "@mui/material";
-import {Stack, Typography} from "@mui/joy";
+import {Divider, Stack, Typography} from "@mui/joy";
 import Image from "next/image";
 import AdsClickOutlinedIcon from '@mui/icons-material/AdsClickOutlined';
 import MouseOutlinedIcon from '@mui/icons-material/MouseOutlined';
 import SwipeVerticalOutlinedIcon from '@mui/icons-material/SwipeVerticalOutlined';
+import SportsEsportsOutlinedIcon from '@mui/icons-material/SportsEsportsOutlined';
+import {useMediaQuery} from "@/hooks/useMediaQuery";
 
 type KeyList = {
     description: string;
+    detailedDescription?: string;
     keyIcons: string[];
 }
 
 const AvailableKeyboardKeysComponent: React.FC = () => {
     const { mode, setMode } = useColorScheme();
+    const { isSmall } = useMediaQuery();
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     useEffect(() => {
@@ -60,20 +62,37 @@ const AvailableKeyboardKeysComponent: React.FC = () => {
                 `${process.env.NEXT_PUBLIC_BASE_PATH}/keys/space-${mode}.svg`,
             ],
         },
+        {
+            description: "Vollbildmodus aktivieren/verlassen",
+            detailedDescription: "Nicht in allen Browsern verfügbar",
+            keyIcons: [
+                `${process.env.NEXT_PUBLIC_BASE_PATH}/keys/fullscreen-${mode}.svg`,
+            ],
+        },
     ];
 
     const modalContent = (
-        <Stack sx={{ justifySelf: "stretch" }} spacing={4}>
+        <Stack sx={{ justifySelf: "stretch" }} spacing={1.3}>
+            <Stack>
+                <Typography level="h3">Spielsteuerung</Typography>
+                <Typography level="body-sm">Tasten können kombiniert verwendet werden</Typography>
+            </Stack>
             {keyList.map((key) =>
                 <React.Fragment key={key.description}>
                     <Stack
-                        direction="row"
-                        spacing={2}
                         sx={{
+                            display: "grid",
+                            gridTemplateColumns: "1fr auto",
+                            gap: 1,
                             alignContent: "center",
                             alignItems: "center",
+                            px: 0.5,
                         }}
                     >
+                        <Stack>
+                            <Typography fontWeight={"bold"}>{key.description}</Typography>
+                            <Typography level="body-sm">{key.detailedDescription}</Typography>
+                        </Stack>
                         <Stack
                             direction="row"
                             spacing={1}
@@ -87,7 +106,7 @@ const AvailableKeyboardKeysComponent: React.FC = () => {
                                     <Image
                                         src={icon}
                                         alt={icon}
-                                        width={50}
+                                        width={icon.includes("space") ? 155 : 50}
                                         height={50}
                                         objectFit={"contain"}
                                         style={{
@@ -99,18 +118,28 @@ const AvailableKeyboardKeysComponent: React.FC = () => {
                                 </React.Fragment>
                             )}
                         </Stack>
-                        <Typography fontWeight={"bold"}>{key.description}</Typography>
                     </Stack>
+                    <Divider />
                 </React.Fragment>
             )}
             <Stack
-                direction="row"
-                spacing={2}
                 sx={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr auto",
+                    gap: 1,
                     alignContent: "center",
                     alignItems: "center",
+                    px: 0.5,
                 }}
             >
+                <Stack>
+                    <Typography fontWeight={"bold"}>
+                        Sichtwinkel und Position der 3D-Kamera ändern
+                    </Typography>
+                    <Typography level="body-sm">
+                        Rechtsklick + Maus bewegen
+                    </Typography>
+                </Stack>
                 <Stack
                     direction="row"
                     spacing={1}
@@ -120,22 +149,31 @@ const AvailableKeyboardKeysComponent: React.FC = () => {
                     }}
                 >
                     <AdsClickOutlinedIcon sx={{ fontSize: "40px", color: mode === "light" ? "black" : "white" }} />
-                    <Typography>+</Typography>
+                    <Typography level="title-lg" fontWeight={"bold"}>+</Typography>
                     <MouseOutlinedIcon sx={{ fontSize: "40px", color: mode === "light" ? "black" : "white" }} />
                 </Stack>
-                <Typography fontWeight={"bold"}>
-                    Sichtwinkel und Position der 3D-Kamera ändern(Klick + Maus bewegen)
-                </Typography>
             </Stack>
 
+            <Divider />
+
             <Stack
-                direction="row"
-                spacing={2}
                 sx={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr auto",
+                    gap: 1,
                     alignContent: "center",
                     alignItems: "center",
+                    px: 0.5,
                 }}
             >
+                <Stack>
+                    <Typography fontWeight={"bold"}>
+                        Sichttiefe der 3D-Kamera anpassen
+                    </Typography>
+                    <Typography level="body-sm">
+                        Mausrad drehen oder vertikales Streichen mit zwei Fingern auf Trackpad
+                    </Typography>
+                </Stack>
                 <Stack
                     direction="row"
                     spacing={1}
@@ -148,16 +186,12 @@ const AvailableKeyboardKeysComponent: React.FC = () => {
                     <Typography>oder</Typography>
                     <SwipeVerticalOutlinedIcon sx={{ fontSize: "40px", color: mode === "light" ? "black" : "white" }} />
                 </Stack>
-                <Typography fontWeight={"bold"}>
-                    Sichttiefe der 3D-Kamera vergrößern/verkleinen
-                    (Mausrad oder vertikales Streichen mit zwei Fingern auf Trackpad)
-                </Typography>
             </Stack>
         </Stack>
     );
     return (
         <>
-            <HelpOutlineOutlinedIcon
+            <SportsEsportsOutlinedIcon
                 onClick={() => setIsOpen(true)}
                 sx={{ fontSize: "var(--icon-medium)", color: "inherit" }}
             />
@@ -166,7 +200,10 @@ const AvailableKeyboardKeysComponent: React.FC = () => {
                 content={modalContent}
                 onClose={() => setIsOpen(false)}
                 modalDialogProps={{
-                    maxWidth: "500px",
+                    sx: {
+                        maxWidth: "600px",
+                        maxHeight: isSmall ? "unset" : "800px",
+                    }
                 }}
             />
         </>

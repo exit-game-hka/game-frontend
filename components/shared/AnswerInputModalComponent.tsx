@@ -153,6 +153,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                                     entering: { opacity: 1 },
                                     entered: { opacity: 1 },
                                 }[state],
+                                mt: isSmall ? "initial" : -20,
                             }}
                             {...modalDialogProps}
                             layout={isSmall ? "fullscreen" : "center"}

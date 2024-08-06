@@ -17,7 +17,7 @@ export const WallPicturesComponent: React.FC<InteractiveObjectProps> = (props) =
     const modalContent = (
         <Card
             sx={{
-                background: `url('${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/ancien_paper.png')`,
+                background: `url('${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/ancien_paper.jpg')`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 width: "inherit",

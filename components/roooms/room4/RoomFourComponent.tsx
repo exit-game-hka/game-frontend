@@ -11,13 +11,13 @@ import {useTexture} from "@/hooks/useTexture";
 import {GroundComponent} from "@/components/GroundComponent";
 import {WORLD_COORDINATE} from "@/app/contants";
 import {RoomProps} from "@/components/roooms/RoomProps";
-import {ExitDoorComponent} from "@/components/roooms/ExitDoorComponent";
 import {DoorToPreviousRoomComponent} from "@/components/roooms/DoorToPreviousRoomComponent";
 import {ClockComponent} from "@/components/roooms/room4/components/ClockComponent";
 import {OfficeWithBooksAndGlobeComponent} from "@/components/roooms/room4/components/OfficeWithBooksAndGlobeComponent";
 import {TheologicalBookStackComponent} from "@/components/roooms/room4/components/TheologicalBookStackComponent";
 import {SmallCupBoardComponent} from "@/components/roooms/room4/components/SmallCupBoardComponent";
 import {InstancedWallModelComponent} from "@/components/roooms/InstancedWallModelComponent";
+import ExitComponent from "@/components/roooms/room4/components/ExitComponent";
 
 const RoomFourComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
@@ -53,12 +53,9 @@ const RoomFourComponent: React.FC<RoomProps> = (props) => {
                     },
                 ]}
             />
-            <ExitDoorComponent
+            <ExitComponent
                 aufgabe={raum.aufgaben[0]}
                 nextRoomId={"20000000-0000-0000-0000-000000000005"}
-                doorProps={{
-                    position: [9.98, WORLD_COORDINATE[1], 0],
-                }}
             />
             <DoorToPreviousRoomComponent
                 doorProps={{

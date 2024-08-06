@@ -66,8 +66,13 @@ export const useTimer = (
             saveCurrentTimeoutToLocalStorage();
         }, 1000);
 
+        const getTotalPlayTime = (): number => {
+            if (minutes < 0) return (minutes * -1) + timeoutInMinutes
+            return  minutes;
+        }
+
         if (minutes === 0 && seconds === 0 && onTimeout) {
-            onTimeout();
+            //onTimeout();
         }
 
         return () => clearInterval(interval);

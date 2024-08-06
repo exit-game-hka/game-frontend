@@ -24,10 +24,11 @@ export const WhiteClockComponent: React.FC<InteractiveObjectProps> = (props) => 
         >
             <Box
                 component={"img"}
-                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room1/alphanumeric-wheel.png`}
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room1/clock.jpg`}
                 sx={{
                     width: "100%",
                     objectFit: "cover",
+                    borderRadius: "10px",
                 }}
             />
         </Box>

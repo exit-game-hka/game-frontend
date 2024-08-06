@@ -24,7 +24,7 @@ const DebriefingPage: React.FC = () => {
             type: NOTIFICATION_TYPE.PLAYER_ENDED_GAME,
         };
         emitNotification(notificationDto);
-        router.push("/feedback");
+        router.push("/result-and-qrcode");
     };
 
     return (

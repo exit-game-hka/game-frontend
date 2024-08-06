@@ -153,6 +153,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                                     entering: { opacity: 1 },
                                     entered: { opacity: 1 },
                                 }[state],
+                                mt: isSmall ? "initial" : -20,
                             }}
                             {...modalDialogProps}
                             layout={isSmall ? "fullscreen" : "center"}
@@ -201,7 +202,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                                                 {failureMessage}
                                             </Alert> : null
                                     }
-                                    <Button onClick={handleSubmit}>{submitButtonLabel ?? "Antwort senden"}</Button>
+                                    <Button onClick={handleSubmit}>{submitButtonLabel ?? "Weiter"}</Button>
                                 </Stack>
                             </DialogContent>
                         </ModalDialog>

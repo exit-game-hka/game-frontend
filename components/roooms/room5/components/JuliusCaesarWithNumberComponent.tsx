@@ -13,7 +13,7 @@ const JuliusCaesarWithNumberComponent: React.FC<InteractiveObjectProps> = (props
     const { raum, ...rest } = props;
     const texture = useLoader(
         TextureLoader,
-        `${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room5/julius-caesar-with-number.png`
+        `${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room5/julius-caesar-with-number.jpg`
     );
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const createInteraktion = useGlobalStore((state) => state.createInteraktion);
@@ -23,7 +23,7 @@ const JuliusCaesarWithNumberComponent: React.FC<InteractiveObjectProps> = (props
         <Stack spacing={"var(--space-3)"} sx={{ mt: "var(--space-4)" }}>
             <Box
                 component={"img"}
-                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room5/julius-caesar-with-number.png`}
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room5/julius-caesar-with-number.jpg`}
                 alt={"Julius Caesar"}
                 sx={{
                     width: "100%",

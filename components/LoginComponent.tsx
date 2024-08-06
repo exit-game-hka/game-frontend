@@ -8,7 +8,7 @@ import {Semester} from "@/api/semester";
 import {Veranstaltung} from "@/api/veranstaltung";
 import {StatusDto} from "@/api/status";
 import {LoadingComponent} from "@/components/shared/LoadingComponent";
-import {Alert, Box, Button, Card, Stack} from "@mui/material";
+import {Alert, Button, Card, Stack, Typography} from "@mui/material";
 import {FormContainerComponent} from "@/components/shared/FormContainerComponent";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
@@ -22,10 +22,12 @@ type LoginData = Partial<SpielerDto> & {
     password: string;
 };
 
+const DEFAULT_VERANSTALTUNGSID = "01000000-0000-0000-0000-000000000001";
+
 const INITIAL_STATE: LoginData = {
     spielerId: "",
     semesterId: undefined,
-    veranstaltungId: undefined,
+    veranstaltungId: DEFAULT_VERANSTALTUNGSID,
     password: "",
 } as const;
 
@@ -132,12 +134,12 @@ const LoginComponent: React.FC = () => {
         }));
     }
 
-    const handleVeranstaltungChange = (option: Veranstaltung) => {
-        setLoginData(prevState => ({
-            ...prevState,
-            veranstaltungId: option ? (option as Veranstaltung).id : "",
-        }));
-    }
+    // const handleVeranstaltungChange = (option: Veranstaltung) => {
+    //     setLoginData(prevState => ({
+    //         ...prevState,
+    //         veranstaltungId: option ? (option as Veranstaltung).id : "",
+    //     }));
+    // }
 
     if (
         isLoadingSemesters ||
@@ -174,21 +176,22 @@ const LoginComponent: React.FC = () => {
                     borderRadius: "var(--space-4)",
                 }}
             >
-                <Box
-                    component={"img"}
-                    src={`${process.env.NEXT_PUBLIC_BASE_PATH}/into-thumbnail.jpg`}
-                    alt={"into thumbnail"}
-                    sx={{
-                        objectFit: "cover",
-                        width: "200px",
-                        borderRadius: "50%",
-                        border: "3px solid white",
-                        justifySelf: "center",
-                        mb: "var(--space-4)",
-                    }}
-                />
+                {/*<Box*/}
+                {/*    component={"img"}*/}
+                {/*    src={`${process.env.NEXT_PUBLIC_BASE_PATH}/into-thumbnail.jpg`}*/}
+                {/*    alt={"into thumbnail"}*/}
+                {/*    sx={{*/}
+                {/*        objectFit: "cover",*/}
+                {/*        width: "200px",*/}
+                {/*        borderRadius: "50%",*/}
+                {/*        border: "3px solid white",*/}
+                {/*        justifySelf: "center",*/}
+                {/*        mb: "var(--space-4)",*/}
+                {/*    }}*/}
+                {/*/>*/}
+                <Typography level="h3" textAlign="center">Anmeldung</Typography>
                 <FormContainerComponent>
-                    <FormControl size="md">
+                    <FormControl size="lg">
                         <FormLabel>Passwort</FormLabel>
                         <Input
                             slotProps={{
@@ -203,7 +206,7 @@ const LoginComponent: React.FC = () => {
                             }}
                         />
                     </FormControl>
-                    <FormControl size="md">
+                    <FormControl size="lg">
                         <FormLabel>Semester</FormLabel>
                         <Autocomplete
                             placeholder="Semester auswählen"
@@ -212,17 +215,24 @@ const LoginComponent: React.FC = () => {
                             onChange={(_, option) => handleSemesterChange(option as unknown as Semester)}
                         />
                     </FormControl>
-                    <FormControl size="md">
-                        <FormLabel>Fachgebiet</FormLabel>
-                        <Autocomplete
-                            placeholder="Fachgebiet auswählen"
-                            options={veranstaltungen}
-                            getOptionLabel={(option: Veranstaltung) => `${option.bezeichnung} - ${option.name}`}
-                            onChange={(_, option) => handleVeranstaltungChange(option as unknown as Veranstaltung)}
-                        />
-                    </FormControl>
+                    {/*<FormControl size="md">*/}
+                    {/*    <FormLabel>Fachgebiet</FormLabel>*/}
+                    {/*    <Autocomplete*/}
+                    {/*        placeholder="Fachgebiet auswählen"*/}
+                    {/*        options={veranstaltungen}*/}
+                    {/*        getOptionLabel={(option: Veranstaltung) => `${option.bezeichnung} - ${option.name}`}*/}
+                    {/*        onChange={(_, option) => handleVeranstaltungChange(option as unknown as Veranstaltung)}*/}
+                    {/*    />*/}
+                    {/*</FormControl>*/}
                     {formError ? <Alert color="danger">{formError}</Alert> : null}
-                    <Button onClick={handleSubmit}>Weiter</Button>
+                    <Button
+                        onClick={handleSubmit}
+                        sx={{
+                            backgroundColor: "var(--color-primary) !important",
+                        }}
+                    >
+                        Weiter
+                    </Button>
                 </FormContainerComponent>
             </Card>
         </Stack>

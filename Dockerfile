@@ -32,14 +32,17 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
 # Run the app
-FROM node:${NODE_VERSION}-alpine AS runner
+FROM alpine:3.20.2 AS runner
 WORKDIR /app
+
+# Install Node.js and npm
+RUN apk add --no-cache nodejs
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+#RUN addgroup --system --gid 1001 nodejs
+#RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json

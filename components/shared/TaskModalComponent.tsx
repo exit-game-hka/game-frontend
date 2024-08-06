@@ -56,11 +56,12 @@ export const TaskModalComponent: React.FC<ModalProps> = (props: ModalProps) => {
                                     entering: { opacity: 1 },
                                     entered: { opacity: 1 },
                                 }[state],
+                                mt: isSmall ? "unset" : -10,
                             }}
                             {...modalDialogProps}
                             layout={isSmall ? "fullscreen" : "center"}
                         >
-                            <ModalClose variant={"soft"} sx={{ borderRadius: "50%" }} />
+                            { onClose ? <ModalClose variant={"soft"} sx={{ borderRadius: "50%" }} /> : null }
                             <DialogHeader>
                                 {title ? <DialogTitle>{title}</DialogTitle> : null}
                             </DialogHeader>

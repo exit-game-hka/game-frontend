@@ -1,7 +1,6 @@
 import {create, StateCreator} from "zustand";
 import {ComponentType, ForwardRefExoticComponent, ReactNode, RefAttributes} from "react";
 import {Megan} from "@/components/avatars/Megan";
-import {Lewis} from "@/components/avatars/Lewis";
 import {Maria} from "@/components/avatars/Maria";
 import {Aufgabe, getAllTasksApi, getTaskByIdApi} from "@/api/aufgabe";
 import {getAllRoomsApi, getRoomByIdApi, Raum} from "@/api/raum";
@@ -19,7 +18,7 @@ import {
     Ergebnis,
     ErgebnisDto,
     getErgebnisByAufgabeIdAndSpielerIdApi,
-    getErgebnisBySemesterIdApi
+    getErgebnisBySemesterIdApi, getErgebnisBySpielerIdApi
 } from "@/api/ergebnis";
 import {UNIX_TIME_TO_JAVASCRIPT_TIME_FACTOR} from "@/app/contants";
 import {ThreeElements} from "@react-three/fiber";
@@ -38,6 +37,7 @@ import {Prisoner} from "@/components/avatars/Prisoner";
 import webSocketClient, {WEBSOCKET_SEND_NOTIFICATION_ENDPOINT} from "@/api/webSocketClient";
 import {Client} from "@stomp/stompjs";
 import {NotificationDto} from "@/api/notification";
+import {AxiosResponse} from "axios";
 
 // Zustand Doc: https://github.com/pmndrs/zustand
 // Avatar store
@@ -53,11 +53,11 @@ const INITIAL_AVATAR_LIST: AvatarItem[] = [
         model: Megan,
         thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/megan/thumbnail.png`,
     },
-    {
-        name: "Lewis",
-        model: Lewis,
-        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/lewis/thumbnail.png`,
-    },
+    // {
+    //     name: "Lewis",
+    //     model: Lewis,
+    //     thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/lewis/thumbnail.png`,
+    // },
     {
         name: "Maria",
         model: Maria,
@@ -189,12 +189,17 @@ const useStatusStoreSlice: StateCreator<StatusStore> = () => ({
 
 type ErgebnisStore = {
     getErgebnisByAufgabeIdAndSpielerId: (aufgabeId: string, spielerId: string) => Promise<Ergebnis[]>;
+    getErgebnisBySpielerId: (spielerId: string) => Promise<Ergebnis[]>;
     getErgebnisBySemesterId: (id: string) => Promise<Ergebnis[]>;
     createErgebnis: (ergebnisDto: ErgebnisDto) => Promise<void>;
 };
 const useErgebnisStoreSlice: StateCreator<ErgebnisStore> = () => ({
     getErgebnisByAufgabeIdAndSpielerId: async (aufgabeId: string, spielerId: string): Promise<Ergebnis[]> => {
         const response = await getErgebnisByAufgabeIdAndSpielerIdApi(aufgabeId, spielerId);
+        return response.data;
+    },
+    getErgebnisBySpielerId: async (spielerId: string): Promise<Ergebnis[]> => {
+        const response = await getErgebnisBySpielerIdApi(spielerId);
         return response.data;
     },
     getErgebnisBySemesterId: async (id: string): Promise<Ergebnis[]> => {

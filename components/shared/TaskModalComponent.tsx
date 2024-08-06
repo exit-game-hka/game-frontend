@@ -56,6 +56,7 @@ export const TaskModalComponent: React.FC<ModalProps> = (props: ModalProps) => {
                                     entering: { opacity: 1 },
                                     entered: { opacity: 1 },
                                 }[state],
+                                mt: isSmall ? "unset" : -10,
                             }}
                             {...modalDialogProps}
                             layout={isSmall ? "fullscreen" : "center"}

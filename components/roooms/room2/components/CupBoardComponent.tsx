@@ -21,7 +21,7 @@ export const CupBoardComponent: React.FC<InteractiveObjectProps> = (props) => {
             component="div"
             sx={{
                 borderRadius: "var(--space-3)",
-                background: `url('${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/ancien_paper.png')`,
+                background: `url('${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/ancien_paper.jpg')`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 p: "var(--space-6) var(--space-4)",

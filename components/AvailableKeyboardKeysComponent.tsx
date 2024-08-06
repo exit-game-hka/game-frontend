@@ -203,6 +203,7 @@ const AvailableKeyboardKeysComponent: React.FC = () => {
                     sx: {
                         maxWidth: "600px",
                         maxHeight: isSmall ? "unset" : "800px",
+                        mt: -8,
                     }
                 }}
             />

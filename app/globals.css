@@ -19,7 +19,7 @@ body {
     --z-index-splash-screen: 1000000002;
 
     /* Icon sizes */
-    --icon-medium: 30px;
+    --icon-medium: 35px;
     --app-bar-height: 60px;
 
     /* Font sizes */
@@ -44,7 +44,7 @@ body {
     --font-15xLarge: 100px;
 
     /* Colors */
-    --color-primary: #653C8C;
+    --color-primary: #64378C;
     --color-secondary: #A3E7CB;
     --color-tertiary: #F0FCF8;
     --color-on-primary: #FFFFFF;

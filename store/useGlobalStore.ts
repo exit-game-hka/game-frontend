@@ -1,7 +1,6 @@
 import {create, StateCreator} from "zustand";
 import {ComponentType, ForwardRefExoticComponent, ReactNode, RefAttributes} from "react";
 import {Megan} from "@/components/avatars/Megan";
-import {Lewis} from "@/components/avatars/Lewis";
 import {Maria} from "@/components/avatars/Maria";
 import {Aufgabe, getAllTasksApi, getTaskByIdApi} from "@/api/aufgabe";
 import {getAllRoomsApi, getRoomByIdApi, Raum} from "@/api/raum";
@@ -54,11 +53,11 @@ const INITIAL_AVATAR_LIST: AvatarItem[] = [
         model: Megan,
         thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/megan/thumbnail.png`,
     },
-    {
-        name: "Lewis",
-        model: Lewis,
-        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/lewis/thumbnail.png`,
-    },
+    // {
+    //     name: "Lewis",
+    //     model: Lewis,
+    //     thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/lewis/thumbnail.png`,
+    // },
     {
         name: "Maria",
         model: Maria,

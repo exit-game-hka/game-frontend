@@ -22,12 +22,13 @@ type LoginData = Partial<SpielerDto> & {
     password: string;
 };
 
-const DEFAULT_VERANSTALTUNGSID = "01000000-0000-0000-0000-000000000001";
+const DEFAULT_VERANSTALTUNG_ID = "01000000-0000-0000-0000-000000000001";
+const DEFAULT_SEMESTER_ID = "00000000-0000-0000-0000-000000000001";
 
 const INITIAL_STATE: LoginData = {
     spielerId: "",
-    semesterId: undefined,
-    veranstaltungId: DEFAULT_VERANSTALTUNGSID,
+    semesterId: DEFAULT_SEMESTER_ID,
+    veranstaltungId: DEFAULT_VERANSTALTUNG_ID,
     password: "",
 } as const;
 
@@ -206,15 +207,15 @@ const LoginComponent: React.FC = () => {
                             }}
                         />
                     </FormControl>
-                    <FormControl size="lg">
-                        <FormLabel>Semester</FormLabel>
-                        <Autocomplete
-                            placeholder="Semester auswählen"
-                            options={semesters}
-                            getOptionLabel={(option: Semester) => option.bezeichnung}
-                            onChange={(_, option) => handleSemesterChange(option as unknown as Semester)}
-                        />
-                    </FormControl>
+                    {/*<FormControl size="lg">*/}
+                    {/*    <FormLabel>Semester</FormLabel>*/}
+                    {/*    <Autocomplete*/}
+                    {/*        placeholder="Semester auswählen"*/}
+                    {/*        options={semesters}*/}
+                    {/*        getOptionLabel={(option: Semester) => option.bezeichnung}*/}
+                    {/*        onChange={(_, option) => handleSemesterChange(option as unknown as Semester)}*/}
+                    {/*    />*/}
+                    {/*</FormControl>*/}
                     {/*<FormControl size="md">*/}
                     {/*    <FormLabel>Fachgebiet</FormLabel>*/}
                     {/*    <Autocomplete*/}

@@ -137,7 +137,7 @@ const AvailableKeyboardKeysComponent: React.FC = () => {
                         Sichtwinkel und Position der 3D-Kamera ändern
                     </Typography>
                     <Typography level="body-sm">
-                        Rechtsklick + Maus bewegen
+                        Linksklick + Maus bewegen
                     </Typography>
                 </Stack>
                 <Stack

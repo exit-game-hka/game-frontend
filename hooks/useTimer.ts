@@ -54,7 +54,7 @@ export const useTimer = (
             if (minutes === undefined || seconds === undefined) return;
 
             if (seconds === 0) {
-                if (minutes === 0) {
+                if (minutes === -60) {
                     clearInterval(interval);
                     return;
                 }
@@ -71,7 +71,7 @@ export const useTimer = (
             return  minutes;
         }
 
-        if (minutes === 0 && seconds === 0 && onTimeout) {
+        if (minutes === 0 && seconds === -60 && onTimeout) {
             //onTimeout();
         }
 

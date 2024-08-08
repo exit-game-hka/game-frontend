@@ -165,3 +165,12 @@ a {
         -moz-transform: rotate(1deg);
     }
 }
+
+@keyframes glow {
+    from {
+        text-shadow: orangered 1px 0 1px;
+    }
+    to {
+        text-shadow: red 1px 0 15px;
+    }
+}

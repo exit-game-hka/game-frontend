@@ -18,7 +18,14 @@ export const TimerTotalTimeToPlayComponent: React.FC<Props> = (props) => {
     return (
         <TimerContainer small={`${isSmall}`}>
             {/*<CardContainer small={`${isSmall}`}>*/}
-                <Typography level="h3" noWrap>
+                <Typography
+                    level="h3"
+                    noWrap
+                    color={minutes < 0 ? "danger" : "neutral"}
+                    sx={{
+                        animation: "glow 1.5s ease-in-out infinite alternate;",
+                    }}
+                >
                     {`${minutes.toString().padStart(2, '0')} : ${seconds.toString().padStart(2, '0')}`}
                 </Typography>
             {/*</CardContainer>*/}

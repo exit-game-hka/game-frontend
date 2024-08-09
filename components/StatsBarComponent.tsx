@@ -14,7 +14,13 @@ const StatsBarComponent: React.FC = () => {
     const pathname = usePathname();
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
     const selectedAvatar = useGlobalStore((state) => state.selectedAvatar);
+    const setProzentZahlAngeklickteObjekte = useGlobalStore((state) => state.setProzentZahlAngeklickteObjekte);
+    const prozentZahlAngeklickteObjekte = useGlobalStore((state) => state.prozentZahlAngeklickteObjekte);
     const [numberOfChallengesSolved, setNumberOfChallengesSolved] = useState<number>(0);
+
+    useEffect(() => {
+        setProzentZahlAngeklickteObjekte();
+    }, []);
 
     useEffect(() => {
         const player = getSpielerFromLocalStorage();
@@ -30,34 +36,38 @@ const StatsBarComponent: React.FC = () => {
     return (
         <StatsContainer small={`${isSmall}`}>
             <Stack
-                direction="row"
-                spacing="var(--space-2)"
                 sx={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr auto 1fr",
+                    gap: isSmall ? "var(--space-2)" : "var(--space-4)",
                     alignItems: "center",
                     alignContent: "center",
-                    justifyContent: "space-evenly",
-                    justifyItems: "space-evenly",
                 }}
             >
                 <Stack spacing="var(--space-2)">
                     <div>
                         <LinearProgress
                             size="lg"
-                            value={60}
+                            value={prozentZahlAngeklickteObjekte}
                             determinate
                             thickness={10}
                             variant="outlined"
                         />
                     </div>
                     <Typography fontWeight="bold" level={isSmall ? "body-xs" : "body-sm"}>
-                        Angeklickte Objekte: 4%
+                        % Angeklickte Objekte: {prozentZahlAngeklickteObjekte}%
                     </Typography>
                 </Stack>
-                <Avatar
-                    alt={"Charakter"}
-                    size={isSmall ? "sm" : "lg"}
-                    src={selectedAvatar.thumbnail}
-                />
+                <Stack>
+                    <Avatar
+                        alt={"Charakter"}
+                        size={isSmall ? "sm" : "lg"}
+                        src={selectedAvatar.thumbnail}
+                    />
+                    <Typography fontWeight="bold" level={"body-xs"}>
+                        {selectedAvatar.name}
+                    </Typography>
+                </Stack>
                 <Stack spacing="var(--space-2)">
                     <div>
                         <LinearProgress
@@ -86,7 +96,7 @@ const StatsContainer = styled(Card)<{ small: "true" | "false" }>`
     z-index: var(--z-index-content-behind-modal);
     width: ${(props) => props.small === "true" ? "95dvw" : "unset"};
 
-    padding: ${(props) => props.small === "true" ? "var(--space-2) var(--space-3)" : "var(--space-2) var(--space-9)"};
+    padding: ${(props) => props.small === "true" ? "var(--space-2) var(--space-3)" : "var(--space-2) var(--space-5)"};
     border-radius: 0 0 var(--space-3) var(--space-3);
     box-shadow: 0 0 10px black;
 

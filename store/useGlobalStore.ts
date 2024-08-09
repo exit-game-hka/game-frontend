@@ -25,7 +25,7 @@ import {ThreeElements} from "@react-three/fiber";
 import {AnimationAction} from "three";
 import {
     createInteraktionApi,
-    getInteraktionBySpielerIdAndAufgabeIdApi,
+    getInteraktionBySpielerIdAndAufgabeIdApi, getInteraktionBySpielerIdApi,
     Interaktion,
     InteraktionDto
 } from "@/api/interaktion";
@@ -235,16 +235,39 @@ const useAnimationStoreSlice: StateCreator<AnimationStore> = (set, get) => ({
 // Interaktion store
 
 type InteraktionStore = {
+    getInteraktionBySpielerId: (spielerId: string) => Promise<Interaktion[]>;
     getInteraktionBySpielerIdAndAufgabeId: (spielerId: string, aufgabeId: string) => Promise<Interaktion[]>;
     createInteraktion: (interaktionDto: InteraktionDto) => Promise<void>;
+    prozentZahlAngeklickteObjekte: number;
+    setProzentZahlAngeklickteObjekte: () => Promise<void>;
 };
-const useInteraktionStoreSlice: StateCreator<InteraktionStore> = () => ({
+const useInteraktionStoreSlice: StateCreator<InteraktionStore> = (set, get) => ({
+    getInteraktionBySpielerId: async (spielerId: string): Promise<Interaktion[]> => {
+        const response = await getInteraktionBySpielerIdApi(spielerId);
+        return response.data;
+    },
     getInteraktionBySpielerIdAndAufgabeId: async (spielerId: string, aufgabeId: string): Promise<Interaktion[]> => {
         const response = await getInteraktionBySpielerIdAndAufgabeIdApi(spielerId, aufgabeId);
         return response.data;
     },
     createInteraktion: async (interaktionDto: InteraktionDto): Promise<void> => {
         await createInteraktionApi(interaktionDto);
+        await get().setProzentZahlAngeklickteObjekte();
+    },
+    prozentZahlAngeklickteObjekte: 0,
+    setProzentZahlAngeklickteObjekte: async () => {
+        const player = useGlobalStore.getState().getSpielerFromLocalStorage();
+        if (!player) {
+            console.log("No player!");
+            return;
+        }
+        const interaktionOfPlayer = await get().getInteraktionBySpielerId(player.id);
+        const interaktionOfPlayerDistinct = interaktionOfPlayer.reduce(
+            (acc: Interaktion[], curr: Interaktion) => acc.find((i) => i.action === curr.action) ? acc : [...acc, curr], []
+        );
+        const quotient = (interaktionOfPlayerDistinct.length / ALL_INTERACTION_ACTIONS.length);
+        const progressPercentage = Math.round(quotient * 100);
+        set(() => ({ prozentZahlAngeklickteObjekte: progressPercentage }));
     },
 });
 
@@ -446,3 +469,26 @@ const convertToSemesterModel = (semester: Semester): Semester => {
         ende: new Date(semester.ende),
     };
 };
+
+export const ALL_INTERACTION_ACTIONS: string[] = [
+    "Infos über Alan Turing angeklickt",
+    "Auf die Zahl 26 geklickt",
+    "Schwarzes alphanumerisches Rad angeklickt",
+    "Buchseite über Kryptographie angeklickt",
+    "Portrait von Julius Caesar angeklickt",
+    "Hinweis mit dem Text 'U → N' angeklickt",
+    "Auf das Plakat mit dem Text 'Substitution' geklickt",
+    "Tafel mit Info über Spartas Militär angeklickt",
+    "Buch 2 angeklickt",
+    "Uhr mit dem Text 'Decode' angeklickt",
+    "Buch 2 mit dem Text 'Die Anzahl der Zeilen ist wichtig' angeklickt",
+    "Tabelle mit vier Zeilen angeklickt",
+    "Buch 1 über Kryptographie und Kryptananlyse angeklickt",
+    "Portrait von Julius Caesar mit Zahl 2 angeklickt",
+    "Pflanze, die auf vier Zeilen hinweist, angeklickt",
+    "Notiz 'Welche Methode fehlt?' angeklickt",
+    "Hinweis mit dem Text 'U W D U V K V W V K Q P F W T E J E C G U C T O G G V U V T C P U R Q U K V K Q P' angeklickt",
+    "Hinweis über Shannons Regeln angeklickt",
+    "Tresor angeklickt",
+    "Notiz angeklickt",
+];

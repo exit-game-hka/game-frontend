@@ -12,6 +12,10 @@ export type InteraktionDto = Omit<Interaktion, "id">;
 
 const ENDPOINT = "/interaktionen" as const;
 
+export const getInteraktionBySpielerIdApi = async (spielerId: string):  Promise<AxiosResponse<Interaktion[]>> => {
+    return await axiosClient.get<Interaktion[]>(`${ENDPOINT}?spieler_id=${spielerId}`);
+};
+
 export const getInteraktionBySpielerIdAndAufgabeIdApi = async (spielerId: string, aufgabeId: string): Promise<AxiosResponse<Interaktion[]>> => {
     return await axiosClient.get<Interaktion[]>(`${ENDPOINT}?spieler_id=${spielerId}&aufgabe_id=${aufgabeId}`);
 };

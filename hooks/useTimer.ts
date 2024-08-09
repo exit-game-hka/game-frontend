@@ -38,6 +38,11 @@ export const useTimer = (
                 setSeconds(0);
                 return;
             }
+            if (minutesFromLocalStorage === -60) {
+                setMinutes(timeoutInMinutes);
+                setSeconds(0);
+                return;
+            }
             setMinutes(minutesFromLocalStorage);
             setSeconds(secondsFromLocalStorage);
         }

@@ -23,7 +23,7 @@ export const TimerTotalTimeToPlayComponent: React.FC<Props> = (props) => {
                     noWrap
                     color={minutes < 0 ? "danger" : "neutral"}
                     sx={{
-                        animation: "glow 1.5s ease-in-out infinite alternate;",
+                        animation: minutes < 0 ? "glow 1.5s ease-in-out infinite alternate" : "unset",
                     }}
                 >
                     {`${minutes.toString().padStart(2, '0')} : ${seconds.toString().padStart(2, '0')}`}

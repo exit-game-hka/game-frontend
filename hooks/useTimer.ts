@@ -76,8 +76,8 @@ export const useTimer = (
             return  minutes;
         }
 
-        if (minutes === 0 && seconds === -60 && onTimeout) {
-            //onTimeout();
+        if (minutes === -60 && seconds === 0 && onTimeout) {
+            onTimeout();
         }
 
         return () => clearInterval(interval);

@@ -28,7 +28,7 @@ const TimeManagerComponent: React.FC = () => {
 
     const handleTimeout = () => {
         alert("Die Zeit zum Spielen ist um!");
-        router.push("/intro");
+        router.push("/result-and-qrcode");
     };
 
     if (isLoading || !aufgaben) return null;

@@ -11,6 +11,7 @@ import {OfficePlantLong} from "@/components/OfficePlantLong";
 import {OfficePlantComponent} from "@/components/roooms/room5/components/OfficePlantComponent";
 import {InstancedWallModelComponent} from "@/components/roooms/InstancedWallModelComponent";
 import JuliusCaesarWithNumberComponent from "@/components/roooms/room5/components/JuliusCaesarWithNumberComponent";
+import {WallFotoFramesComponent} from "@/components/roooms/room5/components/WallFotoFramesComponent";
 
 const RoomFiveComponent: React.FC<RoomProps> = (props) => {
     const { raum } = props;
@@ -59,6 +60,7 @@ const RoomFiveComponent: React.FC<RoomProps> = (props) => {
             />
             <DetectiveOfficeComponent raum={raum} />
             <OldStyleOfficeComponent raum={raum} />
+            <WallFotoFramesComponent raum={raum} />
             <OfficePlantLong
                 // @ts-ignore
                 position={[-4, WORLD_COORDINATE[1], -8]}

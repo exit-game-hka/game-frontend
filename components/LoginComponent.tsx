@@ -173,7 +173,7 @@ const LoginComponent: React.FC = () => {
                 sx={{
                     display: "grid",
                     py: "var(--space-8)",
-                    px: "var(--space-6)",
+                    px: "var(--space-5)",
                     borderRadius: "var(--space-4)",
                 }}
             >
@@ -232,8 +232,13 @@ const LoginComponent: React.FC = () => {
                             backgroundColor: "var(--color-primary) !important",
                         }}
                     >
-                        Weiter
+                        Start
                     </Button>
+
+                    <Typography level={"body-sm"}>
+                        Mit dem Klick auf Start stimmen Sie der Speicherung und Verarbeitung Ihrer Daten für
+                        wissenschaftliche Forschungszwecke zu.
+                    </Typography>
                 </FormContainerComponent>
             </Card>
         </Stack>

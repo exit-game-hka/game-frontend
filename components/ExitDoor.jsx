@@ -12,12 +12,20 @@ import { useGLTF, useAnimations } from '@react-three/drei'
 
 export const ExitDoor = forwardRef(function ExitDoor(props, ref) {
     const group = useRef()
+    // const doorHandleRef = useRef()
+    // const doorMechanismRef = useRef()
     const { nodes, materials, animations } = useGLTF(`${process.env.NEXT_PUBLIC_BASE_PATH}/models/exit_door/scene.gltf`)
     const { actions } = useAnimations(animations, group)
 
     useEffect(() => {
         props.setAnimationActions(actions);
     }, []);
+
+    // useEffect(() => {
+    //     if (!doorHandleRef.current) return;
+    //     doorHandleRef.current.material.color.set("grey");
+    //     doorMechanismRef.current.material.color.set("grey");
+    // }, [doorHandleRef]);
 
     return (
         <group ref={group} {...props} dispose={null}>
@@ -27,9 +35,17 @@ export const ExitDoor = forwardRef(function ExitDoor(props, ref) {
                         <group name="Door_" position={[0, 0, 1.305]}>
                             <group name="Door_mechanism" position={[-0.592, -0.043, 0.016]}>
                                 <group name="Handle" position={[1.096, 0.045, 0.002]}>
-                                    <mesh name="Handle_0" geometry={nodes.Handle_0.geometry} material={materials.Door_1_PBR} />
+                                    <mesh
+                                        name="Handle_0"
+                                        geometry={nodes.Handle_0.geometry}
+                                        material={materials.Door_1_PBR}
+                                    />
                                 </group>
-                                <mesh name="Door_mechanism_0" geometry={nodes.Door_mechanism_0.geometry} material={materials.Door_1_PBR} />
+                                <mesh
+                                    name="Door_mechanism_0"
+                                    geometry={nodes.Door_mechanism_0.geometry}
+                                    material={materials.Door_1_PBR}
+                                />
                             </group>
                             <mesh name="Door__0" geometry={nodes.Door__0.geometry} material={materials.Door_1_PBR} />
                         </group>

@@ -3,12 +3,14 @@ import React, {Ref, useEffect, useRef, useState} from 'react';
 import {ExitDoor} from "@/components/ExitDoor";
 import {ExitDoorAttachment} from "@/components/ExitDoorAttachment";
 import {Mesh} from "three";
-import {Html} from "@react-three/drei";
+import {Html, Text} from "@react-three/drei";
 import {AnswerInputModalComponent} from "@/components/shared/AnswerInputModalComponent";
 import {useRouter} from "next/navigation";
 import {Aufgabe} from "@/api/aufgabe";
 import {GroupProps} from "@react-three/fiber";
 import {useGlobalStore} from "@/store/useGlobalStore";
+import {Stack, Typography} from "@mui/joy";
+import {WORLD_COORDINATE} from "@/app/contants";
 
 type Props = {
     aufgabe: Aufgabe;
@@ -59,11 +61,8 @@ export const ExitDoorComponent: React.FC<Props> = (props: Props) => {
                 {...doorProps}
             />
             <ExitDoorAttachment
-                ref={exitDoorAttachmentRef as Ref<Mesh>}
-                scale={0.15}
-                rotation-y={-Math.PI / 2}
-                // @ts-ignore
-                onClick={() => setIsOpen(true)}
+                attachmentColor={"white"}
+                onClick={() => {}}
             />
             <Html>
                 <AnswerInputModalComponent

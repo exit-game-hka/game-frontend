@@ -65,7 +65,7 @@ const IntroPage: React.FC = () => {
                     <Typography component={"p"} level={"body-lg"} sx={{ mt: "var(--space-2)" }}>
                         Um ein paar zusätzliche Credit Points zu ergattern, erklären Sie sich dazu bereit, den
                         Keller Ihres Informatikprofessors auszumisten. Er lässt Sie alleine und sagt, dass er nach
-                        seiner Mittagspause in X Minuten nach Ihnen sehen wird.
+                        seiner Mittagspause in 35 Minuten nach Ihnen sehen wird.
                     </Typography>
                 </Card>
                 <Box

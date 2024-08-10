@@ -4,7 +4,7 @@ import {DownloadResultAndQrCodeCodeComponent} from "@/components/DownloadResultA
 
 const ResultAndQrCodePage: React.FC = () => {
     return (
-        <PageContentWrapperComponent title={"Lerninhalte & Fragen"}>
+        <PageContentWrapperComponent title={"Lerninhalte und QR Code"}>
             <DownloadResultAndQrCodeCodeComponent />
         </PageContentWrapperComponent>
     );

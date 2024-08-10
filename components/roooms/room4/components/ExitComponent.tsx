@@ -81,6 +81,10 @@ const ExitComponent: React.FC<Props> = (props) => {
                 rotation-y={-Math.PI / 2}
                 // @ts-ignore
                 onClick={() => setIsOpen(true)}
+                attachmentColor={"white"}
+                groupProps={{
+                    position: [0, 0.5, 0],
+                }}
             />
             <Html>
                 <AnswerInputModalComponent

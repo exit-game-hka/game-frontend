@@ -54,7 +54,7 @@ export const TheologicalBookStackComponent: React.FC<InteractiveObjectProps> = (
                 </Typography>
                 <Typography>
                     KRYPTANALYSE: WIRD VON MITLESENDEN DES VERSCHLUESSELTEN TEXTES
-                    VERWENDET UM DEN UNVERSCHLUESSELTEN ORIGINALTEXT WIEDER
+                    VERWENDET, UM DEN UNVERSCHLUESSELTEN ORIGINALTEXT WIEDER
                     HERZUSTELLEN.
                 </Typography>
                 <Stack direction={"row"} spacing={"var(--space-3)"}>

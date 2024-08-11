@@ -487,7 +487,7 @@ export const ALL_INTERACTION_ACTIONS: string[] = [
     "Portrait von Julius Caesar mit Zahl 2 angeklickt",
     "Pflanze, die auf vier Zeilen hinweist, angeklickt",
     "Notiz 'Welche Methode fehlt?' angeklickt",
-    "Hinweis mit dem Text 'U W D U V K V W V K Q P F W T E J E C G U C T O G G V U V T C P U R Q U K V K Q P' angeklickt",
+    "Hinweis mit dem Text 'T C P A Q A F B J C G C C P S D L E' angeklickt",
     "Hinweis über Shannons Regeln angeklickt",
     "Tresor angeklickt",
     "Notiz angeklickt",

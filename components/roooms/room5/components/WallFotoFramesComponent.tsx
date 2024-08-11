@@ -25,7 +25,7 @@ export const WallFotoFramesComponent: React.FC<InteractiveObjectProps> = (props)
                     margin: "var(--space-15) 0",
                 }}
             >
-                UWDUVKVWVKQPFWTEJECGUCTOGGVUVTCPURQUKVKQP
+                TCPAQAFBJCGCCPSDLE
             </Typography>
         </Box>
     );

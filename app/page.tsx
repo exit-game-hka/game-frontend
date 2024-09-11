@@ -9,7 +9,7 @@ const HomePageContentComponent = dynamic(
 
 const Home: React.FC = () => {
     return (
-        <PageContentWrapperComponent subtitle="Das Abenteuer beginnt hier">
+        <PageContentWrapperComponent subtitle="Das Abenteuer beginnt hier ">
             <HomePageContentComponent />
         </PageContentWrapperComponent>
     );

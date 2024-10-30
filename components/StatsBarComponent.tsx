@@ -58,13 +58,13 @@ const StatsBarComponent: React.FC = () => {
                         % Angeklickte Objekte: {prozentZahlAngeklickteObjekte}%
                     </Typography>
                 </Stack>
-                <Stack>
+                <Stack alignItems={"center"}>
                     <Avatar
                         alt={"Charakter"}
                         size={isSmall ? "sm" : "lg"}
                         src={selectedAvatar.thumbnail}
                     />
-                    <Typography fontWeight="bold" level={"body-xs"}>
+                    <Typography fontWeight="bold" level={"body-xs"} textAlign={"center"}>
                         {selectedAvatar.name}
                     </Typography>
                 </Stack>

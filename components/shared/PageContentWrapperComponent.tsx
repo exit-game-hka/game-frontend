@@ -42,7 +42,7 @@ const PageWrapperContainer = styled(Box)`
     display: grid;
     gap: var(--space-10);
     grid-template-rows: max-content 1fr;
-    justify-self: center;
+    //justify-self: center;
     padding: var(--space-1) var(--space-3);
     margin-top: var(--app-bar-height);
 `;

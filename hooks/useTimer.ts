@@ -64,10 +64,10 @@ export const useTimer = (
                     return;
                 }
                 setSeconds(59);
-                setMinutes(minutes - 1);
+                setMinutes(prev => prev - 1);
                 return;
             }
-            setSeconds(seconds - 1);
+            setSeconds(prev => prev - 1);
             saveCurrentTimeoutToLocalStorage();
         }, 1000);
 

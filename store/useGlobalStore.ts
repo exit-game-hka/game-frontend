@@ -1,7 +1,6 @@
 import {create, StateCreator} from "zustand";
 import {ComponentType, ForwardRefExoticComponent, ReactNode, RefAttributes} from "react";
 import {Megan} from "@/components/avatars/Megan";
-import {Maria} from "@/components/avatars/Maria";
 import {Aufgabe, getAllTasksApi, getTaskByIdApi} from "@/api/aufgabe";
 import {getAllRoomsApi, getRoomByIdApi, Raum} from "@/api/raum";
 import {createSpielerApi, getSpielerBySpielerIdApi, Spieler, SpielerDto} from "@/api/spieler";
@@ -34,6 +33,9 @@ import {getAllSemesterApi, getSemesterByIdApi, Semester} from "@/api/semester";
 import {getAllVeranstaltungenApi, getVeranstaltungByIdApi, Veranstaltung} from "@/api/veranstaltung";
 import {Mousey} from "@/components/avatars/Mousey";
 import {Prisoner} from "@/components/avatars/Prisoner";
+import {Alex} from "@/components/avatars/Alex";
+import {SportyGranny} from "@/components/avatars/SportyGranny";
+// import {David} from "@/components/avatars/David";
 import webSocketClient, {WEBSOCKET_SEND_NOTIFICATION_ENDPOINT} from "@/api/webSocketClient";
 import {Client} from "@stomp/stompjs";
 import {NotificationDto} from "@/api/notification";
@@ -58,11 +60,11 @@ const INITIAL_AVATAR_LIST: AvatarItem[] = [
     //     model: Lewis,
     //     thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/lewis/thumbnail.png`,
     // },
-    {
-        name: "Maria",
-        model: Maria,
-        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/maria/thumbnail.png`,
-    },
+    // {
+    //     name: "Maria",
+    //     model: Maria,
+    //     thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/maria/thumbnail.png`,
+    // },
     {
         name: "Mousey",
         model: Mousey,
@@ -73,6 +75,21 @@ const INITIAL_AVATAR_LIST: AvatarItem[] = [
         model: Prisoner,
         thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/prisoner/thumbnail.png`,
     },
+    {
+        name: "Alex",
+        model: Alex,
+        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/alex/thumbnail.png`,
+    },
+    {
+        name: "Sporty Granny",
+        model: SportyGranny,
+        thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/sporty_granny/thumbnail.png`,
+    },
+    // {
+    //     name: "David",
+    //     model: David,
+    //     thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/avatars/david/thumbnail.png`,
+    // },
 ];
 
 const SELECTED_AVATAR_LOCAL_STORAGE_KEY = "selected-avatar" as const;

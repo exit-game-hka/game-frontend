@@ -203,7 +203,12 @@ const AvailableKeyboardKeysComponent: React.FC = () => {
                     sx: {
                         maxWidth: "600px",
                         maxHeight: isSmall ? "unset" : "800px",
-                        mt: -8,
+                        "@media screen and (min-width: 900px)": {
+                            mt: -8,
+                        },
+                        "@media screen and (max-width: 900px)": {
+                            pb: "calc(1.5 * var(--space-20))",
+                        },
                     }
                 }}
             />

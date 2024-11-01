@@ -33,20 +33,71 @@ const HomePageContentComponent: React.FC = ()  => {
             {/*<OverviewCardComponent />*/}
             <LoginSectionContainer>
                 <Stack
-                    direction={"row"}
                     spacing="var(--space-4)"
+                    sx={{
+                        display: "grid",
+                        gridTemplateColumns: "1fr auto",
+                    }}
                 >
-                    <div style={{ flexGrow: 1, alignSelf: "flex-start" }}>
-                        <Box
-                            component={"img"}
-                            src={`${process.env.NEXT_PUBLIC_BASE_PATH}/HKA_IWI_Wortmarke_weiss.svg`}
-                            alt={"HKA IWI Wortmarke weiss"}
+                    <Stack sx={{
+                        display: "grid",
+                        justifySelf: "start",
+                    }}>
+                        <div style={{ flexGrow: 1, alignSelf: "start" }}>
+                            <Box
+                                component={"img"}
+                                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/HKA_IWI_Wortmarke_weiss.svg`}
+                                alt={"HKA IWI Wortmarke weiss"}
+                                sx={{
+                                    height: isSmall ? "calc(95px * 0.6)" : "95px",
+                                    objectFit: "contain",
+                                }}
+                            />
+                        </div>
+                        <Stack
                             sx={{
-                                height: isSmall ? "calc(95px * 0.6)" : "95px",
-                                objectFit: "contain",
+                                display: "grid",
+                                "& *": {
+                                    fontFamily: "Calibri",
+                                },
                             }}
-                        />
-                    </div>
+                        >
+                            <div>
+                                <Typography
+                                    level={"h2"}
+                                    sx={{
+                                        color: "white",
+                                        fontWeight: "bold",
+                                        fontSize: isSmall ? "var(--font-large)" : "var(--font-6xLarge)",
+                                    }}
+                                >
+                                    Digital educational Escape Game
+                                </Typography>
+                            </div>
+                            <div style={{ display: "grid", alignSelf: "end" }}>
+                                <Typography
+                                    sx={{
+                                        color: "white",
+                                        fontWeight: "bold",
+                                        fontSize: isSmall ? "var(--font-xLarge)": "var(--font-10xLarge)",
+                                        textAlign: "right",
+                                    }}
+                                >
+                                    Kryptographie
+                                </Typography>
+                                <Typography
+                                    level="h4"
+                                    textAlign={"right"}
+                                    fontWeight={"bold"}
+                                    sx={{
+                                        color: "white",
+                                    }}
+                                >
+                                    ...are you ready for codes?
+                                </Typography>
+                            </div>
+                        </Stack>
+                    </Stack>
                     <div>
                         <Box
                             component={"img"}
@@ -63,45 +114,8 @@ const HomePageContentComponent: React.FC = ()  => {
                     direction={isSmall ? "column" : "row"}
                     spacing="var(--space-4)"
                 >
-                    <Stack
-                        sx={{
-                            flexGrow: 1,
-                        }}
-                    >
-                        <Typography
-                            level={"h2"}
-                            sx={{
-                                color: "white",
-                                fontWeight: "bold",
-                                fontSize: "var(--font-6xLarge)"
-                            }}
-                        >
-                            Digital educational Escape Game
-                        </Typography>
-                        <div style={{ display: "grid" }}>
-                            <Box
-                                component={"img"}
-                                src={`${process.env.NEXT_PUBLIC_BASE_PATH}/Kryptographie-Schriftzug-Calibri-mit-WordArt.png`}
-                                alt={"HKA IWI Bildmarke weiss"}
-                                sx={{
-                                    height: isSmall ? "calc(120px * 0.6)" : "120px",
-                                    objectFit: "contain",
-                                    ml: -1,
-                                }}
-                            />
-                            <Typography
-                                level="h3"
-                                //textAlign={"right"}
-                                fontWeight={"bold"}
-                                sx={{
-                                    color: "black"
-                                }}
-                            >
-                                ...are you ready for codes?
-                            </Typography>
-                        </div>
-                    </Stack>
-                    <div style={{ marginTop: "50px" }}>
+
+                    <div style={{ marginTop: isSmall ? "var(--space-10)" : "unset" }}>
                         <LoginComponent/>
                     </div>
                 </Stack>

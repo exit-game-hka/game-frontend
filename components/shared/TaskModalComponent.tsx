@@ -21,6 +21,8 @@ export const TaskModalComponent: React.FC<ModalProps> = (props: ModalProps) => {
     const { open, title, subtitle, content, modalDialogProps, onClose } = props;
     const { isSmall } = useMediaQuery();
 
+    const { sx, ...modalDialogPropsWithoutStyles } = modalDialogProps;
+
     return (
         <React.Fragment>
             <Transition in={open} timeout={400}>
@@ -57,8 +59,9 @@ export const TaskModalComponent: React.FC<ModalProps> = (props: ModalProps) => {
                                     entered: { opacity: 1 },
                                 }[state],
                                 //mt: isSmall ? "unset" : -1,
+                                ...(sx ?? {})
                             }}
-                            {...modalDialogProps}
+                            {...modalDialogPropsWithoutStyles}
                             layout={isSmall ? "fullscreen" : "center"}
                         >
                             { onClose ? <ModalClose variant={"soft"} sx={{ borderRadius: "50%" }} /> : null }

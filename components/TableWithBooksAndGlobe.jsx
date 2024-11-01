@@ -69,16 +69,24 @@ export const TableWithBooksAndGlobe = forwardRef(function TableWithBooksAndGlobe
                 </group>
                 <mesh geometry={nodes.Cube001_Material010_0.geometry} material={materials['Material.010']}
                       position={[-190.481, 100.036, -149.331]} rotation={[-Math.PI / 2, 0, 0]}
-                      scale={[53.036, 2.827, 18.39]}/>
+                      scale={[53.036, 2.827, 18.39]}
+                      onClick={props.onClickOpenedDrawer}
+                />
                 <mesh geometry={nodes.Cube002_Material009_0.geometry} material={materials['Material.009']}
                       position={[-190.481, 140.14, -149.331]} rotation={[-Math.PI / 2, 0, 0]}
-                      scale={[53.036, 2.827, 18.39]}/>
+                      scale={[53.036, 2.827, 18.39]}
+                      onClick={props.onClickOpenedDrawer}
+                />
                 <mesh geometry={nodes.Cube003_Material008_0.geometry} material={materials['Material.008']}
                       position={[-190.481, 180.437, -149.331]} rotation={[-Math.PI / 2, 0, 0]}
-                      scale={[53.036, 2.827, 18.39]}/>
+                      scale={[53.036, 2.827, 18.39]}
+                      onClick={props.onClickOpenedDrawer}
+                />
                 <mesh geometry={nodes.Cube004_Material003_0.geometry} material={materials['Material.003']}
                       position={[189.751, 180.437, -149.331]} rotation={[-Math.PI / 2, 0, 0]}
-                      scale={[53.036, 2.827, 18.39]}/>
+                      scale={[53.036, 2.827, 18.39]}
+                      onClick={props.onClickOpenedDrawer}
+                />
                 <mesh
                     geometry={nodes.Cube005_Material004_0.geometry}
                     material={materials['Material.004']}
@@ -89,16 +97,24 @@ export const TableWithBooksAndGlobe = forwardRef(function TableWithBooksAndGlobe
                 />
                 <mesh geometry={nodes.Cube006_Material005_0.geometry} material={materials['Material.005']}
                       position={[189.751, 100.036, -149.331]} rotation={[-Math.PI / 2, 0, 0]}
-                      scale={[53.036, 2.827, 18.39]}/>
+                      scale={[53.036, 2.827, 18.39]}
+                      onClick={props.onClickOpenedDrawer}
+                />
                 <mesh geometry={nodes.Cube007_Material007_0.geometry} material={materials['Material.007']}
                       position={[-190.481, 221.293, -149.331]} rotation={[-Math.PI / 2, 0, 0]}
-                      scale={[53.036, 2.827, 12.438]}/>
+                      scale={[53.036, 2.827, 12.438]}
+                      onClick={props.onClickOpenedDrawer}
+                />
                 <mesh geometry={nodes.Cube008_Material002_0.geometry} material={materials['Material.002']}
                       position={[189.751, 221.293, -149.331]} rotation={[-Math.PI / 2, 0, 0]}
-                      scale={[53.036, 2.827, 12.438]}/>
+                      scale={[53.036, 2.827, 12.438]}
+                      onClick={props.onClickOpenedDrawer}
+                />
                 <mesh geometry={nodes.Cube009_Material006_0.geometry} material={materials['Material.006']}
                       position={[0.253, 221.293, -149.331]} rotation={[-Math.PI / 2, 0, 0]}
-                      scale={[127.053, 2.827, 12.438]}/>
+                      scale={[127.053, 2.827, 12.438]}
+                      onClick={props.onClickOpenedDrawer}
+                />
                 <mesh geometry={nodes.Cube010_Material092_0.geometry} material={materials['Material.092']}
                       position={[-190.799, 110.985, -148.869]} rotation={[-Math.PI / 2, 0, 0]}
                       scale={[5.865, 4.064, 2.975]}/>

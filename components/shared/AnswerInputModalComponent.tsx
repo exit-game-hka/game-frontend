@@ -67,18 +67,18 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
         onClose();
     }, [onClose]);
 
-    useEffect(() => {
-        if (!isComplete) return;
-
-        const timeoutToWait = timeoutOnSuccess ?? 2000;
-
-        const timeout = setTimeout(() => {
-            onSuccess();
-            closeModal();
-        }, timeoutToWait);
-
-        return () => clearTimeout(timeout);
-    }, [closeModal, isComplete, onSuccess, timeoutOnSuccess]);
+    // useEffect(() => {
+    //     if (!isComplete) return;
+    //
+    //     const timeoutToWait = timeoutOnSuccess ?? 2000;
+    //
+    //     const timeout = setTimeout(() => {
+    //         onSuccess();
+    //         //closeModal();
+    //     }, timeoutToWait);
+    //
+    //     return () => clearTimeout(timeout);
+    // }, [closeModal, isComplete, onSuccess, timeoutOnSuccess]);
 
     const resetStates = () => {
         setInputValue("");
@@ -125,7 +125,7 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                     <Modal
                         //keepMounted
                         open={!['exited', 'exiting'].includes(state)}
-                        onClose={closeModal}
+                        onClose={isComplete ? undefined : closeModal}
                         slotProps={{
                             backdrop: {
                                 sx: {
@@ -153,12 +153,15 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                                     entering: { opacity: 1 },
                                     entered: { opacity: 1 },
                                 }[state],
-                                mt: isSmall ? "initial" : -20,
+                                //mt: isSmall ? "initial" : -20,
+                                "@media screen and (min-width: 900px)": {
+                                    mt: -5,
+                                },
                             }}
                             {...modalDialogProps}
                             layout={isSmall ? "fullscreen" : "center"}
                         >
-                            <ModalClose variant={"soft"} sx={{ borderRadius: "50%" }} />
+                            {!isComplete ? <ModalClose variant={"soft"} sx={{ borderRadius: "50%" }} /> : null}
                             <DialogHeader>
                                 {title ? <DialogTitle>{title}</DialogTitle> : null}
                             </DialogHeader>
@@ -202,7 +205,10 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                                                 {failureMessage}
                                             </Alert> : null
                                     }
-                                    <Button onClick={handleSubmit}>{submitButtonLabel ?? "Weiter"}</Button>
+                                    {isComplete ?
+                                        <Button onClick={onSuccess}>Weiter</Button> :
+                                        <Button onClick={handleSubmit}>{submitButtonLabel}</Button>
+                                    }
                                 </Stack>
                             </DialogContent>
                         </ModalDialog>

@@ -27,8 +27,8 @@ export const OfficeWithBooksAndGlobeComponent: React.FC<InteractiveObjectProps> 
                 width: "100%",
             }}
         >
-            <Typography textAlign="center">
-                DIE ANZAHL DER ZEILEN IST WICHTIG
+            <Typography>
+                BEI EINER TRANSPOSITION IST DIE ANZAHL DER ZEILEN WICHTIG.
             </Typography>
         </Card>
     );

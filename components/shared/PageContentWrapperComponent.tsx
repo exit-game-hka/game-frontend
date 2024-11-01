@@ -43,7 +43,7 @@ const PageWrapperContainer = styled(Box)`
     gap: var(--space-10);
     grid-template-rows: max-content 1fr;
     //justify-self: center;
-    padding: var(--space-1) var(--space-3);
+    padding: var(--space-1) var(--space-3) 0 var(--space-3);
     margin-top: var(--app-bar-height);
 `;
 const PageMainContent = styled(Box)`
@@ -53,7 +53,7 @@ const PageMainContent = styled(Box)`
     max-width: var(--max-page-width);
     width: 100%;
     justify-self: center;
-    margin-top: var(--space-8);
+    margin-top: var(--space-5);
 `;
 const PageTitleAndBackButtonContainer = styled(Box)`
     display: grid;

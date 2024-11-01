@@ -33,12 +33,10 @@ export const GreenBoardWithTableComponent: React.FC<InteractiveObjectProps> = (p
             }}
         >
             <Stack spacing={"var(--space-5)"}>
-                <Typography>REIHENFOLGE</Typography>
                 <Typography>
-                    SPARTAS MILITAER BENUTZTE SCYTALE CODE, ABER WELCHE METHODE?
+                    WIE VERSCHLUESSELTE SPARTAS MILITAER DIE NACHRICHTEN?
                 </Typography>
-                <Typography textAlign={"center"}>TEILEN</Typography>
-                <Typography>SAFPGTARARENTI!</Typography>
+                <Typography>TNOTNRSSIEAPION</Typography>
             </Stack>
             <Typography sx={{ alignSelf: "flex-end" }}>
                 1, 2, X

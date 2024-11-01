@@ -32,10 +32,9 @@ export const WallPicturesComponent: React.FC<InteractiveObjectProps> = (props) =
                     fontWeight: "bold",
                 }}
             >
-                WIE LAUTET DIE LOESUNG BEI GLEICHEN REGELN?
+                WIE LAUTET DIE LOESUNG BEI GLEICHEN REGELN WIE IN RAUM 5?
                 <br/>
                 <br/>
-
                 YJYAL   RSBPGLCE <br />
                 ILDYAIERC   BFGC <br />
                 CGLGEHKY

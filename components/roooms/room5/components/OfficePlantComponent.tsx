@@ -57,7 +57,12 @@ export const OfficePlantComponent: React.FC<InteractiveObjectProps> = (props) =>
                     content={modalContent}
                     onClose={() => setIsOpen(false)}
                     modalDialogProps={{
-                        maxWidth: "550px",
+                        sx: {
+                            maxWidth: "550px",
+                            "@media screen and (min-width: 900px)": {
+                                mt: -5,
+                            },
+                        },
                     }}
                 />
             </Html>

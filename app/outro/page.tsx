@@ -59,10 +59,12 @@ const DebriefingPage: React.FC = () => {
                         />
                     </Sheet>
                     <Typography component={"p"} level={"body-lg"} sx={{ mt: "var(--space-2)" }}>
-                        Klasse, Sie haben den Keller des Professors aufgeräumt und sogar das Passbild von Alan
-                        Turing gefunden. Der Professor ist höchst dankbar und gibt Ihnen nicht nur die zusätzlichen
-                        Credits, sondern lädt Sie sogar noch auf ein Mate ein. Klicken Sie auf weiter, um das Spiel
-                        abzuschließen und ihre Ergebnisse zu erhalten.
+                        ALS SIE DEN TRESOR OEFFNEN, STEHEN SIE PLOETZLICH WIEDER IM BUERO DES PROFESSORS. ER ERKLAERT
+                        IHNEN, DASS ER SICH ZU HALLOWEEN EINE ART INFORMATIK GRUSELKABINETT UEBERLEGT HAT UND SIE DAS
+                        VERSUCHSKANINCHEN WAREN. ER FREUT SICH, DASS SIE ES AUS DEM KELLER GESCHAFFT UND SOGAR DAS
+                        PASSBILD VON ALAN TURING GEFUNDEN HABEN. DER PROFESSOR GIBT IHNEN NICHT NUR DIE ZUSÄTZLICHEN
+                        CREDITS, SONDERN LAEDT SIE SOGAR NOCH AUF EIN MATE EIN. KLICKEN SIE AUF WEITER, UM DAS SPIEL
+                        ABZUSCHLIESSEN UND IHRE ERGEBNISSE ZU ERHALTEN.
                     </Typography>
                 </Card>
                 <Box

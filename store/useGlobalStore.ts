@@ -254,9 +254,9 @@ const useAnimationStoreSlice: StateCreator<AnimationStore> = (set, get) => ({
 type InteraktionStore = {
     getInteraktionBySpielerId: (spielerId: string) => Promise<Interaktion[]>;
     getInteraktionBySpielerIdAndAufgabeId: (spielerId: string, aufgabeId: string) => Promise<Interaktion[]>;
-    createInteraktion: (interaktionDto: InteraktionDto) => Promise<void>;
+    createInteraktion: (roomId: string, interaktionDto: InteraktionDto) => Promise<void>;
     prozentZahlAngeklickteObjekte: number;
-    setProzentZahlAngeklickteObjekte: () => Promise<void>;
+    setProzentZahlAngeklickteObjekte: (roomId: string) => Promise<void>;
 };
 const useInteraktionStoreSlice: StateCreator<InteraktionStore> = (set, get) => ({
     getInteraktionBySpielerId: async (spielerId: string): Promise<Interaktion[]> => {
@@ -267,12 +267,12 @@ const useInteraktionStoreSlice: StateCreator<InteraktionStore> = (set, get) => (
         const response = await getInteraktionBySpielerIdAndAufgabeIdApi(spielerId, aufgabeId);
         return response.data;
     },
-    createInteraktion: async (interaktionDto: InteraktionDto): Promise<void> => {
+    createInteraktion: async (roomId: string, interaktionDto: InteraktionDto): Promise<void> => {
         await createInteraktionApi(interaktionDto);
-        await get().setProzentZahlAngeklickteObjekte();
+        await get().setProzentZahlAngeklickteObjekte(roomId);
     },
     prozentZahlAngeklickteObjekte: 0,
-    setProzentZahlAngeklickteObjekte: async () => {
+    setProzentZahlAngeklickteObjekte: async (roomId: string) => {
         const player = useGlobalStore.getState().getSpielerFromLocalStorage();
         if (!player) {
             console.log("No player!");
@@ -282,7 +282,13 @@ const useInteraktionStoreSlice: StateCreator<InteraktionStore> = (set, get) => (
         const interaktionOfPlayerDistinct = interaktionOfPlayer.reduce(
             (acc: Interaktion[], curr: Interaktion) => acc.find((i) => i.action === curr.action) ? acc : [...acc, curr], []
         );
-        const quotient = (interaktionOfPlayerDistinct.length / ALL_INTERACTION_ACTIONS.length);
+
+        const {
+            interactionsOfPlayerInRoom,
+            interactionsInRoom,
+        } = getInteractionsOfPlayerInRoom(roomId, interaktionOfPlayerDistinct.map((i) => i.action));
+
+        const quotient = (interactionsOfPlayerInRoom.length / interactionsInRoom.length);
         const progressPercentage = Math.round(quotient * 100);
         set(() => ({ prozentZahlAngeklickteObjekte: progressPercentage }));
     },
@@ -487,25 +493,131 @@ const convertToSemesterModel = (semester: Semester): Semester => {
     };
 };
 
-export const ALL_INTERACTION_ACTIONS: string[] = [
+export const INTERACTIONS_IN_ROOM_ONE = [
     "Infos über Alan Turing angeklickt",
     "Auf die Zahl 26 geklickt",
     "Schwarzes alphanumerisches Rad angeklickt",
+];
+
+export const INTERACTIONS_IN_ROOM_TWO = [
     "Buchseite über Kryptographie angeklickt",
     "Portrait von Julius Caesar angeklickt",
     "Hinweis mit dem Text 'U → N' angeklickt",
     "Auf das Plakat mit dem Text 'Substitution' geklickt",
+];
+export const INTERACTIONS_IN_ROOM_THREE = [
     "Tafel mit Info über Spartas Militär angeklickt",
+    "Buch 1 angeklickt",
     "Buch 2 angeklickt",
+];
+export const INTERACTIONS_IN_ROOM_FOUR = [
     "Uhr mit dem Text 'Decode' angeklickt",
+    "Buch 1 über Kryptographie und Kryptananlyse angeklickt",
     "Buch 2 mit dem Text 'Die Anzahl der Zeilen ist wichtig' angeklickt",
     "Tabelle mit vier Zeilen angeklickt",
-    "Buch 1 über Kryptographie und Kryptananlyse angeklickt",
+];
+export const INTERACTIONS_IN_ROOM_FIVE = [
     "Portrait von Julius Caesar mit Zahl 2 angeklickt",
     "Pflanze, die auf vier Zeilen hinweist, angeklickt",
     "Notiz 'Welche Methode fehlt?' angeklickt",
     "Hinweis mit dem Text 'T C P A Q A F B J C G C C P S D L E' angeklickt",
+];
+export const INTERACTIONS_IN_ROOM_SIX = [
     "Hinweis über Shannons Regeln angeklickt",
     "Tresor angeklickt",
     "Notiz angeklickt",
 ];
+
+enum RoomId {
+    ROOM_ONE = "20000000-0000-0000-0000-000000000001",
+    ROOM_TWO = "20000000-0000-0000-0000-000000000002",
+    ROOM_THREE = "20000000-0000-0000-0000-000000000003",
+    ROOM_FOUR = "20000000-0000-0000-0000-000000000004",
+    ROOM_FIVE = "20000000-0000-0000-0000-000000000005",
+    ROOM_SIX = "20000000-0000-0000-0000-000000000006",
+}
+
+enum RoomName {
+    ROOM_ONE = "Raum 1",
+    ROOM_TWO = "Raum 2",
+    ROOM_THREE = "Raum 3",
+    ROOM_FOUR = "Raum 4",
+    ROOM_FIVE = "Raum 5",
+    ROOM_SIX = "Raum 6",
+}
+
+export const getRoomNameByTaskId = (taskId: string): string => {
+    switch (taskId) {
+        case RoomId.ROOM_ONE:
+            return RoomName.ROOM_ONE;
+        case RoomId.ROOM_TWO:
+            return RoomName.ROOM_TWO;
+        case RoomId.ROOM_THREE:
+            return RoomName.ROOM_THREE;
+        case RoomId.ROOM_FOUR:
+            return RoomName.ROOM_FOUR;
+        case RoomId.ROOM_FIVE:
+            return RoomName.ROOM_FIVE;
+        case RoomId.ROOM_SIX:
+            return RoomName.ROOM_SIX;
+        default:
+            return "";
+    }
+}
+
+type OutputInteractionsOfPlayerInRoom = {
+    interactionsOfPlayerInRoom: string[],
+    interactionsInRoom: string[]
+}
+const getInteractionsOfPlayerInRoom = (roomId: string, interactionsOfPlayer: string[]): OutputInteractionsOfPlayerInRoom => {
+    switch (roomId) {
+        case RoomId.ROOM_ONE: {
+            const interactionsInRoomOne = interactionsOfPlayer.filter((i) => INTERACTIONS_IN_ROOM_ONE.includes(i));
+            return {
+                interactionsInRoom: INTERACTIONS_IN_ROOM_ONE,
+                interactionsOfPlayerInRoom: interactionsInRoomOne,
+            }
+        }
+        case RoomId.ROOM_TWO: {
+            const interactionsInRoomTwo = interactionsOfPlayer.filter((i) => INTERACTIONS_IN_ROOM_TWO.includes(i));
+            return {
+                interactionsInRoom: INTERACTIONS_IN_ROOM_TWO,
+                interactionsOfPlayerInRoom: interactionsInRoomTwo,
+            }
+        }
+        case RoomId.ROOM_THREE: {
+            const interactionsInRoomThree = interactionsOfPlayer.filter((i) => INTERACTIONS_IN_ROOM_THREE.includes(i));
+            return {
+                interactionsInRoom: INTERACTIONS_IN_ROOM_THREE,
+                interactionsOfPlayerInRoom: interactionsInRoomThree,
+            }
+        }
+        case RoomId.ROOM_FOUR: {
+            const interactionsInRoomFour = interactionsOfPlayer.filter((i) => INTERACTIONS_IN_ROOM_FOUR.includes(i));
+            return {
+                interactionsInRoom: INTERACTIONS_IN_ROOM_FOUR,
+                interactionsOfPlayerInRoom: interactionsInRoomFour,
+            }
+        }
+        case RoomId.ROOM_FIVE: {
+            const interactionsInRoomFive = interactionsOfPlayer.filter((i) => INTERACTIONS_IN_ROOM_FIVE.includes(i));
+            return {
+                interactionsInRoom: INTERACTIONS_IN_ROOM_FIVE,
+                interactionsOfPlayerInRoom: interactionsInRoomFive,
+            }
+        }
+        case RoomId.ROOM_SIX: {
+            const interactionsInRoomSix = interactionsOfPlayer.filter((i) => INTERACTIONS_IN_ROOM_SIX.includes(i));
+            return {
+                interactionsInRoom: INTERACTIONS_IN_ROOM_SIX,
+                interactionsOfPlayerInRoom: interactionsInRoomSix,
+            }
+        }
+        default: {
+            return {
+                interactionsInRoom: [],
+                interactionsOfPlayerInRoom: [],
+            }
+        }
+    }
+}

@@ -4,14 +4,15 @@ import {Avatar, Box, Card, LinearProgress, Stack, Typography} from "@mui/joy";
 import SquareOutlinedIcon from '@mui/icons-material/SquareOutlined';
 import styled from "styled-components";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
-import {useGlobalStore} from "@/store/useGlobalStore";
-import {usePathname, useRouter} from "next/navigation";
+import {getRoomNameByTaskId, useGlobalStore} from "@/store/useGlobalStore";
+import {useParams, usePathname, useRouter} from "next/navigation";
 
 const NUMBER_OF_ROOMS = 6  as const;
 
 const StatsBarComponent: React.FC = () => {
     const { isSmall } = useMediaQuery();
     const pathname = usePathname();
+    const { id } = useParams();
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
     const selectedAvatar = useGlobalStore((state) => state.selectedAvatar);
     const setProzentZahlAngeklickteObjekte = useGlobalStore((state) => state.setProzentZahlAngeklickteObjekte);
@@ -19,8 +20,8 @@ const StatsBarComponent: React.FC = () => {
     const [numberOfChallengesSolved, setNumberOfChallengesSolved] = useState<number>(0);
 
     useEffect(() => {
-        setProzentZahlAngeklickteObjekte();
-    }, []);
+        setProzentZahlAngeklickteObjekte(id as string);
+    }, [id]);
 
     useEffect(() => {
         const player = getSpielerFromLocalStorage();
@@ -54,8 +55,8 @@ const StatsBarComponent: React.FC = () => {
                             variant="outlined"
                         />
                     </div>
-                    <Typography fontWeight="bold" level={isSmall ? "body-xs" : "body-sm"}>
-                        % Angeklickte Objekte: {prozentZahlAngeklickteObjekte}%
+                    <Typography fontWeight="bold" level={"body-xs"}>
+                        Angeklickte Objekte {getRoomNameByTaskId(id as string)}: {prozentZahlAngeklickteObjekte}%
                     </Typography>
                 </Stack>
                 <Stack alignItems={"center"}>
@@ -78,7 +79,7 @@ const StatsBarComponent: React.FC = () => {
                             variant="outlined"
                         />
                     </div>
-                    <Typography fontWeight="bold" level={isSmall ? "body-xs" : "body-sm"}>
+                    <Typography fontWeight="bold" level={"body-xs"}>
                         Gelöste Rätsel: {numberOfChallengesSolved} von 6
                     </Typography>
                 </Stack>

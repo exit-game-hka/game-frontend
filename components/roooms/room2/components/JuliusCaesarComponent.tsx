@@ -8,10 +8,12 @@ import Stack from "@mui/joy/Stack";
 import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
 import {useGlobalStore} from "@/store/useGlobalStore";
 import {InteraktionDto} from "@/api/interaktion";
+import {useParams} from "next/navigation";
 
 type Props = ThreeElements["mesh"] & InteractiveObjectProps;
 export const JuliusCaesarComponent: React.FC<Props> = (props) => {
     const { raum, ...rest} = props;
+    const { id } = useParams();
     const texture = useLoader(TextureLoader, `${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room2/julius_caesar.jpg`);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const createInteraktion = useGlobalStore((state) => state.createInteraktion);
@@ -44,7 +46,7 @@ export const JuliusCaesarComponent: React.FC<Props> = (props) => {
             aufgabeId: raum.aufgaben[0].id,
             action: "Portrait von Julius Caesar angeklickt",
         };
-        createInteraktion(interactionDto);
+        createInteraktion(id as string, interactionDto);
     };
 
     return (

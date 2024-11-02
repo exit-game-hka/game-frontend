@@ -9,9 +9,11 @@ import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
 import {ThreeEvent} from "@react-three/fiber";
 import {useGlobalStore} from "@/store/useGlobalStore";
 import {InteraktionDto} from "@/api/interaktion";
+import {useParams} from "next/navigation";
 
 export const CupBoardComponent: React.FC<InteractiveObjectProps> = (props) => {
     const { raum } = props;
+    const { id } = useParams();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const createInteraktion = useGlobalStore((state) => state.createInteraktion);
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
@@ -88,7 +90,7 @@ export const CupBoardComponent: React.FC<InteractiveObjectProps> = (props) => {
             aufgabeId: raum.aufgaben[0].id,
             action: "Buchseite über Kryptographie angeklickt",
         };
-        await createInteraktion(interactionDto);
+        await createInteraktion(id as string, interactionDto);
     };
 
     return (

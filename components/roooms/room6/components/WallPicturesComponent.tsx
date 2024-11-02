@@ -7,9 +7,11 @@ import {InteraktionDto} from "@/api/interaktion";
 import {WallPictures} from "@/components/WallPictures";
 import {Html} from "@react-three/drei";
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
+import {useParams} from "next/navigation";
 
 export const WallPicturesComponent: React.FC<InteractiveObjectProps> = (props) => {
     const { raum } = props;
+    const { id } = useParams();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const createInteraktion = useGlobalStore((state) => state.createInteraktion);
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
@@ -52,7 +54,7 @@ export const WallPicturesComponent: React.FC<InteractiveObjectProps> = (props) =
             aufgabeId: raum.aufgaben[0].id,
             action: "Notiz angeklickt",
         };
-        await createInteraktion(interactionDto);
+        await createInteraktion(id as string, interactionDto);
     };
 
     return (

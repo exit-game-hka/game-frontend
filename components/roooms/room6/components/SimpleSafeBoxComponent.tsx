@@ -7,7 +7,7 @@ import {Html} from "@react-three/drei";
 import {ThreeEvent} from "@react-three/fiber";
 import {InteraktionDto} from "@/api/interaktion";
 import {AnswerInputModalComponent} from "@/components/shared/AnswerInputModalComponent";
-import {useRouter} from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 import Stack from "@mui/joy/Stack";
 import Image from "next/image";
 import {Typography} from "@mui/joy";
@@ -16,6 +16,7 @@ import {StatusDto} from "@/api/status";
 export const SimpleSafeBoxComponent: React.FC<InteractiveObjectProps> = (props) => {
     const { raum } = props;
     const router = useRouter();
+    const { id } = useParams();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const createInteraktion = useGlobalStore((state) => state.createInteraktion);
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
@@ -51,7 +52,7 @@ export const SimpleSafeBoxComponent: React.FC<InteractiveObjectProps> = (props) 
             aufgabeId: raum.aufgaben[0].id,
             action: "Tresor angeklickt",
         };
-        await createInteraktion(interactionDto);
+        await createInteraktion(id as string, interactionDto);
     };
 
     const handleSuccess = async () => {

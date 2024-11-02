@@ -8,9 +8,11 @@ import {Html} from "@react-three/drei";
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
 import {BookCupboard} from "@/components/BookCupboard";
 import {WORLD_COORDINATE} from "@/app/contants";
+import {useParams} from "next/navigation";
 
 export const CupboardWithGlassDoorsComponent: React.FC<InteractiveObjectProps> = (props) => {
     const { raum } = props;
+    const { id } = useParams();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const createInteraktion = useGlobalStore((state) => state.createInteraktion);
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
@@ -68,7 +70,7 @@ export const CupboardWithGlassDoorsComponent: React.FC<InteractiveObjectProps> =
             aufgabeId: raum.aufgaben[0].id,
             action: "Hinweis über Shannons Regeln angeklickt",
         };
-        await createInteraktion(interactionDto);
+        await createInteraktion(id as string, interactionDto);
     };
 
     return (

@@ -9,9 +9,11 @@ import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
 import {useGlobalStore} from "@/store/useGlobalStore";
 import {ThreeEvent} from "@react-three/fiber";
 import {InteraktionDto} from "@/api/interaktion";
+import {useParams} from "next/navigation";
 
 export const TableWithBooksAndGlobeComponent: React.FC<InteractiveObjectProps> = (props) => {
     const { raum } = props;
+    const { id } = useParams();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const createInteraktion = useGlobalStore((state) => state.createInteraktion);
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
@@ -60,7 +62,7 @@ export const TableWithBooksAndGlobeComponent: React.FC<InteractiveObjectProps> =
             aufgabeId: raum.aufgaben[0].id,
             action: "Buch 2 angeklickt",
         };
-        await createInteraktion(interactionDto);
+        await createInteraktion(id as string, interactionDto);
     };
 
     return (

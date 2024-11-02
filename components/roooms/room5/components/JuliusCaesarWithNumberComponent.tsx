@@ -8,9 +8,11 @@ import {InteraktionDto} from "@/api/interaktion";
 import {Html} from "@react-three/drei";
 import {TaskModalComponent} from "@/components/shared/TaskModalComponent";
 import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
+import {useParams} from "next/navigation";
 
 const JuliusCaesarWithNumberComponent: React.FC<InteractiveObjectProps> = (props) => {
     const { raum, ...rest } = props;
+    const { id } = useParams();
     const texture = useLoader(
         TextureLoader,
         `${process.env.NEXT_PUBLIC_BASE_PATH}/rooms/room5/julius-caesar-with-number.jpg`
@@ -46,7 +48,7 @@ const JuliusCaesarWithNumberComponent: React.FC<InteractiveObjectProps> = (props
             aufgabeId: raum.aufgaben[0].id,
             action: "Portrait von Julius Caesar mit Zahl 2 angeklickt",
         };
-        createInteraktion(interactionDto);
+        createInteraktion(id as string, interactionDto);
     };
 
     return (

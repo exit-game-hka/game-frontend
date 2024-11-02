@@ -7,9 +7,11 @@ import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
 import {useGlobalStore} from "@/store/useGlobalStore";
 import {ThreeEvent} from "@react-three/fiber";
 import {InteraktionDto} from "@/api/interaktion";
+import {useParams} from "next/navigation";
 
 export const WallPapersComponent: React.FC<InteractiveObjectProps> = (props) => {
     const { raum } = props;
+    const { id } = useParams();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const createInteraktion = useGlobalStore((state) => state.createInteraktion);
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
@@ -37,7 +39,7 @@ export const WallPapersComponent: React.FC<InteractiveObjectProps> = (props) => 
             aufgabeId: raum.aufgaben[0].id,
             action: "Auf das Plakat mit dem Text 'Substitution' geklickt",
         };
-        await createInteraktion(interactionDto);
+        await createInteraktion(id as string, interactionDto);
     }
 
     return (

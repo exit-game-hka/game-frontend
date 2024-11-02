@@ -9,9 +9,11 @@ import {useGlobalStore} from "@/store/useGlobalStore";
 import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
 import {InteraktionDto} from "@/api/interaktion";
 import {ThreeEvent} from "@react-three/fiber";
+import {useParams} from "next/navigation";
 
 export const DetectiveOfficeWithWindowComponent: React.FC<InteractiveObjectProps> = (props) => {
     const { raum } = props;
+    const { id } = useParams();
     const frontCardRef = useRef<HTMLButtonElement>();
     const backCardRef = useRef<HTMLButtonElement>();
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -175,7 +177,7 @@ export const DetectiveOfficeWithWindowComponent: React.FC<InteractiveObjectProps
             aufgabeId: raum.aufgaben[0].id,
             action: "Infos über Alan Turing angeklickt",
         };
-        await createInteraktion(interactionDto);
+        await createInteraktion(id as string, interactionDto);
     };
 
     return (

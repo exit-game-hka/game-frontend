@@ -7,9 +7,11 @@ import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
 import {useGlobalStore} from "@/store/useGlobalStore";
 import {InteraktionDto} from "@/api/interaktion";
 import {ThreeEvent} from "@react-three/fiber";
+import {useParams} from "next/navigation";
 
 export const WhiteClockComponent: React.FC<InteractiveObjectProps> = (props) => {
     const { raum } = props;
+    const { id } = useParams();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const createInteraktion = useGlobalStore((state) => state.createInteraktion);
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
@@ -44,7 +46,7 @@ export const WhiteClockComponent: React.FC<InteractiveObjectProps> = (props) => 
             aufgabeId: raum.aufgaben[0].id,
             action: "Schwarzes alphanumerisches Rad angeklickt",
         };
-        await createInteraktion(interactionDto);
+        await createInteraktion(id as string, interactionDto);
     };
 
     return (

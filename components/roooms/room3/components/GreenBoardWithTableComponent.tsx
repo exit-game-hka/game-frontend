@@ -9,9 +9,11 @@ import {InteractiveObjectProps} from "@/components/InteractiveObjectProps";
 import {useGlobalStore} from "@/store/useGlobalStore";
 import {ThreeEvent} from "@react-three/fiber";
 import {InteraktionDto} from "@/api/interaktion";
+import {useParams} from "next/navigation";
 
 export const GreenBoardWithTableComponent: React.FC<InteractiveObjectProps> = (props) => {
     const { raum } = props;
+    const { id } = useParams();
     const [showGreenBoardTip, setShowGreenBoardTip] = useState<boolean>(false);
     const [showFolderTip, setShowFolderTip] = useState<boolean>(false);
     const createInteraktion = useGlobalStore((state) => state.createInteraktion);
@@ -96,7 +98,7 @@ export const GreenBoardWithTableComponent: React.FC<InteractiveObjectProps> = (p
             aufgabeId: raum.aufgaben[0].id,
             action: "Tafel mit Info über Spartas Militär angeklickt",
         };
-        await createInteraktion(interactionDto);
+        await createInteraktion(id as string, interactionDto);
     };
 
     const handleClickFolder = async (event: ThreeEvent<MouseEvent>) => {
@@ -109,7 +111,7 @@ export const GreenBoardWithTableComponent: React.FC<InteractiveObjectProps> = (p
             aufgabeId: raum.aufgaben[0].id,
             action: "Buch 1 angeklickt",
         };
-        await createInteraktion(interactionDto);
+        await createInteraktion(id as string, interactionDto);
     };
 
     return (

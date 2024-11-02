@@ -67,18 +67,18 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
         onClose();
     }, [onClose]);
 
-    // useEffect(() => {
-    //     if (!isComplete) return;
-    //
-    //     const timeoutToWait = timeoutOnSuccess ?? 2000;
-    //
-    //     const timeout = setTimeout(() => {
-    //         onSuccess();
-    //         //closeModal();
-    //     }, timeoutToWait);
-    //
-    //     return () => clearTimeout(timeout);
-    // }, [closeModal, isComplete, onSuccess, timeoutOnSuccess]);
+    useEffect(() => {
+        if (!isComplete) return;
+
+        const timeoutToWait = timeoutOnSuccess ?? 2000;
+
+        const timeout = setTimeout(() => {
+            onSuccess();
+            //closeModal();
+        }, timeoutToWait);
+
+        return () => clearTimeout(timeout);
+    }, [closeModal, isComplete, onSuccess, timeoutOnSuccess]);
 
     const resetStates = () => {
         setInputValue("");
@@ -205,10 +205,11 @@ export const AnswerInputModalComponent: React.FC<Props> = (props) => {
                                                 {failureMessage}
                                             </Alert> : null
                                     }
-                                    {isComplete ?
-                                        <Button onClick={onSuccess}>Weiter</Button> :
-                                        <Button onClick={handleSubmit}>{submitButtonLabel}</Button>
-                                    }
+                                    {/*{isComplete ?*/}
+                                    {/*    <Button onClick={onSuccess}>Weiter</Button> :*/}
+                                    {/*    <Button onClick={handleSubmit}>{submitButtonLabel}</Button>*/}
+                                    {/*}*/}
+                                    <Button onClick={handleSubmit}>{submitButtonLabel ?? "Weiter"}</Button>
                                 </Stack>
                             </DialogContent>
                         </ModalDialog>

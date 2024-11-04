@@ -1,12 +1,13 @@
 "use client";
 import React, {PropsWithChildren, useEffect} from "react";
-import {usePathname} from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 import dynamic from "next/dynamic";
 import {useKeysMap} from "@/hooks/useKeysMap";
 import {KeyboardControls} from "@react-three/drei";
 import {useGlobalStore} from "@/store/useGlobalStore";
 import {StatusDto} from "@/api/status";
 import {CURRENT_TIMEOUT_LOCAL_STORAGE_KEY} from "@/hooks/useTimer";
+import {getPasswordHashApi} from "@/api/frontendUser";
 
 const AppBarComponent = dynamic(
     () => import("@/components/AppBarComponent"),
@@ -23,6 +24,7 @@ type  Props = PropsWithChildren;
 export const ApplicationContainerComponent: React.FC<Props> = (props: Props) => {
     const { children } = props;
     const pathname = usePathname();
+    const router = useRouter();
     const { keysMap } = useKeysMap();
     const createStatus = useGlobalStore((state) => state.createStatus);
     const getPlayerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
@@ -53,6 +55,20 @@ export const ApplicationContainerComponent: React.FC<Props> = (props: Props) => 
             window.removeEventListener("beforeunload", () => {});
         };
     }, [createStatus, getPlayerFromLocalStorage]);
+
+    useEffect(() => {
+        switch (pathname) {
+            case "/outro": return;
+            case "/result-and-qrcode": return;
+            default: {
+                getPasswordHashApi("frontend_user").then((pwd) => {
+                    if (pwd.data === window.localStorage.getItem("pwd")) return;
+                    router.push("/");
+                });
+                break;
+            }
+        }
+    }, [pathname, router]);
 
     return (
         <KeyboardControls map={keysMap}>

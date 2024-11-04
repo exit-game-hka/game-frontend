@@ -69,6 +69,7 @@ export const SimpleSafeBoxComponent: React.FC<InteractiveObjectProps> = (props) 
             istSpielAbgebrochen: false,
         };
         await createStatus(statusToSubmit);
+        window.localStorage.setItem("pwd", JSON.stringify(""));
         router.push("/outro");
     }
 

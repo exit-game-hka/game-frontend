@@ -15,6 +15,7 @@ import FormLabel from "@mui/joy/FormLabel";
 import Input from "@mui/joy/Input";
 import Autocomplete from "@mui/joy/Autocomplete";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
+import {getPasswordHashApi} from "@/api/frontendUser";
 
 const CLIENT_PLAYER_PASSWORD="exitiwihka" as const;
 
@@ -87,24 +88,32 @@ const LoginComponent: React.FC = () => {
     };
 
     const handleSubmit = async () => {
+        setIsLoading(true);
+
         if (!loginData.spielerId) {
             setFormError("Generieren Sie erst eine Spieler-ID.");
+            setIsLoading(false);
             return;
         }
-        if (!loginData.password || loginData.password !== CLIENT_PLAYER_PASSWORD) {
+
+        const pwd = await getPasswordHashApi("frontend_user");
+        window.localStorage.setItem("pwd", pwd.data ?? "");
+
+        if (!loginData.password || loginData.password !== pwd.data) {
             setFormError("Falsches Passwort");
+            setIsLoading(false);
             return;
         }
         if (!loginData.semesterId) {
             setFormError("Wählen Sie ein Semester aus.");
+            setIsLoading(false);
             return;
         }
         if (!loginData.veranstaltungId) {
             setFormError("Wählen Sie ein Fachgebiet aus.");
+            setIsLoading(false);
             return;
         }
-
-        setIsLoading(true);
 
         const {password: _, ...spielerDto} = loginData;
         await createSpieler(spielerDto as SpielerDto);

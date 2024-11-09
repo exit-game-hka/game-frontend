@@ -113,6 +113,9 @@ const HomePageContentComponent: React.FC = ()  => {
                 <Stack
                     direction={isSmall ? "column" : "row"}
                     spacing="var(--space-4)"
+                    sx={{
+                        justifyContent: "center",
+                    }}
                 >
 
                     <div style={{ marginTop: isSmall ? "var(--space-10)" : "unset" }}>

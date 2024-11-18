@@ -20,7 +20,8 @@ const StatsBarComponent: React.FC = () => {
     const prozentZahlAngeklickteObjekte = useGlobalStore((state) => state.prozentZahlAngeklickteObjekte);
     const [numberOfChallengesSolved, setNumberOfChallengesSolved] = useState<number>(0);
 
-    const { spielerId: playerId } = getSpielerFromLocalStorage();
+    const player = getSpielerFromLocalStorage();
+    const playerId = player?.spielerId;
 
     useEffect(() => {
         setProzentZahlAngeklickteObjekte(id as string);

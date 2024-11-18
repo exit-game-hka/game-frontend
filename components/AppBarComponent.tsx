@@ -17,7 +17,8 @@ import {useMediaQuery} from "@/hooks/useMediaQuery";
 const AppBarComponent: React.FC = () => {
     const  { isSmall } = useMediaQuery();
     const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
-    const { spielerId: playerId } = getSpielerFromLocalStorage();
+    const player = getSpielerFromLocalStorage();
+    const playerId = player?.spielerId;
 
     return (
         <AppBarContainer>

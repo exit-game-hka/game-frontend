@@ -6,6 +6,7 @@ import styled from "styled-components";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
 import {getRoomNameByTaskId, useGlobalStore} from "@/store/useGlobalStore";
 import {useParams, usePathname, useRouter} from "next/navigation";
+import PlayerIdTagComponent from "@/components/shared/PlayerIdTagComponent";
 
 const NUMBER_OF_ROOMS = 6  as const;
 
@@ -18,6 +19,8 @@ const StatsBarComponent: React.FC = () => {
     const setProzentZahlAngeklickteObjekte = useGlobalStore((state) => state.setProzentZahlAngeklickteObjekte);
     const prozentZahlAngeklickteObjekte = useGlobalStore((state) => state.prozentZahlAngeklickteObjekte);
     const [numberOfChallengesSolved, setNumberOfChallengesSolved] = useState<number>(0);
+
+    const { spielerId: playerId } = getSpielerFromLocalStorage();
 
     useEffect(() => {
         setProzentZahlAngeklickteObjekte(id as string);
@@ -59,7 +62,7 @@ const StatsBarComponent: React.FC = () => {
                         Angeklickte Objekte {getRoomNameByTaskId(id as string)}: {prozentZahlAngeklickteObjekte}%
                     </Typography>
                 </Stack>
-                <Stack alignItems={"center"}>
+                <Stack alignItems={"center"} alignContent={"center"} justifyItems={"center"} justifyContent={"center"}>
                     <Avatar
                         alt={"Charakter"}
                         size={isSmall ? "sm" : "lg"}
@@ -84,6 +87,9 @@ const StatsBarComponent: React.FC = () => {
                     </Typography>
                 </Stack>
             </Stack>
+            <Stack alignContent={"center"} alignItems={"center"} sx={{ mt: -1 }}>
+                {playerId ? <PlayerIdTagComponent id={playerId} size={"sm"} snackbarOrigin={{ vertical: "bottom", horizontal: "left" }} /> : null}
+            </Stack>
         </StatsContainer>
     );
 };
@@ -97,7 +103,7 @@ const StatsContainer = styled(Card)<{ small: "true" | "false" }>`
     z-index: var(--z-index-content-behind-modal);
     width: ${(props) => props.small === "true" ? "95dvw" : "unset"};
 
-    padding: ${(props) => props.small === "true" ? "var(--space-2) var(--space-3)" : "var(--space-2) var(--space-5)"};
+    padding: ${(props) => props.small === "true" ? "var(--space-1) var(--space-3) var(--space-2) var(--space-3)" : "var(--space-1) var(--space-5) var(--space-2) var(--space-5)"};
     border-radius: 0 0 var(--space-3) var(--space-3);
     box-shadow: 0 0 10px black;
 

@@ -8,17 +8,28 @@ import Menu from '@mui/joy/Menu';
 import MenuButton from '@mui/joy/MenuButton';
 import MenuItem from '@mui/joy/MenuItem';
 import MoreVert from '@mui/icons-material/MoreVert';
-import {ButtonType} from "@/store/useGlobalStore";
+import {ButtonType, useGlobalStore} from "@/store/useGlobalStore";
 import ModeSwitcherIconComponent from "@/components/ModeSwitcherIconComponent";
+import PlayerIdTagComponent from "@/components/shared/PlayerIdTagComponent";
+import {Stack} from "@mui/material";
+import {useMediaQuery} from "@/hooks/useMediaQuery";
 
 const AppBarComponent: React.FC = () => {
+    const  { isSmall } = useMediaQuery();
+    const getSpielerFromLocalStorage = useGlobalStore((state) => state.getSpielerFromLocalStorage);
+    const { spielerId: playerId } = getSpielerFromLocalStorage();
+
     return (
         <AppBarContainer>
             <AppBarContent>
-                <LogoContainer>
-                    <Typography level="title-md">Exit Game HKA</Typography>
-                </LogoContainer>
-                <Box component="div" sx={{ display: "flex", gap: "var(--space-3)" }}>
+                <Stack component={"div"} spacing={"var(--space-1)"}>
+                    <LogoContainer>
+                        <Typography level="title-md">Exit Game HKA</Typography>
+                    </LogoContainer>
+                    {(playerId && isSmall) ? <PlayerIdTagComponent id={playerId} size={"sm"} /> : null}
+                </Stack>
+                <Box component="div" sx={{ display: "flex", gap: "var(--space-3)", alignItems: "center", alignContent: "center" }}>
+                    {(playerId && !isSmall) ? <PlayerIdTagComponent id={playerId} size={"lg"} /> : null}
                     <ModeSwitcherIconComponent />
                 </Box>
             </AppBarContent>
